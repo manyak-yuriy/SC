@@ -1,0 +1,9 @@
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\ManagServices.dll
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\ManagServices.pdb
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\DataAccessLayer.dll
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\EntityFramework.dll
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\DataAccessLayer.pdb
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\bin\Debug\EntityFramework.xml
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\obj\Debug\ManagementServices.csprojResolveAssemblyReference.cache
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\obj\Debug\ManagServices.dll
+D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\ManagServices\obj\Debug\ManagServices.pdb

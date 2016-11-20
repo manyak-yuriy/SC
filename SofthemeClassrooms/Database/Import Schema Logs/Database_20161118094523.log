@@ -1,0 +1,77 @@
+18.11.2016 23:45:23	This log contains information about the import schema operation into project 'Database' on computer 'ASUS' by user 'User'.
+18.11.2016 23:45:23	Import of database schema has started.
+18.11.2016 23:45:56	Gathering database options
+18.11.2016 23:45:56	Gathering users
+18.11.2016 23:45:56	Gathering roles
+18.11.2016 23:45:56	Gathering application roles
+18.11.2016 23:45:56	Gathering role memberships
+18.11.2016 23:45:56	Gathering filegroups
+18.11.2016 23:45:56	Gathering full-text catalogs
+18.11.2016 23:45:56	Gathering assemblies
+18.11.2016 23:45:56	Gathering certificates
+18.11.2016 23:45:56	Gathering asymmetric keys
+18.11.2016 23:45:56	Gathering symmetric keys
+18.11.2016 23:45:56	Gathering encrypted symmetric keys
+18.11.2016 23:45:56	Gathering schemas
+18.11.2016 23:46:08	Gathering XML schema collections
+18.11.2016 23:46:08	Gathering user-defined data types
+18.11.2016 23:46:08	Gathering user-defined types
+18.11.2016 23:46:08	Gathering table types
+18.11.2016 23:46:08	Gathering unique keys for table types
+18.11.2016 23:46:08	Gathering primary keys for table types
+18.11.2016 23:46:08	Gathering indexes for table types
+18.11.2016 23:46:08	Gathering check constraints for table types
+18.11.2016 23:46:08	Gathering default constraints for table types
+18.11.2016 23:46:08	Gathering partition functions
+18.11.2016 23:46:08	Gathering partition schemes
+18.11.2016 23:46:08	Gathering functions
+18.11.2016 23:46:09	Gathering encrypted functions
+18.11.2016 23:46:09	Gathering aggregates
+18.11.2016 23:46:09	Gathering procedures
+18.11.2016 23:46:09	Gathering encrypted procedures
+18.11.2016 23:46:09	Gathering tables
+18.11.2016 23:46:09	Gathering primary keys
+18.11.2016 23:46:09	Gathering unique constraints
+18.11.2016 23:46:09	Gathering foreign keys
+18.11.2016 23:46:09	Gathering default constraints
+18.11.2016 23:46:09	Gathering check constraints
+18.11.2016 23:46:10	Gathering views
+18.11.2016 23:46:10	Gathering encrypted views
+18.11.2016 23:46:10	Gathering indexes
+18.11.2016 23:46:10	Gathering statistics
+18.11.2016 23:46:10	Gathering full-text index stoplists
+18.11.2016 23:46:10	Gathering search property lists
+18.11.2016 23:46:10	Gathering search properties
+18.11.2016 23:46:10	Gathering full-text indexes
+18.11.2016 23:46:10	Gathering column store indexes
+18.11.2016 23:46:10	Gathering spatial indexes
+18.11.2016 23:46:10	Gathering XML indexes
+18.11.2016 23:46:10	Gathering Selective XML indexes
+18.11.2016 23:46:10	Gathering encrypted triggers
+18.11.2016 23:46:10	Gathering triggers
+18.11.2016 23:46:10	Gathering encrypted and clr ddl triggers
+18.11.2016 23:46:10	Gathering ddl triggers
+18.11.2016 23:46:10	Gathering synonyms
+18.11.2016 23:46:10	Gathering defaults
+18.11.2016 23:46:10	Gathering data constraint uddt bindings
+18.11.2016 23:46:10	Gathering rules
+18.11.2016 23:46:10	Gathering data constraint uddt bindings
+18.11.2016 23:46:10	Gathering message types
+18.11.2016 23:46:10	Gathering queues
+18.11.2016 23:46:10	Gathering contracts
+18.11.2016 23:46:11	Gathering services
+18.11.2016 23:46:11	Gathering event notifications
+18.11.2016 23:46:11	Gathering remote service bindings
+18.11.2016 23:46:11	Gathering broker priorities
+18.11.2016 23:46:11	Gathering signatures
+18.11.2016 23:46:11	Gathering data compression options
+18.11.2016 23:46:11	Gathering sequence types
+18.11.2016 23:46:11	Gathering extended properties
+18.11.2016 23:46:12	Gathering credentials
+18.11.2016 23:46:12	Gathering logins
+18.11.2016 23:46:12	Gathering server audits
+18.11.2016 23:46:14	Scanning project for duplicate elements
+18.11.2016 23:46:14	Finished duplicate element processing
+18.11.2016 23:46:14	Finished importing database.
+18.11.2016 23:46:14	A summary of the import was saved to the following location: D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\Database\Import Schema Logs\Database_20161118094523.log
+18.11.2016 23:46:15	Click Finish to continue...
