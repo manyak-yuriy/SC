@@ -18,3 +18,13 @@ D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Da
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

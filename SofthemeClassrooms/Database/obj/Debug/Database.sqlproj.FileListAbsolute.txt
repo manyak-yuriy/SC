@@ -7,3 +7,8 @@ D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Da
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\predeploy.sql
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\Database.dll
 D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\Database.pdb
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\Database\bin\Debug\Database.dacpac
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\Database\bin\Debug\Database.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\Database\bin\Debug\Database.pdb
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\Database\obj\Debug\Database.dll
+C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\Database\obj\Debug\Database.pdb
