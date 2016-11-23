@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DataSchemaModel FileFormatVersion="1.2" SchemaVersion="2.9" DspName="Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider" CollationLcid="1058" CollationCaseSensitive="False" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+<DataSchemaModel FileFormatVersion="1.2" SchemaVersion="2.9" DspName="Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider" CollationLcid="1033" CollationCaseSensitive="False" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
 	<Header>
 		<CustomData Category="AnsiNulls">
 			<Metadata Name="AnsiNulls" Value="True" />
@@ -26,7 +26,7 @@
 	</Header>
 	<Model>
 		<Element Type="SqlDatabaseOptions">
-			<Property Name="Collation" Value="Ukrainian_CI_AS" />
+			<Property Name="Collation" Value="Latin1_General_CI_AS" />
 			<Property Name="IsAnsiNullDefaultOn" Value="True" />
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="IsAnsiWarningsOn" Value="True" />
@@ -44,124 +44,19 @@
 				</Entry>
 			</Relationship>
 		</Element>
-		<Element Type="SqlInlineTableValuedFunction" Name="[dbo].[GetNums]">
+		<Element Type="SqlTable" Name="[dbo].[__MigrationHistory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[GetNums].[@high]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[GetNums].[@low]" />
-				</Entry>
-			</Relationship>
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[n]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DynamicObjects">
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L0]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L0].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L1]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L1].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L2]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L2].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L3]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L3].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L4]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L4].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[L5]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[L5].[c]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlDynamicColumnSource" Name="[dbo].[GetNums].[CTE1].[Nums]">
-						<Relationship Name="Columns">
-							<Entry>
-								<Element Type="SqlComputedColumn" Name="[dbo].[GetNums].[CTE1].[Nums].[rownum]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="FunctionBody">
-				<Entry>
-					<Element Type="SqlScriptFunctionImplementation">
-						<Property Name="BodyScript">
-							<Value><![CDATA[
-  WITH
-    L0   AS (SELECT c FROM (SELECT 1 UNION ALL SELECT 1) AS D(c)),
-    L1   AS (SELECT 1 AS c FROM L0 AS A CROSS JOIN L0 AS B),
-    L2   AS (SELECT 1 AS c FROM L1 AS A CROSS JOIN L1 AS B),
-    L3   AS (SELECT 1 AS c FROM L2 AS A CROSS JOIN L2 AS B),
-    L4   AS (SELECT 1 AS c FROM L3 AS A CROSS JOIN L3 AS B),
-    L5   AS (SELECT 1 AS c FROM L4 AS A CROSS JOIN L4 AS B),
-    Nums AS (SELECT ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS rownum
-            FROM L5)
-  SELECT TOP(@high - @low + 1) @low + rownum - 1 AS n
-  FROM Nums
-  ORDER BY rownum]]></Value>
-						</Property>
-						<Annotation Type="SysCommentsObjectAnnotation">
-							<Property Name="CreateOffset" Value="2" />
-							<Property Name="Length" Value="657" />
-							<Property Name="StartLine" Value="1" />
-							<Property Name="StartColumn" Value="1" />
-							<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE FUNCTION dbo.GetNums(@low AS BIGINT, @high AS BIGINT) RETURNS TABLE&#xD;&#xA;AS&#xD;&#xA;RETURN" />
-							<Property Name="FooterContents" Value=";" />
-						</Annotation>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[GetNums].[@low]">
-						<Relationship Name="Type">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[__MigrationHistory].[MigrationId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="150" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[bigint]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -170,13 +65,49 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSubroutineParameter" Name="[dbo].[GetNums].[@high]">
-						<Relationship Name="Type">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[__MigrationHistory].[ContextKey]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="300" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[bigint]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[__MigrationHistory].[Model]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varbinary]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[__MigrationHistory].[ProductVersion]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="32" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -190,19 +121,38 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="3" />
 		</Element>
-		<Element Type="SqlTable" Name="[dbo].[Nums]">
+		<Element Type="SqlTable" Name="[dbo].[AspNetRoles]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Nums].[n]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetRoles].[Id]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetRoles].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="256" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -218,75 +168,131 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
 		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Nums]">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetRoles].[RoleNameIndex]">
+			<Property Name="IsUnique" Value="True" />
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[Nums].[n]" />
+								<References Name="[dbo].[AspNetRoles].[Name]" />
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
 			</Relationship>
-			<Relationship Name="DefiningTable">
+			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[dbo].[Nums]" />
+					<References Name="[dbo].[AspNetRoles]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="4" />
 		</Element>
-		<Element Type="SqlSchema" Name="[HR]">
-			<Relationship Name="Authorizer">
+		<Element Type="SqlTable" Name="[dbo].[AspNetUserClaims]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserClaims].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserClaims].[UserId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="128" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserClaims].[ClaimType]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserClaims].[ClaimValue]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlCheckConstraint" Name="[HR].[CHK_BirthDate]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[BirthDate]<=getdate()]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[HR].[Employees].[BirthDate]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[HR].[Employees]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
 		</Element>
-		<Element Type="SqlTable" Name="[HR].[Employees]">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetUserClaims].[IX_UserId]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserClaims].[UserId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[AspNetUserClaims]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[AspNetUserLogins]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[EmployeeId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[LastName]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserLogins].[LoginProvider]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="20" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -298,12 +304,12 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[FirstName]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserLogins].[ProviderKey]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -315,179 +321,15 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[Title]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserLogins].[UserId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[TitleOfCourtesy]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="25" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[BirthDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[HireDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[Address]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[City]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[Region]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[PostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[Country]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[Phone]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[HR].[Employees].[ManagerId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -497,126 +339,41 @@
 				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[HR]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
-			<AttachedAnnotation Disambiguator="5" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
-		</Element>
-		<Element Type="SqlIndex" Name="[HR].[Employees].[idx_nc_LastName]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[HR].[Employees].[LastName]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[HR].[Employees].[idx_nc_PostalCode]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[HR].[Employees].[PostalCode]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[HR].[FK_Employees_Employees]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[HR].[Employees].[ManagerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[HR].[Employees].[EmployeeId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="7" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[HR].[PK_Employees]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[HR].[Employees].[EmployeeId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="6" />
-		</Element>
-		<Element Type="SqlSchema" Name="[Production]">
-			<Relationship Name="Authorizer">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
 		</Element>
-		<Element Type="SqlTable" Name="[Production].[Categories]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetUserLogins].[IX_UserId]">
+			<Relationship Name="ColumnSpecifications">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Categories].[CategoryId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
 							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
+								<References Name="[dbo].[AspNetUserLogins].[UserId]" />
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Categories].[CategoryName]">
+					<References Name="[dbo].[AspNetUserLogins]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[AspNetUserRoles]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserRoles].[UserId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -628,12 +385,12 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Categories].[description]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUserRoles].[RoleId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="200" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -647,18 +404,20 @@
 			</Relationship>
 			<Relationship Name="Schema">
 				<Entry>
-					<References Name="[Production]" />
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
 		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Categories].[CategoryName]" Disambiguator="3">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetUserRoles].[IX_RoleId]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[Production].[Categories].[CategoryName]" />
+								<References Name="[dbo].[AspNetUserRoles].[RoleId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -666,188 +425,38 @@
 			</Relationship>
 			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Production].[Categories]" />
+					<References Name="[dbo].[AspNetUserRoles]" />
 				</Entry>
 			</Relationship>
 		</Element>
-		<Element Type="SqlCheckConstraint" Name="[Production].[CHK_Products_UnitPrice]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[UnitPrice]>=(0)]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[Production].[Products].[UnitPrice]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Production].[DFT_Products_Discontinued]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Production].[Products].[Discontinued]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Production].[DFT_Products_UnitPrice]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Production].[Products].[UnitPrice]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Production].[FK_Products_Categories]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Production].[Products].[CategoryId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Production].[Categories].[CategoryId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Production].[Categories]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Production].[FK_Products_Suppliers]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Production].[Products].[SupplierId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Production].[Suppliers].[SupplierId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Production].[Suppliers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Production].[PK_Categories]">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetUserRoles].[IX_UserId]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[Production].[Categories].[CategoryId]" />
+								<References Name="[dbo].[AspNetUserRoles].[UserId]" />
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
 			</Relationship>
-			<Relationship Name="DefiningTable">
+			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Production].[Categories]" />
+					<References Name="[dbo].[AspNetUserRoles]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="8" />
 		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Production].[PK_Products]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Production].[Products].[ProductId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Production].[PK_Suppliers]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Production].[Suppliers].[SupplierId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Production].[Suppliers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
-		</Element>
-		<Element Type="SqlTable" Name="[Production].[Products]">
+		<Element Type="SqlTable" Name="[dbo].[AspNetUsers]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[ProductId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[ProductName]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[Id]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
+									<Property Name="Length" Value="128" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -859,14 +468,14 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[SupplierId]">
-						<Property Name="IsNullable" Value="False" />
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[Email]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="256" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -875,40 +484,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[CategoryId]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[UnitPrice]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="11" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Products].[Discontinued]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[EmailConfirmed]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -921,81 +497,122 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="10" />
 					</Element>
 				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
 				<Entry>
-					<References Name="[Production]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="14" />
-			<AttachedAnnotation Disambiguator="9" />
-			<AttachedAnnotation Disambiguator="12" />
-			<AttachedAnnotation Disambiguator="13" />
-		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Products].[idx_nc_CategoryId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[PasswordHash]">
+						<Relationship Name="TypeSpecifier">
 							<Entry>
-								<References Name="[Production].[Products].[CategoryId]" />
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Products].[idx_nc_ProductName]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[SecurityStamp]">
+						<Relationship Name="TypeSpecifier">
 							<Entry>
-								<References Name="[Production].[Products].[ProductName]" />
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Products].[idx_nc_SupplierId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[PhoneNumber]">
+						<Relationship Name="TypeSpecifier">
 							<Entry>
-								<References Name="[Production].[Products].[SupplierId]" />
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlTable" Name="[Production].[Suppliers]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[SupplierId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[PhoneNumberConfirmed]">
 						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[TwoFactorEnabled]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[LockoutEndDateUtc]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[LockoutEnabled]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[AccessFailedCount]">
+						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -1010,162 +627,12 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[CompanyName]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[AspNetUsers].[UserName]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[ContactName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[ContactTitle]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[Address]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[City]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[Region]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[PostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[Country]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[Phone]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Production].[Suppliers].[Fax]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
+									<Property Name="Length" Value="256" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
@@ -1178,305 +645,20 @@
 				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Production]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="15" />
-		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Suppliers].[idx_nc_CompanyName]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Production].[Suppliers].[CompanyName]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Production].[Suppliers]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Production].[Suppliers].[idx_nc_PostalCode]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Production].[Suppliers].[PostalCode]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Production].[Suppliers]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlSchema" Name="[Sales]">
-			<Relationship Name="Authorizer">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
 		</Element>
-		<Element Type="SqlCheckConstraint" Name="[Sales].[CHK_Discount]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[Discount]>=(0) AND [Discount]<=(1)]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Discount]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
-		</Element>
-		<Element Type="SqlCheckConstraint" Name="[Sales].[CHK_Quantity]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[Quantity]>(0)]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
-		</Element>
-		<Element Type="SqlCheckConstraint" Name="[Sales].[CHK_UnitPrice]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[UnitPrice]>=(0)]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[UnitPrice]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[Customers]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[CustomerId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[CompanyName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[ContactName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[ContactTitle]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[Address]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[City]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[Region]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[PostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[Country]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[Phone]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Customers].[Fax]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Customers].[idx_nc_City]">
+		<Element Type="SqlIndex" Name="[dbo].[AspNetUsers].[UserNameIndex]">
+			<Property Name="IsUnique" Value="True" />
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[Sales].[Customers].[City]" />
+								<References Name="[dbo].[AspNetUsers].[UserName]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -1484,676 +666,15 @@
 			</Relationship>
 			<Relationship Name="IndexedObject">
 				<Entry>
-					<References Name="[Sales].[Customers]" />
+					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
 		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Customers].[idx_nc_CompanyName]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Customers].[CompanyName]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Customers].[idx_nc_PostalCode]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Customers].[PostalCode]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Customers].[idx_nc_Region]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Customers].[Region]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlView" Name="[Sales].[CustOrders]">
-			<Property Name="IsSchemaBound" Value="True" />
-			<Property Name="QueryScript">
-				<Value><![CDATA[
-
-SELECT
-  O.CustomerId, 
-  DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0) AS ordermonth,
-  SUM(OD.Quantity) AS Quantity
-FROM Sales.Orders AS O
-  JOIN Sales.OrderDetails AS OD
-    ON OD.OrderId = O.OrderId
-GROUP BY CustomerId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Value>
-			</Property>
+		<Element Type="SqlTable" Name="[dbo].[ClassRoomProp]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[CustOrders].[CustomerId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[CustomerId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[CustOrders].[ordermonth]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[CustOrders].[Quantity]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="QueryDependencies">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[CustomerId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[CustomerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="2" />
-				<Property Name="Length" Value="347" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE VIEW Sales.CustOrders&#xD;&#xA;  WITH SCHEMABINDING&#xD;&#xA;AS" />
-				<Property Name="FooterContents" Value=";" />
-			</Annotation>
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Sales].[DFT_MyMyOrders_Freight]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[MyMyOrders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Sales].[MyMyOrders].[Freight]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Sales].[DFT_OrderDetails_Discount]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Discount]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Sales].[DFT_OrderDetails_Quantity]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((1))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Sales].[DFT_OrderDetails_UnitPrice]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[UnitPrice]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[Sales].[DFT_Orders_Freight]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[Sales].[Orders].[Freight]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
-		</Element>
-		<Element Type="SqlView" Name="[Sales].[EmpOrders]">
-			<Property Name="IsSchemaBound" Value="True" />
-			<Property Name="QueryScript">
-				<Value><![CDATA[  
-  
-SELECT  
-  O.EmployeeId,
-  DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0) AS ordermonth,  
-  SUM(OD.Quantity) AS Quantity,
-  CAST(SUM(OD.Quantity * OD.UnitPrice * (1 - Discount))  
-       AS NUMERIC(12, 2)) AS val,
-  COUNT(*) AS numorders  
-FROM Sales.Orders AS O  
-  JOIN Sales.OrderDetails AS OD  
-    ON OD.OrderId = O.OrderId  
-GROUP BY EmployeeId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[EmpOrders].[EmployeeId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[EmployeeId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[EmpOrders].[ordermonth]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[EmpOrders].[Quantity]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[EmpOrders].[val]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[EmpOrders].[numorders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="QueryDependencies">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[EmployeeId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[numeric]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[UnitPrice]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Discount]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[EmployeeId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="2" />
-				<Property Name="Length" Value="485" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE VIEW Sales.EmpOrders  &#xD;&#xA;  WITH SCHEMABINDING  &#xD;&#xA;AS" />
-				<Property Name="FooterContents" Value=";" />
-			</Annotation>
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_MyOrders_Customers]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[MyMyOrders].[CustomerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[MyMyOrders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Sales].[Customers].[CustomerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_OrderDetails_Orders]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[OrderId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_OrderDetails_Products]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[ProductId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Production].[Products].[ProductId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Production].[Products]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_Orders_Customers]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[Orders].[CustomerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Sales].[Customers].[CustomerId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_Orders_Employees]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[Orders].[EmployeeId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[HR].[Employees].[EmployeeId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[HR].[Employees]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Sales].[FK_Orders_Shippers]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[Sales].[Orders].[ShipperId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[Sales].[Shippers].[ShipperId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[Sales].[Shippers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[MyCustomers]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[CustomerId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[CompanyName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[ContactName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[ContactTitle]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="30" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[Address]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[City]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[Region]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[PostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[Country]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[Phone]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyCustomers].[Fax]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[MyMyOrders]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[OrderId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[CustomerId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[EmployeeId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRoomProp].[Id]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -2169,248 +690,7 @@ GROUP BY EmployeeId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Valu
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[OrderDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[RequiredDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShippedDate]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipperId]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[Freight]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipAddress]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipCity]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipRegion]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipPostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[MyMyOrders].[ShipCountry]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
-			<AttachedAnnotation Disambiguator="25" />
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[OrderDetails]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[OrderDetails].[OrderId]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[OrderDetails].[ProductId]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[OrderDetails].[UnitPrice]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="23" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[OrderDetails].[Quantity]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRoomProp].[ClassRoomId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -2423,114 +703,10 @@ GROUP BY EmployeeId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Valu
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="22" />
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[OrderDetails].[Discount]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Scale" Value="3" />
-									<Property Name="Precision" Value="4" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[numeric]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="21" />
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
-			<AttachedAnnotation Disambiguator="16" />
-			<AttachedAnnotation Disambiguator="17" />
-			<AttachedAnnotation Disambiguator="18" />
-			<AttachedAnnotation Disambiguator="26" />
-			<AttachedAnnotation Disambiguator="27" />
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[OrderDetails].[idx_nc_OrderId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[OrderDetails].[OrderId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[OrderDetails].[idx_nc_ProductId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[OrderDetails].[ProductId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[Orders]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[OrderId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[CustomerId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[EmployeeId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRoomProp].[EquipmentId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -2546,54 +722,7 @@ GROUP BY EmployeeId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Valu
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[OrderDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[RequiredDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShippedDate]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipperId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRoomProp].[Quantity]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -2608,692 +737,537 @@ GROUP BY EmployeeId, DATEADD(month, DATEDIFF(month, 0, O.OrderDate), 0)]]></Valu
 						</Relationship>
 					</Element>
 				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[Freight]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="24" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipAddress]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="60" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipCity]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipRegion]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipPostalCode]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Orders].[ShipCountry]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="15" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
-			<AttachedAnnotation Disambiguator="28" />
-			<AttachedAnnotation Disambiguator="29" />
-			<AttachedAnnotation Disambiguator="30" />
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_CustomerId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[CustomerId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_EmployeeId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[EmployeeId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_OrderDate]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[OrderDate]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_ShippedDate]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[ShippedDate]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_ShipperId]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[ShipperId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlIndex" Name="[Sales].[Orders].[idx_nc_ShipPostalCode]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[ShipPostalCode]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlView" Name="[Sales].[OrderTotalsByYear]">
-			<Property Name="IsSchemaBound" Value="True" />
-			<Property Name="QueryScript">
-				<Value><![CDATA[
-
-SELECT
-  YEAR(O.OrderDate) AS orderyear,
-  SUM(OD.Quantity) AS Quantity
-FROM Sales.Orders AS O
-  JOIN Sales.OrderDetails AS OD
-    ON OD.OrderId = O.OrderId
-GROUP BY YEAR(OrderDate)]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderTotalsByYear].[orderyear]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderTotalsByYear].[Quantity]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="QueryDependencies">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderDate]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="2" />
-				<Property Name="Length" Value="255" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;CREATE VIEW Sales.OrderTotalsByYear&#xD;&#xA;  WITH SCHEMABINDING&#xD;&#xA;AS" />
-				<Property Name="FooterContents" Value=";" />
-			</Annotation>
-		</Element>
-		<Element Type="SqlView" Name="[Sales].[OrderValues]">
-			<Property Name="IsSchemaBound" Value="True" />
-			<Property Name="QueryScript">
-				<Value><![CDATA[
-
-SELECT O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.RequiredDate, O.ShippedDate,
-  SUM(OD.Quantity) AS Quantity,
-  CAST(SUM(OD.Quantity * OD.UnitPrice * (1 - OD.Discount))
-       AS NUMERIC(12, 2)) AS val
-FROM Sales.Orders AS O
-  JOIN Sales.OrderDetails AS OD
-    ON O.OrderId = OD.OrderId
-GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.RequiredDate, O.ShippedDate]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[OrderId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[OrderId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[CustomerId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[CustomerId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[EmployeeId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[EmployeeId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[ShipperId]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[ShipperId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[OrderDate]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[OrderDate]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[RequiredDate]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[RequiredDate]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[ShippedDate]">
-						<Relationship Name="ExpressionDependencies">
-							<Entry>
-								<References Name="[Sales].[Orders].[ShippedDate]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[Quantity]" />
-				</Entry>
-				<Entry>
-					<Element Type="SqlComputedColumn" Name="[Sales].[OrderValues].[val]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="QueryDependencies">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[OrderId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[CustomerId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[EmployeeId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[ShipperId]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[OrderDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[RequiredDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[Orders].[ShippedDate]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Quantity]" />
-				</Entry>
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[numeric]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[UnitPrice]" />
-				</Entry>
-				<Entry>
-					<References Name="[Sales].[OrderDetails].[Discount]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="177" />
-				<Property Name="Length" Value="659" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;---------------------------------------------------------------------&#xD;&#xA;-- Create Views and Functions&#xD;&#xA;---------------------------------------------------------------------&#xD;&#xA;&#xD;&#xA;CREATE VIEW Sales.OrderValues&#xD;&#xA;  WITH SCHEMABINDING&#xD;&#xA;AS" />
-				<Property Name="FooterContents" Value=";" />
-			</Annotation>
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_Customers]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Customers].[CustomerId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Customers]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="19" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_MyCustomers]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[MyCustomers].[CustomerId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[MyCustomers]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="31" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_MyMyOrders]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[MyMyOrders].[OrderId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[MyMyOrders]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="32" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_OrderDetails]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[OrderDetails].[OrderId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[OrderDetails].[ProductId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[OrderDetails]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="33" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_Orders]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Orders].[OrderId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Orders]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="34" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Sales].[PK_Shippers]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Sales].[Shippers].[ShipperId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Sales].[Shippers]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
-		</Element>
-		<Element Type="SqlTable" Name="[Sales].[Shippers]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Shippers].[ShipperId]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Shippers].[CompanyName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="40" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Sales].[Shippers].[Phone]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="24" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References Name="[Sales]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="35" />
-		</Element>
-		<Element Type="SqlSchema" Name="[Stats]">
-			<Relationship Name="Authorizer">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
 		</Element>
-		<Element Type="SqlCheckConstraint" Name="[Stats].[CHK_Scores_Score]">
-			<Property Name="CheckExpressionScript">
-				<Value><![CDATA[[Score]>=(0) AND [Score]<=(100)]]></Value>
-			</Property>
-			<Relationship Name="CheckExpressionDependencies">
-				<Entry>
-					<References Name="[Stats].[Scores].[Score]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[Stats].[Scores]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[Stats].[FK_Scores_Tests]">
+		<Element Type="SqlTable" Name="[dbo].[ClassRooms]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<References Name="[Stats].[Scores].[TestId]" />
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRooms].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRooms].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRooms].[IsBookable]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[ClassRooms].[Capacity]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[Equipment]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Equipment].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Equipment].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="35" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Equipment].[Path]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[Events]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[Date]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[Duration]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[Description]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="500" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[ClassroomId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[smallint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[OrganizerId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Events].[IsPublic]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ClassRoomProp_ClassRooms]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ClassRoomProp].[ClassRoomId]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[Stats].[Scores]" />
+					<References Name="[dbo].[ClassRoomProp]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignColumns">
 				<Entry>
-					<References Name="[Stats].[Tests].[TestId]" />
+					<References Name="[dbo].[ClassRooms].[Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignTable">
 				<Entry>
-					<References Name="[Stats].[Tests]" />
+					<References Name="[dbo].[ClassRooms]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+			<AttachedAnnotation Disambiguator="14" />
 		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Stats].[PK_Scores]">
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ClassRoomProp_Equipment]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ClassRoomProp].[EquipmentId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ClassRoomProp]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Equipment].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Equipment]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="15" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]">
+			<Property Name="OnDeleteAction" Value="1" />
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[AspNetUserClaims].[UserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserClaims]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="6" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]">
+			<Property Name="OnDeleteAction" Value="1" />
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[AspNetUserLogins].[UserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserLogins]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="8" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]">
+			<Property Name="OnDeleteAction" Value="1" />
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[AspNetUserRoles].[RoleId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserRoles]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[AspNetRoles].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[AspNetRoles]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="10" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]">
+			<Property Name="OnDeleteAction" Value="1" />
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[AspNetUserRoles].[UserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserRoles]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="11" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Events_ClassRooms]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Events].[ClassroomId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Events]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ClassRooms].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ClassRooms]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="19" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Events_User]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Events].[OrganizerId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Events]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[User].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="20" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_VisitorEvent_Events]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[VisitorEvent].[EventId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[VisitorEvent]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Events].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Events]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_VisitorEvent_User]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[VisitorEvent].[VisitorId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[VisitorEvent]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[User].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_ClassRoomProp]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[Stats].[Scores].[TestId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Stats].[Scores].[StudentId]" />
+								<References Name="[dbo].[ClassRoomProp].[Id]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -3301,18 +1275,18 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[Stats].[Scores]" />
+					<References Name="[dbo].[ClassRoomProp]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+			<AttachedAnnotation Disambiguator="13" />
 		</Element>
-		<Element Type="SqlPrimaryKeyConstraint" Name="[Stats].[PK_Tests]">
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_ClassRooms]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[Stats].[Tests].[TestId]" />
+								<References Name="[dbo].[ClassRooms].[Id]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -3320,24 +1294,249 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[Stats].[Tests]" />
+					<References Name="[dbo].[ClassRooms]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
+			<AttachedAnnotation Disambiguator="16" />
 		</Element>
-		<Element Type="SqlTable" Name="[Stats].[Scores]">
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.__MigrationHistory]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[__MigrationHistory].[MigrationId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[__MigrationHistory].[ContextKey]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[__MigrationHistory]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="3" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.AspNetRoles]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetRoles].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetRoles]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="4" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.AspNetUserClaims]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserClaims].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserClaims]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="5" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.AspNetUserLogins]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserLogins].[LoginProvider]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserLogins].[ProviderKey]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserLogins].[UserId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserLogins]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="7" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.AspNetUserRoles]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserRoles].[UserId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUserRoles].[RoleId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUserRoles]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="9" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_dbo.AspNetUsers]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[AspNetUsers].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="12" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Equipment]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Equipment].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Equipment]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="17" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Events]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Events].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Events]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="18" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_User]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[User].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_VisitorEvent]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[VisitorEvent].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[VisitorEvent]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[User]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Stats].[Scores].[TestId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[User].[Id]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
+											<References ExternalSource="BuiltIns" Name="[int]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -3346,15 +1545,15 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Stats].[Scores].[StudentId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[User].[Name]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
+									<Property Name="Length" Value="100" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -3363,14 +1562,32 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Stats].[Scores].[Score]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[User].[Email]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="80" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[tinyint]" />
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[User].[Password]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -3381,53 +1598,55 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 			</Relationship>
 			<Relationship Name="Schema">
 				<Entry>
-					<References Name="[Stats]" />
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="38" />
-			<AttachedAnnotation Disambiguator="36" />
-			<AttachedAnnotation Disambiguator="37" />
+			<AttachedAnnotation Disambiguator="23" />
 		</Element>
-		<Element Type="SqlIndex" Name="[Stats].[Scores].[idx_nc_TestId_Score]">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Stats].[Scores].[TestId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[Stats].[Scores].[Score]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="IndexedObject">
-				<Entry>
-					<References Name="[Stats].[Scores]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlTable" Name="[Stats].[Tests]">
+		<Element Type="SqlTable" Name="[dbo].[VisitorEvent]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[Stats].[Tests].[TestId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[VisitorEvent].[Id]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[VisitorEvent].[EventId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bigint]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[VisitorEvent].[VisitorId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -3438,10 +1657,12 @@ GROUP BY O.OrderId, O.CustomerId, O.EmployeeId, O.ShipperId, O.OrderDate, O.Requ
 			</Relationship>
 			<Relationship Name="Schema">
 				<Entry>
-					<References Name="[Stats]" />
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="39" />
+			<AttachedAnnotation Disambiguator="24" />
+			<AttachedAnnotation Disambiguator="21" />
+			<AttachedAnnotation Disambiguator="22" />
 		</Element>
 	</Model>
 </DataSchemaModel>

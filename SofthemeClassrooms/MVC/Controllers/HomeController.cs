@@ -11,8 +11,8 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-            var customers = CustomersManagement.getAllCustomers();
-            return View(customers);
+            
+            return View();
         }
 
         public ActionResult About()

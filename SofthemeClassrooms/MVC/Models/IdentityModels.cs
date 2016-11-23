@@ -21,7 +21,7 @@ namespace WebApplication1.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(@"Data Source=ASUS\SQLEXPRESS;Initial Catalog=SofthemeClassrooms;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True", throwIfV1Schema: false)
         {
         }
 

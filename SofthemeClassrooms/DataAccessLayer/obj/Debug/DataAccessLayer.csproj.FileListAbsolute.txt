@@ -8,3 +8,13 @@ D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\DataAccessLayer\bin\Debug\En
 D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 D:\DropboxWorking\Dropbox\Test\MVC1\WebApplication1\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.xml
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
