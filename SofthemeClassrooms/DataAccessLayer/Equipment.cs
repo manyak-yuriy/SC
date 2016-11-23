@@ -12,7 +12,7 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipment()
         {
-            ClassRoomProp = new HashSet<ClassRoomProp>();
+            ClassRoomProperties = new HashSet<ClassRoomProperties>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -20,13 +20,13 @@ namespace DataAccessLayer
 
         [Required]
         [StringLength(35)]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Path { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassRoomProp> ClassRoomProp { get; set; }
+        public virtual ICollection<ClassRoomProperties> ClassRoomProperties { get; set; }
     }
 }
