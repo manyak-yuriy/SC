@@ -1,0 +1,9 @@
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\bin\Debug\Database.dacpac
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\bin\Debug\Database.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\bin\Debug\Database.pdb
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\Model.xml
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\refactor.xml
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\postdeploy.sql
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\predeploy.sql
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\Database.dll
+D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\Database\obj\Debug\Database.pdb
