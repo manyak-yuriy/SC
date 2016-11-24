@@ -1,0 +1,8 @@
+/build/
+*.suo
+bin/
+obj/
+Debug/
+Release/
+*.dll
+*.pbd
