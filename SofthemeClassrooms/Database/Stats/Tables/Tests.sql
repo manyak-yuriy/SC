@@ -1,0 +1,5 @@
+﻿CREATE TABLE [Stats].[Tests] (
+    [TestId] VARCHAR (10) NOT NULL,
+    CONSTRAINT [PK_Tests] PRIMARY KEY CLUSTERED ([TestId] ASC)
+);
+
