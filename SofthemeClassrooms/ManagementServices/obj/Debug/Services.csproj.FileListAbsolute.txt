@@ -1,9 +1,0 @@
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\ManagServices.dll
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\ManagServices.pdb
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\DataAccessLayer.dll
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\EntityFramework.dll
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\DataAccessLayer.pdb
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\bin\Debug\EntityFramework.xml
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\obj\Debug\Services.csprojResolveAssemblyReference.cache
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\obj\Debug\ManagServices.dll
-D:\DropboxWorking\Dropbox\Project\repo\Softheme_Classrooms\SofthemeClassrooms\ManagementServices\obj\Debug\ManagServices.pdb
