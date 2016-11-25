@@ -197,9 +197,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Models\Event\EventEditViewModel.cs" />
+    <Compile Include="Models\Feedback\FeedbackViewModel.cs" />
+    <Compile Include="Models\Profile\ProfileChangeViewModel.cs" />
+    <Compile Include="Models\Room\RoomPropViewModel.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,7 +215,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -272,8 +279,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Schedule\" />
+    <Folder Include="Views\Event\" />
+    <Folder Include="Views\Feedback\" />
+    <Folder Include="Views\Profile\" />
     <Folder Include="Views\Room\" />
     <Folder Include="Views\Schedule\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -288,9 +300,9 @@
       <Project>{235d407a-12c5-46ae-934d-5403dd7a2ac4}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ManagementServices\Services.csproj">
+    <ProjectReference Include="..\ManagementServices\ManagementServices.csproj">
       <Project>{c5d74ff1-26f1-4548-a734-6e9aae322e6f}</Project>
-      <Name>Services</Name>
+      <Name>ManagementServices</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

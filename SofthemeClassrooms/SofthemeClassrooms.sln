@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{CAA89AE8-7293-42C9-B1AE-2C9C5EEB7A14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "ManagementServices\Services.csproj", "{C5D74FF1-26F1-4548-A734-6E9AAE322E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementServices", "ManagementServices\ManagementServices.csproj", "{C5D74FF1-26F1-4548-A734-6E9AAE322E6F}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{D1EFF129-C0C9-4049-AC33-78F161F86DEA}"
 EndProject
