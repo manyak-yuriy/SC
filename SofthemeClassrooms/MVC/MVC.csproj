@@ -262,6 +262,7 @@
     <Content Include="Views\Account\ForgotPasswordPartialView.cshtml" />
     <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Schedule\RoomsScheme.cshtml" />
+    <Content Include="Views\Schedule\MapPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

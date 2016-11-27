@@ -1,0 +1,27 @@
+﻿<h1> </h1>
+
+<div id="map" style="width:100%;height:500px"></div>
+
+<script src="https://use.fontawesome.com/48d38a0d54.js"></script>
+
+<script>
+function myMap() {
+      
+      var myCenter = new google.maps.LatLng(50.428991, 30.518236);
+      var mapCanvas = document.getElementById("map");
+      var mapOptions = { center: myCenter, zoom: 17 };
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+      var marker = new google.maps.Marker({ position: myCenter });
+      marker.setMap(map);
+
+      var infowindow = new google.maps.InfoWindow({
+          content: "<h3>Softheme</h3> г. Киев, ул. Деловая, 5а <br><br>" +
+                      '<i class="fa fa-globe" aria-hidden="true"></i> softheme.com <br>' +
+                      '<i class="fa fa-envelope-o" aria-hidden="true"></i> info@softheme.com'
+      });
+      infowindow.open(map, marker);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYhqmJmhnjEaFT-aGDs1NksQlA5djoQCQ&callback=myMap"></script>
+
