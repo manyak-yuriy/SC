@@ -3,8 +3,10 @@
     ViewBag.Title = "Home - Schedule";
 }
 
-@Html.Partial("RoomsScheme")
+@Html.Partial("RoomsSchemePartialView")
+@Html.Partial("SchedulerPatrialView")
 @Html.Partial("MapPartialView")
+
 
 @section Menu{
     @Html.CreateMenuItems(new MenuItemInfo[]{
