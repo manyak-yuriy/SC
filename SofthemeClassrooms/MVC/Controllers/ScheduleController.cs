@@ -10,9 +10,9 @@ namespace WebApplication1.Controllers
     {
         // Render the page
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult ShowSchedule()
         {
-            return new EmptyResult();
+            return View();
         }
 
         // Get data about events for a specific date

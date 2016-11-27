@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
-using WebApplication1.ViewModels;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class FeedbackController : Controller
     {
-        [HttpPost]
-        public ActionResult Index(FeedbackViewModel feedback)
+        public ActionResult SendMessageForm()
         {
-            return new EmptyResult();
+            return View();
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult SendMessageForm(SendMessageModel model)
         {
-            return new EmptyResult();
+            if(ModelState.IsValid)
+            {
+
+            }
+
+            return View(model);
         }
     }
 }

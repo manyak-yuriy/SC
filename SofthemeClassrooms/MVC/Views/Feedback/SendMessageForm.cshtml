@@ -1,0 +1,46 @@
+﻿@using WebApplication1.HtmlHelpers
+@model WebApplication1.Models.SendMessageModel
+
+@{
+    ViewBag.Title = "SendMessageForm";
+}
+
+<link href="~/Content/feedback.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="col-md-4 col-lg-4 col-lg-offset-2">
+        <p><h2>Написать Сообщение</h2>
+        Напишите, если у вас есть идеи, замечания или вопросы.</p>
+        <img src="@Url.Action("GetImage","Resources", new { imageName = "contact-bg.png"})" alt=""/>
+    </div>
+    <div class="col-md-4 col-lg-offset-1 col-md-offset-2 col-lg-4" id="feedbackForm">
+        @using (Html.BeginForm())
+        {
+            <div class="fullname">
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "error" })
+                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6",  placeholder = "Имя" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "error" })
+                @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия" } })
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты" } })
+            </div>  
+            <div>  
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "error" })
+                @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id="messageText"} })
+                <input id="send" type="submit" value="Отправить"/>
+            </div>
+        }
+    </div>
+</div>
+
+@section Menu{
+    @Html.CreateMenuItems(new MenuItemInfo[]{
+                new MenuItemInfo() { ItemName ="Вход", ActionRoute= Url.Action("Login","Account") },
+                new MenuItemInfo() { ItemName ="Обратная связь", ActionRoute= Url.Action("SendMessageForm","Feedback") },
+                new MenuItemInfo() { ItemName ="Рассписание", ActionRoute = Url.Action("ShowSchedule","Schedule") } }, 1)
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")

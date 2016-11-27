@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -11,7 +10,7 @@ namespace WebApplication1.Controllers
     {
         // Save info about capacity, number of equipment items
         [HttpPost]
-        public ActionResult SaveProperties(RoomPropViewModel roomProp)
+        public ActionResult SaveProperties(/*RoomPropViewModel roomProp*/)
         {
             return new EmptyResult();
         }

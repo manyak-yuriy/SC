@@ -1,63 +1,25 @@
-﻿@using WebApplication1.Models
-@model LoginViewModel
+﻿
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+<link href="~/Content/login.css" rel="stylesheet" />
+
+
+
+<div class="login-menu">
+    <ul class="menu-list">
+        <li><img class="menu-logo" src="@Url.Action("GetImage", "Resources", new { imageName="logo-gray.png" })" /></li>
+        <li>@Ajax.ActionLink("Вход", "LoginForm", new AjaxOptions { UpdateTargetId= "inputForm", InsertionMode = InsertionMode.Replace, OnSuccess="$('#title').text('Вход')" })</li>
+        <li>@Ajax.ActionLink("Регистрация", "RegisterForm", new AjaxOptions { UpdateTargetId = "inputForm", InsertionMode = InsertionMode.Replace,OnSuccess = "$('h2').text('Регистрация');" })</li>
+        <li>@Ajax.ActionLink("Смена пароля", "ForgotPassword", new AjaxOptions { UpdateTargetId = "inputForm", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#title').text('Сменить пароль')" })</li>
+    </ul>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div class="input-wrapper">
+    <div class="input-header"><div id="header-content"><h2 id="title">Вход</h2></div></div>
+    <div id="inputForm" class="input-area">
+        @Html.Partial("LoginInput")
+    </div>
+</div>

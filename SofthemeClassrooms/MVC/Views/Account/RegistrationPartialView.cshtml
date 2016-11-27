@@ -1,0 +1,23 @@
+﻿@model WebApplication1.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account"))
+{
+    <div>
+        @Html.ValidationMessageFor(model => model.FullName, "")
+        @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })
+    </div>
+
+    <div>
+        @Html.ValidationMessageFor(model => model.Email, "")
+        @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
+    </div>
+    <div>
+        @Html.ValidationMessageFor(model => model.Password, "")
+        @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
+    </div>
+    <div>
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "")
+        @Html.EditorFor(model => model.ConfirmPassword, "", new { htmlattributes = new { placeholder = " Повторить пароль", @class = "custom-input" } })
+    </div>
+    <input type="submit" value="Зарегистрироваться" />
+}
