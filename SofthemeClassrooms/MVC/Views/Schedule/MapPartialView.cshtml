@@ -20,6 +20,8 @@ function myMap() {
                       '<i class="fa fa-envelope-o" aria-hidden="true"></i> info@softheme.com'
       });
       infowindow.open(map, marker);
+
+      map.setOptions({ draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true });
 }
 </script>
 
