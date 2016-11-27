@@ -10,13 +10,13 @@
 <body>
     <nav>
         <div id="navformer">
-            <img id="logo" src="@Url.Action("GetImage","Resources", new { imageName = "logo.png"})" alt="logo" />
+            <img id="logo" src="~/Images/logo.png" alt="logo" />
             @RenderSection("Menu", true)
         </div>
     </nav>
     @RenderBody()
     <footer>
-        <img id="logo-gray" src="@Url.Action("GetImage","Resources", new { imageName = "logo-gray.png"})"/>
+        <img id="logo-gray" src="~/Images/logo-gray.png"/>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
