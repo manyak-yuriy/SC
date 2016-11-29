@@ -74,20 +74,15 @@ namespace WebApplication1.Controllers
                 return View(model);
             }
 
-            // Сбои при входе не приводят к блокированию учетной записи
-            // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    //return RedirectToLocal(returnUrl);
-                    break;
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    return RedirectToAction("ShowSchedule", "Schedule");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = "", RememberMe = false });
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("","Неудачная попытка входа.");
                     return View(model);
             }
             return null;
@@ -118,10 +113,6 @@ namespace WebApplication1.Controllers
                 return View(model);
             }
 
-            // Приведенный ниже код защищает от атак методом подбора, направленных на двухфакторные коды. 
-            // Если пользователь введет неправильные коды за указанное время, его учетная запись 
-            // будет заблокирована на заданный период. 
-            // Параметры блокирования учетных записей можно настроить в IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -153,19 +144,17 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Отправка сообщения электронной почты с этой ссылкой
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShowSchedule", "Schedule");
                 }
                 AddErrors(result);
             }
@@ -173,6 +162,8 @@ namespace WebApplication1.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
+
+   
 
         //
         // GET: /Account/ConfirmEmail
@@ -211,15 +202,12 @@ namespace WebApplication1.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
-                // Отправка сообщения электронной почты с этой ссылкой
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
-            // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
 
@@ -386,6 +374,8 @@ namespace WebApplication1.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
+        
 
         //
         // POST: /Account/LogOff

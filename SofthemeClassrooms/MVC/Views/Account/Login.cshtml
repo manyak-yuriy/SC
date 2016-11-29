@@ -8,6 +8,7 @@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
     <div>
         @Html.ValidationMessageFor(model => model.Email, "")
         @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
