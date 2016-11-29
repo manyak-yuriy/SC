@@ -60,26 +60,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Snapshots" />
-    <Folder Include="Snapshots\dbo" />
-    <Folder Include="Snapshots\dbo\Tables" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\Database_20161123_19-07-27.dacpac" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="Snapshots\dbo\Tables\__MigrationHistory.sql" />
-    <Build Include="Snapshots\dbo\Tables\AspNetRoles.sql" />
-    <Build Include="Snapshots\dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="Snapshots\dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="Snapshots\dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="Snapshots\dbo\Tables\AspNetUsers.sql" />
-    <Build Include="Snapshots\dbo\Tables\ClassRoomProperties.sql" />
-    <Build Include="Snapshots\dbo\Tables\ClassRooms.sql" />
-    <Build Include="Snapshots\dbo\Tables\Equipment.sql" />
-    <Build Include="Snapshots\dbo\Tables\Events.sql" />
-    <Build Include="Snapshots\dbo\Tables\Feedback.sql" />
-    <Build Include="Snapshots\dbo\Tables\ForeignVisitor.sql" />
-    <Build Include="Snapshots\dbo\Tables\User.sql" />
-    <Build Include="Snapshots\dbo\Tables\VisitorEvent.sql" />
   </ItemGroup>
 </Project>
