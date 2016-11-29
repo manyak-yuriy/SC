@@ -255,15 +255,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Schedule\ShowSchedule.cshtml" />
     <Content Include="Views\Feedback\SendMessageForm.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Account\LoginInput.cshtml" />
-    <Content Include="Views\Account\RegistrationPartialView.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordPartialView.cshtml" />
     <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Schedule\RoomsSchemePartialView.cshtml" />
     <Content Include="Views\Schedule\MapPartialView.cshtml" />
     <Content Include="Views\Schedule\SchedulerPatrialView.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

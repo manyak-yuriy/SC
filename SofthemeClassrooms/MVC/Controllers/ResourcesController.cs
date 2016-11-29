@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,7 +13,7 @@ namespace WebApplication1.Controllers
         {
             if(!string.IsNullOrEmpty(imageName))
             {
-                string path = @"C:\Users\Shohan\Desktop\SofthemeClassrooms\SofthemeClassrooms\MVC\Images" + @"\" + imageName;
+                string path = @"~/Images" + @"/" + imageName;
                 FileInfo file = new FileInfo(path);
                 if (file.Exists)
                     return File(file.FullName, "image/png", file.Name);

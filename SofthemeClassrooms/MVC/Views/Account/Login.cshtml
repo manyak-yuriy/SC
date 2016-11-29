@@ -1,25 +1,26 @@
-﻿
+﻿@model WebApplication1.Models.LoginViewModel
+
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<link href="~/Content/login.css" rel="stylesheet" />
-
-
-
-<div class="login-menu">
-    <ul class="menu-list">
-        <li><img class="menu-logo" src="@Url.Action("GetImage", "Resources", new { imageName="logo-gray.png" })" /></li>
-        <li>@Ajax.ActionLink("Вход", "LoginForm", new AjaxOptions { UpdateTargetId= "inputForm", InsertionMode = InsertionMode.Replace, OnSuccess="$('#title').text('Вход')" })</li>
-        <li>@Ajax.ActionLink("Регистрация", "RegisterForm", new AjaxOptions { UpdateTargetId = "inputForm", InsertionMode = InsertionMode.Replace,OnSuccess = "$('h2').text('Регистрация');" })</li>
-        <li>@Ajax.ActionLink("Смена пароля", "ForgotPassword", new AjaxOptions { UpdateTargetId = "inputForm", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#title').text('Сменить пароль')" })</li>
-    </ul>
-</div>
-
-<div class="input-wrapper">
-    <div class="input-header"><div id="header-content"><h2 id="title">Вход</h2></div></div>
-    <div id="inputForm" class="input-area">
-        @Html.Partial("LoginInput")
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.ValidationMessageFor(model => model.Email, "")
+        @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
     </div>
-</div>
+    <div>
+        @Html.ValidationMessageFor(model => model.Password, "")
+        @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
+    </div>
+    <input type="submit" value="Войти" />
+}
+
+@section header{
+    Вход
+}
+
+
