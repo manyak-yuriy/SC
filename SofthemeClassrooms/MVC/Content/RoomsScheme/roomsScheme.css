@@ -8,11 +8,11 @@
 #prop-pane
 {
     position: absolute;
-    left: 550px;
-    top: 500px;
+    left: 420px;
+    top: 470px;
     z-index: 100;
     background-image: url("../../Images/Extracted/PropPane/PropPane.png");
-    width:400px;
+    width: 400px;
     height:80px;
     border: 5px solid red;
     background-repeat: no-repeat;
