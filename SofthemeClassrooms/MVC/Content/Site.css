@@ -6,9 +6,16 @@
 footer{
     width: 100%;
     background-color: #f4f6fb;
-    height: 15%;
-    position: fixed;
+    height: 100%;
+    position: static;
+    display: inline;
     bottom: 0px;
+    margin: 40px;
+}
+
+#logo-gray
+{
+    
 }
 
 nav{
@@ -25,13 +32,6 @@ nav{
 .body-content{
     width: 70%;
     margin: auto;    
-}
-
-nav{
-    display: block;
-    padding: 0px;
-    margin: 0px;
-    height: 20%;
 }
 
 #logo{
