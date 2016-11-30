@@ -1,0 +1,15 @@
+﻿#schema-image {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+   /*width: 50%;*/ 
+}
+
+.draggable .resizeable {
+    display: inline;
+    position: absolute;
+}
+
+button {
+    margin: 30px;
+}

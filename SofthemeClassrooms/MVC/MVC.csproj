@@ -219,6 +219,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\RoomsScheme\roomsScheme.css" />
     <Content Include="Content\schedule.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -242,6 +243,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RoomsScheme\RoomsScheme.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -1,8 +1,80 @@
 ﻿
 <link href="~/Content/schedule.css" rel="stylesheet" />
+<link href="~/Content/RoomsScheme/roomsScheme.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+<!--
+   <script src="~/Scripts/RoomsScheme/roomsScheme.js"> </script> 
+-->
+
+<script>
+    $
+    var resizeOptions = {
+        autoHide: true, ghost: true
+    }
+
+    $(function () {
+        $(".draggable").draggable();
+
+        $(".resizeable").resizable(resizeOptions);
+    })
+</script>
+
 
 <div class="schema-wrapper">
     <div class="schema">
         <img id="schema-image" src="~/Images/walls.png" alt="" />
+
+        <div class="draggable" id="tesla">
+            <span class="caption">Tesla</span>
+            <img class="resizeable" src="~/Images/Extracted/Tesla/TeslaGrey.png">
+        </div>
+
+        <div class="draggable" id="einstein">
+            <span class="caption">Einstein</span>
+            <img class="resizeable" src="~/Images/Extracted/Einstein/EinsteinDisabled.png">
+        </div>
+
+        <div class="draggable" id="english">
+            <span class="caption">English</span>
+            <img class="resizeable" src="~/Images/Extracted/English/EnglishDisabled.png">
+        </div>
+
+        <div class="draggable" id="english-office">
+            <span class="caption">EnglishOffice</span>
+            <img class="resizeable" src="~/Images/Extracted/EnglishOffice/EnglishOffice.png">
+        </div>
+
+        <div class="draggable" id="hr-office">
+            <span class="caption">HROffice</span>
+            <img class="resizeable" src="~/Images/Extracted/HROffice/HROffice.png">
+        </div>
+        
+        <div class="draggable" id="info-center">
+            <span class="caption">HROffice</span>
+            <img class="resizeable" src="~/Images/Extracted/InfoCenter/InfoCenter.png">
+        </div>
+
+        <div class="draggable" id="marketing1">
+            <span class="caption">marketing1</span>
+            <img class="resizeable" src="~/Images/Extracted/Marketing1/Marketing1.png">
+        </div>
+
+        <div class="draggable" id="marketing2">
+            <span class="caption">marketing2</span>
+            <img class="resizeable" src="~/Images/Extracted/Marketing2/Marketing2.png">
+        </div>
+
+        <div class="draggable" id="marketing3">
+            <span class="caption">marketing3</span>
+            <img class="resizeable" src="~/Images/Extracted/Marketing3/Marketing3.png">
+        </div>
+
+        <div class="draggable" id="newton">
+            <span class="caption">Newton</span>
+            <img class="resizeable" src="~/Images/Extracted/Newton/NewtonAvailable.png">
+        </div>
+
     </div>
 </div>
