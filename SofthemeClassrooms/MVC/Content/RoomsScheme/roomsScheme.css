@@ -19,6 +19,21 @@
     background-size: 100%;
 }
 
+.eq-container
+{
+    display: inline;
+    margin: 5px;
+    top: 12px;
+    left: 5px;
+    border: 1px solid green;
+    position: relative;
+}
+
+.eq-img
+{
+    margin: 5px;
+}
+
 .draggable {
     display: block;
     position: absolute;
