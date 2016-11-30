@@ -5,11 +5,18 @@
    /*width: 50%;*/ 
 }
 
-.draggable .resizeable {
-    display: inline;
+.draggable {
+    display: block;
     position: absolute;
 }
 
 button {
     margin: 30px;
+}
+
+
+#schema-wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
 }

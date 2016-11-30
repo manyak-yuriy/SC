@@ -1,24 +1,15 @@
 ﻿
 <link href="~/Content/schedule.css" rel="stylesheet" />
-<link href="~/Content/RoomsScheme/roomsScheme.css" rel="stylesheet" />
+
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
-<!--
-   <script src="~/Scripts/RoomsScheme/roomsScheme.js"> </script> 
--->
+
+<script src="~/Scripts/RoomsScheme/roomsScheme.js"> </script> 
+<link href="~/Content/RoomsScheme/roomsScheme.css" rel="stylesheet" />
 
 <script>
-    $
-    var resizeOptions = {
-        autoHide: true, ghost: true
-    }
-
-    $(function () {
-        $(".draggable").draggable();
-
-        $(".resizeable").resizable(resizeOptions);
-    })
+    
 </script>
 
 
@@ -39,11 +30,6 @@
         <div class="draggable" id="english">
             <span class="caption">English</span>
             <img class="resizeable" src="~/Images/Extracted/English/EnglishDisabled.png">
-        </div>
-
-        <div class="draggable" id="english-office">
-            <span class="caption">EnglishOffice</span>
-            <img class="resizeable" src="~/Images/Extracted/EnglishOffice/EnglishOffice.png">
         </div>
 
         <div class="draggable" id="hr-office">
@@ -73,8 +59,12 @@
 
         <div class="draggable" id="newton">
             <span class="caption">Newton</span>
-            <img class="resizeable" src="~/Images/Extracted/Newton/NewtonAvailable.png">
+            <img class="resizeable" src="~/Images/Extracted/Newton/NewtonBooked.png">
         </div>
 
     </div>
+
+    <button id="posLoader">Load</button>
+    <button id="posSaver">Save</button>
+    <button id="captionHide">Hide</button>
 </div>
