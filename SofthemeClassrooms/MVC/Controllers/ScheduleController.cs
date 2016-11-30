@@ -15,6 +15,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public JsonResult GetEquipmentDataForRoom(int roomId)
+        {
+            ManagementServices.Implementations.EquipmentManagement equipmentManager = new ManagementServices.Implementations.EquipmentManagement();
+            return Json(equipmentManager.Equals(roomId));
+        }
+
         // Get data about events for a specific date
         [HttpGet]
         public ActionResult GetSchedulerState(DateTime date)

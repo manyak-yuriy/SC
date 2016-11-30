@@ -285,9 +285,9 @@
       <Project>{235d407a-12c5-46ae-934d-5403dd7a2ac4}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ManagementServices\Services.csproj">
-      <Project>{c5d74ff1-26f1-4548-a734-6e9aae322e6f}</Project>
-      <Name>Services</Name>
+    <ProjectReference Include="..\ManagementServices\ManagementServices.csproj">
+      <Project>{b66f15f6-f60a-4c17-87ed-c66155c87c44}</Project>
+      <Name>ManagementServices</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

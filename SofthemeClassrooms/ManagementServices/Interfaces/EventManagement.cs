@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 
-namespace ManagementServices
+namespace ManagementServices.Interfaces
 {
-    public interface EventManagement
+    public interface IEventManagement
     {
         IEnumerable<Events> GetAll();
         Events GetById(int id);

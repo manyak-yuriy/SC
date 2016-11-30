@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 
-namespace ManagementServices
+namespace ManagementServices.Implementations
 {
     
 }
