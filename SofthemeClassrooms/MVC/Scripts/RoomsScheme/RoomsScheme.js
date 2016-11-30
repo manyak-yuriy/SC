@@ -17,15 +17,15 @@ var loadPos =
                             function() 
                             { 
                                 //console.log($(this).text()); 
-                                var key = $(this).attr("id");
+                                var key = $(this).attr("id") + $(this).hasClass('room-image');
                                 
 
                                 $(this).css("left", posData[key]["left"]);
                                 $(this).css("top", posData[key]["top"]);
 
                                 $img = $(this).find("img");
-                                $img.resizable( "destroy" ).width(posData[key]["width"]).resizable(resizeOptions); 
-                                $img.resizable( "destroy" ).height(posData[key]["height"]).resizable(resizeOptions);  
+                                //$img.resizable( "destroy" ).width(posData[key]["width"]).resizable(resizeOptions); 
+                                //$img.resizable( "destroy" ).height(posData[key]["height"]).resizable(resizeOptions);  
                             }
                         );
 
@@ -44,7 +44,7 @@ var savePos =
                     function() 
                     { 
                       //console.log($(this).text()); 
-                      var key = $(this).attr("id");
+                        var key = $(this).attr("id") + $(this).hasClass('room-image');
                       posData[key] = {
                                          left: $(this).css("left"), 
                                          top: $(this).css("top"), 
@@ -90,11 +90,42 @@ var savePos =
 
 $(  function() 
     {
-            //loadPos();
+            loadPos();
 
             $(".draggable" ).draggable();
 
-            $(".resizeable" ).resizable(resizeOptions);
+            $(".resizeable").resizable(resizeOptions);
+
+            $('.line-details').css("display", "none");
+            
+            
+
+            $(".room-image").mouseover(function () {
+               
+                $.ajax({
+                    url: $('#prop-pane').data('request-url'),
+                    type: "GET",
+                    data: {roomId: 0},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+
+                        /*alert(textStatus);
+                        alert(JSON.stringify(data));*/
+
+                        $('.table').html(data.SeatCount);
+                        $('.board').html(data.BoardCount);
+                        $('.laptop').html(data.LaptopCount);
+                        $('.printer').html(data.PrinterCount);
+                        $('.projector').html(data.ProjectorCount);
+
+                        $('.line-details').css("display", "none");
+
+                        $('.line-details').filter('#' + $(this).attr('id')).css("display", "block");
+                    }
+                });
+            });
 
             //$("#map" ).resizable(resizeOptions);
 

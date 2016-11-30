@@ -14,7 +14,7 @@
     background-image: url("../../Images/Extracted/PropPane/PropPane.png");
     width: 400px;
     height:80px;
-    border: 5px solid red;
+    /*border: 5px solid red;*/
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -24,9 +24,14 @@
     display: inline;
     margin: 5px;
     top: 12px;
-    left: 5px;
-    border: 1px solid green;
+    left: 15px;
+    /*border: 1px solid green;*/
     position: relative;
+}
+
+.line-details
+{
+    display: none;
 }
 
 .eq-img
