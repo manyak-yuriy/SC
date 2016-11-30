@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,7 +257,6 @@
     <Content Include="Views\Schedule\ShowSchedule.cshtml" />
     <Content Include="Views\Feedback\SendMessageForm.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Schedule\RoomsSchemePartialView.cshtml" />
     <Content Include="Views\Schedule\MapPartialView.cshtml" />
     <Content Include="Views\Schedule\SchedulerPatrialView.cshtml" />
@@ -265,6 +265,12 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\RegisterMessage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\RegistrationSuccess.cshtml" />
+    <Content Include="Views\UserPage\Page.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

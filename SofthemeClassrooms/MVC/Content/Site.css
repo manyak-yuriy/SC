@@ -80,3 +80,14 @@ li.menu-item-active{
     background-color: #f4f6fb;
     border-bottom: 2px solid red;
 }
+
+
+#name-validation{
+    float: left;
+    width: 50%;
+}
+
+#lname-validation{
+    float: right;
+    width: 50%;
+}
