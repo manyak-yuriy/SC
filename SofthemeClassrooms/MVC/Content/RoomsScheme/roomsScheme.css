@@ -32,16 +32,23 @@
 .line-details
 {
     display: none;
+    z-index: 9;
 }
 
 .eq-img
 {
     margin: 5px;
+    z-index: 10;
 }
 
 .draggable {
     display: block;
     position: absolute;
+}
+
+.draggable .resizeable
+{
+    display: none;
 }
 
 button {

@@ -16,10 +16,10 @@ namespace ManagementServices.Implementations
             return new EquipmentViewModel
             {
                 SeatCount = 10 + r.Next(0, 3),
-                BoardCount = 2 + r.Next(0, 3),
-                LaptopCount = 10 + r.Next(0, 3),
+                BoardCount = 1 + r.Next(0, 2),
+                LaptopCount = 10 + r.Next(0, 10),
                 PrinterCount = 0 + r.Next(0, 3),
-                ProjectorCount = 1 + r.Next(0, 3)
+                ProjectorCount = 0 + r.Next(0, 2)
             };
         }
     }

@@ -89,7 +89,7 @@ var savePos =
 
 
 $(  function() 
-    {
+{
             loadPos();
 
             $(".draggable" ).draggable();
@@ -97,7 +97,6 @@ $(  function()
             $(".resizeable").resizable(resizeOptions);
 
             $('.line-details').css("display", "none");
-            
             
 
             $(".room-image").mouseover(function () {
@@ -114,11 +113,56 @@ $(  function()
                         /*alert(textStatus);
                         alert(JSON.stringify(data));*/
 
-                        $('.table').html(data.SeatCount);
-                        $('.board').html(data.BoardCount);
-                        $('.laptop').html(data.LaptopCount);
-                        $('.printer').html(data.PrinterCount);
-                        $('.projector').html(data.ProjectorCount);
+                        if (data.SeatCount == 0)
+                            $('.table').parent().css("display", "none");
+                        else
+                            $('.table').parent().css("display", "inline");
+
+                        if (data.SeatCount > 1)
+                            $('.table').html(data.SeatCount);
+                        else
+                            $('.table').html("");
+
+
+                        if (data.BoardCount == 0)
+                            $('.board').parent().css("display", "none");
+                        else
+                            $('.board').parent().css("display", "inline");
+
+                        if (data.BoardCount > 1)
+                            $('.board').html(data.BoardCount);
+                        else
+                            $('.board').html("");
+
+                        if (data.LaptopCount == 0)
+                            $('.laptop').parent().css("display", "none");
+                        else
+                            $('.laptop').parent().css("display", "inline");
+
+                        if (data.LaptopCount > 1)
+                            $('.laptop').html(data.LaptopCount);
+                        else
+                            $('.laptop').html("");
+
+                        if (data.PrinterCount == 0)
+                            $('.printer').parent().css("display", "none");
+                        else
+                            $('.printer').parent().css("display", "inline");
+
+                        if (data.PrinterCount > 1)
+                            $('.printer').html(data.PrinterCount);
+                        else
+                            $('.printer').html("");
+
+                        if (data.ProjectorCount == 0)
+                            $('.projector').parent().css("display", "none");
+                        else
+                            $('.projector').parent().css("display", "inline");
+
+                        if (data.ProjectorCount > 1)
+                            $('.projector').html(data.ProjectorCount);
+                        else
+                            $('.projector').html();
 
                         $('.line-details').css("display", "none");
 
