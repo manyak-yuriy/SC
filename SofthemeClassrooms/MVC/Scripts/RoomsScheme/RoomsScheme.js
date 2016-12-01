@@ -167,6 +167,8 @@ $(  function()
                         $('.line-details').css("display", "none");
 
                         $('.line-details').filter('#' + $(this).attr('id')).css("display", "block");
+
+                        $('#prop-pane').css("display", "block");
                     }
                 });
             });
