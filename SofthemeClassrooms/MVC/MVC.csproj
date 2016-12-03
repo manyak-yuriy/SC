@@ -201,7 +201,6 @@
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
-    <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,7 +208,6 @@
     <Compile Include="HtmlHelpers\MenuItemInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +219,7 @@
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\schedule.css" />
+    <Content Include="Content\userpage.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -266,11 +265,14 @@
     <Content Include="Views\Account\RegisterMessage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
-    <Content Include="Views\UserPage\Page.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
+    <Content Include="Views\Account\UserPage.cshtml" />
+    <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
+    <Content Include="Views\Account\ChangePersonalDataPView.cshtml" />
+    <Content Include="Views\Account\PersonalInfoPView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

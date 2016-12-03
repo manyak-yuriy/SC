@@ -5,9 +5,12 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post))*@
 @using (Ajax.BeginForm("Register", "Account", new AjaxOptions()
-{ HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId= "inputForm" }))
+{   HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "inputForm"
+}))
 {
     @Html.AntiForgeryToken()
     <div>
@@ -27,7 +30,9 @@
         @Html.ValidationMessageFor(model => model.ConfirmPassword, "")
         @Html.EditorFor(model => model.ConfirmPassword, "", new { htmlattributes = new { placeholder = " Повторить пароль", @class = "custom-input" } })
     </div>
-    <input type="submit" value="Зарегистрироваться" />
+
+
+    <input class="send" type="submit" value="Зарегистрироваться" />
 }
 
 @section header{

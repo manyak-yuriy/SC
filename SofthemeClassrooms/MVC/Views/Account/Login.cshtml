@@ -17,7 +17,7 @@
         @Html.ValidationMessageFor(model => model.Password, "")
         @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
     </div>
-    <input type="submit" value="Войти" />
+    <input class="send" type="submit" value="Войти" />
 }
 
 @section header{

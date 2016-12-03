@@ -98,4 +98,32 @@ namespace WebApplication1.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ChangePasswordModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name ="NewPassword")]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage ="Пароли не совпадают!!")]
+        public string ConfirmPassword { get; set; }
+    }
+    
+    public class PersonalDataViewModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+    }
+
 }
