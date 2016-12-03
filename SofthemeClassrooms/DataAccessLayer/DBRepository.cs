@@ -26,6 +26,5 @@ namespace DataAccessLayer
             }
         }
 
-        public IEnumerable<>
     }
 }
