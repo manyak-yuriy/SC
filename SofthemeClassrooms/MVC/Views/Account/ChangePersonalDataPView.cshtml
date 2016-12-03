@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.PersonalDataViewModel
+
+
+@using(Ajax.BeginForm("ChangePersonalInfo", "Account", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "pInfo"
+}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div>
+        @Html.ValidationMessageFor(m => m.Name, "")
+        @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
+    </div>
+    
+    <div>
+        @Html.ValidationMessageFor(m => m.Email, "")
+        @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
+    </div>
+
+    <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton"/>
+}

@@ -1,0 +1,51 @@
+﻿.userPagebuttton{
+    width: 150px;
+    border-radius: 20px;
+    border-style: none;
+    margin-top: 10px;
+    height: 30px;
+}
+
+#adminLabel{
+    background-color: red;
+    border-radius: 15px;
+    color: white;
+    padding: 5px 10px 5px 10px;
+}
+
+.changePassword{
+    margin-top: 20px;
+    background-color: #f4f6fb;
+}
+
+.changePasswordForm{
+    display: inline-block;
+    width: 80%;
+    margin: auto;
+}
+
+.textinput{
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 5%;
+    border-style: none;
+    padding: 10px;
+}
+
+#chng-passw-button{
+    margin-top: 8px;
+    margin: auto;
+}
+
+#changePI{
+    background-color: red;
+    color: white;
+}
+
+.changeData {
+    width: 100%;
+    border: 1px solid  silver;
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    margin-top: 8px;
+}
