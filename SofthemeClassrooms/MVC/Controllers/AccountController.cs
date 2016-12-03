@@ -400,11 +400,11 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ShowSchedule", "Schedule");
         }
 
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public ActionResult ExternalLoginFailure()
+        //{
+        //    return View();
+        //}
 
 
         public ActionResult ChangePersonalView()
