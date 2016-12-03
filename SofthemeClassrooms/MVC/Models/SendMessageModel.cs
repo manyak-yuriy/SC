@@ -13,7 +13,7 @@ namespace WebApplication1.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Это обязательное поле для заполнения.")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage ="Введите правильный email.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Это обязательное поле для заполнения.")]

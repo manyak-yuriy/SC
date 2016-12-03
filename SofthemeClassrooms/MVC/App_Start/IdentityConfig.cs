@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using System.Net;
+using System.Net.Mail;
 
 namespace WebApplication1
 {
@@ -18,8 +16,22 @@ namespace WebApplication1
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var me = "classroommanyakhok@gmail.com";
+            var password = "0931426141";
+
+
+            MailAddress from = new MailAddress(me);
+            MailAddress to = new MailAddress(message.Destination);
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = message.Subject;
+            m.Body = message.Body;
+            m.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential(me, password);
+            smtp.EnableSsl = true;
+
+            return smtp.SendMailAsync(m);
+            
         }
     }
 
@@ -27,7 +39,6 @@ namespace WebApplication1
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
     }
@@ -54,10 +65,10 @@ namespace WebApplication1
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults
@@ -76,6 +87,7 @@ namespace WebApplication1
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
+
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;

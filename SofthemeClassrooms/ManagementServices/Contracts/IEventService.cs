@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementServices
 {
-    class EventService
+    public interface IEventService
     {
     }
 }

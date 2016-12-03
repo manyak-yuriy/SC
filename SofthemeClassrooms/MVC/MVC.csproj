@@ -204,11 +204,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelpers\MenuHelper.cs" />
-    <Compile Include="HtmlHelpers\MenuItemInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -217,12 +214,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+
     <Content Include="Images\icon-lock.png" />
+
+    <Content Include="Content\customswitch.css" />
+
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\RoomsScheme\roomsScheme.css" />
     <Content Include="Content\schedule.css" />
+
     <Content Include="Content\TimeTable\CustomTimeTableStyles.css" />
+
+    <Content Include="Content\userpage.css" />
+
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -231,6 +236,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\ActivateMenuItem.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -274,13 +280,13 @@
     <Content Include="Views\Schedule\ShowSchedule.cshtml" />
     <Content Include="Views\Feedback\SendMessageForm.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Schedule\RoomsSchemePartialView.cshtml" />
     <Content Include="Views\Schedule\MapPartialView.cshtml" />
     <Content Include="Views\Schedule\SchedulerPatrialView.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+
     <Content Include="Views\Schedule\TimeTablePartialView.cshtml" />
     <Content Include="TimeTablePlugin\.bowerrc" />
     <Content Include="TimeTablePlugin\.editorconfig" />
@@ -295,6 +301,18 @@
     <Content Include="TimeTablePlugin\README.md" />
     <Content Include="TimeTablePlugin\test\.bowerrc" />
     <Content Include="TimeTablePlugin\test\bower.json" />
+
+    <Content Include="Views\Account\RegisterMessage.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\RegistrationSuccess.cshtml" />
+    <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
+    <Content Include="Views\Account\UserPage.cshtml" />
+    <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
+    <Content Include="Views\Account\ChangePersonalDataPView.cshtml" />
+    <Content Include="Views\Account\PersonalInfoPView.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

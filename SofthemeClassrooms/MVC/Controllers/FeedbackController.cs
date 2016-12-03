@@ -9,6 +9,7 @@ namespace WebApplication1.Controllers
         public ActionResult SendMessageForm()
         {
             return View();
+            
         }
 
         [HttpPost]

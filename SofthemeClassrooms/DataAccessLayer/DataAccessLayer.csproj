@@ -58,6 +58,7 @@
     <Compile Include="ClassRoomProperties.cs" />
     <Compile Include="ClassRooms.cs" />
     <Compile Include="C__MigrationHistory.cs" />
+    <Compile Include="DBRepository.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Feedback.cs" />

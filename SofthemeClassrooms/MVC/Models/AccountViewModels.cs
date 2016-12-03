@@ -58,17 +58,14 @@ namespace WebApplication1.Models
 
         [Required]
         [EmailAddress]
-        [Display(Name = "")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -101,4 +98,34 @@ namespace WebApplication1.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ChangePasswordModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name ="NewPassword")]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage ="Пароли не совпадают!!")]
+        public string ConfirmPassword { get; set; }
+    }
+    
+    public class PersonalDataViewModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        public bool Is_Admin { get; set; }
+    }
+
 }

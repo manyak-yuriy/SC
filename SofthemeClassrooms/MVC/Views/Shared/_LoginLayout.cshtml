@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="~/Content/inputs.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body style="background-color: #f4f6fb; min-width: 760px">
     
-    <link href="~/Content/login.css" rel="stylesheet" />
-
-
-
     <div class="login-menu">
         <ul class="menu-list">
-            <li><img class="menu-logo" src="@Url.Action("GetImage", "Resources", new { imageName="logo-gray.png" })" /></li>
+            <li><img class="menu-logo" src="~/Images/logo-gray.png" })" /></li>
             <li><a href="@Url.Action("Login","Account")">Вход</a></li>
             <li><a href="@Url.Action("Register","Account")">Регистрация</a></li>
             <li><a href="@Url.Action("ForgotPassword","Account")">Сменить пароль</a></li>

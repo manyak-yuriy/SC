@@ -22,7 +22,7 @@
 #header-content{
     color: white;
     transform: skewX(-40deg);
-    margin-left: 15%;
+    margin-left: 14%;
     padding-top: 0px;
 }
 
@@ -30,6 +30,7 @@
     margin-top: 1%;
     transform: skewX(-40deg);
     margin-left: 8%;
+    width: 10%;
 }
 
 .login-menu{
@@ -50,10 +51,4 @@ ul.menu-list{
 a{
    text-decoration: none;
    color: silver;
-}
-
-input.send{
-    background-color: red;
-    color: white;
-    border-radius: 10px;
 }

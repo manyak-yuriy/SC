@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventService.cs" />
+    <Compile Include="Contracts\IEventService.cs" />
+    <Compile Include="Contracts\IUserInfo.cs" />
+    <Compile Include="Contracts\IUserManager.cs" />
+    <Compile Include="Implementation\UserManager.cs" />
+    <Compile Include="Implementation\UserName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +55,9 @@
       <Project>{235d407a-12c5-46ae-934d-5403dd7a2ac4}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
