@@ -1,0 +1,43 @@
+﻿
+.public-event .private-event
+{
+    text-align: center !important;
+}
+
+.public-event
+{
+    background-color: #f16464 !important;
+}
+
+.private-event {
+    background-color: #d4dfe8 !important;
+    border: none !important;
+    background-image: url('../../Images/icon-lock.png');
+    color: black !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.time-entry
+{
+    margin-top: 3px !important;
+    line-height: 80% !important;
+    text-align: center !important;
+}
+
+.room-timeline li
+{
+    height: 50px !important;
+    border: 2px solid #d4dfe8
+}
+
+.timetable aside li
+{
+    height: 50px !important;
+}
+
+.timetable aside
+{
+    width: 200px !important;
+}

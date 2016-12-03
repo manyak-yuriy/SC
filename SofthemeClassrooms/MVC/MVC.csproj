@@ -217,10 +217,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Images\icon-lock.png" />
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\RoomsScheme\roomsScheme.css" />
     <Content Include="Content\schedule.css" />
+    <Content Include="Content\TimeTable\CustomTimeTableStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -245,6 +247,20 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\RoomsScheme\RoomsScheme.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="TimeTablePlugin\.gitattributes" />
+    <Content Include="TimeTablePlugin\.gitignore" />
+    <Content Include="TimeTablePlugin\app\demo.html" />
+    <Content Include="TimeTablePlugin\app\scripts\plugin.js" />
+    <Content Include="TimeTablePlugin\dist\demo.html" />
+    <Content Include="TimeTablePlugin\dist\scripts\timetable.js" />
+    <Content Include="TimeTablePlugin\dist\scripts\timetable.min.js" />
+    <Content Include="TimeTablePlugin\dist\styles\demo.css" />
+    <Content Include="TimeTablePlugin\dist\styles\timetablejs.css" />
+    <Content Include="TimeTablePlugin\gulpfile.js" />
+    <Content Include="TimeTablePlugin\Source\timetable.js" />
+    <Content Include="TimeTablePlugin\Source\timetablejs.css" />
+    <Content Include="TimeTablePlugin\test\index.html" />
+    <Content Include="TimeTablePlugin\test\spec\plugin.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -266,6 +282,19 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Schedule\TimeTablePartialView.cshtml" />
+    <Content Include="TimeTablePlugin\.bowerrc" />
+    <Content Include="TimeTablePlugin\.editorconfig" />
+    <Content Include="TimeTablePlugin\.jshintrc" />
+    <Content Include="TimeTablePlugin\.yo-rc.json" />
+    <Content Include="TimeTablePlugin\app\styles\demo.sass" />
+    <Content Include="TimeTablePlugin\app\styles\plugin.sass" />
+    <Content Include="TimeTablePlugin\bower.json" />
+    <Content Include="TimeTablePlugin\CHANGELOG" />
+    <Content Include="TimeTablePlugin\LICENSE" />
+    <Content Include="TimeTablePlugin\package.json" />
+    <Content Include="TimeTablePlugin\README.md" />
+    <Content Include="TimeTablePlugin\test\.bowerrc" />
+    <Content Include="TimeTablePlugin\test\bower.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
