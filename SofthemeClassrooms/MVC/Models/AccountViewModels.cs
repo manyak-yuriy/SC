@@ -124,6 +124,8 @@ namespace WebApplication1.Models
 
         [Required]
         public string Name { get; set; }
+
+        public bool Is_Admin { get; set; }
     }
 
 }

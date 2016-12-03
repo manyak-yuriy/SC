@@ -16,25 +16,31 @@
 .changePassword{
     margin-top: 20px;
     background-color: #f4f6fb;
+    display: inline-block !important;
 }
 
 .changePasswordForm{
-    display: inline-block;
-    width: 80%;
+    display: block;
+    width: 65%;
     margin: auto;
+}
+
+.input-wrapper{
+    margin-top: 5%;
 }
 
 .textinput{
     width: 100%;
     border-radius: 20px;
-    margin-top: 5%;
     border-style: none;
     padding: 10px;
 }
 
 #chng-passw-button{
-    margin-top: 8px;
-    margin: auto;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-bottom: 5%;
 }
 
 #changePI{

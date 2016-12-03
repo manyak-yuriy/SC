@@ -204,8 +204,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelpers\MenuHelper.cs" />
-    <Compile Include="HtmlHelpers\MenuItemInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
@@ -216,6 +214,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\schedule.css" />
@@ -228,6 +227,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\ActivateMenuItem.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -265,7 +265,6 @@
     <Content Include="Views\Account\RegisterMessage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\RegistrationSuccess.cshtml" />
-    <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />

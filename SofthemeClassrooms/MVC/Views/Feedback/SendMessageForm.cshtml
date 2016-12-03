@@ -8,9 +8,11 @@
 <i class="fa fa-caret-right" aria-hidden="false"></i>
 <div class="container-fluid">
     <div class="col-md-4 col-lg-4 col-lg-offset-2">
-        <p><h2>Написать Сообщение</h2>
-        Напишите, если у вас есть идеи, замечания или вопросы.</p>
-        <img src="~/Images/contact-bg.png" alt=""/>
+        <p>
+            <h2>Написать Сообщение</h2>
+            Напишите, если у вас есть идеи, замечания или вопросы.
+        </p>
+        <img src="~/Images/contact-bg.png" alt="" />
     </div>
     <div class="col-md-4 col-lg-offset-1 col-md-offset-2 col-lg-4" id="feedbackForm">
         @using (Html.BeginForm())
@@ -26,17 +28,17 @@
                 </div>
             </div>
             <div class="fullname">
-                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6",  placeholder = "Имя" } })
+                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6", placeholder = "Имя" } })
                 @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия" } })
             </div>
             <div>
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
                 @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты" } })
-            </div>  
-            <div>  
+            </div>
+            <div>
                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "error" })
-                @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id="messageText"} })
-                <input class="send" type="submit" value="Отправить"/>
+                @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id = "messageText" } })
+                <input class="send" type="submit" value="Отправить" />
             </div>
         }
     </div>
@@ -44,7 +46,10 @@
 
 
 
-@section Menu{
-    @Html.Partial("~/Views/Shared/Menu.cshtml", 1)
+@section MenuItemActive{
+    <script>
+        ActivateMenu('feedbackItem');
+    </script>
 }
+
 

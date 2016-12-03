@@ -429,6 +429,24 @@ namespace WebApplication1.Controllers
             return PartialView("PersonalInfoPView");
         }
 
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return PartialView("ChangePasswordPartialView", model);
+            }
+
+            var user = UserManager.FindByName(User.Identity.Name);
+            var result = UserManager.ChangePassword(user.Id, model.OldPassword, model.OldPassword);
+            if(result.Succeeded)
+            {
+                return Content("<p>Пароль успешно изменен</p>");
+            }
+
+            AddErrors(result);
+            return PartialView("ChangePasswordPartialView", model);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

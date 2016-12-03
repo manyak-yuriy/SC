@@ -8,6 +8,8 @@
 @Html.Partial("MapPartialView")
 
 
-@section Menu{
-   @Html.Partial("~/Views/Shared/Menu.cshtml", 2)
+@section MenuItemActive{
+    <script>
+        ActivateMenu('scheduleItem');
+    </script>
 }

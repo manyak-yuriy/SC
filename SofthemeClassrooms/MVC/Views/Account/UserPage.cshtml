@@ -19,16 +19,17 @@
         </div>
     </div>
 
-    <div class="col-lg-offset-3 col-lg-5  changePassword">
-        <div class="changePasswordForm col-lg-offset-2 col-lg-8">
+    <div class="col-lg-offset-3 col-lg-6  changePassword">
+        <div class="changePasswordForm">
             @Html.Partial("ChangePasswordPartialView", null)
         </div>
     </div>
 </div>
 
-@section Menu{
-    @Html.Partial("~/Views/Shared/Menu.cshtml", 0)
+@section MenuItemActive{
+    <script>
+        ActivateMenu('userPageItem');
+    </script>
 }
-
 
 

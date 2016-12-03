@@ -12,18 +12,40 @@
     <nav>
         <div id="navformer">
             <img id="logo" src="~/Images/logo.png" alt="logo" />
-            @RenderSection("Menu", false)
+            @if (!Request.IsAuthenticated)
+            {
+                <li id="userPageItem" class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
+            }
+            else
+            {
+                <li id="loginItem" class="menu-item">
+                    <a href="@Url.Action("UserPage", "Account")">
+                        <img src="" alt="" />
+                        @(Session["UserName"] as string)
+                    </a>
+                </li>
+            }
+
+            <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
+
+            @if (User.IsInRole("admin"))
+            {
+                <li id="usersItem" class="menu-item"><a href="">Пользователи</a></li>
+            }
+
+            <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
         </div>
     </nav>
     @RenderBody()
     <footer>
-        <img id="logo-gray" src="~/Images/logo-gray.png"/>
+        <img id="logo-gray" src="~/Images/logo-gray.png" />
     </footer>
-
+    <script src="~/Scripts/ActivateMenuItem.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @RenderSection("scripts", required: false)
+    @RenderSection("MenuItemActive", true)
 </body>
 </html>

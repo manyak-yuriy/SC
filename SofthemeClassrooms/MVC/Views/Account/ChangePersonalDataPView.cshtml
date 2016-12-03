@@ -1,5 +1,6 @@
 ﻿@model WebApplication1.Models.PersonalDataViewModel
 
+<link href="~/Content/customswitch.css" rel="stylesheet" />
 
 @using(Ajax.BeginForm("ChangePersonalInfo", "Account", new AjaxOptions()
 {
@@ -19,6 +20,12 @@
         @Html.ValidationMessageFor(m => m.Email, "")
         @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
     </div>
-
+    <div>
+        @if (User.IsInRole("admin"))
+        {
+            <input type="checkbox" checked/>
+        }
+        Администратор
+    </div>
     <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton"/>
 }
