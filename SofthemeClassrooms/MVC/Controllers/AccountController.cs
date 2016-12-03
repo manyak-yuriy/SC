@@ -98,7 +98,7 @@ namespace WebApplication1.Controllers
                     ModelState.AddModelError("", "Неудачная попытка входа.");
                     return View(model);
             }
-            return null;
+      
         }
 
         //
@@ -392,7 +392,7 @@ namespace WebApplication1.Controllers
         //}
 
 
-        [HttpPost]
+        [HttpGet]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {

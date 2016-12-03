@@ -32,6 +32,8 @@
                         @(Session["UserName"] as string)
                     </a>
                 </li>
+
+                <li class="menu-item"><a href="@Url.Action("Login", "Account")">Выход</a></li>
             }
 
             <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
