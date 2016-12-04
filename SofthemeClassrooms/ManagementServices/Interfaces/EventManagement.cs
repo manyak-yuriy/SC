@@ -9,17 +9,17 @@ namespace ManagementServices.Interfaces
 {
     public interface IEventManagement
     {
-        IEnumerable<Events> GetAll();
-        Events GetById(int id);
+        IEnumerable<Event> GetAll();
+        Event GetById(int id);
 
-        void SubscribeFor(string email, Events e);
+        void SubscribeFor(string email, Event e);
 
-        void UnSubscribeFrom(string email, Events e);
+        void UnSubscribeFrom(string email, Event e);
 
-        void Add(Events e);
+        void Add(Event e);
 
-        void Edit(Events e);
+        void Edit(Event e);
 
-        IEnumerable<Events> GetByDate(DateTime date);
+        IEnumerable<Event> GetByDate(DateTime date);
     }
 }

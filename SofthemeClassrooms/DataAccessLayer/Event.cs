@@ -6,19 +6,18 @@ namespace DataAccessLayer
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Events
+    [Table("Event")]
+    public partial class Event
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Events()
+        public Event()
         {
             ForeignVisitor = new HashSet<ForeignVisitor>();
-            VisitorEvent = new HashSet<VisitorEvent>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string Title { get; set; }
 
         public DateTime DateStart { get; set; }
@@ -28,25 +27,22 @@ namespace DataAccessLayer
         [StringLength(500)]
         public string Description { get; set; }
 
-        public short ClassroomId { get; set; }
+        public int ClassroomId { get; set; }
 
-        public int? OrganizerId { get; set; }
+        public long OrganizerId { get; set; }
 
         public bool IsPublic { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string OrganizerName { get; set; }
 
         public bool? AllowSubscription { get; set; }
 
-        public virtual ClassRooms ClassRooms { get; set; }
+        public virtual ClassRoom ClassRoom { get; set; }
 
         public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ForeignVisitor> ForeignVisitor { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VisitorEvent> VisitorEvent { get; set; }
     }
 }

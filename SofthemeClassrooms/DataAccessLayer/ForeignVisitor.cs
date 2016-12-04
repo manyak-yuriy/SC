@@ -9,15 +9,14 @@ namespace DataAccessLayer
     [Table("ForeignVisitor")]
     public partial class ForeignVisitor
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Email { get; set; }
 
         public long EventId { get; set; }
 
-        public virtual Events Events { get; set; }
+        public virtual Event Event { get; set; }
     }
 }
