@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using System.Net;
 using System.Net.Mail;
+using DataAccessLayer;
 
 namespace WebApplication1
 {
