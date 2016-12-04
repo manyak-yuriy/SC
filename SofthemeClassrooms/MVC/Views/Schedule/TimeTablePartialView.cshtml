@@ -1,0 +1,35 @@
+﻿<link rel="stylesheet" href="~/TimeTablePlugin/Source/timetablejs.css">
+
+<script src="~/TimeTablePlugin/Source/timetable.js"></script>
+
+
+<div class="timetable"></div>
+
+<link href="~/Content/TimeTable/CustomTimeTableStyles.css" rel="stylesheet" />
+
+<script> 
+    $(() => {
+        var timetable = new Timetable();
+        timetable.setScope(9, 22); // optional, only whole hours between 0 and 23
+
+        timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
+
+        timetable.addEvent('10:00 - 11:30 Speaking for Juniors', 'English classroom',
+            new Date(2016, 11, 20, 10, 0), new Date(2016, 11, 20, 11, 30), { class: 'public-event' });
+
+        timetable.addEvent('12:00 - 14:30', 'Tesla classroom',
+            new Date(2016, 11, 20, 12, 0), new Date(2016, 11, 20, 14, 30), { class: 'private-event' });
+
+        timetable.addEvent('15:00 - 15:30', 'Tesla classroom',
+            new Date(2016, 11, 20, 15, 0), new Date(2016, 11, 20, 15, 30), { class: 'private-event' });
+
+        timetable.addEvent('13:00 - 14:00 Azure: Blobs', 'Einstein classroom',
+            new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });
+
+        var renderer = new Timetable.Renderer(timetable);
+        renderer.draw('.timetable'); // any css selector
+    })
+    
+</script>
+
+

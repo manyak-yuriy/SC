@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Home - Schedule";
+}
+
+@Html.Partial("RoomsSchemePartialView")
+<!---->
+@Html.Partial("TimeTablePartialView")
+@Html.Partial("MapPartialView")
+
+
+@section MenuItemActive{
+    <script>
+        ActivateMenu('scheduleItem');
+    </script>
+}

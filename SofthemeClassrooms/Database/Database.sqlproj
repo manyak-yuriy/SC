@@ -67,19 +67,12 @@
     <None Include="Snapshots\Database_20161123_19-07-27.dacpac" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\AspNetRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="dbo\Tables\__MigrationHistory.sql" />
-    <Build Include="dbo\Tables\Equipment.sql" />
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\ClassRooms.sql" />
-    <Build Include="dbo\Tables\ClassRoomProperties.sql" />
-    <Build Include="dbo\Tables\Feedback.sql" />
-    <Build Include="dbo\Tables\ForeignVisitor.sql" />
-    <Build Include="dbo\Tables\VisitorEvent.sql" />
-    <Build Include="dbo\Tables\Events.sql" />
+    <Build Include="dbo\Tables\Feedback_1.sql" />
+    <Build Include="dbo\Tables\ClassRoom.sql" />
+    <Build Include="dbo\Tables\Equipment_1.sql" />
+    <Build Include="dbo\Tables\ClassRoomProperty.sql" />
+    <Build Include="dbo\Tables\User_1.sql" />
+    <Build Include="dbo\Tables\Event.sql" />
+    <Build Include="dbo\Tables\ForeignVisitor_1.sql" />
   </ItemGroup>
 </Project>

@@ -10,22 +10,21 @@ namespace DataAccessLayer
     public partial class Feedback
     {
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(500)]
+        [StringLength(1000)]
         public string Contents { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
     }
 }

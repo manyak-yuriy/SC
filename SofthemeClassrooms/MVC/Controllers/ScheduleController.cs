@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,18 @@ namespace WebApplication1.Controllers
     {
         // Render the page
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult ShowSchedule()
         {
-            return new EmptyResult();
+            var db = new ApplicationDbContext();
+            db.SaveChanges();
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetEquipmentDataForRoom(int roomId)
+        {
+            ManagementServices.Implementations.EquipmentManagement equipmentManager = new ManagementServices.Implementations.EquipmentManagement();
+            return Json(equipmentManager.GetEquipmentByRoomId(roomId), JsonRequestBehavior.AllowGet);
         }
 
         // Get data about events for a specific date

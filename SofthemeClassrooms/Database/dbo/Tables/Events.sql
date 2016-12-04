@@ -5,7 +5,7 @@
     [DateEnd]           DATETIME       NOT NULL,
     [Description]       NVARCHAR (500) NULL,
     [ClassroomId]       SMALLINT       NOT NULL,
-    [OrganizerId]       INT            NULL,
+    [OrganizerId]       INT            NOT NULL,
     [IsPublic]          BIT            NOT NULL,
     [OrganizerName]     NVARCHAR (50)  NULL,
     [AllowSubscription] BIT            NULL,

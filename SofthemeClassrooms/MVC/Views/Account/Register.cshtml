@@ -1,41 +1,40 @@
 ﻿@model WebApplication1.Models.RegisterViewModel
+
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post))*@
+@using (Ajax.BeginForm("Register", "Account", new AjaxOptions()
+{   HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "inputForm"
+}))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+    <div>
+        @Html.ValidationMessageFor(model => model.FullName, "")
+        @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
+
+    <div>
+        @Html.ValidationMessageFor(model => model.Email, "")
+        @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
+    <div>
+        @Html.ValidationMessageFor(model => model.Password, "")
+        @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
+    <div>
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "")
+        @Html.EditorFor(model => model.ConfirmPassword, "", new { htmlattributes = new { placeholder = " Повторить пароль", @class = "custom-input" } })
     </div>
+
+
+    <input class="send" type="submit" value="Зарегистрироваться" />
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section header{
+    Регистрация
 }
