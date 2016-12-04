@@ -59,25 +59,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Snapshots" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Snapshots\Database_20161123_19-07-27.dacpac" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\ClassRoom.sql" />
-    <Build Include="dbo\Tables\ClassRoomProperty.sql" />
-    <Build Include="dbo\Tables\Equipment.sql" />
-    <Build Include="dbo\Tables\Event.sql" />
-    <Build Include="dbo\Tables\ForeignVisitor.sql" />
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\Feedback.sql" />
-    <Build Include="dbo\Tables\AspNetRoles.sql" />
-    <Build Include="dbo\Tables\__MigrationHistory.sql" />
   </ItemGroup>
 </Project>
