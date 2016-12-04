@@ -29,8 +29,6 @@ namespace DataAccessLayer
 
         public int ClassroomId { get; set; }
 
-        public long OrganizerId { get; set; }
-
         public bool IsPublic { get; set; }
 
         [StringLength(100)]
@@ -40,7 +38,7 @@ namespace DataAccessLayer
 
         public virtual ClassRoom ClassRoom { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser Organizer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ForeignVisitor> ForeignVisitor { get; set; }

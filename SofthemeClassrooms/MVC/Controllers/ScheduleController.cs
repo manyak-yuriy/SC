@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult ShowSchedule()
         {
+            var db = new ApplicationDbContext();
+            db.SaveChanges();
             return View();
         }
 
