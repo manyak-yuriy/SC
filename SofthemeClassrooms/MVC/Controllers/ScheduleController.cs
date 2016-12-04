@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
 
             var classRoom = new ClassRoom { Title = "Tesla", Capacity = 12, IsBookable = true};
 
-            var ev = new Event { Organizer = currentUser, ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
+            var ev = new Event { AllowSubscription = true, ApplicationUserID = currentUser.Id, ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
 
             db.Event.Add(ev);
             
