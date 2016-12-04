@@ -1,4 +1,6 @@
 ﻿using DataAccessLayer;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,18 @@ namespace WebApplication1.Controllers
         public ActionResult ShowSchedule()
         {
             var db = new ApplicationDbContext();
+            db.Equipment.Add(new Equipment { Title ="TV", ImagePath = "F:"});
+
+            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            var classRoom = new ClassRoom { Title = "Tesla", Capacity = 12, IsBookable = true};
+
+            var ev = new Event { Organizer = currentUser, ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
+
+            db.Event.Add(ev);
+            
+
             db.SaveChanges();
             return View();
         }

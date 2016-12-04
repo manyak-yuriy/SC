@@ -21,7 +21,7 @@ namespace DataAccessLayer
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("FinalTest", throwIfV1Schema: false)
+            : base("STDevelop", throwIfV1Schema: false)
         {
         }
 
