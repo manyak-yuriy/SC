@@ -7,19 +7,21 @@
 
 
 <style>
-    #custom-handle {
-        width: 3em;
-        height: 1.6em;
-        top: 50%;
-        margin-top: -.8em;
-        text-align: center;
-        line-height: 1.6em;
-        opacity: 0.95;
-        border: none;
-        background-color: transparent;
-        border: none !important;
-        z-index: 101;
-    }
+
+        #custom-handle 
+        {
+            width: 3em;
+            height: 1.6em;
+            top: 50%;
+            margin-top: -.8em;
+            text-align: center;
+            line-height: 1.6em;
+            opacity: 0.95;
+            border: none;
+            background-color: transparent;
+            border: none !important;
+            z-index: 101;
+        }
 
         #custom-handle:active {
             background-color: transparent;
@@ -42,28 +44,49 @@
             position: absolute;
             top: -310px;
         }
+
+        .ui-widget-content
+        {
+            border: none !important;
+        }
+
+        .ui-widget.ui-widget-content
+        {
+            border: none !important;
+        }
+        
+        .scrollingHotSpotLeft
+        {
+            opacity: 30;
+        }
+
 </style>
 
 
 <div id="slider">
     <div id="custom-handle" class="ui-slider-handle">
         <img src="~/Images/Slider.png" />
-        <span> 13:37 </span>
+        <span id="selected-time"> 13:37 </span>
         <span> Сейчас </span>
     </div>
 </div>
 
+
+
 <div class="timetable">
 
 </div>
-
+ 
 
 
 <link href="~/Content/TimeTable/CustomTimeTableStyles.css" rel="stylesheet" />
 
 <script>
+    var timetable;
+    var renderer;
+
     $(() => {
-        var timetable = new Timetable();
+        timetable = new Timetable();
         timetable.setScope(9, 5);
 
         timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
@@ -80,13 +103,11 @@
         timetable.addEvent('13:00 - 14:00 Azure: Blobs', 'Einstein classroom',
             new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });
 
-        var renderer = new Timetable.Renderer(timetable);
+        renderer = new Timetable.Renderer(timetable);
         renderer.draw('.timetable');
-
 
         // Init slider
         $("#slider").slider();
-
 
         // Init scroller
         
