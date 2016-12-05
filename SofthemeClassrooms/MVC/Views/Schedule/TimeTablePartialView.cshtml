@@ -10,7 +10,7 @@
 <script> 
     $(() => {
         var timetable = new Timetable();
-        timetable.setScope(9, 22); 
+        timetable.setScope(9, 0); 
 
         timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
 
@@ -18,10 +18,10 @@
             new Date(2016, 11, 20, 10, 0), new Date(2016, 11, 20, 11, 30), { class: 'public-event' });
 
         timetable.addEvent('12:00 - 14:30', 'Tesla classroom',
-            new Date(2016, 11, 20, 12, 0), new Date(2016, 11, 20, 14, 30), { class: 'private-event' });
+            new Date(2016, 11, 20, 12, 0), new Date(2016, 11, 20, 13, 30), { class: 'private-event' });
 
         timetable.addEvent('15:00 - 15:30', 'Tesla classroom',
-            new Date(2016, 11, 20, 15, 0), new Date(2016, 11, 20, 15, 30), { class: 'private-event' });
+            new Date(2016, 11, 20, 15, 0), new Date(2016, 11, 20, 23, 30), { class: 'private-event' });
 
         timetable.addEvent('13:00 - 14:00 Azure: Blobs', 'Einstein classroom',
             new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });

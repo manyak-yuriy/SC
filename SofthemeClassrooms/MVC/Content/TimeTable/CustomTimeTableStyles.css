@@ -18,19 +18,24 @@
     background-position: center;
 }
 
+time
+{
+    
+}
 
 .time-entry
 {
-    margin-top: 2px !important;
+    margin-top: 1px !important;
     line-height: 80% !important;
     text-align: center !important;
+
 }
 
 .room-timeline li
 {
     height: 50px !important;
-    border: 2px solid #d4dfe8 !important;
-    border-collapse: collapse;
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse !important;
     background-color: white !important;
 }
 
@@ -41,8 +46,8 @@
 
 time header li
 {
-    border: 2px solid #d4dfe8 !important;
-    border-collapse: collapse;
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse !important;
 }
 
 .timetable header
@@ -97,6 +102,11 @@ header li span
 header li, header ul, header
 {
     height: 35px !important;
+}
+
+header li
+{
+    border-right: none;
 }
  
 .time-label
