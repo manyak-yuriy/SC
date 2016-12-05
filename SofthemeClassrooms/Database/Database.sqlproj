@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>Database</RootNamespace>
     <AssemblyName>Database</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1058,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -23,7 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultCollation>Ukrainian_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -59,20 +59,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Snapshots" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Snapshots\Database_20161123_19-07-27.dacpac" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\Feedback_1.sql" />
-    <Build Include="dbo\Tables\ClassRoom.sql" />
-    <Build Include="dbo\Tables\Equipment_1.sql" />
-    <Build Include="dbo\Tables\ClassRoomProperty.sql" />
-    <Build Include="dbo\Tables\User_1.sql" />
-    <Build Include="dbo\Tables\Event.sql" />
-    <Build Include="dbo\Tables\ForeignVisitor_1.sql" />
   </ItemGroup>
 </Project>

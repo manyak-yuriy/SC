@@ -6,11 +6,11 @@
 
 .public-event
 {
-    background-color: #f16464 !important;
+    background-color: #f95748 !important;
 }
 
 .private-event {
-    background-color: #d4dfe8 !important;
+    background-color: #eff2f7 !important;
     border: none !important;
     background-image: url('../../Images/icon-lock.png');
     color: black !important;
@@ -18,18 +18,41 @@
     background-position: center;
 }
 
+time
+{
+    
+}
 
 .time-entry
 {
-    margin-top: 2px !important;
+    margin-top: 1px !important;
     line-height: 80% !important;
     text-align: center !important;
+
 }
 
 .room-timeline li
 {
     height: 50px !important;
-    border: 2px solid #d4dfe8
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse !important;
+    background-color: white !important;
+}
+
+.room-timeline
+{
+    
+}
+
+time header li
+{
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse !important;
+}
+
+.timetable header
+{
+    
 }
 
 .timetable aside li
@@ -37,7 +60,84 @@
     height: 50px !important;
 }
 
+.timetable aside li
+{
+    border: 2px solid #d4dfe8;
+    border-collapse: collapse;
+    background-color: white !important;
+}
+
+.timetable section
+{
+    margin: 0px !important;
+}
+
+aside
+{
+    background-color: white;
+    margin-right: 0px !important;
+}
+
+aside ul
+{
+    top: -12px !important;
+    position: relative;
+}
+
 .timetable aside
 {
     width: 200px !important;
 }
+
+header li span
+{
+    color: darkgray !important;
+}
+
+*
+{
+    border-collapse: collapse !important;
+}
+
+header li, header ul, header
+{
+    height: 35px !important;
+}
+
+header li
+{
+    border-right: none;
+}
+ 
+.time-label
+{
+    left: 5px !important;
+    font-size: 130% !important;
+    height: 30px !important;
+}
+
+
+/*Slider*/
+
+.ui-slider-handle
+{
+    background-color: white;
+}
+
+section
+{
+    display: inline-block !important;
+}
+
+
+.scrollableArea
+{
+    width: 2000px !important;
+    height: 300px !important;
+}
+
+.scrollWrapper
+{
+
+}
+

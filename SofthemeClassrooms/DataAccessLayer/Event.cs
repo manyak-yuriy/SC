@@ -40,6 +40,8 @@ namespace DataAccessLayer
 
         public virtual ApplicationUser Organizer { get; set; }
 
+        public string ApplicationUserID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ForeignVisitor> ForeignVisitor { get; set; }
     }

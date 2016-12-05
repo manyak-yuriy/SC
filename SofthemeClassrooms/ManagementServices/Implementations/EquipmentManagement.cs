@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ManagementServices.Models;
+using DataAccessLayer;
 
 namespace ManagementServices.Implementations
 {
@@ -21,6 +22,8 @@ namespace ManagementServices.Implementations
                 PrinterCount = 0 + r.Next(0, 3),
                 ProjectorCount = 0 + r.Next(0, 2)
             };
+
+            
         }
     }
 }
