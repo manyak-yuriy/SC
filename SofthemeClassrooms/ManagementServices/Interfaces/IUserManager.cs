@@ -11,7 +11,7 @@ namespace ManagementServices.Interfaces
     {
         void UpdateUser(UserInfo user);
         void DeleteUser(string userId);
-
         UserInfo GetUserInfo(string userName);
+        IEnumerable<UserInfo> GetUsersInfo();
     }
 }

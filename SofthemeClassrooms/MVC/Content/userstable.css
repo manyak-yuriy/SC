@@ -12,7 +12,8 @@
 
 .usersTableRow:hover{
     background-color: #f4f5f6;
-    cursor: move;
+    cursor: pointer;
+    color: black;
 }
 
 .usersTableItem{

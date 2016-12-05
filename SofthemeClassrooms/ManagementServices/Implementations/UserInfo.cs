@@ -2,11 +2,12 @@
 
 namespace ManagementServices.Implementations
 {
-    class UserInfo
+    public class UserInfo
     {
-        string Id { get; set; }
-        string FullName { get; set; }
-        string Email { get; set; }
-        string Role { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Is_Admin { get; set; }
+
+        public int NumberOfEvents { get; set; }
     }
 }

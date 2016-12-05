@@ -19,14 +19,6 @@ namespace WebApplication1.Controllers
 
             db.Equipment.Add(new Equipment { Title ="TV", ImagePath = "F:"});
 
-            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-
-            var classRoom = new ClassRoom { Title = "Tesla", Capacity = 12, IsBookable = true};
-
-            var ev = new Event { AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
-
-            db.Event.Add(ev);
             db.SaveChanges();
             return View();
         }

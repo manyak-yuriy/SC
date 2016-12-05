@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using ManagementServices.Implementations;
 
 namespace WebApplication1.Controllers
 {
@@ -8,6 +7,9 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Users()
         {
+            UsersManager m = new UsersManager();
+            var users = m.GetUsersInfo();
+            
             return View();
         }
     }
