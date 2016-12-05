@@ -115,3 +115,28 @@ header li
     font-size: 130% !important;
     height: 30px !important;
 }
+
+
+/*Slider*/
+
+.ui-slider-handle
+{
+    background-color: white;
+}
+
+section
+{
+    
+}
+
+
+.scrollableArea
+{
+    width: 2000px !important;
+    height: 300px !important;
+}
+
+.scrollWrapper
+{
+    width: 500px !important;
+}
