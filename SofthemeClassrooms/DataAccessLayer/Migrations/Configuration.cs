@@ -35,5 +35,7 @@ namespace DataAccessLayer.Migrations
                 new IdentityRole { Name = "admin" },
                 new IdentityRole { Name = "superadmin" });
         }
+
+
     }
 }

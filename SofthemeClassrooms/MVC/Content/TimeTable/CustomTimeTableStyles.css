@@ -6,11 +6,11 @@
 
 .public-event
 {
-    background-color: #f16464 !important;
+    background-color: #f95748 !important;
 }
 
 .private-event {
-    background-color: #d4dfe8 !important;
+    background-color: #eff2f7 !important;
     border: none !important;
     background-image: url('../../Images/icon-lock.png');
     color: black !important;
@@ -29,7 +29,25 @@
 .room-timeline li
 {
     height: 50px !important;
-    border: 2px solid #d4dfe8
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse;
+    background-color: white !important;
+}
+
+.room-timeline
+{
+    
+}
+
+time header li
+{
+    border: 1px solid #d4dfe8 !important;
+    border-collapse: collapse;
+}
+
+.timetable header
+{
+    border: 2px solid #d4dfe8 !important;
 }
 
 .timetable aside li
@@ -37,7 +55,46 @@
     height: 50px !important;
 }
 
+.timetable aside li
+{
+    border: 2px solid #d4dfe8;
+    border-collapse: collapse;
+    background-color: white !important;
+}
+
+.timetable section
+{
+    margin: 0px !important;
+}
+
+aside
+{
+    background-color: white;
+    margin-right: 0px !important;
+}
+
 .timetable aside
 {
     width: 200px !important;
+}
+
+header li span
+{
+    color: darkgray !important;
+}
+
+*
+{
+    border-collapse: collapse !important;
+}
+
+header ul
+{
+    height: 20px;
+}
+
+.time-label
+{
+    left: 5px !important;
+    font-size: 130%;
 }

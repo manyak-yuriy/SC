@@ -10,7 +10,7 @@
 <script> 
     $(() => {
         var timetable = new Timetable();
-        timetable.setScope(9, 22); // optional, only whole hours between 0 and 23
+        timetable.setScope(9, 22); 
 
         timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
 
@@ -27,7 +27,7 @@
             new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });
 
         var renderer = new Timetable.Renderer(timetable);
-        renderer.draw('.timetable'); // any css selector
+        renderer.draw('.timetable');
     })
     
 </script>
