@@ -126,7 +126,7 @@ header li
 
 section
 {
-    
+    width: 100%;
 }
 
 
@@ -138,5 +138,5 @@ section
 
 .scrollWrapper
 {
-    width: 500px !important;
+    width: 600px !important;
 }
