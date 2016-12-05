@@ -23,7 +23,7 @@ namespace ManagementServices.Implementations
         public int NumberOfPlanedEvents(string OrgName)
         {
             DbRepository repository = new DbRepository();
-            return repository.Events.Where(c => c.OrganizerName == OrgName).Count();
+            return repository.Events.Where(c => c.o == OrgName).Count();
         }
 
         public void UpdateEvent()

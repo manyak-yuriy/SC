@@ -258,6 +258,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\userstable.css" />
     <Content Include="Images\icon-lock.png" />
     <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
@@ -408,6 +409,9 @@
       <Project>{b66f15f6-f60a-4c17-87ed-c66155c87c44}</Project>
       <Name>ManagementServices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

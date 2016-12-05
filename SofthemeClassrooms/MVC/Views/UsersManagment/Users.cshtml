@@ -2,6 +2,24 @@
 @{
     ViewBag.Title = "Users";
 }
+<link href="~/Content/userstable.css" rel="stylesheet" />
 
-<h2>Users</h2>
 
+<div class="col-lg-5 col-lg-offset-1">
+    <h2>Список пользователей</h2>
+    <div>
+        <span>Всего: (кол)</span>
+        <input id="user-search" type="search" placeholder="Поиск" />
+    </div>
+    <ul class="userTable">
+        <li>
+           <a href="#">
+               <div class="usersTableRow">
+                   <div class="usersTableItem">Олена Мазур</div>
+                   <div class="usersTableItem">schohan@bk.ru</div>
+                   <div class="usersTableItem">13</div>
+               </div>
+           </a>
+        </li>
+    </ul>
+</div>

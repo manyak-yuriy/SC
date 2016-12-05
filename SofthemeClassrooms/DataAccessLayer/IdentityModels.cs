@@ -81,7 +81,6 @@ namespace DataAccessLayer
         {
             get
             {
-                
                 return context.Users;
             }
         }

@@ -14,7 +14,7 @@ namespace ManagementServices.Implementations
         DbRepository db = new DbRepository();
         public void DeleteUser(string userId)
         {
-           
+            
         }
 
         public UserInfo GetUserInfo(string userName)
