@@ -29,7 +29,7 @@
 .room-timeline li
 {
     height: 50px !important;
-    border: 1px solid #d4dfe8 !important;
+    border: 2px solid #d4dfe8 !important;
     border-collapse: collapse;
     background-color: white !important;
 }
@@ -41,13 +41,13 @@
 
 time header li
 {
-    border: 1px solid #d4dfe8 !important;
+    border: 2px solid #d4dfe8 !important;
     border-collapse: collapse;
 }
 
 .timetable header
 {
-    border: 2px solid #d4dfe8 !important;
+    
 }
 
 .timetable aside li
