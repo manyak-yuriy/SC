@@ -173,7 +173,8 @@ namespace WebApplication1.Controllers
                     UserManager.AddToRole(user.Id, "user");
                     UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Name, model.FullName));
 
-                    return PartialView("RegistrationSuccess");
+                    return Content("Регистрация нового пользователя произошла успешно. Пожалуйста ожидайте одобрение администратора сайта." +
+                        "На указаный адрес электронной почты будет выслано приглашение.");
                 }
                 AddErrors(result);
             }
@@ -277,7 +278,7 @@ namespace WebApplication1.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return PartialView("ResetPasswordSuccessful");
+                return Content("<div><p>Пароль успешно изменен</p></div>");
             }
             AddErrors(result);
             return View();

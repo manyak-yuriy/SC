@@ -38,7 +38,7 @@
 
             @if (User.IsInRole("admin"))
             {
-                <li id="usersItem" class="menu-item"><a href="">Пользователи</a></li>
+                <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
             }
 
             <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
@@ -49,6 +49,6 @@
         <img id="logo-gray" src="~/Images/logo-gray.png" />
     </footer> 
     @RenderSection("scripts", required: false)
-    @RenderSection("MenuItemActive", true)
+    @RenderSection("MenuItemActive", false)
 </body>
 </html>

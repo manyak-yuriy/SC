@@ -8,22 +8,25 @@
     <link href="~/Content/login.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyScripts.js"></script>
 </head>
 <body style="background-color: #f4f6fb; min-width: 760px">
 
     <div class="login-menu">
         <ul class="menu-list">
-            <li><img class="menu-logo" src="~/Images/logo-gray.png" })" /></li>
-            <li><a href="@Url.Action("Login","Account")">Вход</a></li>
-            <li><a href="@Url.Action("Register","Account")">Регистрация</a></li>
-            <li><a href="@Url.Action("ForgotPassword","Account")">Сменить пароль</a></li>
+            <li class="menu-item"><img class="menu-logo" src="~/Images/logo-gray.png" })" /></li>
+            <li id="login-item" class="menu-item"><a href="@Url.Action("Login","Account")">Вход</a></li>
+            <li id="Register-item" class="menu-item"><a href="@Url.Action("Register","Account")">Регистрация</a></li>
+            <li id="ForgotPassword-item" class="menu-item"><a href="@Url.Action("ForgotPassword","Account")">Сменить пароль</a></li>
         </ul>
     </div>
 
     <div class="input-wrapper">
-        <div class="input-top-plaint"></div>
-        <div class="red-plane"><div id="header-content"><h2 id="title">@RenderSection("header", false)</h2></div></div>
-        <div class="input-plane">
+        <div class="upper-plane"></div>
+        <div class="header-wrapper">
+            <div class="header-plane">@RenderSection("header", false)</div>
+        </div>
+        <div class="bottom-plane">
             <div id="inputForm" class="input-area">
                 @RenderBody()
             </div>

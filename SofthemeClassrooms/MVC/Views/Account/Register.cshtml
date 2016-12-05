@@ -7,7 +7,8 @@
 
 @*@using (Html.BeginForm("Register", "Account", FormMethod.Post))*@
 @using (Ajax.BeginForm("Register", "Account", new AjaxOptions()
-{   HttpMethod = "POST",
+{
+    HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "inputForm"
 }))
@@ -36,5 +37,10 @@
 }
 
 @section header{
-    Регистрация
+    <div id="register" class="header-content">
+        Регистрация
+    </div>
+    <script>
+        ActivateMenu('Register-item');
+    </script>
 }

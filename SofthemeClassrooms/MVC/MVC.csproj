@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\UsersManagmentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -376,7 +377,6 @@
     <Content Include="TimeTablePlugin\test\bower.json" />
     <Content Include="Views\Account\RegisterMessage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\RegistrationSuccess.cshtml" />
     <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
@@ -384,6 +384,7 @@
     <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Account\ChangePersonalDataPView.cshtml" />
     <Content Include="Views\Account\PersonalInfoPView.cshtml" />
+    <Content Include="Views\UsersManagment\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
