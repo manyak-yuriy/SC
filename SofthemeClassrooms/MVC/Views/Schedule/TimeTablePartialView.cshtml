@@ -38,7 +38,6 @@
         {
             position: relative !important;
     
-            border: 3px solid blue;
             width: 700px !important;
             height: 300px !important;
 
@@ -93,7 +92,7 @@
         // Init scroller
 
         
-        var temp = $('section').css("border", "3px solid red").wrap("<div class='scrollMe'></div>");
+        var temp = $('section').wrap("<div class='scrollMe'></div>");
 
         $(".scrollMe").smoothDivScroll({
             mousewheelScrolling: "allDirections",
@@ -105,102 +104,6 @@
     })
 
 </script>
-
-<style type="text/css">
-    #mixedContent {
-        width: 30%;
-        height: 330px;
-        position: relative;
-        display: block;
-
-        border: 3px solid blue;
-    }
-
-        #mixedContent .contentBox {
-            position: relative;
-            float: left;
-            display: block;
-            height: 308px;
-            width: 200px;
-            border: solid 1px #ccc;
-            padding: 10px;
-            margin: 0px 5px;
-            /* If you don't want the images in the scroller to be selectable, try the following
-               block of code. It's just a nice feature that prevent the images from
-               accidentally becoming selected/inverted when the user interacts with the scroller. */
-            
-        }
-
-            #mixedContent .contentBox img {
-                margin-bottom: 10px;
-            }
-
-            #mixedContent .contentBox p {
-                font-size: 10px;
-            }
-
-            /*
-                .scrollingHotSpotLeft, .scrollingHotSpotRight
-                {
-                    border: 3px solid red;
-                }
-            */
-            
-
-            #mixedContent
-            {
-                width: 300px;
-            }
-
-</style>
-
-
-        <div id="mixedContent">
-            <div class="contentBox">
-
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/mrPip.jpg" /> <br />
-
-                <p>My father's family name being Pirrip, and my Christian name Philip, my infant tongue could make of both names nothing longer or more explicit than Pip. So, I called myself Pip, and came to be called Pip. </p>
-            </div>
-
-            <div class="contentBox">
-
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/blacksmith.jpg" /><br />
-                <p>I give Pirrip as my father's family name, on the authority of his tombstone and my sister - Mrs Joe Gargery, who married the blacksmith.</p>
-            </div>
-
-            <div class="contentBox">
-
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/tombstone.jpg" /><br />
-                <p>As I never saw my father or my mother, and never saw any likeness of either of them (for their days were long before the days of photographs), my first fancies regarding what they were like, were unreasonably derived from their tombstones.</p>
-            </div>
-
-            <div class="contentBox">
-
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/victorianMan.jpg" /><br />
-                <p>The shape of the letters on my father's, gave me an odd idea that he was a square, stout, dark man, with curly black hair.</p>
-            </div>
-
-            <div class="contentBox">
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/victorianLady.jpg" />
-                <br />
-                <p>From the character and turn of the inscription, 'Also Georgiana Wife of the Above,' I drew a childish conclusion that my mother was freckled and sickly.</p>
-            </div>
-
-            <div class="contentBox">
-                <p>To five little stone lozenges, each about a foot and a half long which were arranged in a neat row beside their grave, and were sacred to the memory of five little brothers of mine - who gave up trying to get a living, exceedingly early in that universal struggle - I am indebted for a belief I religiously entertained that they had all been born on their backs with their hands in their trousers' pockets, and had never taken them out in this state of existence.</p>
-            </div>
-
-            <div class="contentBox">
-                <img src="~/Scripts/Smooth-Div-Scroll-master/images/ajaxDemo/cabin.jpg" /> <br />
-                <p>Ours was the marsh country, down by the river, within, as the river wound, twenty miles of the sea.</p>
-            </div>
-
-            <div class="contentBox">
-                <p>My first most vivid and broad impression of the identity of things, seems to me to have been gained on a memorable raw afternoon towards evening.</p>
-                <p>This text is from the first chapter of the book "<a href="http://en.wikipedia.org/wiki/Great_Expectations" target="_blank">Great Expectations</a>" by <a href="http://en.wikipedia.org/wiki/Charles_Dickens" target="_blank">Charles Dickens</a>. As you can see you can put links in the mixed content as well.</p>
-            </div>
-        </div>
 
         <!-- Latest version of jQuery Mouse Wheel by Brandon Aaron
                  You will find it here: http://brandonaaron.net/code/mousewheel/demos -->
