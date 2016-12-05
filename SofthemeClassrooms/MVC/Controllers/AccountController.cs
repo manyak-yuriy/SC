@@ -57,6 +57,9 @@ namespace WebApplication1.Controllers
 
         public void SaveUserDataToSession(string email)
         {
+            if ((Session["UserId"] as string) != null)
+                return;
+
             var user = UserManager.FindByEmail(email);
 
             Session["UserId"] = user.Id;
@@ -181,6 +184,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult UserPage()
         {
+            
             return View();
         }
 
@@ -392,7 +396,7 @@ namespace WebApplication1.Controllers
         //}
 
 
-        [HttpGet]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -437,10 +441,10 @@ namespace WebApplication1.Controllers
             }
 
             var user = UserManager.FindByName(User.Identity.Name);
-            var result = UserManager.ChangePassword(user.Id, model.OldPassword, model.OldPassword);
+            var result = UserManager.ChangePassword(user.Id, model.OldPassword,model.NewPassword );
             if(result.Succeeded)
             {
-                return Content("<p>Пароль успешно изменен</p>");
+                return PartialView("ChangePasswordPartialView");
             }
 
             AddErrors(result);

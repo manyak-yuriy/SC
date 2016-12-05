@@ -14,6 +14,9 @@ namespace WebApplication1.Controllers
         public ActionResult ShowSchedule()
         {
             var db = new ApplicationDbContext();
+
+            db.Equipment.Add(new Equipment { Title = "test eq", ImagePath = "D:"});
+
             db.SaveChanges();
             return View();
         }

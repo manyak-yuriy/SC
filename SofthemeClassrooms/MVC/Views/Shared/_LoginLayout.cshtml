@@ -6,10 +6,11 @@
     <title>Login</title>
     <link href="~/Content/inputs.css" rel="stylesheet" />
     <link href="~/Content/login.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </head>
 <body style="background-color: #f4f6fb; min-width: 760px">
-    
+
     <div class="login-menu">
         <ul class="menu-list">
             <li><img class="menu-logo" src="~/Images/logo-gray.png" })" /></li>
@@ -20,14 +21,13 @@
     </div>
 
     <div class="input-wrapper">
-        <div class="input-header"><div id="header-content"><h2 id="title">@RenderSection("header", false)</h2></div></div>
-        <div id="inputForm" class="input-area">
-            @RenderBody()
+        <div class="input-top-plaint"></div>
+        <div class="red-plane"><div id="header-content"><h2 id="title">@RenderSection("header", false)</h2></div></div>
+        <div class="input-plane">
+            <div id="inputForm" class="input-area">
+                @RenderBody()
+            </div>
         </div>
     </div>
-
-
-    @Scripts.Render("~/scripts/jquery-1.10.2.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 </body>
 </html>

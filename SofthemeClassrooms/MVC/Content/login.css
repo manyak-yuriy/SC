@@ -11,25 +11,65 @@
     border: 1px solid silver;
 }
 
-.input-header{
-    margin-top: 5%;
+.input-top-plaint{
+    height: 20%;
+    border-bottom: 10px solid red;
+    margin: 0;
+}
+
+form{
+    margin: 0;
+}
+
+#title{
+    margin-left: 17%;
+    margin-top: 10px;
+    margin-bottom: 0;
+    transform: skewX(-40deg);
+    color: white;
+}
+
+.red-plane{
     display: block;
     width: 100%;
     height: 10%;
     background-color: red;
+    margin: 0;
 }
 
 #header-content{
-    color: white;
-    transform: skewX(-40deg);
-    margin-left: 14%;
-    padding-top: 0px;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    margin-left: 10px;
+    padding: 0px;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.input-plane{
+    width: 100%;
+    height: 66%;
+    margin-top: 0;
+    margin-left: 10px;
+    border-left: 2px solid red;
+    border-bottom: 2px solid red;
+    padding-top: 10%;
+    padding: 0;
+}
+#form{
+    margin: 0;
+    padding: 0;
+}
+
+#input-form{
+    margin: 0;
+    padding-top: 10%;
 }
 
 .input-area{
-    margin-top: 1%;
+    margin-top: 0px;
     transform: skewX(-40deg);
-    margin-left: 8%;
+    margin-left: 10%;
     width: 10%;
 }
 
@@ -37,6 +77,11 @@
     position: fixed;
     top: 37%;
     left: 10%;
+}
+
+div{
+    margin: 0;
+    padding: 0;
 }
 
 .menu-logo{
