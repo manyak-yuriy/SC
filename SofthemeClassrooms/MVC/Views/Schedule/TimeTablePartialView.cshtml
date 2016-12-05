@@ -4,6 +4,8 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="~/Scripts/Smooth-Div-Scroll-master/css/smoothDivScroll.css" rel="stylesheet" />
+
+
 <style>
     #custom-handle {
         width: 3em;
@@ -29,28 +31,25 @@
             opacity: 0.95;
         }
 
-        section
+        .ui-slider-handle
         {
-            overflow: hidden !important;
+            background-color: white;
         }
 
-        .scrollMe
+        #slider img
         {
-            position: relative !important;
-    
-            width: 700px !important;
-            height: 300px !important;
-
-            display: inline-block !important;
+            height: 1230%;
+            position: absolute;
+            top: -310px;
         }
 </style>
 
 
 <div id="slider">
     <div id="custom-handle" class="ui-slider-handle">
-        <img src="~/Images/today-active-top.png" />
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-        <img src="~/Images/today-active-bottom.png" />
+        <img src="~/Images/Slider.png" />
+        <span> 13:37 </span>
+        <span> Сейчас </span>
     </div>
 </div>
 
@@ -90,7 +89,6 @@
 
 
         // Init scroller
-
         
         var temp = $('section').wrap("<div class='scrollMe'></div>");
 
@@ -99,7 +97,7 @@
             hotSpotScrollingStep: 3
         });
         
-        
+        $('.scrollMe').append($('#slider'));
 
     })
 
@@ -114,12 +112,6 @@
 
         <!-- Smooth Div Scroll 1.3 minified -->
         <script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.smoothdivscroll-1.3-min.js"></script>
-
-        <!-- If you want to look at the uncompressed version you find it at
-             js/source/jquery.smoothDivScroll-1.3.js -->
-        <!-- Plugin initialization -->
-        <script type="text/javascript">
-                
-        </script>
+        
 
 

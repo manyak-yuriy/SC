@@ -119,11 +119,6 @@ header li
 
 /*Slider*/
 
-.ui-slider-handle
-{
-    background-color: white;
-}
-
 section
 {
     display: inline-block !important;
@@ -140,4 +135,20 @@ section
 {
 
 }
+
+
+section
+        {
+            overflow: hidden !important;
+        }
+
+        .scrollMe
+        {
+            position: relative !important;
+    
+            width: 700px !important;
+            height: 300px !important;
+
+            display: inline-block !important;
+        }
 
