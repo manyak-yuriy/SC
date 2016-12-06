@@ -213,6 +213,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Overlays\DisplayEventPartialView.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -294,6 +295,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Overlays\DisplayEventPartialView.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\RoomsScheme\RoomsScheme.js" />
@@ -397,6 +399,7 @@
     <Content Include="Views\Account\PersonalInfoPView.cshtml" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
+    <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

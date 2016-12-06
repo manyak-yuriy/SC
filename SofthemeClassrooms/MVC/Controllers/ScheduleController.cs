@@ -16,6 +16,7 @@ namespace WebApplication1.Controllers
         public ActionResult ShowSchedule()
         {
             var db = new ApplicationDbContext();
+            /*
             db.Equipment.Add(new Equipment { Title ="TV", ImagePath = "F:"});
 
             UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -26,8 +27,10 @@ namespace WebApplication1.Controllers
             var ev = new Event { AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
 
             db.Event.Add(ev);
-
+            */
+            var fb = db.Feedback.ToList();
             db.SaveChanges();
+
             return View();
         }
 
