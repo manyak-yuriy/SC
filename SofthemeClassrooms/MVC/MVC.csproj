@@ -254,6 +254,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\TimeTable\scrollerAndSlider.css" />
+    <Content Include="Content\TimeTable\timeTableControls.css" />
     <Content Include="Images\icon-lock.png" />
     <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
@@ -398,6 +400,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\App_LocalResources\" />
+    <Folder Include="JQWidget\" />
     <Folder Include="Views\Resources\" />
     <Folder Include="Views\Room\" />
   </ItemGroup>
