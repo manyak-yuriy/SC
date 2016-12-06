@@ -18,6 +18,24 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        #newEvent
+        {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #newEvent img
+        {
+            opacity: 0.5;
+        }
+
+        #newEvent img:hover
+        {
+            opacity: 0.9;
+        }
+    </style>
+
 </head>
 <body>
     <nav>
@@ -47,6 +65,7 @@
             }
 
             <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
+            <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
         </div>
     </nav>
     @RenderBody()
