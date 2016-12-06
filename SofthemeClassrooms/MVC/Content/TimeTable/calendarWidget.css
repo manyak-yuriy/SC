@@ -59,6 +59,7 @@
    .jqx-icon-arrow-left, .jqx-icon-arrow-right
    {
        background-image: none !important;
+       z-index: 100;
    }
 
    #backTodayInCalendar

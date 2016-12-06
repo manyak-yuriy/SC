@@ -50,7 +50,9 @@
     </div>
 </div> 
 
-
+<!--
+    Include all files for calendar widget
+-->
     <link href="~/JQWidget/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
 
 
@@ -68,13 +70,16 @@
     <script src="~/JQWidget/jqwidgets/globalization/globalize.culture.ru-RU.js"></script>
 
     <script type="text/javascript">
-            $(document).ready(function () {
+        // Calendar-related scripts
+        $(document).ready(function () {
+
                 // create jqxcalendar.
                 $("#jqxWidget").jqxCalendar({ width: 220, height: 220 });
                 
 
                 $("#jqxWidget").jqxCalendar({ culture: 'ru-RU' });
 
+                // set custom left and right arrows for calendar view
                 $('.jqx-icon-arrow-left').append('<i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>');
                 $('.jqx-icon-arrow-right').append('<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>');
 
@@ -105,6 +110,7 @@
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
 
+                    // show or hide a link to current day
                     if (date.getMonth() != new Date().getMonth())
                         $('#backTodayInCalendar').css("display", "inline-block");
                     else
@@ -118,14 +124,30 @@
                 });
 
 
-                // Set today for calendar
+                // Set today for calendar after page load
                 $('#jqxWidget').jqxCalendar('setDate', new Date());
+
+
+                // Toggle calendar
+                $('.fa-list').click(function () {
+                    $('.fa-align-justify').css('opacity', 0.15);
+                    $(this).css('opacity', 1);
+                    $("#jqxWidget").css("display", "inline-block");
+                });
+
+                $('.fa-align-justify').click(function () {
+                    $('.fa-list').css('opacity', 0.15);
+                    $(this).css('opacity', 1);
+                    $("#jqxWidget").css("display", "none");
+                });
             });
     </script>
    
 
 
-
+<!--
+    Include files for timetable
+-->
 
 <link href="~/Content/TimeTable/CustomTimeTableStyles.css" rel="stylesheet" />
 <link href="~/Content/TimeTable/timeTableControls.css" rel="stylesheet" />
@@ -135,20 +157,8 @@
     var renderer;
 
     $(() => {
-        // Switch calendar
-        $('.fa-list').click(function () {
-            $('.fa-align-justify').css('opacity', 0.15);
-            $(this).css('opacity', 1);
-            $("#jqxWidget").css("display", "inline-block");
-        });
 
-        $('.fa-align-justify').click(function () {
-            $('.fa-list').css('opacity', 0.15);
-            $(this).css('opacity', 1);
-            $("#jqxWidget").css("display", "none");
-        });
-
-
+        // Create and init main timetable
         timetable = new Timetable();
         timetable.setScope(9, 23);
 
@@ -190,6 +200,7 @@
         hours = 0;
         minutes = 0;
 
+        // put selected hours and minutes into global variables hours and minutes respectively
         var updateHours = 
             function (event, ui) {
                 var hourScope = timetable.scope.hourEnd - timetable.scope.hourStart;
@@ -209,11 +220,14 @@
                 $('#selected-time').html(prettyTime);
             }
 
-        
+        // when user stops sliding, update selected time
         $("#slider").slider({
+            // slide or change
             stop: updateHours
         });
 
+        
+        // when user stops scrolling, update selected time
         $(".scrollMe").smoothDivScroll({
             mouseOverLeftHotSpot: updateHours,
             mouseOverRightHotSpot: updateHours,
@@ -225,7 +239,9 @@
 </script>
 
 
-
+<!--
+    Include files for scroller widget
+-->
         <!-- Latest version of jQuery Mouse Wheel by Brandon Aaron
                  You will find it here: http://brandonaaron.net/code/mousewheel/demos -->
         <script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.mousewheel.min.js"></script>

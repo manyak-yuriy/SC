@@ -62,3 +62,8 @@
             top: -40px;
             left: -5px;
         }
+
+        .ui-state-active
+        {
+            color: black !important;
+        }
