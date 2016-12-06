@@ -122,11 +122,27 @@
             $(document).ready(function () {
                 // create jqxcalendar.
                 $("#jqxWidget").jqxCalendar({ width: 220, height: 220 });
+                
 
                 $("#jqxWidget").jqxCalendar({ culture: 'ru-RU' });
 
                 $('.jqx-icon-arrow-left').append('<i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>');
                 $('.jqx-icon-arrow-right').append('<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>');
+
+                // set yesterday in calendar
+                $('#date-scroller .fa-caret-left').click(function () {
+                    var calDate = $('#jqxWidget').jqxCalendar('getDate');
+                    calDate.setDate(calDate.getDate() - 1);
+                    $('#jqxWidget').jqxCalendar('setDate', calDate);
+                });
+
+                // set tomorrow in calendar
+                $('#date-scroller .fa-caret-right').click(function () {
+                    var calDate = $('#jqxWidget').jqxCalendar('getDate');
+                    calDate.setDate(calDate.getDate() + 1);
+                    $('#jqxWidget').jqxCalendar('setDate', calDate);
+                });
+
 
                 // Calendar state changed
                 $('#jqxWidget').on('change viewChange', function (event) {
@@ -140,6 +156,10 @@
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
                 });
+
+
+                // Set today for calendar
+                $('#jqxWidget').jqxCalendar('setDate', new Date());
             });
     </script>
     
