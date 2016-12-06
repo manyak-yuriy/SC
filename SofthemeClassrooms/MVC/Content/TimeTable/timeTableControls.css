@@ -19,10 +19,10 @@
         margin: 5px;
     }
 
-    .fa-list
+    .fa-align-justify
     {
         opacity: 0.15;
-        padding-left: 10px;
+        padding-right: 10px;
     }
 
     #date-scroller

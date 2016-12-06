@@ -177,9 +177,16 @@
 
     $(() => {
         // Switch calendar
-        $('.fa-list, .fa-align-justify').click(function () {
-            $('.fa-list, .fa-align-justify').css('opacity', 0.15);
+        $('.fa-list').click(function () {
+            $('.fa-align-justify').css('opacity', 0.15);
             $(this).css('opacity', 1);
+            $("#jqxWidget").css("display", "inline-block");
+        });
+
+        $('.fa-align-justify').click(function () {
+            $('.fa-list').css('opacity', 0.15);
+            $(this).css('opacity', 1);
+            $("#jqxWidget").css("display", "none");
         });
 
 
