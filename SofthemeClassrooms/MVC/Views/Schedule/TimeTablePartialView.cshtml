@@ -17,66 +17,8 @@
     </div>
 </div>
 
-<style>
-   #jqxWidget
-   {
-       display: inline-block;
-       position: relative;
-       top: -137px;
-   }
 
-   .jqx-widget-header
-   {
-       background-color: transparent !important;
-       border-color: transparent !important;
-
-   }
-
-   .jqx-widget-content
-   {
-       border-color: transparent !important;
-   }
-
-   .jqx-calendar-cell-today
-   {
-       border-radius: 50% !important;
-       background-color: red !important;
-   }
-
-   .jqx-calendar-cell-hover
-   {
-       border-radius: 50% !important;
-       background-color: lightgrey !important;
-   }
-
-   .jqx-calendar-cell-selected
-   {
-       border-radius: 50% !important;
-       background-color: grey !important;
-   }
-
-   .jqx-fill-state-pressed
-   {
-       border-color: transparent !important;
-   }
-
-   .jqx-calendar-cell
-   {
-       border: none !important;
-   }
-
-   .timetable
-   {
-       display: inline-block;
-   }
-
-   .jqx-icon-arrow-left, .jqx-icon-arrow-right
-   {
-       background-image: none !important;
-   }
-
-
-</style>
+<link href="~/Content/TimeTable/calendarWidget.css" rel="stylesheet" />
 
 
 
@@ -98,8 +40,15 @@
 
     </div>
 
-    <div id='jqxWidget'>
+    <div style="display:inline-block !important">
+        <div id='jqxWidget' style="display:inline-block !important">
+
+        </div>
+        <span id="backTodayInCalendar" href="#">
+            Сегодня
+        </span>
     </div>
+</div> 
 
 
     <link href="~/JQWidget/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
@@ -155,6 +104,17 @@
                     var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
+
+                    if (date.getMonth() != new Date().getMonth())
+                        $('#backTodayInCalendar').css("display", "inline-block");
+                    else
+                        $('#backTodayInCalendar').css("display", "none");
+                });
+
+                // Get back today on calendar
+
+                $('#backTodayInCalendar').click(function () {
+                    $('#jqxWidget').jqxCalendar('setDate', new Date());
                 });
 
 
@@ -162,8 +122,7 @@
                 $('#jqxWidget').jqxCalendar('setDate', new Date());
             });
     </script>
-    
-</div>
+   
 
 
 

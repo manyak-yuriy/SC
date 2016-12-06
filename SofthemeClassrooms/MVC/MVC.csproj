@@ -254,6 +254,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\TimeTable\calendarWidget.css" />
     <Content Include="Content\TimeTable\scrollerAndSlider.css" />
     <Content Include="Content\TimeTable\timeTableControls.css" />
     <Content Include="Images\icon-lock.png" />

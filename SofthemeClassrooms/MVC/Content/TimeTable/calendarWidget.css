@@ -1,0 +1,77 @@
+﻿   #main-container
+   {
+       display: inline-block;
+       position: relative;
+   }
+
+   #jqxWidget
+   {
+       display: inline-block;
+       position: absolute;
+       top: 0px;
+   }
+
+   .jqx-widget-header
+   {
+       background-color: transparent !important;
+       border-color: transparent !important;
+
+   }
+
+   .jqx-widget-content
+   {
+       border-color: transparent !important;
+   }
+
+   .jqx-calendar-cell-today
+   {
+       border-radius: 50% !important;
+       background-color: red !important;
+   }
+
+   .jqx-calendar-cell-hover
+   {
+       border-radius: 50% !important;
+       background-color: lightgrey !important;
+   }
+
+   .jqx-calendar-cell-selected
+   {
+       border-radius: 50% !important;
+       background-color: grey !important;
+   }
+
+   .jqx-fill-state-pressed
+   {
+       border-color: transparent !important;
+   }
+
+   .jqx-calendar-cell
+   {
+       border: none !important;
+   }
+
+   .timetable
+   {
+       display: inline-block !important;
+   }
+
+   .jqx-icon-arrow-left, .jqx-icon-arrow-right
+   {
+       background-image: none !important;
+   }
+
+   #backTodayInCalendar
+   {
+       display: none;
+       position: relative;
+       left: 80px;
+       top: -120px;
+
+       color: lightgray;
+   }
+
+   #backTodayInCalendar:hover
+   {
+       color: lightcoral;
+   }
