@@ -110,8 +110,12 @@
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
 
+
+                    var selectedMonth = date.getMonth();
+                    var currMonth = new Date().getMonth();
+
                     // show or hide a link to current day
-                    if (date.getMonth() != new Date().getMonth())
+                    if (selectedMonth != currMonth)
                         $('#backTodayInCalendar').css("display", "inline-block");
                     else
                         $('#backTodayInCalendar').css("display", "none");
