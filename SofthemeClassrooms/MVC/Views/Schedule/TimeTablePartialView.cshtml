@@ -127,6 +127,19 @@
 
                 $('.jqx-icon-arrow-left').append('<i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>');
                 $('.jqx-icon-arrow-right').append('<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>');
+
+                // Calendar state changed
+                $('#jqxWidget').on('change viewChange', function (event) {
+                    var date = event.args.date;
+                    /*
+                    var view = event.args.view;
+                    var viewFrom = view.from;
+                    var viewTo = view.to;
+                    */
+                    var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+                    // Change the state of upper scroller
+                    $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
+                });
             });
     </script>
     
