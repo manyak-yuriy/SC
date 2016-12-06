@@ -37,7 +37,7 @@
             <div>
                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "error" })
                 @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id = "messageText" } })
-                <input class="send" type="submit" value="Отправить" />
+                <input class="button" type="submit" value="Отправить" />
             </div>
         }
     </div>
