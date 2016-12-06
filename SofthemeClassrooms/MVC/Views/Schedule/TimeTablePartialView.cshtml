@@ -60,6 +60,12 @@
             opacity: 30;
         }
 
+        #slider
+        {
+            left: -8px;
+            position: relative;
+        }
+
 </style>
 
 
@@ -87,7 +93,7 @@
 
     $(() => {
         timetable = new Timetable();
-        timetable.setScope(9, 5);
+        timetable.setScope(9, 23);
 
         timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
 
@@ -119,6 +125,20 @@
         });
         
         $('.scrollMe').append($('#slider'));
+
+        $("#slider").slider({
+            stop: function (event, ui) {
+                var hourScope = timetable.scope.hourEnd - timetable.scope.hourStart;
+                var pxPerHour = $('section').width() / hourScope;
+
+                var sliderPos = parseInt($("#custom-handle").css("left"));
+                var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
+
+                var hoursElapsed = ((sliderPos + scrollOffset) / pxPerHour);
+
+                $('#selected-time').html(hoursElapsed + timetable.scope.hourStart);
+            }
+        });
 
     })
 
