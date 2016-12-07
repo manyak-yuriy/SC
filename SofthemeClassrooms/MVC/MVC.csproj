@@ -216,15 +216,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-<<<<<<< HEAD
     <Content Include="Content\Overlays\AddEventPartialView.css" />
     <Content Include="Content\Overlays\CancelEventPartialView.css" />
     <Content Include="Content\Overlays\DisplayEventPartialView.css" />
-=======
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome-4.7.0\HELP-US-OUT.txt" />
->>>>>>> origin/Hok
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -266,13 +263,10 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-<<<<<<< HEAD
     <Content Include="Content\TimeTable\calendarWidget.css" />
     <Content Include="Content\TimeTable\scrollerAndSlider.css" />
     <Content Include="Content\TimeTable\timeTableControls.css" />
-=======
     <Content Include="Content\userstable.css" />
->>>>>>> origin/Hok
     <Content Include="Images\icon-lock.png" />
     <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
@@ -322,16 +316,12 @@
     <Content Include="Content\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-
     <Content Include="Images\Slider.png" />
-
     <Content Include="Scripts\MyScripts.js" />
-
     <Content Include="Images\today-active-bottom.png" />
     <Content Include="Images\today-active-top.png" />
     <Content Include="Images\today-bottom.png" />
     <Content Include="Images\today-top.png" />
-    <Content Include="Scripts\ActivateMenuItem.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -348,11 +338,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-
     <Content Include="Scripts\Overlays\DisplayEventPartialView.js" />
-
     <Content Include="Scripts\Popups\userstable.js" />
-
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\RoomsScheme\RoomsScheme.js" />
@@ -455,15 +442,12 @@
     <Content Include="Views\PersonalPage\PersonalInfoPView.cshtml" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
-
     <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
     <Content Include="Views\Schedule\Overlays\CancelEventPartialView.cshtml" />
     <Content Include="Views\Schedule\Overlays\AddEventPartialView.cshtml" />
-
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

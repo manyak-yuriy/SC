@@ -18,7 +18,8 @@ namespace WebApplication1.Controllers
         // Render main page
         [HttpGet]
         public ActionResult ShowSchedule()
-        {           
+        {       
+            /*    
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
@@ -38,7 +39,7 @@ namespace WebApplication1.Controllers
             
             var fb = db.Feedback.ToList();
             db.SaveChanges();
-            
+            */
             return View();
         }
 
