@@ -214,6 +214,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Overlays\CancelEventPartialView.css" />
     <Content Include="Content\Overlays\DisplayEventPartialView.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -402,6 +403,7 @@
     <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
     <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
+    <Content Include="Views\Schedule\Overlays\CancelEventPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

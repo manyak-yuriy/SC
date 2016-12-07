@@ -11,6 +11,12 @@
     background-color: white !important;
 
     display: block;
+    opacity: 0.8;
+}
+
+.event-display-popup:hover
+{
+    opacity: 1;
 }
 
 .event-display-header

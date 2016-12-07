@@ -66,6 +66,12 @@ namespace WebApplication1.Controllers
             return PartialView("~/Views/Schedule/Overlays/DisplayEventPartialView.cshtml", model);
         }
 
+        [HttpGet]
+        public PartialViewResult GetEventCancellationPartialView()
+        {
+            return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml");
+        }
+
         [HttpPost]
         [Authorize]
         public JsonResult CancelEvent(int Id)
