@@ -4,10 +4,13 @@
     font-family: monospace;
     width: 350px;
 
-    z-index: 1000;
+    z-index: 200;
 
-    position: absolute;
-    left: 50%;
+    position: fixed !important;
+    left: 50% !important;
+    top: 200px !important;
+
+    background-color: white !important;
 }
 
 .event-display-header
