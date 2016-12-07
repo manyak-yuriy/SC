@@ -54,7 +54,11 @@ namespace WebApplication1.Controllers
             model.DateEnd = eventEntity.DateEnd;
             model.Title = eventEntity.Title;
             model.Description = eventEntity.Description;
-            model.OrganizerName = eventEntity.OrganizerName ?? eventEntity.Organizer.UserName;
+            if (eventEntity.OrganizerName != null)
+                model.OrganizerName = eventEntity.OrganizerName;
+            else
+                model.OrganizerName = (eventEntity.Organizer == null)? "" : eventEntity.Organizer.UserName;
+
             model.VisitorCount = eventEntity.ForeignVisitor.Count;
 
             return PartialView("~/Views/Schedule/Overlays/DisplayEventPartialView.cshtml", model);
