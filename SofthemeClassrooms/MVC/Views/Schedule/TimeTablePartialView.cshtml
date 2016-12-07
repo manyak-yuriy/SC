@@ -247,6 +247,12 @@
 
                         $('body').prepend(data);
                         $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '200px').draggable();
+
+                        $('.fa-window-minimize').click(function () {
+                                //alert("min");
+                                $(this).parents('.event-display-popup').remove();
+                        })
+                        
                     }
                 }
             );
