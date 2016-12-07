@@ -7,7 +7,7 @@ using DataAccessLayer;
 
 namespace ManagementServices.Interfaces
 {
-    public interface IEventManagement
+    public interface IEventActions
     {
         IEnumerable<Event> GetAll();
         Event GetById(int id);

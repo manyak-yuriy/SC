@@ -1,5 +1,4 @@
 ﻿.input-wrapper {
-    display: block;
     float: right;
     background-color: white;
     transform: skewX(40deg);
@@ -9,34 +8,72 @@
     position: fixed;
     top: 12%;   
     border: 1px solid silver;
+    padding: 0px;
 }
 
-.input-header{
-    margin-top: 5%;
-    display: block;
+.upper-plane{
     width: 100%;
+    height: 30%;
+    border-bottom: 5px solid red;
+}
+
+.header-wrapper{
     height: 10%;
     background-color: red;
+    width: 100%;
+    margin-bottom: 0;
 }
 
-#header-content{
-    color: white;
+.header-plane{
+    height: 100%;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.header-content{
     transform: skewX(-40deg);
-    margin-left: 14%;
-    padding-top: 0px;
+    font-size: 30px;
+    color: white;
+}
+
+#login{
+    margin-left: 15%;
+}
+
+#register{
+    margin-left: 15%;
+}
+
+#passwordchange{
+    margin-left: 13%;
+}
+
+.bottom-plane{
+    width: 100%;
+    height: 57%;
+    border-bottom: 2px solid red;
+    border-left: 2px solid red;
+    margin-left: 10px;
 }
 
 .input-area{
-    margin-top: 1%;
+    padding-top: 30px;
     transform: skewX(-40deg);
     margin-left: 8%;
-    width: 10%;
+    width: 12%;
 }
 
 .login-menu{
     position: fixed;
     top: 37%;
     left: 10%;
+}
+
+div{
+    margin: 0;
+    padding: 0;
 }
 
 .menu-logo{
@@ -48,7 +85,19 @@ ul.menu-list{
     list-style-type: none;
 }
 
+li.menu-item{
+    margin-bottom: 15px;
+}
+
+.menu-item-active{
+    text-decoration: solid;
+}
+
 a{
    text-decoration: none;
    color: silver;
+}
+
+a:hover{
+    text-decoration: underline;
 }

@@ -3,7 +3,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using DataAccessLayer;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccessLayer
 {
@@ -12,7 +14,6 @@ namespace DataAccessLayer
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
@@ -20,8 +21,7 @@ namespace DataAccessLayer
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("STDevelop", throwIfV1Schema: false)
+        public ApplicationDbContext(): base("DummyDb", throwIfV1Schema: false)
         {
         }
 
@@ -61,6 +61,35 @@ namespace DataAccessLayer
                 .WithRequired(e => e.Event)
                 .WillCascadeOnDelete(false);
 
+        }
+    }
+
+    public class DbRepository
+    {
+        ApplicationDbContext context = new ApplicationDbContext();
+
+        public IEnumerable<Event> Events
+        {
+            get
+            { 
+                return context.Event;
+            }
+        }
+
+        public IEnumerable<ApplicationUser> Users
+        {
+            get
+            {
+                return context.Users;
+            }
+        }
+
+        public IEnumerable<IdentityRole> Roles
+        {
+            get
+            {
+                return context.Roles;
+            }
         }
     }
 }

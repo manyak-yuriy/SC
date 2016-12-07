@@ -15,10 +15,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult SendMessageForm(SendMessageModel model)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-
+                return View(model);
             }
+
+            
 
             return View(model);
         }

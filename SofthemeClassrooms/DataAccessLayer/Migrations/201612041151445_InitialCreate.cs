@@ -57,7 +57,8 @@ namespace DataAccessLayer.Migrations
                         OrganizerName = c.String(maxLength: 100),
                         AllowSubscription = c.Boolean(),
                         Organizer_Id = c.String(maxLength: 128),
-                    })
+                        ApplicationUserID = c.String(maxLength: 128)
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Organizer_Id)
                 .ForeignKey("dbo.ClassRoom", t => t.ClassroomId)

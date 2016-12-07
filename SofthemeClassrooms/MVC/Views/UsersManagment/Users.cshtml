@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebApplication1.Models.PersonalDataViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+
+<div class="container">
+    <div class="col-lg-8 col-lg-offset-1">
+        <h2>Список пользователей</h2>
+        <div>
+            <span>Всего: @Model.Count()</span>
+            <input id="user-search" type="search" placeholder="Поиск" />
+        </div>
+        <ul class="userTable">
+            @{
+                int i = 0;
+                foreach (var u in Model)
+                {
+                    <li>
+                        <div class="usersTableRow">
+                            <a href="@Url.Action("UserPage", "UsersManagment", u)">
+
+                                <div class="usersTableItem">@u.Name</div>
+                                <div class="usersTableItem">@u.Email</div>
+                                <div class="usersTableItem">@u.NumberOfEvents</div>
+                            </a>
+                            <div class="usersTableItem">
+                                <button class="delete" onclick="DeleteUserPopupShow('@i.ToString()')"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div id="@i.ToString()" class="b-popup">
+                            <div class="b-popup-content">
+                                <div class="popup-upper-plane">
+                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                    Вы уверены, что хотите удалить пользователя?
+                                </div>
+                                <p class="deleteMessage">Все события, запланированые этим пользователем, будут отменены.</p>
+                                <div>
+                                    <div class="NoBlock">
+                                        <button onclick="DeleteUserPopupHide('@i.ToString()')" class="button No">Нет</button>
+                                    </div>
+                                    <div class="YesBlock">
+                                        <button class="button Yes">Да</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    ++i;
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+@section MenuItemActive{
+    <script>
+        ActivateMenu('usersItem');
+    </script>
+
+}

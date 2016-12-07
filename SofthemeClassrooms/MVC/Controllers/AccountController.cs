@@ -55,22 +55,13 @@ namespace WebApplication1.Controllers
             }
         }
 
-        public void SaveUserDataToSession(string email)
-        {
-            var user = UserManager.FindByEmail(email);
-
-            Session["UserId"] = user.Id;
-            Session["UserEmail"] = user.Email;
-
-            Session["UserName"] = UserManager.GetClaims(user.Id).Where(c => c.Type == ClaimTypes.Name)
-                .Select(c => c.Value).SingleOrDefault();
-        }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
@@ -81,6 +72,9 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -90,7 +84,6 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    SaveUserDataToSession(model.Email);
                     return RedirectToAction("ShowSchedule", "Schedule");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = "", RememberMe = false });
@@ -106,6 +99,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             // Требовать предварительный вход пользователя с помощью имени пользователя и пароля или внешнего имени входа
             if (!await SignInManager.HasBeenVerifiedAsync())
             {
@@ -121,6 +116,8 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -145,6 +142,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
@@ -155,6 +154,8 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -170,7 +171,8 @@ namespace WebApplication1.Controllers
                     UserManager.AddToRole(user.Id, "user");
                     UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Name, model.FullName));
 
-                    return PartialView("RegistrationSuccess");
+                    return Content("Регистрация нового пользователя произошла успешно. Пожалуйста ожидайте одобрение администратора сайта." +
+                        "На указаный адрес электронной почты будет выслано приглашение.");
                 }
                 AddErrors(result);
             }
@@ -179,16 +181,14 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
-        public ActionResult UserPage()
-        {
-            return View();
-        }
 
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (userId == null || code == null)
             {
                 return View("Error");
@@ -212,6 +212,8 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
@@ -235,6 +237,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
@@ -243,6 +247,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code, string Email)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             ResetPasswordViewModel reset = new ResetPasswordViewModel()
             {
                 Code = code,
@@ -260,6 +266,8 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -273,7 +281,7 @@ namespace WebApplication1.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return PartialView("ResetPasswordSuccessful");
+                return Content("<div><p>Пароль успешно изменен</p></div>");
             }
             AddErrors(result);
             return View();
@@ -392,7 +400,7 @@ namespace WebApplication1.Controllers
         //}
 
 
-        [HttpGet]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -406,46 +414,6 @@ namespace WebApplication1.Controllers
         //    return View();
         //}
 
-
-        public ActionResult ChangePersonalView()
-        {
-            return PartialView("ChangePersonalDataPView", new PersonalDataViewModel() { Email = Session["UserEmail"] as string, Name = Session["UserName"] as string });
-        }
-
-        public ActionResult ChangePersonalInfo(PersonalDataViewModel model)
-        {
-            if (model.Email == null || model.Name == null)
-            {
-                return PartialView("ChangePersonalDataPView", new PersonalDataViewModel() { Email = Session["UserEmail"] as string, Name = Session["UserName"] as string });
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return PartialView("ChangePersonalDataPView", model);
-            }
-
-
-
-            return PartialView("PersonalInfoPView");
-        }
-
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if(!ModelState.IsValid)
-            {
-                return PartialView("ChangePasswordPartialView", model);
-            }
-
-            var user = UserManager.FindByName(User.Identity.Name);
-            var result = UserManager.ChangePassword(user.Id, model.OldPassword, model.OldPassword);
-            if(result.Succeeded)
-            {
-                return Content("<p>Пароль успешно изменен</p>");
-            }
-
-            AddErrors(result);
-            return PartialView("ChangePasswordPartialView", model);
-        }
 
         protected override void Dispose(bool disposing)
         {

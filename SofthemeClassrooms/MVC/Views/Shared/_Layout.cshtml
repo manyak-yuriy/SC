@@ -4,18 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/inputs.css" rel="stylesheet" />
+
     <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     
     <link href="~/calendar.ico" rel="icon" type="image/x-icon" />
-    @Styles.Render("~/Content/css")
 
+    <link href="~/Content/userpage.css" rel="stylesheet" />
+    <link href="~/Content/userstable.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
-
+    <script src="~/Scripts/Popups/userstable.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +43,9 @@
         }
     </style>
 
+
+    <script src="~/Scripts/MyScripts.js"></script> 
+
 </head>
 <body>
     <nav>
@@ -49,21 +57,26 @@
             }
             else
             {
+                
+                if((Session["UserName"] as string) == null)
+                {
+                    ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
+                    Session["UserName"] = m.GetUserName(User.Identity.Name);
+                }
+
                 <li id="loginItem" class="menu-item">
-                    <a href="@Url.Action("UserPage", "Account")">
+                    <a href="@Url.Action("MyPage", "PersonalPage")">
                         <img src="" alt="" />
                         @(Session["UserName"] as string)
                     </a>
                 </li>
-
-                <li class="menu-item"><a href="@Url.Action("Login", "Account")">Выход</a></li>
             }
 
             <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
 
             @if (User.IsInRole("admin"))
             {
-                <li id="usersItem" class="menu-item"><a href="">Пользователи</a></li>
+                <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
             }
 
             <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
@@ -73,11 +86,8 @@
     @RenderBody()
     <footer>
         <img id="logo-gray" src="~/Images/logo-gray.png" />
-    </footer>
-
-    <script src="~/Scripts/ActivateMenuItem.js"></script>
-    
+    </footer> 
     @RenderSection("scripts", required: false)
-    @RenderSection("MenuItemActive", true)
+    @RenderSection("MenuItemActive", false)
 </body>
 </html>
