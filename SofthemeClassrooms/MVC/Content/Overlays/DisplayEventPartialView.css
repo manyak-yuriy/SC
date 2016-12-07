@@ -1,0 +1,143 @@
+﻿.event-display-popup
+{
+    border: 1px solid #ff6464;
+    font-family: monospace;
+    width: 350px;
+
+    z-index: 200;
+
+    position: fixed !important;
+
+    background-color: white !important;
+
+    display: block;
+    opacity: 0.9;
+}
+
+.event-display-popup:hover
+{
+    opacity: 1;
+}
+
+.event-display-header
+{
+    background-color: #ff6464;
+    color: white;
+    padding: 7px;
+}
+
+.change-button, .cancel-button
+{
+    background-color: red;
+    color: white;
+    border-radius: 20%;
+    border: none;
+}
+
+.change-button:hover, .cancel-button:hover
+{
+    background-color: gray;
+}
+
+.change-button:active, .cancel-button:active
+{
+    border: none !important;
+}
+
+.header-controls
+{
+    display: inline-block;
+    margin-left: 30px;
+    float: right;
+
+    position: relative;
+    top: -10px;
+
+    font-weight: bold;
+}
+
+.fa-window-minimize
+{
+    opacity: 0.5;
+}
+
+.fa-window-minimize:hover
+{
+    color: black;
+    opacity: 1;
+}
+
+.event-display-contents
+{
+    background-color: white;
+    margin: 10px;
+}
+
+
+.event-display-links
+{
+    margin: 0 auto; 
+    width: 60%;
+}
+
+.event-display-links i
+{
+    padding: 5px;
+}
+
+
+.new-visitor-block
+{
+    margin: 5px;
+}
+
+.add-visitor-email
+{
+    border-radius: 2em;
+    opacity: 0.5;
+    line-height: 10px;
+    padding: 8px;
+    width: 90%;
+
+    border: 1px solid grey;
+}
+
+i
+{
+    opacity: 0.6;
+}
+
+i:hover
+{
+    opacity: 0.9;
+}
+
+
+.event-display-links i
+{
+    opacity: 0.3;
+}
+
+.event-display-links i:hover
+{
+    opacity: 0.9;
+}
+
+.fa-plus
+{
+    opacity: 0.3;
+}
+
+.organizer-info
+{
+    display: inline-block;
+    margin: 5px;
+}
+
+.visitors-info
+{
+    display: inline-block;
+    margin: 5px;
+    float: right;
+    margin-right: 10px;
+}

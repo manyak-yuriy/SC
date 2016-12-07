@@ -205,6 +205,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +214,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Overlays\AddEventPartialView.css" />
+    <Content Include="Content\Overlays\CancelEventPartialView.css" />
+    <Content Include="Content\Overlays\DisplayEventPartialView.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -254,6 +258,9 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\TimeTable\calendarWidget.css" />
+    <Content Include="Content\TimeTable\scrollerAndSlider.css" />
+    <Content Include="Content\TimeTable\timeTableControls.css" />
     <Content Include="Images\icon-lock.png" />
     <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
@@ -270,6 +277,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\Slider.png" />
+    <Content Include="Images\today-active-bottom.png" />
+    <Content Include="Images\today-active-top.png" />
+    <Content Include="Images\today-bottom.png" />
+    <Content Include="Images\today-top.png" />
     <Content Include="Scripts\ActivateMenuItem.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -287,9 +299,50 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Overlays\DisplayEventPartialView.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\RoomsScheme\RoomsScheme.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\.gitignore" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\ajaxContentMixed.html" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\css\smoothDivScroll.css" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\blacksmith.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\cabin.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\charlesDickens.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\mrPip.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\tombstone.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\victorianCastle.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\victorianLady.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\ajaxDemo\victorianMan.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\arrow_left.gif" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\arrow_left.png" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\arrow_right.gif" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\arrow_right.png" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\big_transparent.gif" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_left.cur" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_left.gif" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_left.png" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_right.cur" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_right.gif" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\cursors\cursor_arrow_right.png" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\dog.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\field.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\gnome.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\golf.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\leaf.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\pencils.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\river.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\images\demo\train.jpg" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\index.html" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\jquery-ui-1.8.23.custom.min.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\jquery.kinetic.min.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\jquery.mousewheel.min.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\jquery.smoothdivscroll-1.3-min.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery.kinetic.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery.mousewheel.js" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery.smoothDivScroll-1.3.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="TimeTablePlugin\.gitattributes" />
     <Content Include="TimeTablePlugin\.gitignore" />
@@ -348,10 +401,16 @@
     <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
     <Content Include="Views\Account\ChangePersonalDataPView.cshtml" />
     <Content Include="Views\Account\PersonalInfoPView.cshtml" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
+    <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
+    <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
+    <Content Include="Views\Schedule\Overlays\CancelEventPartialView.cshtml" />
+    <Content Include="Views\Schedule\Overlays\AddEventPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\App_LocalResources\" />
+    <Folder Include="JQWidget\" />
     <Folder Include="Views\Resources\" />
     <Folder Include="Views\Room\" />
   </ItemGroup>

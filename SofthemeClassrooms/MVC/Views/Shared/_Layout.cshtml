@@ -6,6 +6,8 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/inputs.css" rel="stylesheet" />
     <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    
+    <link href="~/calendar.ico" rel="icon" type="image/x-icon" />
     @Styles.Render("~/Content/css")
 
     @Scripts.Render("~/bundles/jquery")
@@ -15,6 +17,27 @@
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #newEvent
+        {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #newEvent img
+        {
+            opacity: 0.5;
+        }
+
+        #newEvent img:hover
+        {
+            opacity: 0.9;
+        }
+    </style>
+
 </head>
 <body>
     <nav>
@@ -44,6 +67,7 @@
             }
 
             <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
+            <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
         </div>
     </nav>
     @RenderBody()

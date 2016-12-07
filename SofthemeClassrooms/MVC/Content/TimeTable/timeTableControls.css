@@ -1,0 +1,74 @@
+﻿#change-view
+    {
+        border-radius: 20px;
+        border: 2px solid #d4dfe8;
+        display: inline-block;
+
+        margin: 10px;
+        padding: 3px;
+
+        left: 60px;
+        top: 15px;
+        position: absolute;
+    }
+
+    
+
+    #change-view .fa
+    {
+        margin: 5px;
+    }
+
+    .fa-align-justify
+    {
+        opacity: 0.15;
+        padding-right: 10px;
+    }
+
+    #date-scroller
+    {
+        display: inline-block;
+        width: 600px;
+        position: relative;
+        left: 200px;
+
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .fa-caret-left, .fa-caret-right
+    {
+        opacity: 0.4;
+        transition: all .2s ease-in-out;
+    }
+
+    .fa-caret-left:hover, .fa-caret-right:hover
+    {
+        opacity: 0.9;
+    }
+
+    .fa-caret-left:active, .fa-caret-right:active
+    {
+        opacity: 1;
+        transform: scale(1.9);
+    }
+
+    .fa-caret-left
+    {
+        float: left;
+    }
+
+    .fa-caret-right
+    {
+        float: right;
+    }
+
+    .fa-align-justify, .fa-list
+    {
+        transition: all .2s ease-in-out;
+    }
+
+    .fa-align-justify:hover, .fa-list:hover
+    {
+        transform: scale(1.3);
+    }
