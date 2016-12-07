@@ -7,17 +7,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
+using WebApplication1.Models.Schedule;
 
 namespace WebApplication1.Controllers
 {
     public class ScheduleController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // Render the page
         [HttpGet]
         public ActionResult ShowSchedule()
-        {
-            var db = new ApplicationDbContext();
-            
+        {           
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
@@ -28,10 +29,10 @@ namespace WebApplication1.Controllers
 
             db.ClassRoom.AddOrUpdate(c => c.Title, classRoom);
 
-            var startsAt = new DateTime(2016, 12, 07) + new TimeSpan(10, 15, 0);
-            var endsAt = new DateTime(2016, 12, 07) + new TimeSpan(15, 10, 0);
+            var startsAt = new DateTime(2016, 12, 08) + new TimeSpan(9, 15, 0);
+            var endsAt = new DateTime(2016, 12, 08) + new TimeSpan(11, 10, 0);
 
-            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "Very long private event", Description = "Cool event", IsPublic = false};
+            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "ASP.NET 2nd lecture", Description = "Cool event", IsPublic = true};
 
             db.Event.AddOrUpdate(e => e.Title, ev);
             
@@ -39,6 +40,24 @@ namespace WebApplication1.Controllers
             db.SaveChanges();
             
             return View();
+        }
+
+        public PartialViewResult GetDisplayEventPartial(int Id)
+        {
+            var eventEntity = db.Event.Where(e => e.Id == Id).First();
+
+            if (eventEntity == null)
+                throw new NullReferenceException("There's no event with specified id!");
+
+            DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+            model.DateStart = eventEntity.DateStart;
+            model.DateEnd = eventEntity.DateEnd;
+            model.Title = eventEntity.Title;
+            model.Description = eventEntity.Description;
+            model.OrganizerName = eventEntity.OrganizerName ?? eventEntity.Organizer.UserName;
+            model.VisitorCount = eventEntity.ForeignVisitor.Count;
+
+            return PartialView("~/Views/Schedule/Overlays/DisplayEventPartialView.cshtml", model);
         }
 
         [HttpGet]

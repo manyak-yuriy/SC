@@ -71,11 +71,11 @@
         var firstLoad = true;
 
         // Calendar-related scripts
-        $(document).ready(function () {
+
 
                 // create jqxcalendar.
                 $("#jqxWidget").jqxCalendar({ width: 220, height: 220 });
-                
+
 
                 $("#jqxWidget").jqxCalendar({ culture: 'ru-RU' });
 
@@ -113,12 +113,12 @@
                         dataType: "json",
                         success: function (data, textStatus, jqXHR) {
                             //alert(JSON.stringify(data));
-                                                        
+
                             renderTimeTable(data);
                         }
                     });
 
-           
+
                     var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
@@ -157,7 +157,7 @@
                     $(this).css('opacity', 1);
                     $("#jqxWidget").css("display", "none");
                 });
-            });
+            
     </script>
    
 
@@ -224,21 +224,38 @@
 
 
         }
-            
 
-        
+
 
         renderer = new Timetable.Renderer(timetable);
         if (!firstLoad)
            $('.timetable').empty();
         renderer.draw('.timetable');
 
+        // Display event info in a popup
+        // Schedule/GetDisplayEventPartial/10502
+        $('.time-entry').click(function () {
+            $.ajax(
+                {
+                    url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
+                    type: "GET",
+                    data: { Id: 10502 },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, textStatus, jqXHR) {
+                        alert(textStatus);
+                        $('body').prepend(data);
+                    }
+                }
+            );
+        });
+
         // Init slider
-        
+
         var sliderHtml = '<div id="slider"> <div id="custom-handle" class="ui-slider-handle"> <img src=' + '../../Images/Slider.png' + ' /> <span id="selected-time"> </span> <span>  </span> </div> </div>)';
 
         $('body').append(sliderHtml);
-        
+
         $("#slider").slider();
 
 
