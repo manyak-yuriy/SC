@@ -220,7 +220,7 @@ namespace WebApplication1.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Не показывать, что пользователь не существует или не подтвержден
-                    return View("ForgotPasswordConfirmation");
+                    return PartialView("ForgotPasswordPView");
                 }
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
@@ -229,7 +229,7 @@ namespace WebApplication1.Controllers
                 return PartialView("PasswordChangeRequestSent");
             }
 
-            return View(model);
+            return PartialView("ForgotPasswordPView", model);
         }
 
         //
