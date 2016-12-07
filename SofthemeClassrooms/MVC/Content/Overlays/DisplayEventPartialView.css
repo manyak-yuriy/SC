@@ -7,10 +7,12 @@
     z-index: 200;
 
     position: fixed !important;
-    left: 50% !important;
+    left: 100px !important;
     top: 200px !important;
 
     background-color: white !important;
+
+    display: block;
 }
 
 .event-display-header
