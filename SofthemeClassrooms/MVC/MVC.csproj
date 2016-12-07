@@ -198,6 +198,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\PersonalPageController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -427,13 +428,15 @@
     <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
-    <Content Include="Views\Account\UserPage.cshtml" />
-    <Content Include="Views\Account\ChangePasswordPartialView.cshtml" />
-    <Content Include="Views\Account\ChangePersonalDataPView.cshtml" />
-    <Content Include="Views\Account\PersonalInfoPView.cshtml" />
-    <Content Include="Views\UsersManagment\Users.cshtml" />
+    <Content Include="Views\PersonalPage\MyPage.cshtml" />
+    <Content Include="Views\PersonalPage\ChangePasswordPartialView.cshtml" />
+    <Content Include="Views\PersonalPage\ChangePersonalDataPView.cshtml" />
+    <Content Include="Views\PersonalPage\PersonalInfoPView.cshtml" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
+    <Content Include="Views\UsersManagment\Users.cshtml" />
+    <Content Include="Views\UsersManagment\UserPage.cshtml" />
+    <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,5 +13,6 @@ namespace ManagementServices.Interfaces
         void DeleteUser(string userId);
         UserInfo GetUserInfo(string userName);
         IEnumerable<UserInfo> GetUsersInfo();
+        string GetUserName(string email);
     }
 }

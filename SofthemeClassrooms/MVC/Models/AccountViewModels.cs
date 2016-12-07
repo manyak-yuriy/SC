@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ManagementServices.Implementations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication1.Models
@@ -126,6 +127,24 @@ namespace WebApplication1.Models
         public string Name { get; set; }
 
         public bool Is_Admin { get; set; }
+
+        public int NumberOfEvents { get; set; }
+
+        public IEnumerable<PersonalDataViewModel> CreateFromUserInfo(IEnumerable<UserInfo> users)
+        {
+            List<PersonalDataViewModel> l = new List<PersonalDataViewModel>();
+            foreach(var u in users)
+            {
+                l.Add(new PersonalDataViewModel
+                {
+                    Email = u.Email,
+                    Name = u.FullName,
+                    Is_Admin = u.Role == "admin" ? true : false,
+                    NumberOfEvents = u.NumberOfEvents
+                });
+            }
+            return l;
+        }
     }
 
 }

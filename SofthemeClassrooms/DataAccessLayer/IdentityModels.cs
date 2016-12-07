@@ -83,5 +83,13 @@ namespace DataAccessLayer
                 return context.Users;
             }
         }
+
+        public IEnumerable<IdentityRole> Roles
+        {
+            get
+            {
+                return context.Roles;
+            }
+        }
     }
 }
