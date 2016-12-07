@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // Render the page
+        // Render main page
         [HttpGet]
         public ActionResult ShowSchedule()
         {           
@@ -42,6 +42,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        // Returns partial view with popup contents for displaying info for a particular event
+        [HttpGet]
         public PartialViewResult GetDisplayEventPartial(int Id)
         {
             var eventEntity = db.Event.Where(e => e.Id == Id).First();
@@ -64,6 +66,34 @@ namespace WebApplication1.Controllers
             return PartialView("~/Views/Schedule/Overlays/DisplayEventPartialView.cshtml", model);
         }
 
+        [HttpPost]
+        [Authorize]
+        public JsonResult CancelEvent(int Id)
+        {
+            var eventToDelete = db.Event.Find(Id);
+            
+
+            if (eventToDelete == null)
+            {
+                return Json(new { result = "No such event exists in the database"}, JsonRequestBehavior.DenyGet);
+            }
+            else
+            {
+                bool isAuthorized = false;
+
+                if (User.IsInRole("admin") || eventToDelete.ApplicationUserID == User.Identity.GetUserId())
+                    isAuthorized = true;
+
+                if (!isAuthorized)
+                    return Json(new { result = "Request for deletion is not authorized" }, JsonRequestBehavior.DenyGet);
+
+                // isAuthorized 
+                db.Event.Remove(eventToDelete);
+                return Json(new { result = "Succeess" }, JsonRequestBehavior.DenyGet);
+            }
+        }
+
+        // Get data necessary to render TimeTable
         [HttpGet]
         public JsonResult GetEventDataForDay(DateTime daySelected)
         {
@@ -74,6 +104,7 @@ namespace WebApplication1.Controllers
             return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
         }
 
+        // Get euipment data displayed on the panel
         [HttpGet]
         public JsonResult GetEquipmentDataForRoom(int roomId)
         {
@@ -81,18 +112,5 @@ namespace WebApplication1.Controllers
             return Json(equipmentManager.GetEquipmentByRoomId(roomId), JsonRequestBehavior.AllowGet);
         }
 
-        // Get data about events for a specific date
-        [HttpGet]
-        public ActionResult GetSchedulerState(DateTime date)
-        {
-            return new EmptyResult();
-        }
-
-        // Get equipment info for a specific room
-        [HttpGet]
-        public ActionResult GetRoomInfo(int roomId)
-        {
-            return new EmptyResult();
-        }
     }
 }
