@@ -74,7 +74,6 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult CancelEvent(int Id)
         {
             var eventToDelete = db.Event.Find(Id);
@@ -87,8 +86,10 @@ namespace WebApplication1.Controllers
             else
             {
                 bool isAuthorized = false;
+                bool isAdmin = User.IsInRole("admin");
+                string userId = User.Identity.GetUserId();
 
-                if (User.IsInRole("admin") || eventToDelete.ApplicationUserID == User.Identity.GetUserId())
+                if (isAdmin || eventToDelete.ApplicationUserID == userId)
                     isAuthorized = true;
 
                 if (!isAuthorized)
@@ -96,7 +97,8 @@ namespace WebApplication1.Controllers
 
                 // isAuthorized 
                 db.Event.Remove(eventToDelete);
-                return Json(new { result = "Succeess" }, JsonRequestBehavior.DenyGet);
+                db.SaveChanges();
+                return Json(new { result = "Success" }, JsonRequestBehavior.DenyGet);
             }
         }
 

@@ -274,7 +274,21 @@
                                         // cancel current event
                                         var eventId = $(this).parents('.event-cancel-popup').attr('id');
 
+                                        $.ajax({
+                                            url: '@Url.Action("CancelEvent", "Schedule")',
+                                            type: "POST",
+                                            context: this,
+                                            data: "{ 'Id': '" +   eventId + "'}",
+                                            contentType: "application/json; charset=utf-8",
+                                            success: function (data, textStatus, jqXHR) {
+                                                alert(JSON.stringify(data));
 
+                                                var cancelPopup = $(this).parents('.event-cancel-popup');
+
+                                                cancelPopup.remove();
+                                                $('.event-display-popup#' + eventId).remove();
+                                            }
+                                        });
                                     });
                                 }
                             });
