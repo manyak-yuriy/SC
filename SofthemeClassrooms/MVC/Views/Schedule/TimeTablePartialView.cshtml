@@ -9,13 +9,7 @@
 <link href="~/Content/TimeTable/scrollerAndSlider.css" rel="stylesheet" />
 
 
-<div id="slider">
-    <div id="custom-handle" class="ui-slider-handle">
-        <img src="~/Images/Slider.png" />
-        <span id="selected-time">  </span>
-        <span>  </span>
-    </div>
-</div>
+
 
 
 <link href="~/Content/TimeTable/calendarWidget.css" rel="stylesheet" />
@@ -70,6 +64,12 @@
     <script src="~/JQWidget/jqwidgets/globalization/globalize.culture.ru-RU.js"></script>
 
     <script type="text/javascript">
+
+        var timetable;
+        var renderer;
+
+        var firstLoad = true;
+
         // Calendar-related scripts
         $(document).ready(function () {
 
@@ -100,7 +100,28 @@
 
                 // Calendar state changed
                 $('#jqxWidget').on('change viewChange', function (event) {
+
                     var date = event.args.date;
+
+                    // Load event data into TimeTable
+
+                    $.ajax({
+                        url: '@Url.Action("GetEventDataForDay", "Schedule")',
+                        type: "GET",
+                        data: { daySelected: date.toISOString() },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data, textStatus, jqXHR) {
+                            alert(JSON.stringify(data));
+                            timetable.events = []
+                            
+                            renderTimeTable();
+                            //renderer = new Timetable.Renderer(timetable);
+                            //renderer.draw('.timetable');
+                        }
+                    });
+
+                    
                     /*
                     var view = event.args.view;
                     var viewFrom = view.from;
@@ -157,11 +178,33 @@
 <link href="~/Content/TimeTable/timeTableControls.css" rel="stylesheet" />
 
 <script>
-    var timetable;
-    var renderer;
 
-    $(() => {
+    // Time selection slider
+    hours = 0;
+    minutes = 0;
 
+    // put selected hours and minutes into global variables hours and minutes respectively
+    var updateHours =
+        function (event, ui) {
+            var hourScope = timetable.scope.hourEnd - timetable.scope.hourStart;
+            var pxPerHour = $('section').width() / hourScope;
+
+            var sliderPos = parseInt($("#custom-handle").css("left"));
+            var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
+
+            var hoursElapsed = ((sliderPos + scrollOffset) / pxPerHour) + timetable.scope.hourStart;
+
+            hours = Math.floor(hoursElapsed);
+            var hourFract = hoursElapsed - hours;
+            minutes = Math.floor(60 * hourFract);
+
+            var prettyTime = ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes);
+
+            $('#selected-time').html(prettyTime);
+        }
+    
+    // Redraw the whole area and elements, associated with timetable
+    var renderTimeTable = function () {
         // Create and init main timetable
         timetable = new Timetable();
         timetable.setScope(9, 23);
@@ -181,48 +224,29 @@
             new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });
 
         renderer = new Timetable.Renderer(timetable);
+        if (!firstLoad)
+           $('.timetable').empty();
         renderer.draw('.timetable');
 
         // Init slider
+        
+        var sliderHtml = '<div id="slider"> <div id="custom-handle" class="ui-slider-handle"> <img src=' + '../../Images/Slider.png' + ' /> <span id="selected-time"> </span> <span>  </span> </div> </div>)';
+
+        $('body').append(sliderHtml);
+        
         $("#slider").slider();
-       
+
 
         // Init scroller
-        
+
         var temp = $('section').wrap("<div class='scrollMe'></div>");
 
         $(".scrollMe").smoothDivScroll({
             mousewheelScrolling: "allDirections",
             hotSpotScrollingStep: 3
         });
-        
+
         $('.scrollMe').append($('#slider'));
-        $('.scrollMe').prepend($('#sliderCurr'));
-
-
-        // Time selection slider
-        hours = 0;
-        minutes = 0;
-
-        // put selected hours and minutes into global variables hours and minutes respectively
-        var updateHours = 
-            function (event, ui) {
-                var hourScope = timetable.scope.hourEnd - timetable.scope.hourStart;
-                var pxPerHour = $('section').width() / hourScope;
-
-                var sliderPos = parseInt($("#custom-handle").css("left"));
-                var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
-
-                var hoursElapsed = ((sliderPos + scrollOffset) / pxPerHour) + timetable.scope.hourStart;
-
-                hours = Math.floor(hoursElapsed);
-                var hourFract = hoursElapsed - hours;
-                minutes = Math.floor(60 * hourFract);
-
-                var prettyTime = ((hours < 10)? "0" + hours : hours) + ":" + ((minutes < 10)? "0" + minutes: minutes);
-
-                $('#selected-time').html(prettyTime);
-            }
 
         // when user stops sliding, update selected time
         $("#slider").slider({
@@ -230,13 +254,22 @@
             stop: updateHours
         });
 
-        
+
         // when user stops scrolling, update selected time
         $(".scrollMe").smoothDivScroll({
             mouseOverLeftHotSpot: updateHours,
             mouseOverRightHotSpot: updateHours,
             hotSpotsVisibleTime: 1000
         });
+
+        firstLoad = false;
+    }
+
+
+    // On page load
+    $(() => {
+
+        renderTimeTable();
 
     })
 
