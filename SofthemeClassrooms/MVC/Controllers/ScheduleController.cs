@@ -45,8 +45,10 @@ namespace WebApplication1.Controllers
         public JsonResult GetEventDataForDay(DateTime daySelected)
         {
             var db = new ApplicationDbContext();
-            var eventsData = db.Event.Where(e => e.DateStart.Day == daySelected.Day).Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title});
-            return Json(eventsData, JsonRequestBehavior.AllowGet);
+            var eventsData = db.Event.Where(e => e.DateStart.Day == daySelected.Day)
+                .Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title, e.IsPublic});
+            var roomData = eventsData.Select(e => new { e.ClassroomId, e.classRoomTitle } ).Distinct();
+            return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
