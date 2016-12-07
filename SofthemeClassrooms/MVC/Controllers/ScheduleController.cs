@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Migrations;
 
 namespace WebApplication1.Controllers
 {
@@ -17,21 +18,35 @@ namespace WebApplication1.Controllers
         {
             var db = new ApplicationDbContext();
             /*
-            db.Equipment.Add(new Equipment { Title ="TV", ImagePath = "F:"});
+            var eq = new Equipment { Title = "TV", ImagePath = "F:" };
+            db.Equipment.AddOrUpdate(e => e.Title, eq);
 
             UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
             var classRoom = new ClassRoom { Title = "Tesla", Capacity = 12, IsBookable = true};
 
-            var ev = new Event { AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), ClassRoom = classRoom, DateStart = DateTime.Now, DateEnd = DateTime.MaxValue, Title = "QA intro", Description = "Cool event", IsPublic = true};
+            db.ClassRoom.AddOrUpdate(c => c.Title, classRoom);
+
+            var startsAt = new DateTime(2016, 12, 07) + new TimeSpan(8, 30, 0);
+            var endsAt = new DateTime(2016, 12, 07) + new TimeSpan(8, 55, 0);
+
+            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "English", Description = "Cool event", IsPublic = true};
 
             db.Event.Add(ev);
-            */
+            
             var fb = db.Feedback.ToList();
             db.SaveChanges();
-
+            */
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetEventDataForDay(DateTime daySelected)
+        {
+            var db = new ApplicationDbContext();
+            var eventsData = db.Event.Where(e => e.DateStart.Day == daySelected.Day).Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title});
+            return Json(eventsData, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
