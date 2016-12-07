@@ -253,7 +253,7 @@
                             $(this).parents('.event-display-popup').remove();
                         })
 
-                        $('.cancel-button').click(function () {
+                        $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
                             var eventId = $(this).parents('.event-display-popup').attr('id');
                             $.ajax({
                                 url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
@@ -266,11 +266,11 @@
                                     $('body').prepend(data);
                                     $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
 
-                                    $('.discart-cancellation-button').click(function () {
+                                    $('#' + eventId + ' .discart-cancellation-button').click(function () {
                                         $(this).parents('.event-cancel-popup').remove();
                                     });
 
-                                    $('.confirm-cancellation-button').click(function () {
+                                    $('#' + eventId + ' .confirm-cancellation-button').click(function () {
                                         // cancel current event
                                         var eventId = $(this).parents('.event-cancel-popup').attr('id');
 
