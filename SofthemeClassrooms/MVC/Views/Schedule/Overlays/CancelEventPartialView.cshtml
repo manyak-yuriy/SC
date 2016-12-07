@@ -1,12 +1,13 @@
 ﻿<link href="~/Content/Overlays/CancelEventPartialView.css" rel="stylesheet" />
 
 <script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
-
+@model string
 
 <div class="event-cancel-popup">
     <div class="event-cancel-header">
         <i class="fa fa-ban fa-2x" aria-hidden="true"></i>
-        Вы уверены, что хотите отменить событие?
+        <span>Вы уверены, что хотите отменить событие @Model?</span>
+        
     </div>
 
     <div class="cancellation-controls">

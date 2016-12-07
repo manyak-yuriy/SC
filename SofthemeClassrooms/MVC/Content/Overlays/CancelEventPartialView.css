@@ -2,8 +2,13 @@
 {
     background-color: white !important;
     border: 1px solid #837f7f;
-    opacity: 0.8;
+    opacity: 0.9;
     width: 400px;
+
+    z-index: 300;
+
+    position: fixed !important;
+    display: block;
 }
 
 .event-cancel-popup:hover
@@ -15,7 +20,7 @@
 {
     background-color: #9a90b6;
     color: white;
-    height: 50px;
+    padding: 5px;
 }
 
 .cancellation-controls

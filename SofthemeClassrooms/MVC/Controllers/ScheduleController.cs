@@ -67,9 +67,10 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetEventCancellationPartialView()
+        public PartialViewResult GetEventCancellationPartialView(int Id)
         {
-            return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml");
+            var e = db.Event.Find(Id);
+            return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml", e.Title);
         }
 
         [HttpPost]
