@@ -25,14 +25,14 @@ namespace WebApplication1.Controllers
             UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            var classRoom = new ClassRoom { Title = "NewTon", Capacity = 45, IsBookable = true};
+            var classRoom = new ClassRoom { Title = "Einstein", Capacity = 45, IsBookable = true};
 
             db.ClassRoom.AddOrUpdate(c => c.Title, classRoom);
 
-            var startsAt = new DateTime(2016, 12, 08) + new TimeSpan(9, 15, 0);
-            var endsAt = new DateTime(2016, 12, 08) + new TimeSpan(11, 10, 0);
+            var startsAt = new DateTime(2016, 12, 08) + new TimeSpan(18, 20, 0);
+            var endsAt = new DateTime(2016, 12, 08) + new TimeSpan(19, 10, 0);
 
-            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "ASP.NET 2nd lecture", Description = "Cool event", IsPublic = true};
+            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "Quest", Description = "Unknown destination and characters", IsPublic = true};
 
             db.Event.AddOrUpdate(e => e.Title, ev);
             
