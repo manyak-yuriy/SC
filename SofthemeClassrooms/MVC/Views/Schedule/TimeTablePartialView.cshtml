@@ -112,21 +112,13 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data, textStatus, jqXHR) {
-                            alert(JSON.stringify(data));
-                            timetable.events = []
-                            
-                            renderTimeTable();
-                            //renderer = new Timetable.Renderer(timetable);
-                            //renderer.draw('.timetable');
+                            //alert(JSON.stringify(data));
+                                                        
+                            renderTimeTable(data);
                         }
                     });
 
-                    
-                    /*
-                    var view = event.args.view;
-                    var viewFrom = view.from;
-                    var viewTo = view.to;
-                    */
+           
                     var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
                     // Change the state of upper scroller
                     $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
@@ -202,26 +194,39 @@
 
             $('#selected-time').html(prettyTime);
         }
-    
+    var jDate = function(obj)
+    {
+        return new Date(parseInt(obj.substr(6)));
+    }
+
     // Redraw the whole area and elements, associated with timetable
-    var renderTimeTable = function () {
+    var renderTimeTable = function (data) {
+        $('.timetable').css('visible', 'hidden');
+
+        if (data == null)
+            return;
         // Create and init main timetable
         timetable = new Timetable();
-        timetable.setScope(9, 23);
+        timetable.setScope(7, 23);
 
-        timetable.addLocations(['Einstein classroom', 'Tesla classroom', 'English classroom', 'Newton classroom']);
+        for (var i = 0; i < data.roomData.length; i++)
+            timetable.addLocations([data.roomData[i].classRoomTitle]);
 
-        timetable.addEvent('10:00 - 11:30 Speaking for Juniors', 'English classroom',
-            new Date(2016, 11, 20, 10, 0), new Date(2016, 11, 20, 11, 30), { class: 'public-event' });
+        for (var i = 0; i < data.eventsData.length; i++)
+        {
+            var e = data.eventsData[i];
+            timetable.addEvent(e.Title, e.classRoomTitle,
+                jDate(e.DateStart), jDate(e.DateEnd), {
+                    class: e.IsPublic ? 'public-event' : 'private-event', data: {
+                        id: e.Id
+                    }
+                });
 
-        timetable.addEvent('12:00 - 14:30', 'Tesla classroom',
-            new Date(2016, 11, 20, 12, 0), new Date(2016, 11, 20, 13, 30), { class: 'private-event' });
 
-        timetable.addEvent('15:00 - 15:30', 'Tesla classroom',
-            new Date(2016, 11, 20, 15, 0), new Date(2016, 11, 20, 23, 30), { class: 'private-event' });
+        }
+            
 
-        timetable.addEvent('13:00 - 14:00 Azure: Blobs', 'Einstein classroom',
-            new Date(2016, 11, 20, 13, 0), new Date(2016, 11, 20, 14, 0), { class: 'public-event' });
+        
 
         renderer = new Timetable.Renderer(timetable);
         if (!firstLoad)
@@ -262,6 +267,7 @@
             hotSpotsVisibleTime: 1000
         });
 
+        $('.timetable').css('visible', 'visible');
         firstLoad = false;
     }
 

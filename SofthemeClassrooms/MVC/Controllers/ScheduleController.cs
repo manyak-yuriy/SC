@@ -17,27 +17,27 @@ namespace WebApplication1.Controllers
         public ActionResult ShowSchedule()
         {
             var db = new ApplicationDbContext();
-            /*
+            
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
             UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            var classRoom = new ClassRoom { Title = "Tesla", Capacity = 12, IsBookable = true};
+            var classRoom = new ClassRoom { Title = "NewTon", Capacity = 45, IsBookable = true};
 
             db.ClassRoom.AddOrUpdate(c => c.Title, classRoom);
 
-            var startsAt = new DateTime(2016, 12, 07) + new TimeSpan(8, 30, 0);
-            var endsAt = new DateTime(2016, 12, 07) + new TimeSpan(8, 55, 0);
+            var startsAt = new DateTime(2016, 12, 07) + new TimeSpan(10, 15, 0);
+            var endsAt = new DateTime(2016, 12, 07) + new TimeSpan(15, 10, 0);
 
-            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "English", Description = "Cool event", IsPublic = true};
+            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "Very long private event", Description = "Cool event", IsPublic = false};
 
-            db.Event.Add(ev);
+            db.Event.AddOrUpdate(e => e.Title, ev);
             
             var fb = db.Feedback.ToList();
             db.SaveChanges();
-            */
+            
             return View();
         }
 
