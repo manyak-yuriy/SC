@@ -10,13 +10,16 @@
     <div class="event-display-header">
         <span>@Model.DateStart.DayOfWeek.ToString(), @Model.DateStart.Day @Model.DateStart.Month</span>
         <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
+        @if (Model.CanEdit)
+        {
+            <div class="header-controls">
+                <input type="button" class="change-button" value="Изменить">
+                <input type="button" class="cancel-button" value="Отменить">
 
-        <div class="header-controls">
-            <input type="button" class="change-button" value="Изменить">
-            <input type="button" class="cancel-button" value="Отменить">
-
-            <i class="fa fa-window-minimize" aria-hclassden="true"></i>
-        </div>
+                <i class="fa fa-window-minimize" aria-hclassden="true"></i>
+            </div>
+        }
+        
         
     </div>
 

@@ -52,7 +52,16 @@ namespace WebApplication1.Controllers
             if (eventEntity == null)
                 throw new NullReferenceException("There's no event with specified id!");
 
+            bool isAuthorized = false;
+            bool isAdmin = User.IsInRole("admin");
+            string userId = User.Identity.GetUserId();
+
+            if (isAdmin || eventEntity.ApplicationUserID == userId)
+                isAuthorized = true;
+
             DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+            model.CanEdit = isAuthorized;
+
             model.DateStart = eventEntity.DateStart;
             model.DateEnd = eventEntity.DateEnd;
             model.Title = eventEntity.Title;
