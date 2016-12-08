@@ -448,13 +448,13 @@
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\App_LocalResources\" />
     <Folder Include="JQWidget\" />
     <Folder Include="Views\Resources\" />
-    <Folder Include="Views\Room\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
