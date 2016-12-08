@@ -6,6 +6,11 @@
 
     opacity: 0.9;
     border-radius: 5%;
+
+    z-index: 300;
+
+    position: fixed !important;
+    display: block;
 }
 
 .event-edit-popup:hover
@@ -18,4 +23,22 @@
     background-color: #cac0c0;
     height: 60px;
     border-radius: 5% 5% 0% 0%;
+    padding: 10px;
+}
+
+.event-edit-contents {
+    padding: 10px;
+}
+
+.send-event-form-data {
+    border: none;
+    border-radius: 10px;
+    background-color: #dcdcdc;
+    width: 50px;
+    left: 10px;
+    margin: 10px;
+}
+
+.send-event-form-data:hover {
+     background-color: red;
 }

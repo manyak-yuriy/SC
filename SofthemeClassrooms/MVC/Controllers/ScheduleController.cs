@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult ShowSchedule()
         {       
-            /*    
+              
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
             
             var fb = db.Feedback.ToList();
             db.SaveChanges();
-            */
+            
             return View();
         }
 
@@ -84,11 +84,13 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetEventEditPartialView(int? Id)
+        public PartialViewResult GetEventAddPartialView()
         {
             EditEventPartialViewModel viewModel;
             
             viewModel = new EditEventPartialViewModel();
+            viewModel.Start = DateTime.Now;
+            viewModel.End = DateTime.Now.AddHours(2);
            
             return PartialView("~/Views/Schedule/Overlays/AddEventPartialView.cshtml", viewModel);
         }
