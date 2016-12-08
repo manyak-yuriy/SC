@@ -56,8 +56,7 @@ namespace DataAccessLayer.Migrations
                         IsPublic = c.Boolean(nullable: false),
                         OrganizerName = c.String(maxLength: 100),
                         AllowSubscription = c.Boolean(),
-                        Organizer_Id = c.String(maxLength: 128),
-                        ApplicationUserID = c.String(maxLength: 128)
+                        Organizer_Id = c.String(maxLength: 128)
                 })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Organizer_Id)
