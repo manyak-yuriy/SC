@@ -412,7 +412,7 @@
     <Content Include="Views\Feedback\SendMessageForm.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Schedule\RoomsSchemePartialView.cshtml" />
-    <Content Include="Views\Schedule\MapPartialView.cshtml" />
+    <Content Include="Views\Shared\MapPartialView.cshtml" />
     <Content Include="Views\Schedule\SchedulerPatrialView.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -449,6 +449,7 @@
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Room\WeeklyScheduler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
