@@ -12,7 +12,7 @@
             <span>@Html.EditorFor(p => p.End)</span>
 
             <div class="event-edit-header-contents">
-
+                @Html.DropDownList("RoomId", (List<SelectListItem>) ViewBag.RoomIdOptions)
             </div>
 
         </div>

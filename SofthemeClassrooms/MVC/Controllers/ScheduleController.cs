@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult ShowSchedule()
         {       
-              
+             /*
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
@@ -38,6 +38,7 @@ namespace WebApplication1.Controllers
             db.Event.AddOrUpdate(e => e.Title, ev);
             
             var fb = db.Feedback.ToList();
+            */
             db.SaveChanges();
             
             return View();
@@ -91,7 +92,20 @@ namespace WebApplication1.Controllers
             viewModel = new EditEventPartialViewModel();
             viewModel.Start = DateTime.Now;
             viewModel.End = DateTime.Now.AddHours(2);
-           
+
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+
+            foreach (var room in availRooms)
+            {
+                items.Add(new SelectListItem
+                    {
+                         Text = room.Title, Value = room.Id.ToString()
+                    }
+                );
+            }
+            ViewBag.RoomIdOptions = items;
             return PartialView("~/Views/Schedule/Overlays/AddEventPartialView.cshtml", viewModel);
         }
 
@@ -102,7 +116,7 @@ namespace WebApplication1.Controllers
             dbModel.AllowSubscription = eventModel.AllowSubscription;
             dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
             dbModel.OrganizerName = (eventModel.ShowAuthor)? null : eventModel.OrganizerName;
-            dbModel.ClassRoom = db.ClassRoom.First();
+            dbModel.ClassroomId = Int32.Parse(eventModel.RoomId);
             dbModel.Description = eventModel.Description;
             dbModel.Title = eventModel.Title;
             dbModel.DateStart = eventModel.Start;

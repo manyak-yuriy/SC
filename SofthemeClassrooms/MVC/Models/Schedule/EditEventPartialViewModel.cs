@@ -15,6 +15,8 @@ namespace WebApplication1.Models.Schedule
         public bool IsPublic { get; set; }
         public bool ShowAuthor { get; set; }
         public string OrganizerName { get; set; }
+        
+        public string RoomId { get; set; }
 
     }
 }
