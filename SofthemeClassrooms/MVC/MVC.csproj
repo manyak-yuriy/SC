@@ -448,6 +448,7 @@
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
