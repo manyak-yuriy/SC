@@ -22,6 +22,8 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
 
     <style>
         #newEvent
@@ -46,46 +48,72 @@
 
 </head>
 <body>
-    <nav>
-        <div id="navformer">
-            <img id="logo" src="~/Images/logo.png" alt="logo" />
-            @if (!Request.IsAuthenticated)
-            {
-                <li id="userPageItem" class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
-            }
-            else
-            {
+<nav>
+    <div id="navformer">
+        <img id="logo" src="~/Images/logo.png" alt="logo" />
+        @if (!Request.IsAuthenticated)
+        {
+            <li id="userPageItem" class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
+        }
+        else
+        {
                 
-                if((Session["UserName"] as string) == null)
-                {
-                    ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
-                    Session["UserName"] = m.GetUserName(User.Identity.Name);
-                }
-
-                <li id="loginItem" class="menu-item">
-                    <a href="@Url.Action("MyPage", "PersonalPage")">
-                        <img src="" alt="" />
-                        @(Session["UserName"] as string)
-                    </a>
-                </li>
-            }
-
-            <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
-
-            @if (User.IsInRole("admin"))
+            if((Session["UserName"] as string) == null)
             {
-                <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
+                ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
+                Session["UserName"] = m.GetUserName(User.Identity.Name);
             }
 
-            <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
-            <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
-        </div>
-    </nav>
-    @RenderBody()
-    <footer>
-        <img id="logo-gray" src="~/Images/logo-gray.png" />
-    </footer> 
-    @RenderSection("scripts", required: false)
-    @RenderSection("MenuItemActive", false)
+            <li id="loginItem" class="menu-item">
+                <a href="@Url.Action("MyPage", "PersonalPage")">
+                    <img src="" alt="" />
+                    @(Session["UserName"] as string)
+                </a>
+            </li>
+        }
+
+        <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
+
+        @if (User.IsInRole("admin"))
+        {
+            <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
+        }
+
+        <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
+        @if (Request.IsAuthenticated)
+        {
+            
+        }
+
+        <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
+            
+    </div>
+</nav>
+@RenderBody()
+<footer>
+    <img id="logo-gray" src="~/Images/logo-gray.png" />
+</footer> 
+@RenderSection("scripts", required: false)
+@RenderSection("MenuItemActive", false)
 </body>
+
+
+
+<script>
+    $('#newEvent img').click(function () {
+        $.ajax({
+            url: '@Url.Action("GetEventAddPartialView", "Schedule")',
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus, jqXHR) {
+                $('body').prepend(data);
+                $('.event-edit-popup:first-of-type').css('left', '100px').css('top', '50px').draggable();
+            }
+        });
+    });
+</script>
+
+
+
+
 </html>

@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Index(int roomId)
         {
-            return new EmptyResult();
+            return View();
         }
     }
 }

@@ -10,138 +10,140 @@
 
 
 <div class="schema-wrapper">
-    <div class="schema">
-        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
-            <div class="eq-container">
-                <img class="eq-img" src="~/Images/icon-table.png" />
-                <span class="table">12</span>
+    <a href="@Url.Action("Index", "Room", new { roomId = 1})">
+        <div class="schema">
+            <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
+                <div class="eq-container">
+                    <img class="eq-img" src="~/Images/icon-table.png" />
+                    <span class="table">12</span>
+                </div>
+
+                <div class="eq-container">
+                    <img class="eq-img" src="~/Images/icon-board.png" />
+                    <span class="board">12</span>
+                </div>
+
+                <div class="eq-container">
+                    <img class="eq-img" src="~/Images/icon-laptop.png" />
+                    <span class="laptop">12</span>
+                </div>
+
+                <div class="eq-container">
+                    <img class="eq-img" src="~/Images/icon-print.png" />
+                    <span class="printer">12</span>
+                </div>
+
+                <div class="eq-container">
+                    <img class="eq-img" src="~/Images/icon-proect.png" />
+                    <span class="projector">12</span>
+                </div>
+
             </div>
 
-            <div class="eq-container">
-                <img class="eq-img" src="~/Images/icon-board.png" />
-                <span class="board">12</span>
+
+            <img id="schema-image" src="~/Images/walls.png" alt="" />
+
+            <div class="draggable room-image" id="tesla">
+                <span class="caption">Tesla</span>
+                <img class="resizeable" src="~/Images/Extracted/Tesla/TeslaGrey.png">
             </div>
 
-            <div class="eq-container">
-                <img class="eq-img" src="~/Images/icon-laptop.png" />
-                <span class="laptop">12</span>
+            <div class="draggable room-image" id="einstein">
+                <span class="caption">Einstein</span>
+                <img class="resizeable" src="~/Images/Extracted/Einstein/EinsteinDisabled.png">
             </div>
-           
-            <div class="eq-container">
-                <img class="eq-img" src="~/Images/icon-print.png" />
-                <span class="printer">12</span>
+
+            <div class="draggable room-image" id="english">
+                <span class="caption">English</span>
+                <img class="resizeable" src="~/Images/Extracted/English/EnglishDisabled.png">
             </div>
-           
-            <div class="eq-container">
-                <img class="eq-img" src="~/Images/icon-proect.png" />
-                <span class="projector">12</span>
+
+            <div class="draggable room-image" id="hr">
+                <span class="caption">HROffice</span>
+                <img class="resizeable" src="~/Images/Extracted/HROffice/HROffice.png">
             </div>
-                      
+
+            <div class="draggable room-image" id="info">
+                <span class="caption">HROffice</span>
+                <img class="resizeable" src="~/Images/Extracted/InfoCenter/InfoCenter.png">
+            </div>
+
+            <div class="draggable room-image" id="web-1">
+                <span class="caption">marketing1</span>
+                <img class="resizeable" src="~/Images/Extracted/Marketing1/Marketing1.png">
+            </div>
+
+            <div class="draggable room-image" id="web-2">
+                <span class="caption">marketing2</span>
+                <img class="resizeable" src="~/Images/Extracted/Marketing2/Marketing2.png">
+            </div>
+
+            <div class="draggable room-image" id="web-3">
+                <span class="caption">marketing3</span>
+                <img class="resizeable" src="~/Images/Extracted/Marketing3/Marketing3.png">
+            </div>
+
+            <div class="draggable room-image" id="newton">
+                <span class="caption">Newton</span>
+                <img class="resizeable" src="~/Images/Extracted/Newton/NewtonBooked.png">
+            </div>
+
+            <!--
+                Line details images:
+            -->
+
+            <div class="draggable line-details" id="einstein">
+                <span class="caption">line-details-einstein</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-einstein.png">
+            </div>
+
+            <div class="draggable line-details" id="empty">
+                <span class="caption">line-details-empty</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-empty.png">
+            </div>
+
+            <div class="draggable line-details" id="english">
+                <span class="caption">line-details-english</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-english.png">
+            </div>
+
+            <div class="draggable line-details" id="hr">
+                <span class="caption">line-details-hr</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-hr.png">
+            </div>
+
+            <div class="draggable line-details" id="info">
+                <span class="caption">line-details-info</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-info.png">
+            </div>
+
+            <div class="draggable line-details" id="newton">
+                <span class="caption">line-details-newton</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-newton.png">
+            </div>
+
+            <div class="draggable line-details" id="tesla">
+                <span class="caption">line-details-tesla</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-tesla.png">
+            </div>
+
+            <div class="draggable line-details" id="web-1">
+                <span class="caption">line-details-web-1</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-web-1.png">
+            </div>
+
+            <div class="draggable line-details" id="web-2">
+                <span class="caption">line-details-web-2</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-web-2.png">
+            </div>
+
+            <div class="draggable line-details" id="web-3">
+                <span class="caption">line-details-web-3</span>
+                <img class="resizeable" src="~/Images/LineDetails/line-details-web-3.png">
+            </div>
+
         </div>
-        
-
-        <img id="schema-image" src="~/Images/walls.png" alt="" />
-
-        <div class="draggable room-image" id="tesla">
-            <span class="caption">Tesla</span>
-            <img class="resizeable" src="~/Images/Extracted/Tesla/TeslaGrey.png">
-        </div>
-
-        <div class="draggable room-image" id="einstein">
-            <span class="caption">Einstein</span>
-            <img class="resizeable" src="~/Images/Extracted/Einstein/EinsteinDisabled.png">
-        </div>
-
-        <div class="draggable room-image" id="english">
-            <span class="caption">English</span>
-            <img class="resizeable" src="~/Images/Extracted/English/EnglishDisabled.png">
-        </div>
-
-        <div class="draggable room-image" id="hr">
-            <span class="caption">HROffice</span>
-            <img class="resizeable" src="~/Images/Extracted/HROffice/HROffice.png">
-        </div>
-        
-        <div class="draggable room-image" id="info">
-            <span class="caption">HROffice</span>
-            <img class="resizeable" src="~/Images/Extracted/InfoCenter/InfoCenter.png">
-        </div>
-
-        <div class="draggable room-image" id="web-1">
-            <span class="caption">marketing1</span>
-            <img class="resizeable" src="~/Images/Extracted/Marketing1/Marketing1.png">
-        </div>
-
-        <div class="draggable room-image" id="web-2">
-            <span class="caption">marketing2</span>
-            <img class="resizeable" src="~/Images/Extracted/Marketing2/Marketing2.png">
-        </div>
-
-        <div class="draggable room-image" id="web-3">
-            <span class="caption">marketing3</span>
-            <img class="resizeable" src="~/Images/Extracted/Marketing3/Marketing3.png">
-        </div>
-
-        <div class="draggable room-image" id="newton">
-            <span class="caption">Newton</span>
-            <img class="resizeable" src="~/Images/Extracted/Newton/NewtonBooked.png">
-        </div>
-
-        <!--
-            Line details images:
-        -->
-
-        <div class="draggable line-details" id="einstein">
-            <span class="caption">line-details-einstein</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-einstein.png">
-        </div>
-
-        <div class="draggable line-details" id="empty">
-            <span class="caption">line-details-empty</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-empty.png">
-        </div>
-
-        <div class="draggable line-details" id="english">
-            <span class="caption">line-details-english</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-english.png">
-        </div>
-
-        <div class="draggable line-details" id="hr">
-            <span class="caption">line-details-hr</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-hr.png">
-        </div>
-
-        <div class="draggable line-details" id="info">
-            <span class="caption">line-details-info</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-info.png">
-        </div>
-
-        <div class="draggable line-details" id="newton">
-            <span class="caption">line-details-newton</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-newton.png">
-        </div>
-
-        <div class="draggable line-details" id="tesla">
-            <span class="caption">line-details-tesla</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-tesla.png">
-        </div>
-
-        <div class="draggable line-details" id="web-1">
-            <span class="caption">line-details-web-1</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-web-1.png">
-        </div>
-
-        <div class="draggable line-details" id="web-2">
-            <span class="caption">line-details-web-2</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-web-2.png">
-        </div>
-
-        <div class="draggable line-details" id="web-3">
-            <span class="caption">line-details-web-3</span>
-            <img class="resizeable" src="~/Images/LineDetails/line-details-web-3.png">
-        </div>
-
-    </div>
+    </a>
     <br><br>
     <button id="posLoader">Load</button>
     <button id="posSaver">Save</button>

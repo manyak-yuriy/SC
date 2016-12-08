@@ -1,53 +1,56 @@
 ﻿<link href="~/Content/Overlays/AddEventPartialView.css" rel="stylesheet" />
 
-<div class="event-display-popup">
-    <div class="event-display-header">
-        <span>@Model.DateStart.DayOfWeek.ToString(), @Model.DateStart.Day @Model.DateStart.Month</span>
-        <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
+@model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-        <div class="header-controls">
-            <input type="button" class="change-button" value="Изменить">
-            <input type="button" class="cancel-button" value="Отменить">
+@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
+{
+    <div class="event-edit-popup">
+        <div class="event-edit-header">
+            @Html.LabelFor(p => p.Start) :
+            <span>@Html.EditorFor(p => p.Start)</span>
+            @Html.LabelFor(p => p.End) :
+            <span>@Html.EditorFor(p => p.End)</span>
 
-            <i class="fa fa-window-minimize" aria-hclassden="true"></i>
+            <div class="event-edit-header-contents">
+                @Html.DropDownList("RoomId", (List<SelectListItem>) ViewBag.RoomIdOptions)
+            </div>
+
         </div>
 
+        <div class="event-edit-contents">
+            @Html.LabelFor(p => p.Title) :<span>@Html.EditorFor(p => p.Title)</span>
+
+            <br />
+            @Html.LabelFor(p => p.Description) :
+            <p>
+                @Html.EditorFor(p => p.Description)
+            </p>
+
+            <div class="event-reg-info">
+
+                @Html.LabelFor(p => p.AllowSubscription) :
+                <span>@Html.EditorFor(p => p.AllowSubscription)</span>
+
+                @Html.LabelFor(p => p.IsPublic) :
+                <span>@Html.EditorFor(p => p.IsPublic)</span>
+            </div>
+
+            <div class="event-org-info">
+                @Html.LabelFor(p => p.ShowAuthor)
+                <span>@Html.EditorFor(p => p.ShowAuthor)</span>
+
+                @Html.LabelFor(p => p.OrganizerName)
+                <span>@Html.EditorFor(p => p.OrganizerName)</span>
+            </div>
+
+        </div>
+        <input type="submit" class="send-event-form-data" value="Add" />
     </div>
+}
 
-    <div class="event-display-contents">
-        <h3>@Model.Title</h3>
-        <p>
-            @Model.Description
-        </p>
+    <script>
+        $('.send-event-form-data').click(function () {
 
-        <div class="organizer-info">
-            <i class="fa fa-user fa-2x" aria-hclassden="true"></i>
-            <span>@Model.OrganizerName</span>
-        </div>
+        });
+    </script>
 
-        <div class="visitors-info">
-            <i class="fa fa-users fa-2x" aria-hclassden="true"></i>
-            <span>@Model.VisitorCount</span>
-        </div>
-
-
-        <br>
-
-        <div class="new-visitor-block">
-            <input type="text" class="add-visitor-email" placeholder="Укажите e-mail" />
-
-            <i class="fa fa-plus" aria-hclassden="true"></i> <br />
-        </div>
-
-
-
-    </div>
-
-    <div class="event-display-links">
-        <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
-        <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
-        <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
-        <i class="fa fa-link fa-2x" aria-hclassden="true"></i>
-    </div>
-
-</div>

@@ -13,5 +13,7 @@ namespace WebApplication1.Models.Schedule
         public DateTime DateEnd { get; set; }
         public string OrganizerName { get; set; }
         public int VisitorCount { get; set; }
+
+        public bool CanEdit { get; set; }
     }
 }

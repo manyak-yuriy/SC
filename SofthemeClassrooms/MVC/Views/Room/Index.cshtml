@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Room page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("~/Views/Schedule/RoomsSchemePartialView.cshtml")
+<!---->
+@Html.Partial("WeeklySchedulerPartialView")
+@Html.Partial("MapPartialView")
+
+
+
+@section MenuItemActive{
+    <script>
+        ActivateMenu('scheduleItem');
+    </script>
+}
+
+
+
+

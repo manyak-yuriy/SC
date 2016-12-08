@@ -1,0 +1,57 @@
+﻿<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.css' />
+<!--
+    <script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+-->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js'></script>
+
+
+
+<div id='calendar'></div>
+
+<script>
+
+    $(document).ready(function () {
+        // page is ready
+        $('#calendar').fullCalendar({
+            // enable theme
+            theme: true,
+            // emphasizes business hours
+            businessHours: true,
+            // event dragging & resizing
+            editable: true,
+            // header
+            header: {
+                left: 'prev',
+                center: 'title',
+                right: 'next'
+            },
+
+            events: [
+                {
+                    title: 'C# multithreading',
+                    start: '2016-12-08T05:30:00',
+                    end: '2016-12-08'
+                },
+                {
+                    title: 'ASP.NET routing',
+                    start: '2016-12-08T10:30:00',
+                    end: '2016-12-08'
+                },
+                {
+                    title: 'QA intro',
+                    start: '2016-12-08T17:30:00',
+                    allDay: false // will make the time show
+                }
+            ],
+
+            color: 'black',     // an option!
+            textColor: 'yellow' // an option!
+        }).fullCalendar('changeView', 'agendaWeek')
+    });
+
+
+</script>
+
+

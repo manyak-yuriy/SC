@@ -207,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
@@ -412,7 +413,7 @@
     <Content Include="Views\Feedback\SendMessageForm.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Schedule\RoomsSchemePartialView.cshtml" />
-    <Content Include="Views\Schedule\MapPartialView.cshtml" />
+    <Content Include="Views\Shared\MapPartialView.cshtml" />
     <Content Include="Views\Schedule\SchedulerPatrialView.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -448,14 +449,18 @@
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
+
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
+
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\App_LocalResources\" />
     <Folder Include="JQWidget\" />
     <Folder Include="Views\Resources\" />
-    <Folder Include="Views\Room\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult ShowSchedule()
         {       
-            /*    
+             /*
             var eq = new Equipment { Title = "TV", ImagePath = "F:" };
             db.Equipment.AddOrUpdate(e => e.Title, eq);
 
@@ -38,8 +38,9 @@ namespace WebApplication1.Controllers
             db.Event.AddOrUpdate(e => e.Title, ev);
             
             var fb = db.Feedback.ToList();
-            db.SaveChanges();
             */
+            db.SaveChanges();
+            
             return View();
         }
 
@@ -52,7 +53,16 @@ namespace WebApplication1.Controllers
             if (eventEntity == null)
                 throw new NullReferenceException("There's no event with specified id!");
 
+            bool isAuthorized = false;
+            bool isAdmin = User.IsInRole("admin");
+            string userId = User.Identity.GetUserId();
+
+            if (isAdmin || eventEntity.ApplicationUserID == userId)
+                isAuthorized = true;
+
             DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+            model.CanEdit = isAuthorized;
+
             model.DateStart = eventEntity.DateStart;
             model.DateEnd = eventEntity.DateEnd;
             model.Title = eventEntity.Title;
@@ -72,6 +82,50 @@ namespace WebApplication1.Controllers
         {
             var e = db.Event.Find(Id);
             return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml", e.Title);
+        }
+
+        [HttpGet]
+        public PartialViewResult GetEventAddPartialView()
+        {
+            EditEventPartialViewModel viewModel;
+            
+            viewModel = new EditEventPartialViewModel();
+            viewModel.Start = DateTime.Now;
+            viewModel.End = DateTime.Now.AddHours(2);
+
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+
+            foreach (var room in availRooms)
+            {
+                items.Add(new SelectListItem
+                    {
+                         Text = room.Title, Value = room.Id.ToString()
+                    }
+                );
+            }
+            ViewBag.RoomIdOptions = items;
+            return PartialView("~/Views/Schedule/Overlays/AddEventPartialView.cshtml", viewModel);
+        }
+
+        [HttpPost]
+        public ViewResult AddNewEvent(EditEventPartialViewModel eventModel)
+        {
+            Event dbModel = new Event();
+            dbModel.AllowSubscription = eventModel.AllowSubscription;
+            dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
+            dbModel.OrganizerName = (eventModel.ShowAuthor)? null : eventModel.OrganizerName;
+            dbModel.ClassroomId = Int32.Parse(eventModel.RoomId);
+            dbModel.Description = eventModel.Description;
+            dbModel.Title = eventModel.Title;
+            dbModel.DateStart = eventModel.Start;
+            dbModel.DateEnd = eventModel.End;
+            dbModel.IsPublic = eventModel.IsPublic;
+
+            db.Event.Add(dbModel);
+            db.SaveChanges();
+            return View("ShowSchedule");
         }
 
         [HttpPost]
