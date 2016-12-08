@@ -1,0 +1,20 @@
+﻿@model WebApplication1.Models.PersonalDataViewModel
+
+<div class="container">
+    <div class="col-lg-3">
+        <div id="pInfo">
+            <div>
+                <h2>@Html.DisplayFor(m => m.Name)</h2>
+                @if (Model.Is_Admin)
+                {
+                    <span id="adminLabel">admin</span>
+                }
+                @Html.HiddenFor(m => m.Is_Admin)
+                <br />
+                <strong>Email:</strong><span> @Html.DisplayFor(m => m.Email)</span>
+                <br /><br />
+                <strong>Количество активных событий:</strong><span>@Model.NumberOfEvents</span>
+            </div>
+        </div>
+    </div>
+</div>

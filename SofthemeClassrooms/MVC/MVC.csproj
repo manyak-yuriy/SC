@@ -198,8 +198,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
-    <Compile Include="Controllers\PersonalPageController.cs" />
-    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersManagmentController.cs" />
@@ -432,15 +430,13 @@
     <Content Include="TimeTablePlugin\README.md" />
     <Content Include="TimeTablePlugin\test\.bowerrc" />
     <Content Include="TimeTablePlugin\test\bower.json" />
-    <Content Include="Views\Account\RegisterMessage.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\PasswordChangeRequestSent.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordSuccessful.cshtml" />
-    <Content Include="Views\PersonalPage\MyPage.cshtml" />
-    <Content Include="Views\PersonalPage\ChangePasswordPartialView.cshtml" />
-    <Content Include="Views\PersonalPage\ChangePersonalDataPView.cshtml" />
-    <Content Include="Views\PersonalPage\PersonalInfoPView.cshtml" />
+    <Content Include="Views\UsersManagment\MyPage.cshtml" />
+    <Content Include="Views\UsersManagment\ChangePasswordPartialView.cshtml" />
+    <Content Include="Views\UsersManagment\ChangePersonalDataPView.cshtml" />
+    <Content Include="Views\UsersManagment\PersonalInfoPView.cshtml" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\Makefile" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
     <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
@@ -449,12 +445,10 @@
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
-
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
-
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
-
+    <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

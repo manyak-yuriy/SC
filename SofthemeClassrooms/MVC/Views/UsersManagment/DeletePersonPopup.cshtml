@@ -1,0 +1,20 @@
+﻿@model System.Int32
+
+<div id="@Model" class="b-popup">
+    <div class="b-popup-content">
+        <div class="popup-upper-plane">
+            <i class="fa fa-ban" aria-hidden="true"></i>
+            Вы уверены, что хотите удалить пользователя?
+        </div>
+        <p class="deleteMessage">Все события, запланированые этим пользователем, будут отменены.</p>
+        <div>
+            <div class="NoBlock">
+                <button onclick="DeleteUserPopupHide('@Model')" class="button No">Нет</button>
+            </div>
+            <div class="YesBlock">
+                <button class="button Yes">Да</button>
+            </div>
+        </div>
+    </div>
+</div>
+
