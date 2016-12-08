@@ -83,6 +83,16 @@ namespace WebApplication1.Controllers
             return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml", e.Title);
         }
 
+        [HttpGet]
+        public PartialViewResult GetEventEditPartialView(int? Id)
+        {
+            EditEventPartialViewModel viewModel;
+            
+            viewModel = new EditEventPartialViewModel();
+           
+            return PartialView("~/Views/Schedule/Overlays/AddEventPartialView.cshtml", viewModel);
+        }
+
         [HttpPost]
         public JsonResult CancelEvent(int Id)
         {

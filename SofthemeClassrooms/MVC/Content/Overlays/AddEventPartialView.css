@@ -1,1 +1,21 @@
-﻿
+﻿.event-edit-popup
+{
+    width: 500px;
+    border: 1px solid #cac0c0;
+    background-color: white;
+
+    opacity: 0.9;
+    border-radius: 5%;
+}
+
+.event-edit-popup:hover
+{
+    opacity: 1;
+}
+
+.event-edit-header
+{
+    background-color: #cac0c0;
+    height: 60px;
+    border-radius: 5% 5% 0% 0%;
+}
