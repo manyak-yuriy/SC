@@ -2,49 +2,55 @@
 
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-<div class="event-edit-popup">
-    <div class="event-edit-header">
-        @Html.LabelFor(p => p.Start) :
-        <span>@Html.EditorFor(p => p.Start)</span> 
-        @Html.LabelFor(p => p.End) :
-        <span>@Html.EditorFor(p => p.End)</span>
+@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
+{
+    <div class="event-edit-popup">
+        <div class="event-edit-header">
+            @Html.LabelFor(p => p.Start) :
+            <span>@Html.EditorFor(p => p.Start)</span>
+            @Html.LabelFor(p => p.End) :
+            <span>@Html.EditorFor(p => p.End)</span>
 
-        <div class="event-edit-header-contents">
-            
+            <div class="event-edit-header-contents">
+
+            </div>
+
         </div>
 
+        <div class="event-edit-contents">
+            @Html.LabelFor(p => p.Title) :<span>@Html.EditorFor(p => p.Title)</span>
+
+            <br />
+            @Html.LabelFor(p => p.Description) :
+            <p>
+                @Html.EditorFor(p => p.Description)
+            </p>
+
+            <div class="event-reg-info">
+
+                @Html.LabelFor(p => p.AllowSubscription) :
+                <span>@Html.EditorFor(p => p.AllowSubscription)</span>
+
+                @Html.LabelFor(p => p.IsPublic) :
+                <span>@Html.EditorFor(p => p.IsPublic)</span>
+            </div>
+
+            <div class="event-org-info">
+                @Html.LabelFor(p => p.ShowAuthor)
+                <span>@Html.EditorFor(p => p.ShowAuthor)</span>
+
+                @Html.LabelFor(p => p.OrganizerName)
+                <span>@Html.EditorFor(p => p.OrganizerName)</span>
+            </div>
+
+        </div>
+        <input type="submit" class="send-event-form-data" value="Add" />
     </div>
+}
 
-    <div class="event-edit-contents">
-        @Html.LabelFor(p => p.Title) :<span>@Html.EditorFor(p => p.Title)</span>
-        
-        <br />
-        @Html.LabelFor(p => p.Description) :
-        <p>
-            @Html.EditorFor(p => p.Description)
-        </p>
+    <script>
+        $('.send-event-form-data').click(function () {
 
-        <div class="event-reg-info">
-            
-            @Html.LabelFor(p => p.AllowSubscription) :
-            <span>@Html.EditorFor(p => p.AllowSubscription)</span>
+        });
+    </script>
 
-            @Html.LabelFor(p => p.IsPublic) :
-            <span>@Html.EditorFor(p => p.IsPublic)</span>
-        </div>
-
-        <div class="event-org-info">
-            @Html.LabelFor(p => p.ShowAuthor)
-            <span>@Html.EditorFor(p => p.ShowAuthor)</span>
-
-            @Html.LabelFor(p => p.OrganizerName)
-            <span>@Html.EditorFor(p => p.OrganizerName)</span>
-        </div>
-
-    </div>
-
-    <button class="send-event-form-data">
-       Add
-    </button>
-
-</div>

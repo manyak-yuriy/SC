@@ -96,6 +96,25 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        public ViewResult AddNewEvent(EditEventPartialViewModel eventModel)
+        {
+            Event dbModel = new Event();
+            dbModel.AllowSubscription = eventModel.AllowSubscription;
+            dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
+            dbModel.OrganizerName = (eventModel.ShowAuthor)? null : eventModel.OrganizerName;
+            dbModel.ClassRoom = db.ClassRoom.First();
+            dbModel.Description = eventModel.Description;
+            dbModel.Title = eventModel.Title;
+            dbModel.DateStart = eventModel.Start;
+            dbModel.DateEnd = eventModel.End;
+            dbModel.IsPublic = eventModel.IsPublic;
+
+            db.Event.Add(dbModel);
+            db.SaveChanges();
+            return View("ShowSchedule");
+        }
+
+        [HttpPost]
         public JsonResult CancelEvent(int Id)
         {
             var eventToDelete = db.Event.Find(Id);
