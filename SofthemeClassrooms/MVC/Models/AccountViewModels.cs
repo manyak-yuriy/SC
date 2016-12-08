@@ -139,7 +139,7 @@ namespace WebApplication1.Models
                 {
                     Email = u.Email,
                     Name = u.FullName,
-                    Is_Admin = u.Role == "admin" ? true : false,
+                    Is_Admin = u.Role == "admin",
                     NumberOfEvents = u.NumberOfEvents
                 });
             }
