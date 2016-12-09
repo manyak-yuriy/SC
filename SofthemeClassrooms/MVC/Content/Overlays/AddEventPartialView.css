@@ -5,25 +5,29 @@
     background-color: white;
 
     opacity: 0.9;
-    border-radius: 5%;
+    border-radius: 1%;
 
     z-index: 300;
 
     position: fixed !important;
     display: block;
+
+    font-family: monospace;
+    color: white !important;
 }
 
 .event-edit-popup:hover
 {
-    opacity: 1;
+    opacity: 0.96;
 }
 
 .event-edit-header
 {
-    background-color: #cac0c0;
-    height: 60px;
-    border-radius: 5% 5% 0% 0%;
+    background-color: #9ea6b4;
+    height: 80px;
+    border-radius: 0% 0% 0% 0%;
     padding: 10px;
+    font-size: 130%;
 }
 
 .event-edit-contents {
@@ -42,3 +46,51 @@
 .send-event-form-data:hover {
      background-color: red;
 }
+
+.fa
+{
+    margin: 0px;
+    color: white;
+}
+
+.custom-numeric-picker
+{
+    text-align: center;
+    width: 20px;
+    display: inline-block;
+   
+    margin: -3px;
+}
+
+.date-custom-input
+{
+    border: none;
+    margin: 0 auto;
+    background-color: transparent;
+    display: inline;
+    width: 20px; 
+    text-align: center;
+    margin: -10px;
+}
+
+.event-edit-popup textarea:focus, .event-edit-popup  input:focus{
+    outline: none;
+    width: 20px;
+}
+
+
+.custom-room-dropdown
+{
+    float: right;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+}
+
+.custom-delimiter
+{
+    display: inline-block;
+    position: relative;
+    top: -27px;
+}
+

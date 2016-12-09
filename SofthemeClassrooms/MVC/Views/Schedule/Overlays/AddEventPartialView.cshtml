@@ -1,37 +1,84 @@
 ﻿<link href="~/Content/Overlays/AddEventPartialView.css" rel="stylesheet" />
 
+
+<script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
+
+
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
 @using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
 {
     <div class="event-edit-popup">
         <div class="event-edit-header">
-            @Html.LabelFor(p => p.Start) :
-            <span>@Html.EditorFor(p => p.Start)</span>
-            @Html.LabelFor(p => p.End) :
-            <span>@Html.EditorFor(p => p.End)</span>
 
-            <div class="event-edit-header-contents">
-                @Html.DropDownList("RoomId", (List<SelectListItem>) ViewBag.RoomIdOptions)
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
+
+            <div style='width: 30px; display: inline-block'>
+            </div>
+
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+
+            <div style='width: 30px; display: inline-block'>
+            </div>
+
+
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+            <div class="custom-delimiter">:</div>
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+
+            <div style='width: 10px; display: inline-block'>
+                <div class="custom-delimiter">-</div>
+            </div>
+
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+            <div class="custom-delimiter">:</div>
+            <div class="custom-numeric-picker">
+                <i class="fa fa-caret-up" aria-hidden="true"></i><br>
+                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+
+
+            @Html.DropDownList("RoomId", (List<SelectListItem>)ViewBag.RoomIdOptions, new { @class = "custom-room-dropdown" })
+
 
         </div>
 
         <div class="event-edit-contents">
-            @Html.LabelFor(p => p.Title) :<span>@Html.EditorFor(p => p.Title)</span>
+            <span>@Html.EditorFor(p => p.Title)</span>
 
             <br />
-            @Html.LabelFor(p => p.Description) :
+
             <p>
                 @Html.EditorFor(p => p.Description)
             </p>
 
             <div class="event-reg-info">
 
-                @Html.LabelFor(p => p.AllowSubscription) :
-                <span>@Html.EditorFor(p => p.AllowSubscription)</span>
+                @Html.LabelFor(p => p.AllowSubscription)
+                @Html.EditorFor(p => p.AllowSubscription)
 
-                @Html.LabelFor(p => p.IsPublic) :
+                @Html.LabelFor(p => p.IsPublic)
                 <span>@Html.EditorFor(p => p.IsPublic)</span>
             </div>
 
@@ -48,9 +95,9 @@
     </div>
 }
 
-    <script>
-        $('.send-event-form-data').click(function () {
+<script>
+    $('.send-event-form-data').click(function () {
 
-        });
-    </script>
+    });
+</script>
 
