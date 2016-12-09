@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Security.Claims;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace WebApplication1.Controllers
 {
@@ -20,25 +22,20 @@ namespace WebApplication1.Controllers
             }
         }
 
-        public void SaveUserDataToSession(string email)
-        {
-            if ((Session["UserId"] as string) != null)
-                return;
 
-            var user = UserManager.FindByEmail(email);
-
-            Session["UserId"] = user.Id;
-            Session["UserEmail"] = user.Email;
-
-            Session["UserName"] = UserManager.GetClaims(user.Id).Where(c => c.Type == ClaimTypes.Name)
-                .Select(c => c.Value).SingleOrDefault();
-
-        }
 
         public ActionResult MyPage()
         {
-            SaveUserDataToSession(User.Identity.Name);
-            return View();
+            var user = Session["User"] as PersonalDataViewModel;
+            if (user == null)
+            {
+                AppUsersManager uManager = new AppUsersManager();
+                var uInfo = uManager.GetUserInfo(User.Identity.Name);
+                user = PersonalDataViewModel.CreateFromUserInfo(uInfo);
+                Session["User"] = user;
+            }
+
+            return View(user);
         }
 
         public ActionResult ChangePersonalView()
@@ -63,6 +60,11 @@ namespace WebApplication1.Controllers
             return PartialView("PersonalInfoPView");
         }
 
+        public ActionResult ChangePasswordView()
+        {
+            return PartialView("ChangePasswordPartialView");
+        }
+
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (!ModelState.IsValid)
@@ -84,13 +86,38 @@ namespace WebApplication1.Controllers
             return PartialView("ChangePasswordPartialView", model);
         }
 
+        [HttpGet]
         [Authorize(Roles ="admin")]
-        public ActionResult Users()
+        public ActionResult Users(int page = 0)
         {
+            if(page < 0)
+            {
+                return new HttpNotFoundResult();
+            }
+
             AppUsersManager m = new AppUsersManager();
-            PersonalDataViewModel pView = new PersonalDataViewModel();
-            var users = pView.CreateFromUserInfo(m.GetUsersInfo());
-            return View(users);
+            int itemsPerPage = 20,
+                NumberOfUsers = m.GetUserNumber();
+            int lastPage =  NumberOfUsers / itemsPerPage;
+            if(lastPage < page)
+            {
+                return new HttpNotFoundResult();
+            }
+            
+            var usersInfo = m.GetUsersInfo(page, itemsPerPage);
+            var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo);
+            PageInfo pageInfo = new PageInfo
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                TotalNumOfItems = NumberOfUsers
+            };
+            
+            return View(new Pair<PageInfo, IEnumerable<PersonalDataViewModel>>
+            {
+                item1 = pageInfo,
+                item2 = users
+            });
         }
 
         public ActionResult ChangeUserInfoView(PersonalDataViewModel model)

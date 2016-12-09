@@ -18,21 +18,38 @@ namespace ManagementServices.Implementations
             throw new NotImplementedException();
         }
 
-        public UserInfo GetUserInfo(string userName)
+        public int GetUserNumber()
         {
-            throw new NotImplementedException();
+            return db.Users.Count();
         }
 
-        public IEnumerable<UserInfo> GetUsersInfo()
+        public  UserInfo GetUserInfo(string userName)
         {
-            var usersInfo = from u in db.Users
+            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            var adminId = db.Roles.Where(c => c.Name == "admin").FirstOrDefault().Id;
+            var role = user.Roles.Where(r => r.RoleId == adminId).FirstOrDefault();
+            UserInfo uInfo = new UserInfo
+            {
+                Email = user.Email,
+                UserId = user.Id,
+                FullName = user.Claims.Where(c => c.ClaimType == ClaimTypes.Name).FirstOrDefault().ClaimValue,
+                NumberOfEvents = GetNumberUserEvents(user.Id),
+                Role = role == null ? "user" : "admin"
+            };
+
+            return uInfo;
+        }
+
+        public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage)
+        {
+            var usersInfo = (from u in db.Users
                             select new UserInfo
                             {
                                 FullName = u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue,
                                 Email = u.Email,
                                 UserId = u.Id,
                                 NumberOfEvents = db.Events.Where(e => e.ApplicationUserID == u.Id).Count()
-                            };
+                            }).Skip(page*itemsPerPage).Take(itemsPerPage);
        
             return usersInfo;
         }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication1.Models.PersonalDataViewModel>
+﻿@using WebApplication1.Models;
+@model Pair<PageInfo, IEnumerable<WebApplication1.Models.PersonalDataViewModel>>
 
 @{
     ViewBag.Title = "Users";
@@ -9,13 +10,13 @@
     <div class="col-lg-8 col-lg-offset-1">
         <h2>Список пользователей</h2>
         <div>
-            <span>Всего: @Model.Count()</span>
+            <span>Всего: @Model.item2.Count()</span>
             <input id="user-search" type="search" placeholder="Поиск" />
         </div>
         <ul class="userTable">
             @{
                 int i = 0;
-                foreach (var u in Model)
+                foreach (var u in Model.item2)
                 {
                     <li>
                         <div class="usersTableRow">

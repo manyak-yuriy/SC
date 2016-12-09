@@ -130,20 +130,25 @@ namespace WebApplication1.Models
 
         public int NumberOfEvents { get; set; }
 
-        public IEnumerable<PersonalDataViewModel> CreateFromUserInfo(IEnumerable<UserInfo> users)
+        public static IEnumerable<PersonalDataViewModel> CreateFromUsersInfo(IEnumerable<UserInfo> users)
         {
             List<PersonalDataViewModel> l = new List<PersonalDataViewModel>();
             foreach(var u in users)
             {
-                l.Add(new PersonalDataViewModel
-                {
-                    Email = u.Email,
-                    Name = u.FullName,
-                    Is_Admin = u.Role == "admin",
-                    NumberOfEvents = u.NumberOfEvents
-                });
+                l.Add(CreateFromUserInfo(u));
             }
             return l;
+        }
+
+        public static PersonalDataViewModel CreateFromUserInfo(UserInfo user)
+        {
+            return new PersonalDataViewModel
+            {
+                Email = user.Email,
+                Name = user.FullName,
+                Is_Admin = user.Role == "admin",
+                NumberOfEvents = user.NumberOfEvents
+            };
         }
     }
 

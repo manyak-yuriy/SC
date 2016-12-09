@@ -201,10 +201,14 @@
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersManagmentController.cs" />
+    <Compile Include="Filters\NonAuthorizedAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\Pagination.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Models\Pair.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
@@ -449,6 +453,7 @@
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
+    <Content Include="Views\Account\RegisterInput.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

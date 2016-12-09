@@ -12,6 +12,7 @@ using WebApplication1.Models;
 using DataAccessLayer;
 using System.Collections.Generic;
 using System.Threading;
+using WebApplication1.Filters;
 
 namespace WebApplication1.Controllers
 {
@@ -56,12 +57,10 @@ namespace WebApplication1.Controllers
         }
 
         //
-        // GET: /Account/Login
+        [NonAuthorized]
         [AllowAnonymous]
         public ActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
@@ -70,11 +69,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [NonAuthorized]
         public async Task<ActionResult> Login(LoginViewModel model)
-        {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
-
+        { 
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -95,12 +92,10 @@ namespace WebApplication1.Controllers
         }
 
         //
-        // GET: /Account/VerifyCode
+        
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             // Требовать предварительный вход пользователя с помощью имени пользователя и пароля или внешнего имени входа
             if (!await SignInManager.HasBeenVerifiedAsync())
             {
@@ -113,11 +108,10 @@ namespace WebApplication1.Controllers
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
+        [NonAuthorized]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
+        { 
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -140,22 +134,20 @@ namespace WebApplication1.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [NonAuthorized]
         public ActionResult Register()
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
         //
         // POST: /Account/Register
         [HttpPost]
+        [NonAuthorized]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -178,17 +170,16 @@ namespace WebApplication1.Controllers
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
-            return View(model);
+            return PartialView("RegisterInput",model);
         }
 
 
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        [NonAuthorized]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (userId == null || code == null)
             {
                 return View("Error");
@@ -200,6 +191,7 @@ namespace WebApplication1.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
+        [NonAuthorized]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -209,11 +201,10 @@ namespace WebApplication1.Controllers
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
+        [NonAuthorized]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
@@ -235,20 +226,18 @@ namespace WebApplication1.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
+        [NonAuthorized]
         public ActionResult ForgotPasswordConfirmation()
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             return View();
         }
 
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        [NonAuthorized]
         public ActionResult ResetPassword(string code, string Email)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             ResetPasswordViewModel reset = new ResetPasswordViewModel()
             {
                 Code = code,
@@ -263,11 +252,10 @@ namespace WebApplication1.Controllers
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
+        [NonAuthorized]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (User.Identity.IsAuthenticated)
-                RedirectToRoute("Schedule/ShowSchedule");///!! Нужно перенести в фильтр
             if (!ModelState.IsValid)
             {
                 return View(model);

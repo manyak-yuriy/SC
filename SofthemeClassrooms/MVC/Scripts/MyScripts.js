@@ -10,3 +10,9 @@ function PasswordChangedSuccessfull() {
     $('#newpassword').text("");
     $('#confirmpassword').text("");
 }
+
+function toggleDisplayAndInputPInfo()
+{
+    $('#piEditor').addClass("visibleBlock");
+    $('#displayPersonalInfo').addClass("invisibleBlock");
+}
