@@ -1,5 +1,5 @@
 ﻿<link href="~/Content/Overlays/AddEventPartialView.css" rel="stylesheet" />
-
+<script src="~/Scripts/Overlays/AddEventPartialView.js"></script>
 
 <script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
 
@@ -11,7 +11,7 @@
     <div class="event-edit-popup">
         <div class="event-edit-header">
 
-            <div class="custom-numeric-picker">
+            <div class="custom-numeric-picker month-day-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
                 <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -20,9 +20,10 @@
             <div style='width: 30px; display: inline-block'>
             </div>
 
-            <div class="custom-numeric-picker">
+            <div class="custom-numeric-picker month-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" /><br />
+                <input type="hidden" value="@Model.Start.Month" />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
@@ -30,38 +31,38 @@
             </div>
 
 
-            <div class="custom-numeric-picker">
+            <div id="first" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" value="@Model.Start.Hour" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
             <div class="custom-delimiter">:</div>
-            <div class="custom-numeric-picker">
+            <div id="first" class="custom-numeric-picker minute-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" value="@Model.Start.Minute" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
-            <div style='width: 10px; display: inline-block'>
-                <div class="custom-delimiter">-</div>
-            </div>
+            
+            <div class="custom-delimiter">-</div>
+            
 
-            <div class="custom-numeric-picker">
+            <div id="second" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" value="@Model.End.Hour" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
             <div class="custom-delimiter">:</div>
-            <div class="custom-numeric-picker">
+            <div id="second" class="custom-numeric-picker minute-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" value="@Model.End.Minute" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
 
             @Html.DropDownList("RoomId", (List<SelectListItem>)ViewBag.RoomIdOptions, new { @class = "custom-room-dropdown" })
 
-
+            <i class="fa fa-window-minimize" aria-hclassden="true"></i>
         </div>
 
         <div class="event-edit-contents">
@@ -95,9 +96,5 @@
     </div>
 }
 
-<script>
-    $('.send-event-form-data').click(function () {
 
-    });
-</script>
 
