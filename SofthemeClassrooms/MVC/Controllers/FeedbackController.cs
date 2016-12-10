@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using ManagementServices.Implementations;
+using ManagementServices.Models;
+using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 
@@ -8,8 +10,7 @@ namespace WebApplication1.Controllers
     {
         public ActionResult SendMessageForm()
         {
-            return View();
-            
+            return View();     
         }
 
         [HttpPost]
@@ -20,9 +21,11 @@ namespace WebApplication1.Controllers
                 return View(model);
             }
 
-            
+            FeedBackDTO feedback = SendMessageModel.ToFeedbackDTO(model);
+            FeedbackSender sender = new FeedbackSender();
+            sender.SendFeedback(feedback);
 
-            return View(model);
+            return PartialView("SendFeedbackForm", null);
         }
     }
 }

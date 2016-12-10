@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
 
-namespace DataAccessLayer.Repositories
+namespace DataAccessLayer
 {
-    class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable
     {
         private ApplicationDbContext context = new ApplicationDbContext();
         private ClassroomRepository _classroooms;

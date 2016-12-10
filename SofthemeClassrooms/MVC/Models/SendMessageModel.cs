@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System;
 using System.ComponentModel.DataAnnotations;
+using ManagementServices.Models;
 
 namespace WebApplication1.Models
 {
@@ -23,5 +24,16 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Это обязательное поле для заполнения.")]
         [DataType(DataType.MultilineText)]
         public string Message { get; set; }
+
+        public static FeedBackDTO ToFeedbackDTO(SendMessageModel model)
+        {
+            return new FeedBackDTO
+            {
+                Email = model.Email,
+                LastName = model.LastName,
+                Message = model.Message,
+                Name = model.Name
+            };
+        }
     }
 }

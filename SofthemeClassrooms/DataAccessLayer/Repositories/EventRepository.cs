@@ -10,7 +10,7 @@ using DataAccessLayer.Interfaces;
 namespace DataAccessLayer.Repositories
 {
   
-    class EventRepository : IRepository<Event, int>
+    public class EventRepository : IRepository<Event, int>
     {
         private ApplicationDbContext dbContext;
 
@@ -37,6 +37,11 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<Event> GetAll()
         {
             return dbContext.Event;
+        }
+
+        public void Insert(Event item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Event item)

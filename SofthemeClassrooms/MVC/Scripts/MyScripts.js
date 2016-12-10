@@ -16,3 +16,8 @@ function toggleDisplayAndInputPInfo()
     $('#piEditor').addClass("visibleBlock");
     $('#displayPersonalInfo').addClass("invisibleBlock");
 }
+
+function SendSuccess()
+{
+    $('#SuccessMessage').html('Спасибо. Ваше сообщение отправлено администратору.');
+}

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    class ClassRoomPropertyRepository : IRepository<ClassRoomProperty, int>
+    public class ClassRoomPropertyRepository : IRepository<ClassRoomProperty, int>
     {
         ApplicationDbContext dbContext;
 
@@ -35,6 +35,11 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<ClassRoomProperty> GetAll()
         {
             return dbContext.ClassRoomProperty;
+        }
+
+        public void Insert(ClassRoomProperty item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(ClassRoomProperty item)

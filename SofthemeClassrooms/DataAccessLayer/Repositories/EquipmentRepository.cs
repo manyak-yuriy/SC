@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    class EquipmentRepository : IRepository<Equipment, int>
+    public class EquipmentRepository : IRepository<Equipment, int>
     {
         ApplicationDbContext dbContext;
 
@@ -35,6 +35,11 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<Equipment> GetAll()
         {
             return dbContext.Equipment;
+        }
+
+        public void Insert(Equipment item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Equipment item)

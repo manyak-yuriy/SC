@@ -60,14 +60,15 @@
   <ItemGroup>
     <Compile Include="Implementations\EquipmentManagement.cs" />
     <Compile Include="Implementations\EventManagement.cs" />
-    <Compile Include="Implementations\Feedback.cs" />
+    <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Implementations\UserInfo.cs" />
     <Compile Include="Implementations\UserManager.cs" />
     <Compile Include="Interfaces\EventManagement.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
-    <Compile Include="Interfaces\IFeedback.cs" />
+    <Compile Include="Interfaces\IFeedbackSender.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
     <Compile Include="Models\EquipmentViewModel.cs" />
+    <Compile Include="Models\FeedBackDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

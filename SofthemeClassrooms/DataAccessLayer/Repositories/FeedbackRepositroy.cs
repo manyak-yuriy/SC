@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    class FeedbackRepositroy : IRepository<Feedback, int>
+    public class FeedbackRepositroy : IRepository<Feedback, int>
     {
         ApplicationDbContext dbContext;
 
@@ -33,6 +33,12 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<Feedback> GetAll()
         {
             return dbContext.Feedback;
+        }
+
+        public void Insert(Feedback item)
+        {
+            dbContext.Feedback.Add(item);
+            dbContext.SaveChanges();
         }
 
         public void Update(Feedback item)

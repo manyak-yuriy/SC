@@ -74,6 +74,7 @@
     <Compile Include="Repositories\FeedbackRepositroy.cs" />
     <Compile Include="Repositories\ForeignVisitorRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>

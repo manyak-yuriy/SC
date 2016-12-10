@@ -454,6 +454,7 @@
     <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
+    <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

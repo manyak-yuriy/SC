@@ -9,7 +9,7 @@ using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.Repositories
 {
-    class UsersRepository : IRepository<ApplicationUser, string>
+    public class UsersRepository : IRepository<ApplicationUser, string>
     {
         ApplicationDbContext dbContext;
 
@@ -37,6 +37,11 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<ApplicationUser> GetAll()
         {
             return dbContext.Users;
+        }
+
+        public void Insert(ApplicationUser item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(ApplicationUser item)

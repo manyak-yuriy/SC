@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    class ForeignVisitorRepository : IRepository<ForeignVisitor, int>
+    public class ForeignVisitorRepository : IRepository<ForeignVisitor, int>
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
 
@@ -34,6 +34,11 @@ namespace DataAccessLayer.Repositories
         public IEnumerable<ForeignVisitor> GetAll()
         {
             return dbContext.ForeignVisitor;
+        }
+
+        public void Insert(ForeignVisitor item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(ForeignVisitor item)
