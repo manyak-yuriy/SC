@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Implementations\EquipmentManagement.cs" />
     <Compile Include="Implementations\EventManagement.cs" />
-    <Compile Include="Implementations\EventManager.cs" />
     <Compile Include="Implementations\Feedback.cs" />
     <Compile Include="Implementations\UserInfo.cs" />
     <Compile Include="Implementations\UserManager.cs" />

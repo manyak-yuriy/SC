@@ -87,10 +87,10 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Users(int page = 0)
         {
-            if(page < 0)
+            if (page < 0)
             {
                 return new HttpNotFoundResult();
             }
@@ -98,12 +98,12 @@ namespace WebApplication1.Controllers
             AppUsersManager m = new AppUsersManager();
             int itemsPerPage = 20,
                 NumberOfUsers = m.GetUserNumber();
-            int lastPage =  NumberOfUsers / itemsPerPage;
-            if(lastPage < page)
+            int lastPage = NumberOfUsers / itemsPerPage;
+            if (lastPage < page)
             {
                 return new HttpNotFoundResult();
             }
-            
+
             var usersInfo = m.GetUsersInfo(page, itemsPerPage);
             var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo);
             PageInfo pageInfo = new PageInfo
@@ -112,7 +112,7 @@ namespace WebApplication1.Controllers
                 PageNumber = page,
                 TotalNumOfItems = NumberOfUsers
             };
-            
+
             return View(new Pair<PageInfo, IEnumerable<PersonalDataViewModel>>
             {
                 item1 = pageInfo,
@@ -132,9 +132,19 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize(Roles = "admin")]
+        [HttpPost]
         public ActionResult DeleteUser(string email)
         {
-            return new EmptyResult();
+            if (User.Identity.Name != email)
+            {
+                //DeletePerson
+            }
+
+            return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary
+                {
+                    {"controller", "Schedule"},
+                    {"action", "ShowSchedule" }
+                }); ;
         }
 
         private void AddErrors(IdentityResult result)

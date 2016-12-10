@@ -10,7 +10,11 @@
     <button class="userPagebuttton"  onclick="DeleteUserPopupShow('1')">Удалить</button>
 </div>
 
-@Html.Partial("DeletePersonPopup", 1)
+@Html.Partial("DeletePersonPopup",new WebApplication1.Models.Pair<System.Int32, System.String>
+{
+    item1 = 1,
+    item2 = Model.Email
+})
 
 <div class="container">
     <div class="col-lg-4">

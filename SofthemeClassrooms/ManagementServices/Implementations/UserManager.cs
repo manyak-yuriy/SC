@@ -12,7 +12,7 @@ namespace ManagementServices.Implementations
 {
     public class AppUsersManager
     {
-        DbRepository db = new DbRepository();
+        ApplicationDbContext db = new ApplicationDbContext();
         public void DeleteUser(string userId)
         {
             throw new NotImplementedException();
@@ -48,8 +48,8 @@ namespace ManagementServices.Implementations
                                 FullName = u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue,
                                 Email = u.Email,
                                 UserId = u.Id,
-                                NumberOfEvents = db.Events.Where(e => e.ApplicationUserID == u.Id).Count()
-                            }).Skip(page*itemsPerPage).Take(itemsPerPage);
+                                NumberOfEvents = db.Event.Where(e => e.ApplicationUserID == u.Id).Count()
+                            }).OrderBy(c => c.FullName).Skip(page*itemsPerPage).Take(itemsPerPage);
        
             return usersInfo;
         }
@@ -69,7 +69,7 @@ namespace ManagementServices.Implementations
 
         public int GetNumberUserEvents(string uId)
         {
-            return db.Events.Where(e => e.ApplicationUserID == uId).Count();
+            return db.Event.Where(e => e.ApplicationUserID == uId).Count();
         }
     }
 }

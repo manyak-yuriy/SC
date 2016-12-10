@@ -13,6 +13,19 @@ namespace WebApplication1.HtmlHelpers
         public static MvcHtmlString PageLinks(PageInfo pInfo, string url)
         {
             StringBuilder result = new StringBuilder();
+            if(pInfo.TotalNumOfItems > pInfo.ItemsPerPage)
+            {
+                return MvcHtmlString.Empty;
+            }
+
+            int pageNumber = pInfo.PageNumber;
+            if (pageNumber <= 10)
+            {
+                for(int i = 0; i < pageNumber; ++i)
+                {
+
+                }
+            }            
 
             return MvcHtmlString.Create(result.ToString());
         }

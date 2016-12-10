@@ -1,6 +1,6 @@
-﻿@model System.Int32
+﻿@model WebApplication1.Models.Pair<System.Int32, System.String>
 
-<div id="@Model" class="b-popup">
+<div id="@Model.item1" class="b-popup">
     <div class="b-popup-content">
         <div class="popup-upper-plane">
             <i class="fa fa-ban" aria-hidden="true"></i>
@@ -9,10 +9,14 @@
         <p class="deleteMessage">Все события, запланированые этим пользователем, будут отменены.</p>
         <div>
             <div class="NoBlock">
-                <button onclick="DeleteUserPopupHide('@Model')" class="button No">Нет</button>
+                <button onclick="DeleteUserPopupHide('@Model.item1')" class="button No">Нет</button>
             </div>
             <div class="YesBlock">
-                <button class="button Yes">Да</button>
+                @using (Html.BeginForm("DeleteUser", "UsersManagment", FormMethod.Post))
+                {
+                    <input type="hidden" name="email" value="@Model.item2"/>
+                    <input type="submit" class="button Yes" value="Да"/>
+                }
             </div>
         </div>
     </div>
