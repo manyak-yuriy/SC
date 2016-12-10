@@ -98,6 +98,11 @@
     color: white;
 }
 
+.custom-room-dropdown option
+{
+    background-color: gray;
+}
+
 .custom-delimiter
 {
     display: inline-block;

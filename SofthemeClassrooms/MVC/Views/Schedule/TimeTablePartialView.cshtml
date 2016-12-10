@@ -175,6 +175,34 @@
     hours = 0;
     minutes = 0;
 
+    var updateCurrentTime =
+        function (event, ui) {
+            var hourScope = timetable.scope.hourEnd - timetable.scope.hourStart;
+            var pxPerHour = $('section').width() / hourScope;
+
+            var nowHours = new Date().getHours() - timetable.scope.hourStart;
+            var nowMinutes = new Date().getMinutes();
+
+            var left = (nowHours + nowMinutes / 60) * pxPerHour;
+
+            var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
+
+            left = left - scrollOffset;
+
+            hours = Math.floor(timetable.scope.hourStart + nowHours);
+            var hourFract = nowHours - hours;
+            minutes = new Date().getMinutes();
+
+            //alert(nowHours + " : " + minutes);
+
+            var prettyTime = ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes);
+
+            $('#time-now-wrapper').css('left', left);
+            $('#current-time').html(prettyTime);
+        }
+
+
+
     // put selected hours and minutes into global variables hours and minutes respectively
     var updateHours =
         function (event, ui) {
@@ -207,7 +235,7 @@
             return;
         // Create and init main timetable
         timetable = new Timetable();
-        timetable.setScope(7, 23);
+        timetable.setScope(7, 1);
 
         for (var i = 0; i < data.roomData.length; i++)
             timetable.addLocations([data.roomData[i].classRoomTitle]);
@@ -226,11 +254,14 @@
         }
 
 
-
         renderer = new Timetable.Renderer(timetable);
         if (!firstLoad)
            $('.timetable').empty();
         renderer.draw('.timetable');
+
+        updateCurrentTime();
+
+        setTimeout(() => { updateCurrentTime(); }, 1000);
 
         // Display event info in a popup
         // Schedule/GetDisplayEventPartial/10502
@@ -308,6 +339,10 @@
         $("#slider").slider();
 
 
+        // 
+        var staticSliderHtml = '<div id="time-now-wrapper"> <img src=' + '../../Images/SliderStatic.png' + ' /> <span id="current-time"> Time now</span> <span>  </span> </div>';
+
+
         // Init scroller
 
         var temp = $('section').wrap("<div class='scrollMe'></div>");
@@ -318,11 +353,12 @@
         });
 
         $('.scrollMe').append($('#slider'));
+        $('.scrollMe').prepend($(staticSliderHtml));
 
         // when user stops sliding, update selected time
         $("#slider").slider({
             // slide or change
-            stop: updateHours
+            stop: function () { updateCurrentTime(); updateHours();}
         });
 
 
