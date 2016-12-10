@@ -11,6 +11,11 @@ namespace DataAccessLayer.Repositories
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
 
+        public ForeignVisitorRepository(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+
         public void Delete(int id)
         {
             var visitor = dbContext.ForeignVisitor.Find(id);

@@ -10,7 +10,13 @@ namespace DataAccessLayer.Repositories
 {
     class EquipmentRepository : IRepository<Equipment, int>
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        ApplicationDbContext dbContext;
+
+        public EquipmentRepository(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+
         public void Delete(int id)
         {
             Equipment equipment = dbContext.Equipment.Find(id);

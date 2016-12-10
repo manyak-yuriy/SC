@@ -11,7 +11,13 @@ namespace DataAccessLayer.Repositories
 {
     class UsersRepository : IRepository<ApplicationUser, string>
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        ApplicationDbContext dbContext;
+
+        public UsersRepository(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+
         public void Delete(string id)
         {
             var user = dbContext.Users.Find(id);

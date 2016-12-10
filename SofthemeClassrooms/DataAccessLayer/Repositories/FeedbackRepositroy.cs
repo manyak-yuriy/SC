@@ -9,7 +9,13 @@ namespace DataAccessLayer.Repositories
 {
     class FeedbackRepositroy : IRepository<Feedback, int>
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        ApplicationDbContext dbContext;
+
+        public FeedbackRepositroy(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+
         public void Delete(int id)
         {
             var feedback = dbContext.Feedback.Find(id);

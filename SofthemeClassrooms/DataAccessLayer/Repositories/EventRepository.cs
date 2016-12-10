@@ -12,7 +12,12 @@ namespace DataAccessLayer.Repositories
   
     class EventRepository : IRepository<Event, int>
     {
-        private ApplicationDbContext dbContext = new ApplicationDbContext();
+        private ApplicationDbContext dbContext;
+
+        public EventRepository(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
 
         public void Delete(int id)
         {

@@ -10,7 +10,13 @@ namespace DataAccessLayer.Repositories
 {
     class ClassRoomPropertyRepository : IRepository<ClassRoomProperty, int>
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        ApplicationDbContext dbContext;
+
+        public ClassRoomPropertyRepository(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
+
         public void Delete(int id)
         {
             ClassRoomProperty property = dbContext.ClassRoomProperty.Find(id);
