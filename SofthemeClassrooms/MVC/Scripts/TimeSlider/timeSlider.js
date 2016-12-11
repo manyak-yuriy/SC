@@ -21,6 +21,12 @@ var updateCurrentTime =
             $('#time-now-wrapper').css('visibility', 'visible');
 
         
+        var calDate = $('#jqxWidget').jqxCalendar('getDate');
+        // Hide if not current day is selected in calendar
+        var nowDate = new Date();
+
+        if (calDate.getDate() != nowDate.getDate() | calDate.getMonth() != nowDate.getMonth() || calDate.getYear() != nowDate.getYear())
+            $('#time-now-wrapper').css('visibility', 'hidden');
 
         left = left - scrollOffset;
 
