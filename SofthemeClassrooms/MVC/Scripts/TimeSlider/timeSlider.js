@@ -10,15 +10,17 @@ var updateCurrentTime =
         var nowHours = new Date().getHours() - timetable.scope.hourStart;
         var nowMinutes = new Date().getMinutes();
 
+        var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
 
         var left = (nowHours + nowMinutes / 60) * pxPerHour;
-        /*
-        if (left > $('scrollWrapper').width() || left < 0)
+        var totalWidth = $('.scrollWrapper').width();
+        
+        if (left < scrollOffset || left - scrollOffset > totalWidth)
             $('#time-now-wrapper').css('visibility', 'hidden');
         else
             $('#time-now-wrapper').css('visibility', 'visible');
-*/
-        var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
+
+        
 
         left = left - scrollOffset;
 
