@@ -84,8 +84,11 @@
             </div>
 
             <div class="event-org-info">
-                @Html.LabelFor(p => p.ShowAuthor)
-                <span>@Html.EditorFor(p => p.ShowAuthor)</span>
+                
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree" name="check" />
+                    <label for="slideThree"></label>
+                </div>
 
                 @Html.LabelFor(p => p.OrganizerName)
                 <span>@Html.EditorFor(p => p.OrganizerName)</span>

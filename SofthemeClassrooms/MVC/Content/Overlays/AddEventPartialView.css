@@ -24,14 +24,25 @@
 .event-edit-header
 {
     background-color: #9ea6b4;
-    height: 80px;
+    height: 60px;
     border-radius: 0% 0% 0% 0%;
     padding: 10px;
     font-size: 100%;
+    margin: 1px;
+    padding: 3px;
+    padding-left: 20px;
 }
 
 .event-edit-contents {
     padding: 10px;
+}
+
+.event-edit-contents input
+{
+    border-radius: 2em;
+    outline: none;
+    border: 1px solid lightgrey;
+    width: 200px;
 }
 
 .send-event-form-data {
@@ -51,6 +62,11 @@
 {
     margin: 0px;
     color: white;
+}
+
+.fa:hover
+{
+    color: lightcoral;
 }
 
 .custom-numeric-picker
@@ -126,3 +142,71 @@
     opacity: 1;
 }
 
+
+
+/* SLIDE THREE */
+
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+
+.slideThree {
+	width: 50px;
+	height: 26px;
+	background: transparent;
+	margin: 0px auto;
+    border: 1px solid red;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+
+}
+
+.slideThree:after {
+	content: '';
+	font: 12px/26px Arial, sans-serif;
+	color: #000;
+	position: absolute;
+	left: 7px;
+	z-index: 0;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+}
+
+.slideThree:before {
+	content: '';
+	font: 12px/26px Arial, sans-serif;
+	color: #00bf00;
+	position: absolute;
+	left: 5px;
+	z-index: 0;
+	font-weight: bold;
+}
+
+.slideThree label {
+	display: block;
+	width: 24px;
+	height: 22px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	
+	transition: all .2s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	z-index: 1;
+
+	background: red;
+}
+
+.slideThree input[type=checkbox]:checked + label {
+	left: 23px;
+    background: grey;
+}
