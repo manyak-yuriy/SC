@@ -8,7 +8,11 @@
 
 @using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
 {
+
+
     <div class="event-edit-popup">
+
+
         <div class="event-edit-header">
 
             <div class="custom-numeric-picker month-day-picker">
@@ -43,9 +47,9 @@
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
-            
+
             <div class="custom-delimiter">-</div>
-            
+
 
             <div id="second" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
@@ -66,43 +70,54 @@
         </div>
 
         <div class="event-edit-contents">
-            <span>@Html.EditorFor(p => p.Title)</span>
+
+            <input type="text" name="Title" value="@Model.Title" />
 
             <br />
 
-            <p>
-                @Html.EditorFor(p => p.Description)
-            </p>
+            <textarea rows="8" cols="50">@Model.Description</textarea>
 
             <div class="event-reg-info">
 
-                @Html.LabelFor(p => p.AllowSubscription)
-                @Html.EditorFor(p => p.AllowSubscription)
+                @{
+                    string isPub;
+                    if (@Model.IsPublic)
+                    {
+                        isPub = "checked";
+                    }
 
-                @Html.LabelFor(p => p.IsPublic)
-                <span>@Html.EditorFor(p => p.IsPublic)</span>
+                    else
+                    {
+                        isPub = "";
+                    }
+
+                }
             </div>
 
-            <div class="event-org-info">
-                <div>
-                    <input id="checkbox-3" class="checkbox-custom" name="checkbox-3" type="checkbox">
-                    <label for="checkbox-3" class="checkbox-custom-label">Third Choice</label>
-                </div>
-
-
-                <div class="slideThree">
-                    <input type="checkbox" value="None" id="slideThree" name="check" />
-                    <label for="slideThree"></label>
-                </div>
-
-                @Html.LabelFor(p => p.OrganizerName)
-                <span>@Html.EditorFor(p => p.OrganizerName)</span>
+            <!-- Squared THREE -->
+            <div class="squaredThree">
+                <input type="checkbox" value="" id="squaredThree" name="" @isPub />
+                <label for="squaredThree"></label>
             </div>
+
+            <span>Регистрация желающих</span>
 
         </div>
-        <input type="submit" class="send-event-form-data" value="Add" />
+
+        <div class="event-org-info">
+
+            <div class="slideThree">
+                <input type="checkbox" value="None" id="slideThree" name="check" />
+                <label for="slideThree"></label>
+            </div>
+
+            @Html.LabelFor(p => p.OrganizerName)
+            <span>@Html.EditorFor(p => p.OrganizerName)</span>
+
+            <input type="submit" class="send-event-form-data" value="Add" />
+        </div>
     </div>
-}
+  }
 
 
 
