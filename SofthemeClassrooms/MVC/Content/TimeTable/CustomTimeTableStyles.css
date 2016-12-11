@@ -126,7 +126,7 @@ section {
 #time-now-wrapper {
     position: absolute;
     top: 0px; 
-    left: 10px;
+    left: 0px;
 }
 
 #time-now-wrapper img
@@ -141,5 +141,5 @@ section {
 {
     position: relative;
     top: 254px;
-    left: -28px;
+    left: -20px;
 }
