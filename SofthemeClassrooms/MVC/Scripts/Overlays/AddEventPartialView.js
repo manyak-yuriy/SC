@@ -79,6 +79,49 @@ $('.hour-picker .fa-caret-down').unbind().click(function () {
         $hours.val($hoursValOld);
 });
 
+var getDaysInMonth = function(month,year) {  
+    // Here January is 1 based  
+    //Day 0 is the last day in the previous month  
+    return new Date(year, month, 0).getDate();  
+    // Here January is 0 based  
+    // return new Date(year, month+1, 0).getDate();  
+}
+
+// alert(getDaysInMonth(2, 2017));
+
+$('.month-day-picker .fa-caret-up').unbind().click(function () {
+    var $day = $(this).parent().children('.date-custom-input');
+    var $dayVal = parseInt($day.val());
+
+    $dayVal = $dayVal + 1;
+
+    var month = parseInt($(".month-picker input[type='hidden']").val());
+
+    var dayMax = getDaysInMonth(month + 1, new Date().getYear());
+
+    if ($dayVal > dayMax)
+        $dayVal = 1;
+
+    $day.val($dayVal);
+});
+
+$('.month-day-picker .fa-caret-down').unbind().click(function () {
+    var $day = $(this).parent().children('.date-custom-input');
+    var $dayVal = parseInt($day.val());
+
+    $dayVal = $dayVal -1;
+
+
+    var month = parseInt($(".month-picker input[type='hidden']").val());
+    
+    var dayMax = getDaysInMonth(month + 1, new Date().getYear());
+
+    if ($dayVal < 1)
+        $dayVal = dayMax;
+
+    $day.val($dayVal);
+});
+
 $('.month-picker .fa-caret-up').unbind().click(function () {
     $month = $(".month-picker input[type='hidden']");
     $monthVal = parseInt($month.val()) + 1;
