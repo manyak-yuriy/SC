@@ -16,3 +16,15 @@
         $('#rightTodayInTimeTable').css('visibility', 'visible');
     }
 }
+
+$('#leftTodayInTimeTable').click(function () {
+    var currTimeSliderleft = parseInt($('#time-now-wrapper').css('left'));
+
+    $(".scrollMe").smoothDivScroll("move", currTimeSliderleft - 30);
+});
+
+$('#rightTodayInTimeTable').click(function () {
+    var currTimeSliderleft = parseInt($('#time-now-wrapper').css('left'));
+
+    $(".scrollMe").smoothDivScroll("move", currTimeSliderleft + 30);
+});
