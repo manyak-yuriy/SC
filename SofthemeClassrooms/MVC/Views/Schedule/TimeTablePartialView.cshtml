@@ -34,132 +34,170 @@
 
     </div>
 
-    <div style="display:inline-block !important">
+    <div id="calendar-container" style="display:inline-block !important">
         <div id='jqxWidget' style="display:inline-block !important">
 
         </div>
-        <span id="backTodayInCalendar" href="#">
-            Сегодня
-        </span>
+
+        <div id="calendar-quick-nav">
+            <span id="leftTodayInCalendar" href="#">
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i> Сегодня
+            </span>
+
+            <span id="TodayInCalendar" href="#">
+                Сегодня
+            </span>
+
+            <span id="rightTodayInCalendar" href="#">
+                Сегодня <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </span>
+        </div>
+        
     </div>
-</div> 
+</div>
 
 <!--
     Include all files for calendar widget
 -->
-    <link href="~/JQWidget/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
+<link href="~/JQWidget/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
 
 
-    <script src="~/JQWidget/jqwidgets/jqxcore.js"></script>
- 
-    <script src="~/JQWidget/jqwidgets/jqxdatetimeinput.js"></script>
+<script src="~/JQWidget/jqwidgets/jqxcore.js"></script>
 
-    <script src="~/JQWidget/jqwidgets/jqxcalendar.js"></script>
- 
-    <script src="~/JQWidget/jqwidgets/jqxtooltip.js"></script>
+<script src="~/JQWidget/jqwidgets/jqxdatetimeinput.js"></script>
 
-    <script src="~/JQWidget/jqwidgets/globalization/globalize.js"></script>
+<script src="~/JQWidget/jqwidgets/jqxcalendar.js"></script>
 
+<script src="~/JQWidget/jqwidgets/jqxtooltip.js"></script>
 
-    <script src="~/JQWidget/jqwidgets/globalization/globalize.culture.ru-RU.js"></script>
-
-    <script type="text/javascript">
-
-        var timetable;
-        var renderer;
-
-        var firstLoad = true;
-
-        // Calendar-related scripts
+<script src="~/JQWidget/jqwidgets/globalization/globalize.js"></script>
 
 
-                // create jqxcalendar.
-                $("#jqxWidget").jqxCalendar({ width: 220, height: 220 });
+<script src="~/JQWidget/jqwidgets/globalization/globalize.culture.ru-RU.js"></script>
+
+<script type="text/javascript">
+
+    var timetable;
+    var renderer;
+
+    var firstLoad = true;
+
+    // Calendar-related scripts
 
 
-                $("#jqxWidget").jqxCalendar({ culture: 'ru-RU' });
-
-                // set custom left and right arrows for calendar view
-                $('.jqx-icon-arrow-left').append('<i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>');
-                $('.jqx-icon-arrow-right').append('<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>');
-
-                // set yesterday in calendar
-                $('#date-scroller .fa-caret-left').click(function () {
-                    var calDate = $('#jqxWidget').jqxCalendar('getDate');
-                    calDate.setDate(calDate.getDate() - 1);
-                    $('#jqxWidget').jqxCalendar('setDate', calDate);
-                });
-
-                // set tomorrow in calendar
-                $('#date-scroller .fa-caret-right').click(function () {
-                    var calDate = $('#jqxWidget').jqxCalendar('getDate');
-                    calDate.setDate(calDate.getDate() + 1);
-                    $('#jqxWidget').jqxCalendar('setDate', calDate);
-                });
+    // create jqxcalendar.
+    $("#jqxWidget").jqxCalendar({ width: 220, height: 220 });
 
 
-                // Calendar state changed
-                $('#jqxWidget').on('change viewChange', function (event) {
+    $("#jqxWidget").jqxCalendar({ culture: 'ru-RU' });
 
-                    var date = event.args.date;
+    // set custom left and right arrows for calendar view
+    $('.jqx-icon-arrow-left').append('<i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>');
+    $('.jqx-icon-arrow-right').append('<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>');
 
-                    // Load event data into TimeTable
+    // set yesterday in calendar
+    $('#date-scroller .fa-caret-left').click(function () {
+        var calDate = $('#jqxWidget').jqxCalendar('getDate');
+        calDate.setDate(calDate.getDate() - 1);
+        $('#jqxWidget').jqxCalendar('setDate', calDate);
+    });
 
-                    $.ajax({
-                        url: '@Url.Action("GetEventDataForDay", "Schedule")',
-                        type: "GET",
-                        data: { daySelected: date.toISOString() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data, textStatus, jqXHR) {
-                            //alert(JSON.stringify(data));
-
-                            renderTimeTable(data);
-                        }
-                    });
-
-
-                    var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-                    // Change the state of upper scroller
-                    $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
+    // set tomorrow in calendar
+    $('#date-scroller .fa-caret-right').click(function () {
+        var calDate = $('#jqxWidget').jqxCalendar('getDate');
+        calDate.setDate(calDate.getDate() + 1);
+        $('#jqxWidget').jqxCalendar('setDate', calDate);
+    });
 
 
-                    var selectedMonth = date.getMonth();
-                    var currMonth = new Date().getMonth();
+    // Calendar state changed
+    $('#jqxWidget').on('change viewChange', function (event) {
 
-                    // show or hide a link to current day
-                    if (selectedMonth != currMonth)
-                        $('#backTodayInCalendar').css("display", "inline-block");
-                    else
-                        $('#backTodayInCalendar').css("display", "none");
-                });
+        var date = event.args.date;
 
-                // Get back today on calendar
+        // Load event data into TimeTable
 
-                $('#backTodayInCalendar').click(function () {
-                    $('#jqxWidget').jqxCalendar('setDate', new Date());
-                });
+        $.ajax({
+            url: '@Url.Action("GetEventDataForDay", "Schedule")',
+            type: "GET",
+            data: { daySelected: date.toISOString() },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                //alert(JSON.stringify(data));
+
+                renderTimeTable(data);
+            }
+        });
 
 
-                // Set today for calendar after page load
-                $('#jqxWidget').jqxCalendar('setDate', new Date());
+        var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+        // Change the state of upper scroller
+        $('#date-scroller-value').text(date.getDate() + ", " + days[date.getDay()]);
 
 
-                // Toggle calendar
-                $('.fa-list').click(function () {
-                    $('.fa-align-justify').css('opacity', 0.15);
-                    $(this).css('opacity', 1);
-                    $("#jqxWidget").css("display", "inline-block");
-                });
+        var selectedMonth = date.getMonth();
+        var selectedYear = date.getYear();
+        var currMonth = new Date().getMonth();
+        var currYear = new Date().getYear();
 
-                $('.fa-align-justify').click(function () {
-                    $('.fa-list').css('opacity', 0.15);
-                    $(this).css('opacity', 1);
-                    $("#jqxWidget").css("display", "none");
-                });
-            
-    </script>
-   
+        // show or hide a link to current day's date
+        if (selectedMonth == currMonth && selectedYear == currYear)
+        {
+            $('#TodayInCalendar').css("display", "inline-block");
+            $('#leftTodayInCalendar').css("display", "none");
+            $('#rightTodayInCalendar').css("display", "none");
+        }
+        else
+            if (date > new Date())
+        {
+            $('#TodayInCalendar').css("display", "none");
+            $('#leftTodayInCalendar').css("display", "inline-block");
+            $('#rightTodayInCalendar').css("display", "none");
+        }
+        else
+            if (date < new Date())
+        {
+            $('#TodayInCalendar').css("display", "none");
+            $('#leftTodayInCalendar').css("display", "none");
+            $('#rightTodayInCalendar').css("display", "inline-block");
+        }
+    });
+
+    // Get back today on calendar
+    $('#TodayInCalendar').click(function () {
+        $('#jqxWidget').jqxCalendar('setDate', new Date());
+    });
+
+
+    $('#TodayInCalendar').click(function () {
+        $('#jqxWidget').jqxCalendar('setDate', new Date());
+    });
+
+    $('#TodayInCalendar').click(function () {
+        $('#jqxWidget').jqxCalendar('setDate', new Date());
+    });
+
+
+    // Set today for calendar after page load
+    $('#jqxWidget').jqxCalendar('setDate', new Date());
+
+
+    // Toggle calendar
+    $('.fa-list').click(function () {
+        $('.fa-align-justify').css('opacity', 0.15);
+        $(this).css('opacity', 1);
+        $("#jqxWidget").css("display", "inline-block");
+    });
+
+    $('.fa-align-justify').click(function () {
+        $('.fa-list').css('opacity', 0.15);
+        $(this).css('opacity', 1);
+        $("#jqxWidget").css("display", "none");
+    });
+
+</script>
+
 
 
 <!--
@@ -183,8 +221,16 @@
             var nowHours = new Date().getHours() - timetable.scope.hourStart;
             var nowMinutes = new Date().getMinutes();
 
-            var left = (nowHours + nowMinutes / 60) * pxPerHour;
+            nowHours = 2;
+            nowMinutes = 0;
 
+            var left = (nowHours + nowMinutes / 60) * pxPerHour;
+            /*
+            if (left > $('scrollWrapper').width() || left < 0)
+                $('#time-now-wrapper').css('visibility', 'hidden');
+            else
+                $('#time-now-wrapper').css('visibility', 'visible');
+*/
             var scrollOffset = $(".scrollMe").smoothDivScroll("getScrollerOffset");
 
             left = left - scrollOffset;
@@ -217,13 +263,12 @@
             hours = Math.floor(hoursElapsed);
             var hourFract = hoursElapsed - hours;
             minutes = Math.floor(60 * hourFract);
-
+            mousewheelScrolling:
             var prettyTime = ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes);
 
             $('#selected-time').html(prettyTime);
         }
-    var jDate = function(obj)
-    {
+    var jDate = function (obj) {
         return new Date(parseInt(obj.substr(6)));
     }
 
@@ -235,13 +280,12 @@
             return;
         // Create and init main timetable
         timetable = new Timetable();
-        timetable.setScope(7, 1);
+        timetable.setScope(7, 23);
 
         for (var i = 0; i < data.roomData.length; i++)
             timetable.addLocations([data.roomData[i].classRoomTitle]);
 
-        for (var i = 0; i < data.eventsData.length; i++)
-        {
+        for (var i = 0; i < data.eventsData.length; i++) {
             var e = data.eventsData[i];
             timetable.addEvent(e.Title, e.classRoomTitle,
                 jDate(e.DateStart), jDate(e.DateEnd), {
@@ -256,12 +300,12 @@
 
         renderer = new Timetable.Renderer(timetable);
         if (!firstLoad)
-           $('.timetable').empty();
+            $('.timetable').empty();
         renderer.draw('.timetable');
 
         updateCurrentTime();
 
-        setTimeout(() => { updateCurrentTime(); }, 1000);
+        setTimeout(function () { updateCurrentTime(); }, 1000);
 
         // Display event info in a popup
         // Schedule/GetDisplayEventPartial/10502
@@ -272,7 +316,7 @@
                     url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
                     type: "GET",
                     context: this,
-                    data: { Id:  eventId},
+                    data: { Id: eventId },
                     contentType: "application/json; charset=utf-8",
                     success: function (data, textStatus, jqXHR) {
 
@@ -280,7 +324,7 @@
                         $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '200px').draggable();
 
                         $('.fa-window-minimize').click(function () {
-                                //alert("min");
+                            //alert("min");
                             $(this).parents('.event-display-popup').remove();
                         })
 
@@ -290,10 +334,9 @@
                                 url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
                                 type: "GET",
                                 context: this,
-                                data: { Id:  eventId},
+                                data: { Id: eventId },
                                 contentType: "application/json; charset=utf-8",
-                                success: function (data, textStatus, jqXHR)
-                                {
+                                success: function (data, textStatus, jqXHR) {
                                     $('body').prepend(data);
                                     $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
 
@@ -309,7 +352,7 @@
                                             url: '@Url.Action("CancelEvent", "Schedule")',
                                             type: "POST",
                                             context: this,
-                                            data: "{ 'Id': '" +   eventId + "'}",
+                                            data: "{ 'Id': '" + eventId + "'}",
                                             contentType: "application/json; charset=utf-8",
                                             success: function (data, textStatus, jqXHR) {
                                                 //alert(JSON.stringify(data));
@@ -324,7 +367,7 @@
                                 }
                             });
                         });
-                        
+
                     }
                 }
             );
@@ -339,7 +382,7 @@
         $("#slider").slider();
 
 
-        // 
+        //
         var staticSliderHtml = '<div id="time-now-wrapper"> <img src=' + '../../Images/SliderStatic.png' + ' /> <span id="current-time"> Time now</span> <span>  </span> </div>';
 
 
@@ -348,17 +391,19 @@
         var temp = $('section').wrap("<div class='scrollMe'></div>");
 
         $(".scrollMe").smoothDivScroll({
-            mousewheelScrolling: "allDirections",
+            mousewheelScrolling: "",
             hotSpotScrollingStep: 3
         });
 
         $('.scrollMe').append($('#slider'));
         $('.scrollMe').prepend($(staticSliderHtml));
 
+
+
         // when user stops sliding, update selected time
         $("#slider").slider({
             // slide or change
-            stop: function () { updateCurrentTime(); updateHours();}
+            change: function () { updateCurrentTime(); updateHours(); }
         });
 
 
@@ -387,13 +432,12 @@
 <!--
     Include files for scroller widget
 -->
-        <!-- Latest version of jQuery Mouse Wheel by Brandon Aaron
-                 You will find it here: http://brandonaaron.net/code/mousewheel/demos -->
-        <script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.mousewheel.min.js"></script>
+<!-- Latest version of jQuery Mouse Wheel by Brandon Aaron
+         You will find it here: http://brandonaaron.net/code/mousewheel/demos -->
+<script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.mousewheel.min.js"></script>
 
-        <!-- jQuery Kinetic - for touch -->
-        <script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.kinetic.min.js"></script>
+<!-- jQuery Kinetic - for touch -->
+<script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.kinetic.min.js"></script>
 
-        <!-- Smooth Div Scroll 1.3 minified -->
-        <script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.smoothdivscroll-1.3-min.js"></script>
-        
+<!-- Smooth Div Scroll 1.3 minified -->
+<script src="~/Scripts/Smooth-Div-Scroll-master/js/jquery.smoothdivscroll-1.3-min.js"></script>

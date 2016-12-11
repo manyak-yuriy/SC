@@ -134,5 +134,12 @@ section {
     height: 1380% !important;
     position: absolute;
     top: -17px;
-    left: -26px;
+    left: -16px;
+}
+
+#current-time
+{
+    position: relative;
+    top: 254px;
+    left: -28px;
 }
