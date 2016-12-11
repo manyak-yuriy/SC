@@ -92,32 +92,36 @@
                     }
 
                 }
-            </div>
 
-            <!-- Squared THREE -->
-            <div class="squaredThree">
-                <input type="checkbox" value="" id="squaredThree" name="" @isPub />
-                <label for="squaredThree"></label>
-            </div>
+                <div class="reg-info">
+                    <!-- Squared THREE -->
+                    <div class="squaredThree">
+                        <input type="checkbox" value="" id="squaredThree" name="IsPublic" @isPub />
+                        <label for="squaredThree"></label>
+                    </div>
 
-            <span>Регистрация желающих</span>
+                    <span>Регистрация желающих</span>
+                </div>
+
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree" name="check" />
+                    <label for="slideThree"></label>
+                </div>
+                
+            </div>
 
         </div>
 
         <div class="event-org-info">
 
-            <div class="slideThree">
-                <input type="checkbox" value="None" id="slideThree" name="check" />
-                <label for="slideThree"></label>
-            </div>
+            
 
-            @Html.LabelFor(p => p.OrganizerName)
-            <span>@Html.EditorFor(p => p.OrganizerName)</span>
+            <input type="text" readonly class="org-name-input" name="OrganizerName" value="@Model.OrganizerName"/>
 
-            <input type="submit" class="send-event-form-data" value="Add" />
         </div>
+        <input type="button" class="send-event-form-data" value="Создать" />
     </div>
-  }
+}
 
 
 

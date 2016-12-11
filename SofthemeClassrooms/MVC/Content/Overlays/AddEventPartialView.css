@@ -44,6 +44,7 @@
     width: 90% !important;
     margin: 10px;
     padding: 10px;
+    height: 40px;
 }
 
 .event-edit-contents textarea
@@ -292,4 +293,21 @@ input[type=checkbox] {
 .squaredThree
 {
     display: inline-block;
+}
+
+
+.send-event-form-data
+{
+    border: none;
+    background-color: tomato;
+    width: 170px;
+    height: 40px;
+    float: right;
+    border-radius: 2em;
+    color: white;
+}
+
+.send-event-form-data:hover
+{
+    background-color: red;
 }
