@@ -1,31 +1,42 @@
 ﻿@model WebApplication1.Models.PersonalDataViewModel
 
-<link href="~/Content/customswitch.css" rel="stylesheet" />
 
-@using(Ajax.BeginForm("ChangePersonalInfo", "UserManagment", new AjaxOptions()
+@*new AjaxOptions()
 {
     HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "pInfo"
-}))
+})*@
+
+@using (Html.BeginForm("ChangePersonalInfo", "UsersManagment", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" value="@Model.NumberOfEvents" name="NumberOfEvents" />
     <div>
         @Html.ValidationMessageFor(m => m.Name, "")
         @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
     </div>
-    
+
     <div>
         @Html.ValidationMessageFor(m => m.Email, "")
         @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
     </div>
     <div>
-        @if (User.IsInRole("admin"))
+        @if (Model.Is_Admin)
         {
-            <input type="checkbox" checked/>
+            <input type="checkbox" name="Is_Admin" checked />
         }
-        Администратор
-    </div>
-    <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton"/>
+        else
+        {
+            <input type="checkbox" name="Is_Admin"/>
+        }
+            Администратор
+        </div>
+
+
+
+
+            <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton" />
 }

@@ -177,7 +177,6 @@ namespace WebApplication1.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        [NonAuthorized]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)

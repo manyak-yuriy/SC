@@ -18,17 +18,5 @@
 </div>
 
 <div id="piEditor" class="invisibleBlock">
-    @using (Html.BeginForm())
-    {
-        @Html.EditorFor(m => m.Name, new { htmlattributes = new { @class = "changeData" } })
-        @Html.EditorFor(m => m.Email, new { htmlattributes = new { @class = "changeData" } })
-
-        if (Model.Is_Admin)
-        {
-            @Html.EditorFor(m => m.Is_Admin)
-            <span>Администратор</span>
-        }
-        <br/>
-        <input class="userPagebuttton" type="submit" value="Сохранить"/>
-    }
+  @Html.Partial("ChangePersonalDataPView")
 </div>

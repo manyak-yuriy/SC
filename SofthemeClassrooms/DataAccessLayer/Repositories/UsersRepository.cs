@@ -20,7 +20,7 @@ namespace DataAccessLayer.Repositories
 
         public void Delete(string id)
         {
-            var user = dbContext.Users.Find(id);
+            var user = dbContext.Users.Where(c => c.Id == id).FirstOrDefault();
             if(user != null)
             {
                 dbContext.Users.Remove(user);

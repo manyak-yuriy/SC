@@ -6,16 +6,19 @@
 }
 
 
+
 <div class="container">
     <div class="col-lg-8 col-lg-offset-1">
         <h2>Список пользователей</h2>
         <div>
             <span>Всего: @Model.item2.Count()</span>
-            <div>
-                @using (Html.BeginForm())
+            <div class="searchForm">
+                @using (Html.BeginForm("Search", "UserManagment"))
                 {
-                    <input id="user-search" type="search" placeholder="Поиск" />
-                    <input type="submit" value="search"/>
+                    <input id="user-search" type="search" placeholder="Поиск" onkeyup="SendChecker()" />
+                    <button id="searchButton" type="submit" onsubmit="ValidateSearchInput" disabled>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
                 }
             </div>
         </div>
@@ -39,7 +42,7 @@
                             @Html.Partial("DeletePersonPopup", new WebApplication1.Models.Pair<System.Int32, System.String>
                             {
                                 item1 = i,
-                                item2 = u.Email
+                                item2 = u.Id
                             })
                         </div>
                     </li>
@@ -48,6 +51,10 @@
             }
         </ul>
     </div>
+</div>
+
+<div id="pageLinks" class="btn-group">
+    @WebApplication1.HtmlHelpers.Pagination.PageLinks(Model.item1, x => Url.Action("Users", new { page = x }))
 </div>
 
 @section MenuItemActive{

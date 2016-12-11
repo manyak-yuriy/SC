@@ -43,11 +43,26 @@
     margin: 0;
 }
 
-#user-search{
+
+.searchForm{
     float: right;
-    border-radius: 4px;
     border: 1px solid silver;
+    border-radius: 4px;
     padding: 2px 4px;
+}
+
+#user-search{
+    float: left;
+    border: none;
+}
+
+#user-search:focus{
+    border: none;
+}
+
+#searchButton {
+    background-color: white;
+    border-style: none;
 }
 
 .b-popup {

@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using ManagementServices.Interfaces;
+using ManagementServices.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -64,7 +65,14 @@ namespace ManagementServices.Implementations
                 appUser.Email = user.Email;
                 appUser.UserName = user.Email;
                 appUser.Claims.Where(c => c.ClaimValue == ClaimTypes.Name).First().ClaimValue = user.FullName;
-                //Here should be added the role update code
+
+                var role = appUser.Roles.FirstOrDefault();
+                var admin = db.Roles.Where(r => r.Name == "admin").FirstOrDefault();
+                if (user.Role == "admin" && role.RoleId != admin.Id)
+                {
+                    role.RoleId = admin.Id;
+                }
+
                 db.Users.Update(appUser);
             }
         }

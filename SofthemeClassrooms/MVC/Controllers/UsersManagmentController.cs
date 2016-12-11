@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ManagementServices.Implementations;
+using ManagementServices.Models;
 using WebApplication1.Models;
 using System.Web;
 using Microsoft.AspNet.Identity;
@@ -43,6 +44,7 @@ namespace WebApplication1.Controllers
             return PartialView("ChangePersonalDataPView", new PersonalDataViewModel() { Email = Session["UserEmail"] as string, Name = Session["UserName"] as string });
         }
 
+        [HttpPost]
         public ActionResult ChangePersonalInfo(PersonalDataViewModel model)
         {
             if (model.Email == null || model.Name == null)
@@ -55,7 +57,8 @@ namespace WebApplication1.Controllers
                 return PartialView("ChangePersonalDataPView", model);
             }
 
-            ///Here Should be code to change personal data
+            AppUsersManager manager = new AppUsersManager();
+            manager.UpdateUser(model.ToUserInfo());
 
             return PartialView("PersonalInfoPView");
         }
@@ -120,6 +123,13 @@ namespace WebApplication1.Controllers
             });
         }
 
+        public ActionResult Search(string pattern)
+        {
+            
+
+            return View();
+        }
+
         public ActionResult ChangeUserInfoView(PersonalDataViewModel model)
         {
             return PartialView(model);
@@ -133,11 +143,12 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult DeleteUser(string email)
+        public ActionResult DeleteUser(string Id)
         {
-            if (User.Identity.Name != email)
+            if (User.Identity.GetUserId() != Id)
             {
-                //DeletePerson
+                AppUsersManager manager = new AppUsersManager();
+                manager.DeleteUser(Id);
             }
 
             return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary

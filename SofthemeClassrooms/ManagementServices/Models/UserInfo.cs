@@ -1,6 +1,6 @@
 ﻿using ManagementServices.Interfaces;
 
-namespace ManagementServices.Implementations
+namespace ManagementServices.Models
 {
     public class UserInfo
     {
