@@ -10,40 +10,16 @@
     <button class="userPagebuttton"  onclick="DeleteUserPopupShow('1')">Удалить</button>
 </div>
 
-<div id="1" class="b-popup">
-    <div class="b-popup-content">
-        <div class="popup-upper-plane">
-            <i class="fa fa-ban" aria-hidden="true"></i>
-            Вы уверены, что хотите удалить пользователя?
-        </div>
-        <p class="deleteMessage">Все события, запланированые этим пользователем, будут отменены.</p>
-        <div>
-            <div class="NoBlock">
-                <button onclick="DeleteUserPopupHide('1')" class="button No">Нет</button>
-            </div>
-            <div class="YesBlock">
-                <button class="button Yes">Да</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+@Html.Partial("DeletePersonPopup",new WebApplication1.Models.Pair<System.Int32, System.String>
+{
+    item1 = 1,
+    item2 = Model.Email
+})
 
 <div class="container">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div id="pInfo">
-            <div>
-                <h2>@Html.DisplayFor(m => m.Name)</h2>
-                @if (Model.Is_Admin)
-                {
-                    <span id="adminLabel">admin</span>
-                }
-                @Html.HiddenFor(m => m.Is_Admin)
-                <br />
-                <strong>Email:</strong><span>@Html.DisplayFor(m => m.Email)</span>
-                <br /><br />
-                <strong>Количество активных событий:</strong> <span>@Model.NumberOfEvents</span>
-            </div>
+            @Html.Partial("PersonalInfoPView")
         </div>
     </div>
 </div>

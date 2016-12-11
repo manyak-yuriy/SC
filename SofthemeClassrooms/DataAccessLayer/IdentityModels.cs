@@ -22,7 +22,9 @@ namespace DataAccessLayer
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(): base("SSC", throwIfV1Schema: false)
+
         {
+           
         }
 
         public virtual DbSet<ClassRoom> ClassRoom { get; set; }
@@ -60,36 +62,7 @@ namespace DataAccessLayer
                 .HasMany(e => e.ForeignVisitor)
                 .WithRequired(e => e.Event)
                 .WillCascadeOnDelete(false);
-
-        }
-    }
-
-    public class DbRepository
-    {
-        ApplicationDbContext context = new ApplicationDbContext();
-
-        public IEnumerable<Event> Events
-        {
-            get
-            { 
-                return context.Event;
-            }
-        }
-
-        public IEnumerable<ApplicationUser> Users
-        {
-            get
-            {
-                return context.Users;
-            }
-        }
-
-        public IEnumerable<IdentityRole> Roles
-        {
-            get
-            {
-                return context.Roles;
-            }
+            
         }
     }
 }

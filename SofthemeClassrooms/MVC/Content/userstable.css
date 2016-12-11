@@ -17,6 +17,7 @@
 }
 
 .delete{
+    visibility: hidden;
     border-style: none;
     background-color: white;
     color: silver;
@@ -24,6 +25,7 @@
 
 .usersTableRow:hover .delete{
     background-color: #f4f5f6; 
+    visibility: initial;
 }
 
 .usersTableRow a{
@@ -73,6 +75,7 @@
     padding: 0;
     background-color: white;
     box-shadow: 0px 0px 10px #000;
+    z-index: auto;    
 }
 
 .popup-upper-plane {

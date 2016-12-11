@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementServices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Interfaces
 {
-    interface IFeedback
+    interface IFeedbackSender
     {
-        void SendMessage(string message, string Name, string LName, string email);
+        void SendFeedback(FeedBackDTO feedback);
     }
 }

@@ -18,29 +18,7 @@ namespace WebApplication1.Controllers
         // Render main page
         [HttpGet]
         public ActionResult ShowSchedule()
-        {       
-             /*
-            var eq = new Equipment { Title = "TV", ImagePath = "F:" };
-            db.Equipment.AddOrUpdate(e => e.Title, eq);
-
-            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-
-            var classRoom = new ClassRoom { Title = "Einstein", Capacity = 45, IsBookable = true};
-
-            db.ClassRoom.AddOrUpdate(c => c.Title, classRoom);
-
-            var startsAt = new DateTime(2016, 12, 08) + new TimeSpan(18, 20, 0);
-            var endsAt = new DateTime(2016, 12, 08) + new TimeSpan(19, 10, 0);
-
-            var ev = new Event { ClassroomId = classRoom.Id, AllowSubscription = true, ApplicationUserID = User.Identity.GetUserId(), DateStart = startsAt, DateEnd = endsAt, Title = "Quest", Description = "Unknown destination and characters", IsPublic = true};
-
-            db.Event.AddOrUpdate(e => e.Title, ev);
-            
-            var fb = db.Feedback.ToList();
-            */
-            db.SaveChanges();
-            
+        {
             return View();
         }
 
