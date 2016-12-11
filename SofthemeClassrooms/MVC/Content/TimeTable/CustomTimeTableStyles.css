@@ -1,11 +1,9 @@
 ﻿
-.public-event .private-event
-{
+.public-event .private-event {
     text-align: center !important;
 }
 
-.public-event
-{
+.public-event {
     background-color: #f95748 !important;
 }
 
@@ -18,99 +16,78 @@
     background-position: center;
 }
 
-time
-{
-    
+time {
 }
 
-.time-entry
-{
+.time-entry {
     margin-top: 1px !important;
     line-height: 80% !important;
     text-align: center !important;
-
 }
 
-.room-timeline li
-{
+.room-timeline li {
     height: 50px !important;
     border: 1px solid #d4dfe8 !important;
     border-collapse: collapse !important;
     background-color: white !important;
 }
 
-.room-timeline
-{
-    
+.room-timeline {
 }
 
-time header li
-{
+time header li {
     border: 1px solid #d4dfe8 !important;
     border-collapse: collapse !important;
 }
 
-.timetable header
-{
-    
+.timetable header {
 }
 
-.timetable aside li
-{
+.timetable aside li {
     height: 50px !important;
 }
 
-.timetable aside li
-{
+.timetable aside li {
     border: 2px solid #d4dfe8;
     border-collapse: collapse;
     background-color: white !important;
 }
 
-.timetable section
-{
+.timetable section {
     margin: 0px !important;
 }
 
-aside
-{
+aside {
     background-color: white;
     margin-right: 0px !important;
 }
 
-aside ul
-{
-    top: -12px !important;
-    position: relative;
-}
+    aside ul {
+        top: -12px !important;
+        position: relative;
+    }
 
-.timetable aside
-{
+.timetable aside {
     width: 200px !important;
 }
 
-header li span
-{
+header li span {
     color: darkgray !important;
 }
 
-*
-{
+* {
     border-collapse: collapse !important;
 }
 
-header li, header ul, header
-{
+header li, header ul, header {
     height: 35px !important;
 }
 
-header li
-{
-    border-right: none;
-}
- 
-.time-label
-{
+    header li {
+        border-right: none;
+    }
+
+.time-label {
     left: 5px !important;
     font-size: 130% !important;
     height: 30px !important;
@@ -119,36 +96,57 @@ header li
 
 /*Slider*/
 
-section
-{
+section {
     display: inline-block !important;
 }
 
 
-.scrollableArea
-{
+.scrollableArea {
     width: 2000px !important;
     height: 300px !important;
 }
 
-.scrollWrapper
-{
-
+.scrollWrapper {
 }
 
 
-section
-        {
-            overflow: hidden !important;
-        }
+section {
+    overflow: hidden !important;
+}
 
-        .scrollMe
-        {
-            position: relative !important;
-    
-            width: 650px !important;
-            
+.scrollMe {
+    position: relative !important;
+    width: 650px !important;
+    display: inline-block !important;
+}
 
-            display: inline-block !important;
-        }
 
+
+
+#time-now-wrapper {
+    position: absolute;
+    top: 0px; 
+    left: 0px;
+}
+
+#time-now-wrapper img
+{
+    height: 276px !important;
+    position: absolute;
+    top: -17px;
+    left: -16px;
+}
+
+#current-time
+{
+    position: relative;
+    top: 254px;
+    left: -20px;
+}
+
+#time-now-label
+{
+    position: relative;
+    top: 274px;
+    left: -65px;
+}
