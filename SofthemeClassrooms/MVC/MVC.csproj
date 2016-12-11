@@ -387,6 +387,7 @@
     <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery.mousewheel.js" />
     <Content Include="Scripts\Smooth-Div-Scroll-master\js\source\jquery.smoothDivScroll-1.3.js" />
     <Content Include="Scripts\TimeSlider\timeSlider.js" />
+    <Content Include="Scripts\TimeTableControls\timeTableControls.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="TimeTablePlugin\.gitattributes" />
     <Content Include="TimeTablePlugin\.gitignore" />
