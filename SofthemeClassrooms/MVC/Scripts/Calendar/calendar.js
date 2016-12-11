@@ -30,6 +30,16 @@
         $('#jqxWidget').jqxCalendar('setDate', calDate);
     });
 
+// get left to the current month
+
+    $('#leftTodayInCalendar').click(function () {
+        $('#jqxWidget').jqxCalendar('setDate', new Date());
+    });
+// get right to the current month
+    $('#rightTodayInCalendar').click(function () {
+        $('#jqxWidget').jqxCalendar('setDate', new Date());
+    });
+
 
     // Calendar state changed
     $('#jqxWidget').on('change viewChange', function (event) {

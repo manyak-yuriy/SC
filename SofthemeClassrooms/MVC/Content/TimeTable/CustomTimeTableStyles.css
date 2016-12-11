@@ -143,3 +143,10 @@ section {
     top: 254px;
     left: -20px;
 }
+
+#time-now-label
+{
+    position: relative;
+    top: 274px;
+    left: -65px;
+}
