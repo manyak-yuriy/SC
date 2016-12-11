@@ -11,6 +11,7 @@ namespace DataAccessLayer
     public class UnitOfWork : IDisposable
     {
         private ApplicationDbContext context = new ApplicationDbContext();
+
         private ClassroomRepository _classroooms;
         private ClassRoomPropertyRepository _classroomProperties;
         private EquipmentRepository _equipment;
