@@ -62,7 +62,7 @@
     <Compile Include="Implementations\EventManagement.cs" />
     <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Implementations\UserInfo.cs" />
-    <Compile Include="Implementations\UserManager.cs" />
+    <Compile Include="Implementations\AppUserManager.cs" />
     <Compile Include="Interfaces\EventManagement.cs" />
     <Compile Include="Interfaces\IEventManager.cs" />
     <Compile Include="Interfaces\IFeedbackSender.cs" />

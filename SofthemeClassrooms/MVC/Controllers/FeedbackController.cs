@@ -25,7 +25,12 @@ namespace WebApplication1.Controllers
             FeedbackSender sender = new FeedbackSender();
             sender.SendFeedback(feedback);
 
-            return PartialView("SendFeedbackForm", null);
+            model.Email = "";
+            model.LastName = "";
+            model.Message = "";
+            model.Email = "";
+
+            return PartialView("SendFeedbackForm", model);
         }
     }
 }

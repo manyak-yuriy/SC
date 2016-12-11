@@ -207,8 +207,15 @@
     </Compile>
     <Compile Include="HtmlHelpers\Pagination.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\Pair.cs" />
+    <Compile Include="Models\PersonalDataViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
@@ -270,6 +277,29 @@
     <Content Include="Content\TimeTable\scrollerAndSlider.css" />
     <Content Include="Content\TimeTable\timeTableControls.css" />
     <Content Include="Content\userstable.css" />
+    <Content Include="Images\contact-bg.png" />
+    <Content Include="Images\Extracted\Einstein\EinsteinAvailable.png" />
+    <Content Include="Images\Extracted\Einstein\EinsteinBooked.png" />
+    <Content Include="Images\Extracted\Einstein\EinsteinDisabled.png" />
+    <Content Include="Images\Extracted\EnglishOffice\EnglishOffice.png" />
+    <Content Include="Images\Extracted\English\EnglishDisabled.png" />
+    <Content Include="Images\Extracted\HROffice\HROffice.png" />
+    <Content Include="Images\Extracted\HROffice\HROfficeBooked.png" />
+    <Content Include="Images\Extracted\InfoCenter\InfoCenter.png" />
+    <Content Include="Images\Extracted\Marketing1\Marketing1.png" />
+    <Content Include="Images\Extracted\Marketing2\Marketing2.png" />
+    <Content Include="Images\Extracted\Marketing3\Marketing3.png" />
+    <Content Include="Images\Extracted\Newton\NewtonAvailable.png" />
+    <Content Include="Images\Extracted\Newton\NewtonBooked.png" />
+    <Content Include="Images\Extracted\Newton\NewtonDisabled.png" />
+    <Content Include="Images\Extracted\Other\icon-lock.png" />
+    <Content Include="Images\Extracted\PropPane\PropPane.png" />
+    <Content Include="Images\Extracted\Tesla\TeslaAvailable.png" />
+    <Content Include="Images\Extracted\Tesla\TeslaBooked.png" />
+    <Content Include="Images\Extracted\Tesla\TeslaDisabled.png" />
+    <Content Include="Images\Extracted\Tesla\TeslaGrey.png" />
+    <Content Include="Images\icon-board.png" />
+    <Content Include="Images\icon-laptop.png" />
     <Content Include="Images\icon-lock.png" />
     <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
@@ -318,8 +348,41 @@
     <Content Include="Content\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Images\Extracted\Einstein\EinsteinDisabled.psd" />
+    <Content Include="Images\Extracted\PropPane.psd" />
+    <Content Include="Images\Extracted\Tesla\NewTesla.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\icon-print.png" />
+    <Content Include="Images\icon-proect.png" />
+    <Content Include="Images\icon-table.png" />
+    <Content Include="Images\LineDetails\line-details-einstein.png" />
+    <Content Include="Images\LineDetails\line-details-empty.png" />
+    <Content Include="Images\LineDetails\line-details-english.png" />
+    <Content Include="Images\LineDetails\line-details-hr.png" />
+    <Content Include="Images\LineDetails\line-details-info.png" />
+    <Content Include="Images\LineDetails\line-details-newton.png" />
+    <Content Include="Images\LineDetails\line-details-tesla.png" />
+    <Content Include="Images\LineDetails\line-details-web-1.png" />
+    <Content Include="Images\LineDetails\line-details-web-2.png" />
+    <Content Include="Images\LineDetails\line-details-web-3.png" />
+    <Content Include="Images\logo-gray.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\NewEvent.png" />
+    <Content Include="Images\Path\path-einstein.png" />
+    <Content Include="Images\Path\path-empty.png" />
+    <Content Include="Images\Path\path-hr.png" />
+    <Content Include="Images\Path\path-ienglish.png" />
+    <Content Include="Images\Path\path-info.png" />
+    <Content Include="Images\Path\path-newton.png" />
+    <Content Include="Images\Path\path-tesla.png" />
+    <Content Include="Images\Path\path-web-1.png" />
+    <Content Include="Images\Path\path-web-2.png" />
+    <Content Include="Images\Path\path-web-3.png" />
+    <Content Include="Images\person.png" />
+    <Content Include="Images\popup-triangle.png" />
     <Content Include="Images\Slider.png" />
+    <Content Include="Images\SliderStatic.png" />
+    <Content Include="Images\walls.png" />
     <Content Include="Scripts\MyScripts.js" />
     <Content Include="Images\today-active-bottom.png" />
     <Content Include="Images\today-active-top.png" />
@@ -458,7 +521,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\App_LocalResources\" />
     <Folder Include="JQWidget\" />
     <Folder Include="Views\Resources\" />
   </ItemGroup>
@@ -500,7 +562,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50270</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50270/</IISUrl>
+          <IISUrl>http://localhost:4356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DataAccessLayer
 {
@@ -86,7 +87,7 @@ namespace DataAccessLayer
                 {
                     _foreignVisitors = new ForeignVisitorRepository(context);
                 }
-
+                
                 return _foreignVisitors;
             }
         }
@@ -99,8 +100,16 @@ namespace DataAccessLayer
                 {
                     _users = new UsersRepository(context);
                 }
-
+                
                 return _users;
+            }
+        }
+
+        public IQueryable<IdentityRole> Roles
+        {
+            get
+            {
+                return context.Roles;
             }
         }
 
