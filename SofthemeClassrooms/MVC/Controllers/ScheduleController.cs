@@ -97,6 +97,17 @@ namespace WebApplication1.Controllers
             var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
             var errors = new ErrorModel();
 
+            if (!ModelState.IsValid)
+            {
+                var errorList = (from item in ModelState.Values
+                                 from error in item.Errors
+                                 select error.ErrorMessage).ToList();
+
+                foreach (string s in errorList)
+                    errors.Errors.Add(s);
+            }
+                
+
             if (classRoom == null)
             {
                 errors.Errors.Add("Specified room does not exist");
