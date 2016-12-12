@@ -9,7 +9,7 @@
     border: none;
     background-color: transparent;
     border: none !important;
-    z-index: 101;
+    z-index: 102;
 }
 
     #custom-handle:active {
