@@ -123,6 +123,7 @@
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");
+                    setTimeout(function () {$('.val-errors').css("display", "none");}, 1000);
                 }
             }
         });
