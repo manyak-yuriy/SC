@@ -21,10 +21,14 @@ $('#leftTodayInTimeTable').click(function () {
     var currTimeSliderleft = parseInt($('#time-now-wrapper').css('left'));
 
     $(".scrollMe").smoothDivScroll("move", currTimeSliderleft - 30);
+
+    setTimeout(function () { updateCurrentTime(); updateHours(); checkTimeTableQuickNavState(); }, 500);
 });
 
 $('#rightTodayInTimeTable').click(function () {
     var currTimeSliderleft = parseInt($('#time-now-wrapper').css('left'));
 
     $(".scrollMe").smoothDivScroll("move", currTimeSliderleft + 30);
+
+    setTimeout(function () { updateCurrentTime(); updateHours(); checkTimeTableQuickNavState(); }, 500);
 });
