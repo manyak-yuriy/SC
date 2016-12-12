@@ -1,42 +1,32 @@
 ﻿@model WebApplication1.Models.PersonalDataViewModel
+@using WebApplication1.HtmlHelpers
 
 
-@*new AjaxOptions()
-{
-    HttpMethod = "POST",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "pInfo"
-})*@
-
-@using (Html.BeginForm("ChangePersonalInfo", "UsersManagment", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="hidden" value="@Model.NumberOfEvents" name="NumberOfEvents" />
-    <div>
-        @Html.ValidationMessageFor(m => m.Name, "")
-        @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
-    </div>
-
-    <div>
-        @Html.ValidationMessageFor(m => m.Email, "")
-        @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
-    </div>
-    <div>
-        @if (Model.Is_Admin)
-        {
-            <input type="checkbox" name="Is_Admin" checked />
-        }
-        else
-        {
-            <input type="checkbox" name="Is_Admin"/>
-        }
-            Администратор
+<div id="ChangePersonalInfo">
+    @using (Ajax.BeginForm("ChangePersonalInfo", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "pInfo",
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" value="@Model.NumberOfEvents" name="NumberOfEvents" />
+        <div>
+            @Html.RedValidationMessageFor(m => m.Name)
+            @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
         </div>
 
-
-
-
-            <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton" />
-}
+        <div>
+            @Html.RedValidationMessageFor(m => m.Email)
+            @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
+        </div>
+        <div>
+            @Html.EditorFor(m => m.Is_Admin)
+            Администратор
+        </div>
+        <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton" />
+    }
+</div>

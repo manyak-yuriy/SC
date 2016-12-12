@@ -1,4 +1,5 @@
 ﻿@model WebApplication1.Models.RegisterViewModel
+@using WebApplication1.HtmlHelpers;
 
 @using (Ajax.BeginForm("Register", "Account", new AjaxOptions()
 {
@@ -10,20 +11,20 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
     <div>
-        @Html.ValidationMessageFor(model => model.FullName, "")
+        @Html.RedValidationMessageFor(model => model.FullName)
         @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })
     </div>
 
     <div>
-        @Html.ValidationMessageFor(model => model.Email, "")
+        @Html.RedValidationMessageFor(model => model.Email)
         @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
     </div>
     <div>
-        @Html.ValidationMessageFor(model => model.Password, "")
+        @Html.RedValidationMessageFor(model => model.Password)
         @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
     </div>
     <div>
-        @Html.ValidationMessageFor(model => model.ConfirmPassword, "")
+        @Html.RedValidationMessageFor(model => model.ConfirmPassword)
         @Html.EditorFor(model => model.ConfirmPassword, "", new { htmlattributes = new { placeholder = " Повторить пароль", @class = "custom-input" } })
     </div>
 

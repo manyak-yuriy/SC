@@ -91,3 +91,8 @@ li.menu-item-active{
     float: right;
     width: 50%;
 }
+
+.red-error{
+    font-size: 10px;
+    color: red;
+}

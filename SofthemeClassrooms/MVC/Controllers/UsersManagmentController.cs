@@ -51,6 +51,7 @@ namespace WebApplication1.Controllers
             {
                 return PartialView("ChangePersonalDataPView", new PersonalDataViewModel() { Email = Session["UserEmail"] as string, Name = Session["UserName"] as string });
             }
+            
 
             if (!ModelState.IsValid)
             {
@@ -60,7 +61,13 @@ namespace WebApplication1.Controllers
             AppUsersManager manager = new AppUsersManager();
             manager.UpdateUser(model.ToUserInfo());
 
-            return PartialView("PersonalInfoPView");
+            if(model.Id == User.Identity.GetUserId())
+            {
+                Session["UserName"] = model.Name;
+                Session["User"] = model;
+            }
+
+            return PartialView("PersonalInfoPView", model);
         }
 
         public ActionResult ChangePasswordView()
@@ -108,7 +115,8 @@ namespace WebApplication1.Controllers
             }
 
             var usersInfo = m.GetUsersInfo(page, itemsPerPage);
-            var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo);
+            var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo).ToList();
+
             PageInfo pageInfo = new PageInfo
             {
                 ItemsPerPage = itemsPerPage,

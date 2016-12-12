@@ -23,8 +23,8 @@ function SendSuccess()
 }
 
 function SendChecker() {
-    var searchInput = $('#user-search').val;
-    if (searchInput.lenght > 0) {
+    var searchInput = $('#user-search:input').val;
+    if (searchInput == "") {
         $('#searchButton').prop('disabled', true);
     }
     else {

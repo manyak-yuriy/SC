@@ -123,4 +123,18 @@
     background: silver;
 }
 
+.buttonLink {
+    color: black;
+    padding: 3px 2px;
+}
+
+link-active{
+    text-decoration: solid;
+    font-size: 20px;
+}
+
+#pageLinks{
+    margin-left: 50%;
+}
+
 

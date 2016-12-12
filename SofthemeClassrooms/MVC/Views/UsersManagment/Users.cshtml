@@ -1,4 +1,5 @@
 ﻿@using WebApplication1.Models;
+@using WebApplication1.HtmlHelpers;
 @model Pair<PageInfo, IEnumerable<WebApplication1.Models.PersonalDataViewModel>>
 
 @{
@@ -24,7 +25,7 @@
         </div>
         <ul class="userTable">
             @{
-                    int i = 0;
+                int i = 0;
                 foreach (var u in Model.item2)
                 {
                     <li>
@@ -40,22 +41,23 @@
                             </div>
 
                             @Html.Partial("DeletePersonPopup", new WebApplication1.Models.Pair<System.Int32, System.String>
-                            {
-                                item1 = i,
-                                item2 = u.Id
-                            })
+                       {
+                           item1 = i,
+                           item2 = u.Id
+                       })
                         </div>
                     </li>
                     ++i;
                 }
             }
         </ul>
+        <div id="pageLinks" class="btn-group">
+            @Html.PageLinks(Model.item1, x => Url.Action("Users", new { page = x }))
+        </div>
     </div>
 </div>
 
-<div id="pageLinks" class="btn-group">
-    @WebApplication1.HtmlHelpers.Pagination.PageLinks(Model.item1, x => Url.Action("Users", new { page = x }))
-</div>
+
 
 @section MenuItemActive{
     <script>

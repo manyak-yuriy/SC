@@ -46,7 +46,7 @@ namespace DataAccessLayer.Repositories
 
         public void Update(ApplicationUser item)
         {
-            var user = dbContext.Users.Find(item);
+            var user = dbContext.Users.Find(item.Id);
             if(user != null)
             {
                 dbContext.Entry(item).State = System.Data.Entity.EntityState.Modified;

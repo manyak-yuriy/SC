@@ -201,11 +201,13 @@
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersManagmentController.cs" />
+    <Compile Include="Filters\ExceptionHandlerAttribute.cs" />
     <Compile Include="Filters\NonAuthorizedAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\Pagination.cs" />
+    <Compile Include="HtmlHelpers\Validation.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\ExternalLoginConfirmationViewModel.cs" />
@@ -946,13 +948,13 @@
     <Content Include="Views\Schedule\Overlays\AddEventPartialView.cshtml" />
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
-    <Content Include="Views\UsersManagment\ChangeUserInfoView.cshtml" />
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

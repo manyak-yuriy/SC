@@ -64,7 +64,7 @@ namespace ManagementServices.Implementations
             {
                 appUser.Email = user.Email;
                 appUser.UserName = user.Email;
-                appUser.Claims.Where(c => c.ClaimValue == ClaimTypes.Name).First().ClaimValue = user.FullName;
+                appUser.Claims.Where(c => c.ClaimType == ClaimTypes.Name).FirstOrDefault().ClaimValue = user.FullName;
 
                 var role = appUser.Roles.FirstOrDefault();
                 var admin = db.Roles.Where(r => r.Name == "admin").FirstOrDefault();
