@@ -6,12 +6,10 @@
 
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
+@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post, new { @class = "edit-event-form"}))
 {
 
-
     <div class="event-edit-popup">
-
 
         <div class="event-edit-header">
 
@@ -71,11 +69,11 @@
 
         <div class="event-edit-contents">
 
-            <input type="text" name="Title" value="@Model.Title" />
+            <input type="text" class="Title" name="Title" value="@Model.Title" />
 
             <br />
 
-            <textarea rows="8" cols="50">@Model.Description</textarea>
+            <textarea rows="5" cols="50" class="Description">@Model.Description</textarea>
 
             <div class="event-reg-info">
 
@@ -91,37 +89,111 @@
                         isPub = "";
                     }
 
+                    string allowReg;
+                    if (@Model.AllowSubscription)
+                    {
+                        allowReg = "checked";
+                    }
+
+                    else
+                    {
+                        allowReg = "";
+                    }
+
                 }
 
                 <div class="reg-info">
                     <!-- Squared THREE -->
-                    <div class="squaredThree">
-                        <input type="checkbox" value="" id="squaredThree" name="IsPublic" @isPub />
+                    <div>
+                        <input type="checkbox" value="true" id="" class="AllowReg" @allowReg />
                         <label for="squaredThree"></label>
                     </div>
 
-                    <span>Регистрация желающих</span>
+                    <span id="reg-text">Регистрация желающих</span>
+ 
                 </div>
 
-                <div class="slideThree">
-                    <input type="checkbox" value="None" id="slideThree" name="check" />
-                    <label for="slideThree"></label>
+                <div class="event-privacy-info">
+
+                    <span id="public-text">Публично</span>
+                    
+                    <div class="slideThree">
+                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check" @isPub />
+                        <label for="slideThree"></label>
+                    </div>
+
+                    <span id="private-text">Приватно</span>
+                    
+                </div>
+
+                <div class="author-info">
+                    <!-- Squared THREE -->
+
+                    <div>
+                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor"/>
+                        <label for="squaredThree"></label>
+                    </div>
+
+                    <span id="show-author-text">Показать автора    или</span>
+                    
+                    <input type="text" class="org-name-input OrganizerName" placeholder="Указать организатора" name="OrganizerName" value="@Model.OrganizerName" />
                 </div>
                 
             </div>
 
         </div>
 
-        <div class="event-org-info">
-
-            
-
-            <input type="text" readonly class="org-name-input" name="OrganizerName" value="@Model.OrganizerName"/>
-
-        </div>
         <input type="button" class="send-event-form-data" value="Создать" />
     </div>
 }
+
+<script>
+    $(() => {
+        $(".send-event-form-data").click(function () {
+            var year = new Date().getFullYear();
+            var month = $(".month-picker input[type='hidden']").val();
+            var day = $(".month-day-picker .date-custom-input").val();
+
+            var hours1 = $(".hour-picker#first .date-custom-input").val();
+            var minutes1 = $(".minute-picker#first .date-custom-input").val();
+
+            var hours2 = $(".hour-picker#second .date-custom-input").val();
+            var minutes2 = $(".minute-picker#second .date-custom-input").val();
+
+            var dateStart = new Date(year, month, day, hours1, minutes1, 0, 0);
+            var dateEnd = new Date(year, month, day, hours2, minutes2, 0, 0);
+            
+
+            var jsonData = JSON.stringify(
+                {
+                    'AllowSubscription': $('.AllowReg').is(':checked'),
+                    'ShowAuthor': (!$('.ShowAuthor').is(':checked')),
+                    'OrganizerName': $('.OrganizerName').val(),
+                    'RoomId': $('.custom-room-dropdown').val(),
+                    'Description': $('.Description').val(),
+                    'Title': $('.Title').val(),
+                    'IsPublic': $('.IsPublic').is(':checked'),
+                    'Start': dateStart,
+                    'End': dateEnd
+                });
+
+            alert(jsonData);
+            
+            $.ajax({
+                url: $('.edit-event-form').attr('action'),
+                type: "POST",
+                data: jsonData
+                    ,
+                contentType: "application/json; charset=utf-8",
+                success: function (data, textStatus, jqXHR) {
+                    //alert(JSON.stringify(data));
+                    alert(textStatus);
+                }
+            });
+        });
+    });
+    
+</script>
 
 
 

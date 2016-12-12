@@ -1,6 +1,6 @@
 ﻿.event-edit-popup
 {
-    width: 500px;
+    width: 450px;
     border: 1px solid #cac0c0;
     background-color: white;
 
@@ -37,7 +37,7 @@
     padding: 10px;
 }
 
-.event-edit-contents input
+.event-edit-contents input[type="text"]
 {
     border-radius: 2em;
     border: 1px solid lightgrey;
@@ -66,6 +66,11 @@
     margin: 10px;
 }
 
+.event-edit-contents input
+{
+    width: 40px;
+}
+
 .send-event-form-data:hover {
      
 }
@@ -87,8 +92,6 @@
     width: 20px;
     display: inline-block;
     margin: -3px;
-
-  
 }
 
 .date-custom-input
@@ -157,7 +160,7 @@
 
 /* SLIDE THREE */
 
-input[type=checkbox] {
+.slideThree input[type=checkbox] {
 	visibility: hidden;
 }
 
@@ -223,91 +226,107 @@ input[type=checkbox] {
 }
 
 
-/* Another checkbox style*/
-
-
-
-/* SQUARED THREE */
-.squaredThree {
-	width: 20px;	
-	margin: 20px auto;
-	position: relative;
-}
-
-.squaredThree label {
-	cursor: pointer;
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 0;
-	border-radius: 4px;
-
-	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
-	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
-	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
-
-	background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -o-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
-	background: linear-gradient(top, #222 0%, #45484d 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
-}
-
-.squaredThree label:after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: alpha(opacity=0);
-	opacity: 0;
-	content: '';
-	position: absolute;
-	width: 9px;
-	height: 5px;
-	background: transparent;
-	top: 4px;
-	left: 4px;
-	border: 3px solid #fcfff4;
-	border-top: none;
-	border-right: none;
-
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	-o-transform: rotate(-45deg);
-	-ms-transform: rotate(-45deg);
-	transform: rotate(-45deg);
-}
-
-.squaredThree label:hover::after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-	filter: alpha(opacity=30);
-	opacity: 0.3;
-}
-
-.squaredThree input[type=checkbox]:checked + label:after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-	filter: alpha(opacity=100);
-	opacity: 1;
-}
-
-
-
-.squaredThree
+#reg-text
 {
-    display: inline-block;
+    position: relative;
+    left: 30px;
+    top: -22px;
+}
+
+#show-author-text
+{
+    position: relative;
+    left: 30px;
+    top: -22px;
 }
 
 
 .send-event-form-data
 {
     border: none;
-    background-color: tomato;
-    width: 170px;
-    height: 40px;
+    background-color: lightsteelblue;
+    width: 140px;
+    height: 35px;
     float: right;
     border-radius: 2em;
     color: white;
+
+    margin-right: 20px;
 }
 
 .send-event-form-data:hover
 {
     background-color: red;
+}
+
+.event-edit-contents
+{
+    color: black;
+}
+
+.reg-info
+{
+    margin-left: 10px;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+}
+
+.event-privacy-info
+{
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+
+    position: relative;
+    top: 0px;
+}
+
+#public-text, #private-text
+{
+    position: relative;
+    top: 0px;
+}
+
+#public-text
+{
+    color: red;
+}
+
+ #private-text
+ {
+     color: grey;
+ }
+
+.slideThree
+{
+    display: inline-block;
+}
+
+.event-privacy-info
+{
+
+}
+
+.author-info
+{
+    position: relative;
+    top: 0px;
+    left: 10px;
+}
+
+.event-edit-contents input[type="checkbox"]
+{
+    
+}
+
+.event-reg-info
+{
+
+}
+
+.org-name-input
+{
+    width: 40px !important;
+    display: inline-block;
 }
