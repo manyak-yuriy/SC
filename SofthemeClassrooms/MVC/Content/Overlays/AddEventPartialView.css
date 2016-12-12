@@ -330,3 +330,27 @@
     width: 40px !important;
     display: inline-block;
 }
+
+.error-panel
+{
+    display: none;
+    width: 240px;
+    color: black;
+    
+    margin: 10px;
+    margin-left: 20px;
+
+    position: relative;
+    top: -22px;
+}
+
+.error-panel span
+{
+    margin-left: 5px;
+}
+
+.error-panel .fa
+{
+    opacity: 0.8;
+    color: black !important;
+}

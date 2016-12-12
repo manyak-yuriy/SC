@@ -218,6 +218,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
+    <Compile Include="Models\Schedule\ErrorModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -382,9 +383,7 @@
     <Content Include="Images\person.png" />
     <Content Include="Images\popup-triangle.png" />
     <Content Include="Images\Slider.png" />
-
     <Content Include="Scripts\Calendar\calendar.js" />
-
     <Content Include="Images\SliderStatic.png" />
     <Content Include="Images\walls.png" />
     <Content Include="JQWidget\demos.js" />
@@ -816,7 +815,6 @@
     <Content Include="JQWidget\jqwidgets\styles\jqx.ui-sunny.css" />
     <Content Include="JQWidget\jqwidgets\styles\jqx.web.css" />
     <Content Include="JQWidget\jqwidgets\styles\jqx.windowsphone.css" />
-
     <Content Include="Scripts\MyScripts.js" />
     <Content Include="Images\today-active-bottom.png" />
     <Content Include="Images\today-active-top.png" />
@@ -952,11 +950,9 @@
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\WeeklySchedulerPartialView.cshtml" />
-
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

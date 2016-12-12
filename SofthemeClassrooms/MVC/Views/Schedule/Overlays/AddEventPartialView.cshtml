@@ -153,6 +153,10 @@
 
         </div>
 
+        <div class="error-panel">
+            
+        </div>
+
         <input type="button" class="send-event-form-data" value="Создать" />
     </div>
 }
@@ -187,7 +191,7 @@
                     'End': dateEnd
                 });
 
-            alert(jsonData);
+            //alert(jsonData);
             
             $.ajax({
                 url: $('.edit-event-form').attr('action'),
@@ -196,9 +200,22 @@
                     ,
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
-                    //alert(JSON.stringify(data));
-                    alert(textStatus);
+                    alert(JSON.stringify(data));
                     reRenderTimeTableTrick();
+                    if (data.status == 'success')
+                    {
+
+                    }
+                    else
+                    {
+                        var errors = data.Errors;
+                        $('.error-panel').empty();
+                        $('.error-panel').append('<i class="fa fa-frown-o fa-3x"></i>');
+                        $('.error-panel').css('display', 'inline-block');
+                        for (var i = 0; i < errors.length; i++)
+                            $('.error-panel').append("<span>" + errors[i] + "</span> <br>");
+                        
+                    }
                 }
             });
         });

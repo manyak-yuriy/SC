@@ -88,9 +88,42 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ViewResult AddNewEvent(EditEventPartialViewModel eventModel)
+        public ActionResult AddNewEvent(EditEventPartialViewModel eventModel)
         {
+            var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
+            var errors = new ErrorModel();
+
+            if (classRoom == null)
+            {
+                errors.Errors.Add("Specified room does not exist");
+            }
+            else if (!classRoom.IsBookable)
+            {
+                errors.Errors.Add("Specified room is not bookable");
+            }
+            else
+            {
+                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id);
+
+                DateTime startDate = eventModel.Start;
+                DateTime endDate = eventModel.End;
+
+                foreach (var e in eventsForClassRoom)
+                {
+                    if ( (e.DateStart > startDate && e.DateStart < endDate) || 
+                         (e.DateEnd > startDate && e.DateEnd < endDate))
+                    {
+                        errors.Errors.Add("Specified room is already booked for the specified time");
+                        break;
+                    }
+                }
+            }
+
+            if (errors.Errors.Count() > 0)
+                return Json(new { status = "fail", errors.Errors}) ;
+
             Event dbModel = new Event();
+
             dbModel.AllowSubscription = eventModel.AllowSubscription;
             dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
             dbModel.OrganizerName = (eventModel.ShowAuthor)? null : eventModel.OrganizerName;
@@ -103,7 +136,8 @@ namespace WebApplication1.Controllers
 
             db.Event.Add(dbModel);
             db.SaveChanges();
-            return View("ShowSchedule");
+
+            return Json(new { status = "success"});
         }
 
         [HttpPost]
