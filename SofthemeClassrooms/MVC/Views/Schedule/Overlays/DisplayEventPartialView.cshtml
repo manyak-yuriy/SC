@@ -3,6 +3,23 @@
 <script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
 
 
+<style>
+    .val-errors
+    {
+        color: lightcoral;
+        height: 50px;
+        width: 100%;
+        margin: 5px;
+        display: none;
+    }
+
+    .val-errors span
+    {
+        margin-left: 5px !important;
+    }
+
+</style>
+
 
 @model WebApplication1.Models.Schedule.DisplayEventPartialViewModel
 
@@ -43,6 +60,7 @@
 
 
         <br>
+
         @if (Model.AllowSubscription)
         {
             <div class="new-visitor-block">
@@ -51,7 +69,10 @@
                 <i class="fa fa-plus" aria-hclassden="true"></i> <br />
             </div>
         }
-       
+
+        <div class="val-errors">
+
+        </div>
 
     </div>
 
@@ -67,3 +88,44 @@
 <script src="~/Scripts/Overlays/DisplayEventPartialView.js"></script>
 
 
+<script>
+
+    $('.new-visitor-block .fa-plus').click(function () {
+
+        $('.val-errors').empty();
+
+        var eventId = $(this).parents('.event-display-popup').attr('id');
+
+        var eMail = $('.new-visitor-block input').val();
+        //alert(eMail);
+
+        var jsonData = JSON.stringify({ eventId: eventId, Email:  eMail});
+        
+        $.ajax({
+            url: '@Url.Action("AddSubscriber", "Schedule")',
+            type: "POST",
+            context: this,
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus, jqXHR) {
+                //alert(JSON.stringify(data));
+                
+                if (data.result == "fail")
+                {
+                    $('.val-errors').css("display", "inline-block");
+                    $('.val-errors').append('<i class="fa fa-frown-o fa-3x"></i>');
+                    var eList = data.errorList;
+                    for (var i = 0; i < eList.length; i++)
+                        $('.val-errors').append("<span>" + eList[i] + "</span> <br>");
+                }
+                
+                if (data.result == "success")
+                {
+                    $('.val-errors').css("display", "inline-block");
+                    $('.val-errors').append("<span>Добавлено</span> <br>");
+                }
+            }
+        });
+    });
+
+</script>

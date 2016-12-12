@@ -219,6 +219,7 @@
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ErrorModel.cs" />
+    <Compile Include="Models\Schedule\NewSubscriberViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

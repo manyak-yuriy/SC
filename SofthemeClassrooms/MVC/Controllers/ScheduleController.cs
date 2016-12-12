@@ -92,6 +92,36 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        public ActionResult AddSubscriber(int eventId, NewSubscriberViewModel subModel)
+        {
+            var e = db.Event.Find(eventId);
+
+            if (e == null)
+                throw new NullReferenceException("No event with a given id exists");
+
+            if (!ModelState.IsValid)
+            {
+                var errorList = (from item in ModelState.Values
+                                 from error in item.Errors
+                                 select error.ErrorMessage).ToList();
+
+                return Json(new { result = "fail", errorList});
+            }
+                
+
+            var newVis = new ForeignVisitor();
+
+            newVis.Email = subModel.Email;
+            newVis.Event = e;
+
+            db.ForeignVisitor.Add(newVis);
+
+            db.SaveChanges();
+
+            return Json(new { result = "success"});
+        }
+
+        [HttpPost]
         public ActionResult AddNewEvent(EditEventPartialViewModel eventModel)
         {
             var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
