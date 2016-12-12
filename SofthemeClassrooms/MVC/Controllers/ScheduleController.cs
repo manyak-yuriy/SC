@@ -24,12 +24,13 @@ namespace WebApplication1.Controllers
 
         // Returns partial view with popup contents for displaying info for a particular event
         [HttpGet]
-        public PartialViewResult GetDisplayEventPartial(int Id)
+        public ActionResult GetDisplayEventPartial(int Id)
         {
             var eventEntity = db.Event.Where(e => e.Id == Id).First();
 
             if (eventEntity == null)
                 throw new NullReferenceException("There's no event with specified id!");
+
 
             bool isAuthorized = false;
             bool isAdmin = User.IsInRole("admin");
@@ -38,7 +39,10 @@ namespace WebApplication1.Controllers
             if (isAdmin || eventEntity.ApplicationUserID == userId)
                 isAuthorized = true;
 
-            DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+            if (!eventEntity.IsPublic && !isAuthorized)
+                throw new AccessViolationException("Not enough rigths to view the private event");
+
+                DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
             model.CanEdit = isAuthorized;
             model.AllowSubscription = (bool) eventEntity.AllowSubscription;
             model.DateStart = eventEntity.DateStart;
