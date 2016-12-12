@@ -105,7 +105,7 @@
                 <div class="reg-info">
                     <!-- Squared THREE -->
                     <div>
-                        <input type="checkbox" value="true" id="" class="AllowReg" @allowReg />
+                        <input type="checkbox" value="true" id="" class="AllowReg" />
                         <label for="squaredThree"></label>
                     </div>
 
@@ -118,7 +118,7 @@
                     <span id="public-text">Публично</span>
                     
                     <div class="slideThree">
-                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check" @isPub />
+                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check"/>
                         <label for="slideThree"></label>
                     </div>
 
@@ -163,11 +163,11 @@
             var dateStart = new Date(year, month, day, hours1, minutes1, 0, 0);
             var dateEnd = new Date(year, month, day, hours2, minutes2, 0, 0);
             
-
+            var isPub = ($('.ShowAuthor').is(':checked'));
             var jsonData = JSON.stringify(
                 {
                     'AllowSubscription': $('.AllowReg').is(':checked'),
-                    'ShowAuthor': (!$('.ShowAuthor').is(':checked')),
+                    'ShowAuthor': isPub,
                     'OrganizerName': $('.OrganizerName').val(),
                     'RoomId': $('.custom-room-dropdown').val(),
                     'Description': $('.Description').val(),

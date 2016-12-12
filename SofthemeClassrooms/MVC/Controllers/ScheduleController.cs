@@ -99,7 +99,7 @@ namespace WebApplication1.Controllers
             dbModel.Title = eventModel.Title;
             dbModel.DateStart = eventModel.Start;
             dbModel.DateEnd = eventModel.End;
-            dbModel.IsPublic = eventModel.IsPublic;
+            dbModel.IsPublic = !eventModel.IsPublic;
 
             db.Event.Add(dbModel);
             db.SaveChanges();
