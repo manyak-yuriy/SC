@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
 
             DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
             model.CanEdit = isAuthorized;
-
+            model.AllowSubscription = (bool) eventEntity.AllowSubscription;
             model.DateStart = eventEntity.DateStart;
             model.DateEnd = eventEntity.DateEnd;
             model.Title = eventEntity.Title;
