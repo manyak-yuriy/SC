@@ -79,7 +79,7 @@
 
                 @{
                     string isPub;
-                    if (@Model.IsPublic)
+                    if (Model.IsPublic)
                     {
                         isPub = "checked";
                     }
@@ -89,17 +89,27 @@
                         isPub = "";
                     }
 
-                    string allowReg;
-                    if (@Model.AllowSubscription)
+                    string allowSub;
+                    if (Model.AllowSubscription)
                     {
-                        allowReg = "checked";
+                        allowSub = "checked";
                     }
 
                     else
                     {
-                        allowReg = "";
+                        allowSub = "";
                     }
 
+
+                    string showAuthor;
+                    if (Model.ShowAuthor)
+                    {
+                        showAuthor = "checked";
+                    }
+                    else
+                    {
+                        showAuthor = "";
+                    }
                 }
 
                 <div class="reg-info">
@@ -163,16 +173,16 @@
             var dateStart = new Date(year, month, day, hours1, minutes1, 0, 0);
             var dateEnd = new Date(year, month, day, hours2, minutes2, 0, 0);
             
-            var isPub = ($('.ShowAuthor').is(':checked'));
+            var isPub = !($('.IsPublic').is(':checked'));
             var jsonData = JSON.stringify(
                 {
                     'AllowSubscription': $('.AllowReg').is(':checked'),
-                    'ShowAuthor': isPub,
+                    'ShowAuthor': $('.ShowAuthor').is(':checked'),
                     'OrganizerName': $('.OrganizerName').val(),
                     'RoomId': $('.custom-room-dropdown').val(),
                     'Description': $('.Description').val(),
                     'Title': $('.Title').val(),
-                    'IsPublic': $('.IsPublic').is(':checked'),
+                    'IsPublic': isPub,
                     'Start': dateStart,
                     'End': dateEnd
                 });
