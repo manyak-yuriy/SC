@@ -30,7 +30,7 @@
         $('#jqxWidget').jqxCalendar('setDate', calDate);
     });
 
-// get left to the current month
+// get left to the current month  
 
     $('#leftTodayInCalendar').click(function () {
         $('#jqxWidget').jqxCalendar('setDate', new Date());

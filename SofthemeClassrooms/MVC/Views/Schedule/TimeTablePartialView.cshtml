@@ -50,11 +50,7 @@
     </div>
 
     <script src="~/Scripts/TimeTableControls/timeTableControls.js"></script>
-    <script>
-        
-
-        
-    </script>
+    
 
 
     <div id="calendar-container" style="display:inline-block !important">
@@ -100,6 +96,16 @@
 
 <!--Calendar scripts-->
 <script src="~/Scripts/Calendar/calendar.js"></script>
+
+<script>
+        // quickly re-render timetable using events defined on calendar widget
+
+        function reRenderTimeTableTrick()
+        {
+            $('#jqxWidget').jqxCalendar('setDate', $('#jqxWidget').jqxCalendar('getDate'));
+        }
+
+</script>
 
 <!--
     Include files for timetable
@@ -209,6 +215,7 @@
 
                                                 cancelPopup.remove();
                                                 $('.event-display-popup#' + eventId).remove();
+                                                reRenderTimeTableTrick();
                                             }
                                         });
                                     });
