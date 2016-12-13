@@ -6,14 +6,16 @@
 
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post))
+@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post, new { @class = "edit-event-form"}))
 {
+
     <div class="event-edit-popup">
+
         <div class="event-edit-header">
 
             <div class="custom-numeric-picker month-day-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Day" /><br />
+                <input type="text" class="date-custom-input" readonly value="@Model.Start.Day" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
@@ -22,7 +24,7 @@
 
             <div class="custom-numeric-picker month-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" /><br />
+                <input type="text" readonly class="date-custom-input" /><br />
                 <input type="hidden" value="@Model.Start.Month" />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
@@ -33,29 +35,29 @@
 
             <div id="first" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Hour" /><br />
+                <input type="text" class="date-custom-input" readonly value="@Model.Start.Hour" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
             <div class="custom-delimiter">:</div>
             <div id="first" class="custom-numeric-picker minute-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.Start.Minute" /><br />
+                <input type="text" class="date-custom-input" readonly value="@Model.Start.Minute" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
-            
+
             <div class="custom-delimiter">-</div>
-            
+
 
             <div id="second" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.End.Hour" /><br />
+                <input type="text" class="date-custom-input" readonly value="@Model.End.Hour" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
             <div class="custom-delimiter">:</div>
             <div id="second" class="custom-numeric-picker minute-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
-                <input type="text" class="date-custom-input" value="@Model.End.Minute" /><br />
+                <input type="text" class="date-custom-input" readonly value="@Model.End.Minute" /><br />
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
@@ -66,43 +68,161 @@
         </div>
 
         <div class="event-edit-contents">
-            <span>@Html.EditorFor(p => p.Title)</span>
+
+            <input type="text" class="Title" name="Title" value="@Model.Title" />
 
             <br />
 
-            <p>
-                @Html.EditorFor(p => p.Description)
-            </p>
+            <textarea rows="5" cols="50" class="Description">@Model.Description</textarea>
 
             <div class="event-reg-info">
 
-                @Html.LabelFor(p => p.AllowSubscription)
-                @Html.EditorFor(p => p.AllowSubscription)
+                @{
+                    string isPub;
+                    if (Model.IsPublic)
+                    {
+                        isPub = "checked";
+                    }
 
-                @Html.LabelFor(p => p.IsPublic)
-                <span>@Html.EditorFor(p => p.IsPublic)</span>
-            </div>
+                    else
+                    {
+                        isPub = "";
+                    }
 
-            <div class="event-org-info">
-                <div>
-                    <input id="checkbox-3" class="checkbox-custom" name="checkbox-3" type="checkbox">
-                    <label for="checkbox-3" class="checkbox-custom-label">Third Choice</label>
+                    string allowSub;
+                    if (Model.AllowSubscription)
+                    {
+                        allowSub = "checked";
+                    }
+
+                    else
+                    {
+                        allowSub = "";
+                    }
+
+
+                    string showAuthor;
+                    if (Model.ShowAuthor)
+                    {
+                        showAuthor = "checked";
+                    }
+                    else
+                    {
+                        showAuthor = "";
+                    }
+                }
+
+                <div class="reg-info">
+                    <!-- Squared THREE -->
+                    <div>
+                        <input type="checkbox" value="true" id="" class="AllowReg" />
+                        <label for="squaredThree"></label>
+                    </div>
+
+                    <span id="reg-text">Регистрация желающих</span>
+ 
                 </div>
 
+                <div class="event-privacy-info">
 
-                <div class="slideThree">
-                    <input type="checkbox" value="None" id="slideThree" name="check" />
-                    <label for="slideThree"></label>
+                    <span id="public-text">Публично</span>
+                    
+                    <div class="slideThree">
+                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check"/>
+                        <label for="slideThree"></label>
+                    </div>
+
+                    <span id="private-text">Приватно</span>
+                    
                 </div>
 
-                @Html.LabelFor(p => p.OrganizerName)
-                <span>@Html.EditorFor(p => p.OrganizerName)</span>
+                <div class="author-info">
+                    <!-- Squared THREE -->
+
+                    <div>
+                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor"/>
+                        <label for="squaredThree"></label>
+                    </div>
+
+                    <span id="show-author-text">Показать автора    или</span>
+                    
+                    <input type="text" class="org-name-input OrganizerName" placeholder="Указать организатора" name="OrganizerName" value="@Model.OrganizerName" />
+                </div>
+                
             </div>
 
         </div>
-        <input type="submit" class="send-event-form-data" value="Add" />
+
+        <div class="error-panel">
+            
+        </div>
+
+        <input type="button" class="send-event-form-data" value="Создать" />
     </div>
 }
+
+<script>
+    $(() => {
+        $(".send-event-form-data").click(function () {
+            var year = new Date().getFullYear();
+            var month = $(".month-picker input[type='hidden']").val();
+            var day = $(".month-day-picker .date-custom-input").val();
+
+            var hours1 = $(".hour-picker#first .date-custom-input").val();
+            var minutes1 = $(".minute-picker#first .date-custom-input").val();
+
+            var hours2 = $(".hour-picker#second .date-custom-input").val();
+            var minutes2 = $(".minute-picker#second .date-custom-input").val();
+
+            var dateStart = new Date(year, month, day, hours1, minutes1, 0, 0);
+            var dateEnd = new Date(year, month, day, hours2, minutes2, 0, 0);
+            
+            var isPub = !($('.IsPublic').is(':checked'));
+            var jsonData = JSON.stringify(
+                {
+                    'AllowSubscription': $('.AllowReg').is(':checked'),
+                    'ShowAuthor': $('.ShowAuthor').is(':checked'),
+                    'OrganizerName': $('.OrganizerName').val(),
+                    'RoomId': $('.custom-room-dropdown').val(),
+                    'Description': $('.Description').val(),
+                    'Title': $('.Title').val(),
+                    'IsPublic': isPub,
+                    'Start': dateStart,
+                    'End': dateEnd
+                });
+
+            //alert(jsonData);
+            
+            $.ajax({
+                url: $('.edit-event-form').attr('action'),
+                type: "POST",
+                data: jsonData
+                    ,
+                contentType: "application/json; charset=utf-8",
+                success: function (data, textStatus, jqXHR) {
+                    alert(JSON.stringify(data));
+                    reRenderTimeTableTrick();
+                    if (data.status == 'success')
+                    {
+                        $('.edit-event-form').remove();
+                    }
+                    else
+                    {
+                        var errors = data.Errors;
+                        $('.error-panel').empty();
+                        $('.error-panel').append('<i class="fa fa-frown-o fa-3x"></i>');
+                        $('.error-panel').css('display', 'inline-block');
+                       
+                        for (var i = 0; i < errors.length; i++)
+                            $('.error-panel').append("<span>" + errors[i] + "</span> <br>");
+                        
+                    }
+                }
+            });
+        });
+    });
+    
+</script>
 
 
 

@@ -238,6 +238,8 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
+    <Compile Include="Models\Schedule\ErrorModel.cs" />
+    <Compile Include="Models\Schedule\NewSubscriberViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\SendMessageModel.cs" />
     <Compile Include="Models\UsersPageModel.cs" />
@@ -975,6 +977,7 @@
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

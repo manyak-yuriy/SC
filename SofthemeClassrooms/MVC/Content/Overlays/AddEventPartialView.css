@@ -1,6 +1,6 @@
 ﻿.event-edit-popup
 {
-    width: 500px;
+    width: 450px;
     border: 1px solid #cac0c0;
     background-color: white;
 
@@ -37,13 +37,25 @@
     padding: 10px;
 }
 
-.event-edit-contents input
+.event-edit-contents input[type="text"]
 {
     border-radius: 2em;
-    outline: none;
     border: 1px solid lightgrey;
-    width: 200px;
+    width: 90% !important;
+    margin: 10px;
+    padding: 10px;
+    height: 40px;
 }
+
+.event-edit-contents textarea
+{
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    width: 90% !important;
+    margin: 10px;
+    padding: 10px;
+}
+
 
 .send-event-form-data {
     border: none;
@@ -54,11 +66,16 @@
     margin: 10px;
 }
 
+.event-edit-contents input
+{
+    width: 40px;
+}
+
 .send-event-form-data:hover {
      
 }
 
-.fa
+.event-edit-popup .fa
 {
     margin: 0px;
     color: white;
@@ -75,8 +92,6 @@
     width: 20px;
     display: inline-block;
     margin: -3px;
-
-  
 }
 
 .date-custom-input
@@ -98,7 +113,6 @@
 
 .event-edit-popup textarea:focus, .event-edit-popup  input:focus {
     outline: none;
-    width: 20px;
 }
 
 
@@ -109,7 +123,7 @@
 
     position: absolute;
     left: 60%;
-    top:10%;
+    top:5%;
 
     color: white;
 }
@@ -146,7 +160,7 @@
 
 /* SLIDE THREE */
 
-input[type=checkbox] {
+.slideThree input[type=checkbox] {
 	visibility: hidden;
 }
 
@@ -212,65 +226,131 @@ input[type=checkbox] {
 }
 
 
-/* Another checkbox style*/
-
-
-HTML  CSS   Result
-Edit on 
-/* only demo styles */
-
-body {
-  font-family: Raleway;
-}
-
-/* end only demo styles */
-
-.checkbox-custom, .radio-custom {
-    opacity: 0;
-    position: absolute;   
-}
-
-.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
-    cursor: pointer;
-}
-
-.checkbox-custom-label, .radio-custom-label {
+#reg-text
+{
     position: relative;
+    left: 30px;
+    top: -22px;
 }
 
-.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-    content: '';
-    background: #fff;
-    border: 2px solid #ddd;
+#show-author-text
+{
+    position: relative;
+    left: 30px;
+    top: -22px;
+}
+
+
+.send-event-form-data
+{
+    border: none;
+    background-color: lightsteelblue;
+    width: 140px;
+    height: 35px;
+    float: right;
+    border-radius: 2em;
+    color: white;
+
+    margin-right: 20px;
+}
+
+.send-event-form-data:hover
+{
+    background-color: red;
+}
+
+.event-edit-contents
+{
+    color: black;
+}
+
+.reg-info
+{
+    margin-left: 10px;
     display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    padding: 2px;
-    margin-right: 10px;
-    text-align: center;
+    position: relative;
+    top: 0px;
 }
 
-.checkbox-custom:checked + .checkbox-custom-label:before {
-    content: "\f00c";
-    font-family: 'FontAwesome';
-    background: rebeccapurple;
-    color: #fff;
+.event-privacy-info
+{
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+
+    position: relative;
+    top: 0px;
 }
 
-.radio-custom + .radio-custom-label:before {
-    border-radius: 50%;
+#public-text, #private-text
+{
+    position: relative;
+    top: 0px;
 }
 
-.radio-custom:checked + .radio-custom-label:before {
-    content: "\f00c";
-    font-family: 'FontAwesome';
-    color: #bbb;
+#public-text
+{
+    color: red;
 }
 
-.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-  outline: 1px solid #ddd; /* focus style */
+ #private-text
+ {
+     color: grey;
+ }
+
+.slideThree
+{
+    display: inline-block;
+}
+
+.event-privacy-info
+{
+
+}
+
+.author-info
+{
+    position: relative;
+    top: 0px;
+    left: 10px;
+}
+
+.event-edit-contents input[type="checkbox"]
+{
+    
+}
+
+.event-reg-info
+{
+
+}
+
+.org-name-input
+{
+    width: 40px !important;
+    display: inline-block;
+}
+
+.error-panel
+{
+    display: none;
+    width: 240px;
+    color: black;
+    
+    margin: 10px;
+    margin-left: 20px;
+
+    position: relative;
+    top: -22px;
+}
+
+.error-panel span
+{
+    margin-left: 5px;
+}
+
+.error-panel .fa
+{
+    opacity: 0.8;
+    color: black !important;
 }

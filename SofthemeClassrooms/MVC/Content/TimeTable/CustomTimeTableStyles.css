@@ -135,6 +135,7 @@ section {
     position: absolute;
     top: -17px;
     left: -16px;
+    z-index: 101;
 }
 
 #current-time

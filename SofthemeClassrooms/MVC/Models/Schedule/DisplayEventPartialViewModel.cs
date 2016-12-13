@@ -14,6 +14,8 @@ namespace WebApplication1.Models.Schedule
         public string OrganizerName { get; set; }
         public int VisitorCount { get; set; }
 
+        public bool AllowSubscription { get; set; }
+
         public bool CanEdit { get; set; }
     }
 }
