@@ -6,7 +6,7 @@
 
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post, new { @class = "edit-event-form"}))
+@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post, new { @class = "edit-event-form" }))
 {
 
     <div class="event-edit-popup">
@@ -121,49 +121,61 @@
                     </div>
 
                     <span id="reg-text">Регистрация желающих</span>
- 
+
                 </div>
 
                 <div class="event-privacy-info">
 
                     <span id="public-text">Публично</span>
-                    
+
                     <div class="slideThree">
-                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check" @isPub/>
+                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check" @isPub />
                         <label for="slideThree"></label>
                     </div>
 
                     <span id="private-text">Приватно</span>
-                    
+
                 </div>
 
                 <div class="author-info">
                     <!-- Squared THREE -->
 
                     <div>
-                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor" @showAuthor/>
+                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor" @showAuthor />
                         <label for="squaredThree"></label>
                     </div>
 
-                    <span id="show-author-text">Показать автора    или</span>
-                    
-                    <input type="text" class="org-name-input OrganizerName" placeholder="Указать организатора" name="OrganizerName" value="@Model.OrganizerName" />
+                    <span id="show-author-text">Показать автора   или</span>
+
+                    <input type="text" class="org-name-input OrganizerName" placeholder="Указать организатора" name="OrganizerName" value="@Model.OrganizerName" @((Model.ShowAuthor) ? "disabled" : "") />
+
                 </div>
-                
+
+
             </div>
+
 
         </div>
 
+
         <div class="error-panel">
-            
+
         </div>
 
         <input type="button" class="send-event-form-data" value="Создать" />
     </div>
-}
+                    }
 
 <script>
     $(() => {
+        $('#show-author').change(function () {
+            if ($(this).is(":checked"))
+                $('.org-name-input').prop('disabled', true);
+            else
+                $('.org-name-input').prop('disabled', false);
+        });
+
+
         $(".send-event-form-data").click(function () {
             var year = new Date().getFullYear();
             var month = $(".month-picker input[type='hidden']").val();
@@ -177,7 +189,7 @@
 
             var dateStart = new Date(year, month, day, hours1, minutes1, 0, 0);
             var dateEnd = new Date(year, month, day, hours2, minutes2, 0, 0);
-            
+
             var isPub = !($('.IsPublic').is(':checked'));
             var jsonData = JSON.stringify(
                 {
@@ -193,7 +205,7 @@
                 });
 
             //alert(jsonData);
-            
+
             $.ajax({
                 url: $('.edit-event-form').attr('action'),
                 type: "POST",
@@ -203,26 +215,24 @@
                 success: function (data, textStatus, jqXHR) {
                     alert(JSON.stringify(data));
                     reRenderTimeTableTrick();
-                    if (data.status == 'success')
-                    {
+                    if (data.status == 'success') {
                         $('.edit-event-form').remove();
                     }
-                    else
-                    {
+                    else {
                         var errors = data.Errors;
                         $('.error-panel').empty();
                         $('.error-panel').append('<i class="fa fa-frown-o fa-3x"></i>');
                         $('.error-panel').css('display', 'inline-block');
-                       
+
                         for (var i = 0; i < errors.length; i++)
                             $('.error-panel').append("<span>" + errors[i] + "</span> <br>");
-                        
+
                     }
                 }
             });
         });
     });
-    
+
 </script>
 
 
