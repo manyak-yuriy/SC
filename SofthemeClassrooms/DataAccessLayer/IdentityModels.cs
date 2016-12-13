@@ -21,7 +21,7 @@ namespace DataAccessLayer
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(): base("PreDeploy", throwIfV1Schema: false)
+        public ApplicationDbContext(): base("SSC", throwIfV1Schema: false)
 
         {
            
