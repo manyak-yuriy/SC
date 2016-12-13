@@ -1,22 +1,29 @@
 ﻿@using WebApplication1.Models;
 @using WebApplication1.HtmlHelpers;
-@model Pair<PageInfo, IEnumerable<WebApplication1.Models.PersonalDataViewModel>>
+@model UsersPageModel
 
 @{
     ViewBag.Title = "Users";
 }
 
 
-
 <div class="container">
     <div class="col-lg-8 col-lg-offset-1">
-        <h2>Список пользователей</h2>
+        <h2>
+            Список пользователей
+            @if(Model.SearchPattern != null)
+            {
+                <span>с именем</span>
+                @Model.SearchPattern;
+            }
+        </h2>
         <div>
-            <span>Всего: @Model.item2.Count()</span>
+            <span>Всего: @Model.Users.Count()</span>
             <div class="searchForm">
-                @using (Html.BeginForm("Search", "UserManagment"))
+                @using (Html.BeginForm("Users", "UsersManagment", FormMethod.Get))
                 {
-                    <input id="user-search" type="search" placeholder="Поиск" onkeyup="SendChecker()" />
+                    <input name='SearcPattern' type='text' value='@Model.SearchPattern' id ='user-search' onkeyup = 'SendChecker()'/>
+                    @Html.HiddenFor(m => m.PageInfo.PageNumber)
                     <button id="searchButton" type="submit" onsubmit="ValidateSearchInput" disabled>
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
@@ -26,7 +33,7 @@
         <ul class="userTable">
             @{
                 int i = 0;
-                foreach (var u in Model.item2)
+                foreach (var u in Model.Users)
                 {
                     <li>
                         <div class="usersTableRow">
@@ -52,7 +59,7 @@
             }
         </ul>
         <div id="pageLinks" class="btn-group">
-            @Html.PageLinks(Model.item1, x => Url.Action("Users", new { page = x }))
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
         </div>
     </div>
 </div>

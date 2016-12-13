@@ -85,7 +85,7 @@ namespace WebApplication1.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = "", RememberMe = false });
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("", "Неправильный email или пароль.");
                     return View(model);
             }
       

@@ -9,12 +9,20 @@ using System.Linq;
 using System.Security.Claims;
 using System.Collections;
 using System.Collections.Generic;
+using ManagementServices.Interfaces;
 
 namespace WebApplication1.Controllers
 {
     [Authorize]
     public class UsersManagmentController : Controller
     {
+        private IBusinessLogicFactory _businessLogicFactory;
+
+        public UsersManagmentController(IBusinessLogicFactory factory)
+        {
+            _businessLogicFactory = factory;
+        }
+
         private ApplicationUserManager UserManager
         {
             get
@@ -30,7 +38,7 @@ namespace WebApplication1.Controllers
             var user = Session["User"] as PersonalDataViewModel;
             if (user == null)
             {
-                AppUsersManager uManager = new AppUsersManager();
+                IUserManager uManager = _businessLogicFactory.UserManager;
                 var uInfo = uManager.GetUserInfo(User.Identity.Name);
                 user = PersonalDataViewModel.CreateFromUserInfo(uInfo);
                 Session["User"] = user;
@@ -51,17 +59,17 @@ namespace WebApplication1.Controllers
             {
                 return PartialView("ChangePersonalDataPView", new PersonalDataViewModel() { Email = Session["UserEmail"] as string, Name = Session["UserName"] as string });
             }
-            
+
 
             if (!ModelState.IsValid)
             {
                 return PartialView("ChangePersonalDataPView", model);
             }
 
-            AppUsersManager manager = new AppUsersManager();
+            IUserManager manager = _businessLogicFactory.UserManager;
             manager.UpdateUser(model.ToUserInfo());
 
-            if(model.Id == User.Identity.GetUserId())
+            if (model.Id == User.Identity.GetUserId())
             {
                 Session["UserName"] = model.Name;
                 Session["User"] = model;
@@ -98,23 +106,32 @@ namespace WebApplication1.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public ActionResult Users(int page = 0)
+        public ActionResult Users(string searcPattern, int page = 1)
         {
-            if (page < 0)
+            if (page < 1)
             {
                 return new HttpNotFoundResult();
             }
 
-            AppUsersManager m = new AppUsersManager();
-            int itemsPerPage = 20,
-                NumberOfUsers = m.GetUserNumber();
+            IUserManager m = _businessLogicFactory.UserManager;
+            int itemsPerPage = 20;
+            int NumberOfUsers = m.GetUserNumber();
+
             int lastPage = NumberOfUsers / itemsPerPage;
+            int remainder = NumberOfUsers % itemsPerPage;
+            lastPage += remainder > 0 ? 1 : 0;
+
             if (lastPage < page)
             {
                 return new HttpNotFoundResult();
             }
 
-            var usersInfo = m.GetUsersInfo(page, itemsPerPage);
+            IEnumerable<UserInfo> usersInfo =
+                string.IsNullOrEmpty(searcPattern) ?
+                m.GetUsersInfo(page, itemsPerPage) :
+                m.GetUsersInfo(page, itemsPerPage, searcPattern);
+
+
             var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo).ToList();
 
             PageInfo pageInfo = new PageInfo
@@ -124,18 +141,13 @@ namespace WebApplication1.Controllers
                 TotalNumOfItems = NumberOfUsers
             };
 
-            return View(new Pair<PageInfo, IEnumerable<PersonalDataViewModel>>
+            UsersPageModel mod = new UsersPageModel
             {
-                item1 = pageInfo,
-                item2 = users
-            });
-        }
-
-        public ActionResult Search(string pattern)
-        {
-            
-
-            return View();
+                PageInfo = pageInfo,
+                SearchPattern = searcPattern,
+                Users = users
+            };
+            return View(mod);
         }
 
         public ActionResult ChangeUserInfoView(PersonalDataViewModel model)

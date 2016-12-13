@@ -58,9 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\BusinessLogicFactory.cs" />
     <Compile Include="Implementations\EquipmentManagement.cs" />
     <Compile Include="Implementations\EventManagement.cs" />
     <Compile Include="Implementations\FeedbackSender.cs" />
+    <Compile Include="Interfaces\IBusinessLogicFactory.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Implementations\AppUserManager.cs" />
     <Compile Include="Interfaces\EventManagement.cs" />

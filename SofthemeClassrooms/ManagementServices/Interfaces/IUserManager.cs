@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Interfaces
 {
-    interface IUserManager
+    public interface IUserManager
     {
         void UpdateUser(UserInfo user);
         void DeleteUser(string userId);
         UserInfo GetUserInfo(string userName);
-        IEnumerable<UserInfo> GetUsersInfo();
+        IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage, string searchPattern = null);
         string GetUserName(string email);
+        int GetUserNumber(string name = null);
     }
 }

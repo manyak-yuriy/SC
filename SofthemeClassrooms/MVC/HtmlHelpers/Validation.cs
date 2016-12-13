@@ -14,20 +14,18 @@ namespace WebApplication1.HtmlHelpers
         public static MvcHtmlString RedValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
         {
             StringBuilder result = new StringBuilder();
-            TagBuilder icon = new TagBuilder("i");
-            icon.AddCssClass("fa");
-            icon.AddCssClass("fa-info-circle");
+            //TagBuilder icon = new TagBuilder("i");
+            //icon.AddCssClass("fa");
+            //icon.AddCssClass("fa-info-circle");
 
-            result.Append(icon.ToString(TagRenderMode.Normal));
+            var valMessage = helper.ValidationMessageFor(expression).ToString();
 
             TagBuilder DivBuilder = new TagBuilder("div");
             DivBuilder.AddCssClass("mid");
-            DivBuilder.InnerHtml = helper.ValidationMessageFor(expression).ToString();
+            DivBuilder.InnerHtml = valMessage;
+            DivBuilder.AddCssClass("red-error");
 
             result.Append(DivBuilder.ToString(TagRenderMode.Normal));
-            TagBuilder wrapper = new TagBuilder("div");
-            wrapper.InnerHtml = result.ToString();
-            wrapper.AddCssClass("red-error");
 
             return MvcHtmlString.Create(result.ToString());
         }

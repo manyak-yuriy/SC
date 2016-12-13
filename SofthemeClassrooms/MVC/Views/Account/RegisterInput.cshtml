@@ -9,7 +9,6 @@
 }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
     <div>
         @Html.RedValidationMessageFor(model => model.FullName)
         @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })

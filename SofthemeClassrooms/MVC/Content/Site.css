@@ -58,6 +58,10 @@ a:hover{
     text-decoration: none;
 }
 
+a:visited {
+    text-decoration: none;
+}
+
 ul.menu-items{
     list-style-type: none;
     padding: 0px;
@@ -90,9 +94,4 @@ li.menu-item-active{
 #lname-validation{
     float: right;
     width: 50%;
-}
-
-.red-error{
-    font-size: 10px;
-    color: red;
 }

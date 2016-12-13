@@ -11,17 +11,25 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Implementations
 {
-    public class AppUsersManager
+    public class AppUsersManager : IUserManager
     {
         UnitOfWork db = new UnitOfWork();
+
         public void DeleteUser(string userId)
         {
             db.Users.Delete(userId);
         }
 
-        public int GetUserNumber()
+        public int GetUserNumber(string name = null)
         {
-            return db.Users.GetAll().Count();
+            if(name == null)
+            {
+                return db.Users.GetAll().Count();
+            }
+
+            return db.Users.GetAll()
+                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimValue).FirstOrDefault().ClaimValue == name)
+                .Count();
         }
 
         public UserInfo GetUserInfo(string userName)
@@ -41,9 +49,20 @@ namespace ManagementServices.Implementations
             return uInfo;
         }
 
-        public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage)
+        public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage, string searchPattern = null)
         {
-            var users = db.Users.GetAll();
+            IEnumerable<ApplicationUser> users;
+
+            if(searchPattern != null)
+            {
+                users = db.Users.GetAll()
+                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue == searchPattern);
+            }
+            else
+            {
+                users = db.Users.GetAll();
+            }
+
             var usersInfo =
                 (from u in users
                  select new UserInfo
@@ -52,7 +71,7 @@ namespace ManagementServices.Implementations
                      Email = u.Email,
                      UserId = u.Id,
                      NumberOfEvents = GetNumberUserEvents(u.Id),
-                 }).OrderBy(c => c.FullName).Skip(page * itemsPerPage).Take(itemsPerPage);
+                 }).OrderBy(c => c.FullName).Skip(page-1 * itemsPerPage).Take(itemsPerPage);
 
             return usersInfo;
         }
