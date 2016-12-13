@@ -74,8 +74,8 @@ namespace WebApplication1.Controllers
             viewModel = new EditEventPartialViewModel();
             viewModel.Start = DateTime.Now;
             viewModel.End = DateTime.Now.AddHours(2);
-            viewModel.AllowSubscription = true;
-            viewModel.IsPublic = true;
+            viewModel.AllowSubscription = false;
+            viewModel.IsPublic = false;
             viewModel.ShowAuthor = true;
 
             List<SelectListItem> items = new List<SelectListItem>();
@@ -91,10 +91,11 @@ namespace WebApplication1.Controllers
                 );
             }
             ViewBag.RoomIdOptions = items;
+            ViewBag.CallBackAction = "AddNewEvent";
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
 
-        /*
+        
         [HttpGet]
         public PartialViewResult GetEventEditPartialView(int eventId)
         {
@@ -113,27 +114,34 @@ namespace WebApplication1.Controllers
             viewModel.Title = eventEntity.Title;
             viewModel.IsPublic = eventEntity.IsPublic;
             viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer.UserName;
-            viewModel.RoomId = eventEntity.ClassroomId.ToString();
+            
             viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
-            viewModel.
 
             List<SelectListItem> items = new List<SelectListItem>();
 
             IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
 
+            int roomId = eventEntity.ClassroomId;
+
             foreach (var room in availRooms)
             {
+                bool sel = room.Id == roomId;
+
                 items.Add(new SelectListItem
                 {
                     Text = room.Title,
-                    Value = room.Id.ToString()
+                    Value = room.Id.ToString(),
+                    Selected = sel
                 }
                 );
             }
             ViewBag.RoomIdOptions = items;
+            // Pass id this way - will be replaced later
+            ViewBag.eventId = eventId;
+            ViewBag.CallBackAction = "EditEvent";
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
-        */
+        
 
         [HttpPost]
         public ActionResult AddSubscriber(int eventId, NewSubscriberViewModel subModel)

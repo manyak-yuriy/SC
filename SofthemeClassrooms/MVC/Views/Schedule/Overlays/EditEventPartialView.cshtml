@@ -6,11 +6,14 @@
 
 @model WebApplication1.Models.Schedule.EditEventPartialViewModel
 
-@using (Html.BeginForm("AddNewEvent", "Schedule", FormMethod.Post, new { @class = "edit-event-form" }))
+@{
+    string callBackAction = @ViewBag.CallBackAction;
+}
+@using (Html.BeginForm(callBackAction, "Schedule", FormMethod.Post, new { @class = "edit-event-form" }))
 {
 
     <div class="event-edit-popup">
-
+        <input class="hidden-eventId" type="hidden" value="@ViewBag.eventId"/>
         <div class="event-edit-header">
 
             <div class="custom-numeric-picker month-day-picker">
@@ -201,7 +204,9 @@
                     'Title': $('.Title').val(),
                     'IsPublic': isPub,
                     'Start': dateStart,
-                    'End': dateEnd
+                    'End': dateEnd,
+                    // will be ignored by addEvent model binder
+                    'eventId': $('.hidden-eventId').val()
                 });
 
             //alert(jsonData);
