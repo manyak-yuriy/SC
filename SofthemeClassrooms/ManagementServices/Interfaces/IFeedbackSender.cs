@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Interfaces
 {
-    interface IFeedbackSender
+    public interface IFeedbackSender
     {
         void SendFeedback(FeedBackDTO feedback);
     }

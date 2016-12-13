@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Interfaces
 {
-    interface IEventManager
+    public interface IEventManager
     {
         int NumberOfPlanedEvents(string userId);
         void CancelEvent(int id);

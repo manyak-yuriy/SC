@@ -1,5 +1,6 @@
 ﻿@using WebApplication1.Models;
-@model Pair<PageInfo, IEnumerable<WebApplication1.Models.PersonalDataViewModel>>
+@using WebApplication1.HtmlHelpers;
+@model UsersPageModel
 
 @{
     ViewBag.Title = "Users";
@@ -8,21 +9,31 @@
 
 <div class="container">
     <div class="col-lg-8 col-lg-offset-1">
-        <h2>Список пользователей</h2>
+        <h2>
+            Список пользователей
+            @if(Model.SearchPattern != null)
+            {
+                <span>с именем</span>
+                @Model.SearchPattern;
+            }
+        </h2>
         <div>
-            <span>Всего: @Model.item2.Count()</span>
-            <div>
-                @using (Html.BeginForm())
+            <span>Всего: @Model.Users.Count()</span>
+            <div class="searchForm">
+                @using (Html.BeginForm("Users", "UsersManagment", FormMethod.Get))
                 {
-                    <input id="user-search" type="search" placeholder="Поиск" />
-                    <input type="submit" value="search"/>
+                    <input name='SearcPattern' type='text' value='@Model.SearchPattern' id ='user-search' onkeyup = 'SendChecker()'/>
+                    @Html.HiddenFor(m => m.PageInfo.PageNumber)
+                    <button id="searchButton" type="submit" onsubmit="ValidateSearchInput" disabled>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
                 }
             </div>
         </div>
         <ul class="userTable">
             @{
-                    int i = 0;
-                foreach (var u in Model.item2)
+                int i = 0;
+                foreach (var u in Model.Users)
                 {
                     <li>
                         <div class="usersTableRow">
@@ -37,18 +48,23 @@
                             </div>
 
                             @Html.Partial("DeletePersonPopup", new WebApplication1.Models.Pair<System.Int32, System.String>
-                            {
-                                item1 = i,
-                                item2 = u.Email
-                            })
+                       {
+                           item1 = i,
+                           item2 = u.Id
+                       })
                         </div>
                     </li>
                     ++i;
                 }
             }
         </ul>
+        <div id="pageLinks" class="btn-group">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
+        </div>
     </div>
 </div>
+
+
 
 @section MenuItemActive{
     <script>

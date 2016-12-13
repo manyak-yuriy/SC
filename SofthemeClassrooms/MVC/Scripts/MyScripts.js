@@ -21,3 +21,14 @@ function SendSuccess()
 {
     $('#SuccessMessage').html('Спасибо. Ваше сообщение отправлено администратору.');
 }
+
+function SendChecker() {
+    var searchInput = $('#user-search:input').val;
+    if (searchInput == "") {
+        $('#searchButton').prop('disabled', true);
+    }
+    else {
+        $('#searchButton').prop('disabled', false);
+    }
+}
+

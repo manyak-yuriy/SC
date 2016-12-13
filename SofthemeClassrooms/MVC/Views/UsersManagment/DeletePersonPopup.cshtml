@@ -14,7 +14,7 @@
             <div class="YesBlock">
                 @using (Html.BeginForm("DeleteUser", "UsersManagment", FormMethod.Post))
                 {
-                    <input type="hidden" name="email" value="@Model.item2"/>
+                    <input type="hidden" name="Id" value="@Model.item2"/>
                     <input type="submit" class="button Yes" value="Да"/>
                 }
             </div>

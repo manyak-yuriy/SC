@@ -1,4 +1,5 @@
 ﻿using ManagementServices.Implementations;
+using ManagementServices.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,6 +42,17 @@ namespace WebApplication1.Models
                 Is_Admin = user.Role == "admin",
                 NumberOfEvents = user.NumberOfEvents,
                 Id = user.UserId
+            };
+        }
+
+        public UserInfo ToUserInfo()
+        {
+            return new UserInfo
+            {
+                Email = this.Email,
+                FullName = this.Name,
+                Role = this.Is_Admin ? "admin" : "user",
+                UserId = this.Id
             };
         }
     }

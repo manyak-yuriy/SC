@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using ManagementServices.Interfaces;
+using ManagementServices.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,17 +11,25 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Implementations
 {
-    public class AppUsersManager
+    public class AppUsersManager : IUserManager
     {
         UnitOfWork db = new UnitOfWork();
+
         public void DeleteUser(string userId)
         {
             db.Users.Delete(userId);
         }
 
-        public int GetUserNumber()
+        public int GetUserNumber(string name = null)
         {
-            return db.Users.GetAll().Count();
+            if(name == null)
+            {
+                return db.Users.GetAll().Count();
+            }
+
+            return db.Users.GetAll()
+                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimValue).FirstOrDefault().ClaimValue == name)
+                .Count();
         }
 
         public UserInfo GetUserInfo(string userName)
@@ -40,9 +49,20 @@ namespace ManagementServices.Implementations
             return uInfo;
         }
 
-        public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage)
+        public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage, string searchPattern = null)
         {
-            var users = db.Users.GetAll();
+            IEnumerable<ApplicationUser> users;
+
+            if(searchPattern != null)
+            {
+                users = db.Users.GetAll()
+                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue == searchPattern);
+            }
+            else
+            {
+                users = db.Users.GetAll();
+            }
+
             var usersInfo =
                 (from u in users
                  select new UserInfo
@@ -51,7 +71,7 @@ namespace ManagementServices.Implementations
                      Email = u.Email,
                      UserId = u.Id,
                      NumberOfEvents = GetNumberUserEvents(u.Id),
-                 }).OrderBy(c => c.FullName).Skip(page * itemsPerPage).Take(itemsPerPage);
+                 }).OrderBy(c => c.FullName).Skip(page-1 * itemsPerPage).Take(itemsPerPage);
 
             return usersInfo;
         }
@@ -63,8 +83,15 @@ namespace ManagementServices.Implementations
             {
                 appUser.Email = user.Email;
                 appUser.UserName = user.Email;
-                appUser.Claims.Where(c => c.ClaimValue == ClaimTypes.Name).First().ClaimValue = user.FullName;
-                //Here should be added the role update code
+                appUser.Claims.Where(c => c.ClaimType == ClaimTypes.Name).FirstOrDefault().ClaimValue = user.FullName;
+
+                var role = appUser.Roles.FirstOrDefault();
+                var admin = db.Roles.Where(r => r.Name == "admin").FirstOrDefault();
+                if (user.Role == "admin" && role.RoleId != admin.Id)
+                {
+                    role.RoleId = admin.Id;
+                }
+
                 db.Users.Update(appUser);
             }
         }

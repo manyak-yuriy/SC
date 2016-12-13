@@ -1,31 +1,32 @@
 ﻿@model WebApplication1.Models.PersonalDataViewModel
+@using WebApplication1.HtmlHelpers
 
-<link href="~/Content/customswitch.css" rel="stylesheet" />
 
-@using(Ajax.BeginForm("ChangePersonalInfo", "UserManagment", new AjaxOptions()
-{
-    HttpMethod = "POST",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "pInfo"
-}))
-{
-    @Html.AntiForgeryToken()
-    
-    <div>
-        @Html.ValidationMessageFor(m => m.Name, "")
-        @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
-    </div>
-    
-    <div>
-        @Html.ValidationMessageFor(m => m.Email, "")
-        @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
-    </div>
-    <div>
-        @if (User.IsInRole("admin"))
-        {
-            <input type="checkbox" checked/>
-        }
-        Администратор
-    </div>
-    <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton"/>
-}
+<div id="ChangePersonalInfo">
+    @using (Ajax.BeginForm("ChangePersonalInfo", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "pInfo",
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" value="@Model.NumberOfEvents" name="NumberOfEvents" />
+        <div>
+            @Html.RedValidationMessageFor(m => m.Name)
+            @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData" } })
+        </div>
+
+        <div>
+            @Html.RedValidationMessageFor(m => m.Email)
+            @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData" } })
+        </div>
+        <div>
+            @Html.EditorFor(m => m.Is_Admin)
+            Администратор
+        </div>
+        <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton" />
+    }
+</div>
