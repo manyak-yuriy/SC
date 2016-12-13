@@ -11,7 +11,7 @@ namespace ManagementServices.Implementations
 {
     public class FeedbackSender : IFeedbackSender
     {
-        UnitOfWork work = new UnitOfWork();
+        private UnitOfWork _work = new UnitOfWork();
         public void SendFeedback(FeedBackDTO feedback)
         {
             Feedback f = new Feedback();
@@ -19,7 +19,7 @@ namespace ManagementServices.Implementations
             f.Email = feedback.Email;
             f.FirstName = feedback.Name;
             f.LastName = feedback.LastName;
-            work.Feedback.Insert(f);
+            _work.Feedback.Insert(f);
         }
     }
 }
