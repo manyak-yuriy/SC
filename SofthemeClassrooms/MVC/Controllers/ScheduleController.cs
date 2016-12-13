@@ -240,6 +240,71 @@ namespace WebApplication1.Controllers
             return Json(new { status = "success"});
         }
 
+        public ActionResult EditEvent(int eventId, EditEventPartialViewModel eventModel)
+        {
+            var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
+            var errors = new ErrorModel();
+
+            if (!ModelState.IsValid)
+            {
+                var errorList = (from item in ModelState.Values
+                                 from error in item.Errors
+                                 select error.ErrorMessage).ToList();
+
+                foreach (string s in errorList)
+                    errors.Errors.Add(s);
+            }
+
+            if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
+                errors.Errors.Add("Событие не может быть короче 20 минут");
+
+
+            if (classRoom == null)
+            {
+                errors.Errors.Add("Specified room does not exist");
+            }
+            else if (!classRoom.IsBookable)
+            {
+                errors.Errors.Add("Specified room is not bookable");
+            }
+            else
+            {
+                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id && e.Id != eventId);
+
+                DateTime startDate = eventModel.Start;
+                DateTime endDate = eventModel.End;
+
+                foreach (var e in eventsForClassRoom)
+                {
+                    if ((e.DateStart > startDate && e.DateStart < endDate) ||
+                         (e.DateEnd > startDate && e.DateEnd < endDate))
+                    {
+                        errors.Errors.Add("Specified room is already booked for the specified time");
+                        break;
+                    }
+                }
+            }
+
+            if (errors.Errors.Count() > 0)
+                return Json(new { status = "fail", errors.Errors });
+
+            Event dbModel = db.Event.Find(eventId);
+
+            dbModel.AllowSubscription = eventModel.AllowSubscription;
+            dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
+            dbModel.OrganizerName = (eventModel.ShowAuthor) ? null : eventModel.OrganizerName;
+            dbModel.ClassroomId = Int32.Parse(eventModel.RoomId);
+            dbModel.Description = eventModel.Description;
+            dbModel.Title = eventModel.Title;
+            dbModel.DateStart = eventModel.Start;
+            dbModel.DateEnd = eventModel.End;
+            dbModel.IsPublic = eventModel.IsPublic;
+
+            db.SaveChanges();
+
+            return Json(new { status = "success" });
+        }
+
         [HttpPost]
         public JsonResult CancelEvent(int Id)
         {
