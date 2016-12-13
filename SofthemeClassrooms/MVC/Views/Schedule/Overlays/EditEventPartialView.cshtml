@@ -79,7 +79,8 @@
 
                 @{
                     string isPub;
-                    if (Model.IsPublic)
+                    // slightly confusing
+                    if (!Model.IsPublic)
                     {
                         isPub = "checked";
                     }
@@ -115,7 +116,7 @@
                 <div class="reg-info">
                     <!-- Squared THREE -->
                     <div>
-                        <input type="checkbox" value="true" id="" class="AllowReg" />
+                        <input type="checkbox" value="true" id="" class="AllowReg" @allowSub />
                         <label for="squaredThree"></label>
                     </div>
 
@@ -128,7 +129,7 @@
                     <span id="public-text">Публично</span>
                     
                     <div class="slideThree">
-                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check"/>
+                        <input type="checkbox" value="true" class="IsPublic" id="slideThree" name="check" @isPub/>
                         <label for="slideThree"></label>
                     </div>
 
@@ -140,7 +141,7 @@
                     <!-- Squared THREE -->
 
                     <div>
-                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor"/>
+                        <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor" @showAuthor/>
                         <label for="squaredThree"></label>
                     </div>
 

@@ -967,7 +967,7 @@
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
     <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
     <Content Include="Views\Schedule\Overlays\CancelEventPartialView.cshtml" />
-    <Content Include="Views\Schedule\Overlays\AddEventPartialView.cshtml" />
+    <Content Include="Views\Schedule\Overlays\EditEventPartialView.cshtml" />
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
@@ -977,7 +977,6 @@
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

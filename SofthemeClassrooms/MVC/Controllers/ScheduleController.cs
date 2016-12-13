@@ -74,6 +74,9 @@ namespace WebApplication1.Controllers
             viewModel = new EditEventPartialViewModel();
             viewModel.Start = DateTime.Now;
             viewModel.End = DateTime.Now.AddHours(2);
+            viewModel.AllowSubscription = true;
+            viewModel.IsPublic = true;
+            viewModel.ShowAuthor = true;
 
             List<SelectListItem> items = new List<SelectListItem>();
 
@@ -88,8 +91,49 @@ namespace WebApplication1.Controllers
                 );
             }
             ViewBag.RoomIdOptions = items;
-            return PartialView("~/Views/Schedule/Overlays/AddEventPartialView.cshtml", viewModel);
+            return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
+
+        /*
+        [HttpGet]
+        public PartialViewResult GetEventEditPartialView(int eventId)
+        {
+            Event eventEntity = db.Event.Find(eventId);
+
+            if (eventEntity == null)
+                throw new NullReferenceException("Event with specified id does not exist");
+
+            EditEventPartialViewModel viewModel;
+            viewModel = new EditEventPartialViewModel();
+
+            viewModel.AllowSubscription = (bool)eventEntity.AllowSubscription;
+            viewModel.Description = eventEntity.Description;
+            viewModel.End = eventEntity.DateEnd;
+            viewModel.Start = eventEntity.DateStart;
+            viewModel.Title = eventEntity.Title;
+            viewModel.IsPublic = eventEntity.IsPublic;
+            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer.UserName;
+            viewModel.RoomId = eventEntity.ClassroomId.ToString();
+            viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
+            viewModel.
+
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+
+            foreach (var room in availRooms)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = room.Title,
+                    Value = room.Id.ToString()
+                }
+                );
+            }
+            ViewBag.RoomIdOptions = items;
+            return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
+        }
+        */
 
         [HttpPost]
         public ActionResult AddSubscriber(int eventId, NewSubscriberViewModel subModel)
@@ -136,7 +180,10 @@ namespace WebApplication1.Controllers
                 foreach (string s in errorList)
                     errors.Errors.Add(s);
             }
-                
+
+            if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
+                errors.Errors.Add("Событие не может быть короче 20 минут");
+
 
             if (classRoom == null)
             {
