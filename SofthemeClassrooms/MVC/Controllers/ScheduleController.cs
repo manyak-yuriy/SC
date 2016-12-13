@@ -147,9 +147,16 @@ namespace WebApplication1.Controllers
         public ActionResult AddSubscriber(int eventId, NewSubscriberViewModel subModel)
         {
             var e = db.Event.Find(eventId);
+            var errors = new ErrorModel();
 
             if (e == null)
                 throw new NullReferenceException("No event with a given id exists");
+
+            bool canSubscribe = (bool)e.AllowSubscription;
+            if (!canSubscribe)
+            {
+                errors.Errors.Add("Это событие не поддерживает подписку");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -157,9 +164,13 @@ namespace WebApplication1.Controllers
                                  from error in item.Errors
                                  select error.ErrorMessage).ToList();
 
-                return Json(new { result = "fail", errorList});
+                foreach (string s in errorList)
+                    errors.Errors.Add(s);
             }
-                
+
+            if (errors.Errors.Count() > 0)
+                return Json(new { status = "fail", errors.Errors });
+
 
             var newVis = new ForeignVisitor();
 
@@ -170,7 +181,7 @@ namespace WebApplication1.Controllers
 
             db.SaveChanges();
 
-            return Json(new { result = "success"});
+            return Json(new { status = "success"});
         }
 
         [HttpPost]

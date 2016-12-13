@@ -110,16 +110,16 @@
             success: function (data, textStatus, jqXHR) {
                 //alert(JSON.stringify(data));
                 
-                if (data.result == "fail")
+                if (data.status == "fail")
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append('<i class="fa fa-frown-o fa-3x"></i>');
-                    var eList = data.errorList;
+                    var eList = data.Errors;
                     for (var i = 0; i < eList.length; i++)
                         $('.val-errors').append("<span>" + eList[i] + "</span> <br>");
                 }
                 
-                if (data.result == "success")
+                if (data.status == "success")
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");
