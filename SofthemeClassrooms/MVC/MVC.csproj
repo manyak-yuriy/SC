@@ -408,6 +408,7 @@
     <Content Include="Images\popup-triangle.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\Slider.png" />
+    <Content Include="Images\wallsMod.png" />
     <Content Include="Scripts\Calendar\calendar.js" />
     <Content Include="Images\SliderStatic.png" />
     <Content Include="Images\walls.png" />

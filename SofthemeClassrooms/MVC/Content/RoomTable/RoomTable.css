@@ -4,16 +4,32 @@
     width: 960px;
     height: 550px;
     position: relative;
+
+    
+}
+
+#wrap-table
+{
+    background-color: #d6dae8;
 }
 
 #schema-image {
     position: absolute;
     left: 10px;
     top: 10px;
-    z-index: 100;
+    z-index: 5;
     pointer-events: none;
     
     /*width: 50%;*/
+}
+
+#schema-image-b
+{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: -1;
+    pointer-events: none;
 }
 
 #prop-pane {
