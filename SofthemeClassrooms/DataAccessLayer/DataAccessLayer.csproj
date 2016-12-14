@@ -61,11 +61,13 @@
   <ItemGroup>
     <Compile Include="ClassRoom.cs" />
     <Compile Include="ClassRoomProperty.cs" />
+    <Compile Include="DataBaseRepositories.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Feedback.cs" />
     <Compile Include="ForeignVisitor.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Interfaces\IDatabaseRepositories.cs" />
     <Compile Include="Migrations\201612081819506_SeedOnly.cs" />
     <Compile Include="Migrations\201612081819506_SeedOnly.Designer.cs">
       <DependentUpon>201612081819506_SeedOnly.cs</DependentUpon>
@@ -79,7 +81,6 @@
     <Compile Include="Repositories\FeedbackRepositroy.cs" />
     <Compile Include="Repositories\ForeignVisitorRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>

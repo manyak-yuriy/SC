@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
     [Authorize]
     public class UsersManagmentController : Controller
     {
-        private IBusinessLogicFactory _businessLogicFactory;
+        private readonly IBusinessLogicFactory _businessLogicFactory;
 
         public UsersManagmentController(IBusinessLogicFactory factory)
         {

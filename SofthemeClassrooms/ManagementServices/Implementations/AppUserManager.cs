@@ -8,12 +8,13 @@ using System.IdentityModel.Claims;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Interfaces;
 
 namespace ManagementServices.Implementations
 {
     public class AppUsersManager : IUserManager
     {
-        UnitOfWork db = new UnitOfWork();
+        IDatabaseRepositories db = new DataBaseRepositories();
 
         public void DeleteUser(string userId)
         {
@@ -34,14 +35,27 @@ namespace ManagementServices.Implementations
 
         public UserInfo GetUserInfo(string userName)
         {
-            var user = db.Users.GetAll().Where(u => u.UserName == userName).FirstOrDefault();
-            var adminId = db.Roles.Where(c => c.Name == "admin").FirstOrDefault().Id;
-            var role = user.Roles.Where(r => r.RoleId == adminId).FirstOrDefault();
+            var user = db.Users.GetAll()
+                .Where(u => u.UserName == userName)
+                .FirstOrDefault();
+
+            var adminId = db.Roles.
+                Where(c => c.Name == "admin").
+                FirstOrDefault()
+                .Id;
+
+            var role = user.Roles.
+                Where(r => r.RoleId == adminId)
+                .FirstOrDefault();
+
             UserInfo uInfo = new UserInfo
             {
                 Email = user.Email,
                 UserId = user.Id,
-                FullName = user.Claims.Where(c => c.ClaimType == ClaimTypes.Name).FirstOrDefault().ClaimValue,
+                FullName = user.Claims
+                    .Where(c => c.ClaimType == ClaimTypes.Name)
+                    .FirstOrDefault().ClaimValue,
+
                 NumberOfEvents = GetNumberUserEvents(user.Id),
                 Role = role == null ? "user" : "admin"
             };
@@ -56,7 +70,10 @@ namespace ManagementServices.Implementations
             if(searchPattern != null)
             {
                 users = db.Users.GetAll()
-                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue == searchPattern);
+                .Where(u => u.Claims
+                .Where(c => ClaimTypes.Name == c.ClaimType)
+                .FirstOrDefault()
+                .ClaimValue == searchPattern);
             }
             else
             {
@@ -83,10 +100,16 @@ namespace ManagementServices.Implementations
             {
                 appUser.Email = user.Email;
                 appUser.UserName = user.Email;
-                appUser.Claims.Where(c => c.ClaimType == ClaimTypes.Name).FirstOrDefault().ClaimValue = user.FullName;
+                appUser.Claims
+                    .Where(c => c.ClaimType == ClaimTypes.Name)
+                    .FirstOrDefault()
+                    .ClaimValue = user.FullName;
 
                 var role = appUser.Roles.FirstOrDefault();
-                var admin = db.Roles.Where(r => r.Name == "admin").FirstOrDefault();
+                var admin = db.Roles
+                    .Where(r => r.Name == "admin")
+                    .FirstOrDefault();
+
                 if (user.Role == "admin" && role.RoleId != admin.Id)
                 {
                     role.RoleId = admin.Id;
@@ -98,14 +121,18 @@ namespace ManagementServices.Implementations
 
         public string GetUserName(string email)
         {
-            var user = db.Users.GetAll().Where(u => u.Email == email)
+            var user = db.Users
+                .GetAll()
+                .Where(u => u.Email == email)
                 .FirstOrDefault();
+
             if (user == null)
             {
                 return null;
             }
 
-            var name = user.Claims.Where(c => c.ClaimType == ClaimTypes.Name)
+            var name = user.Claims
+                .Where(c => c.ClaimType == ClaimTypes.Name)
                 .FirstOrDefault().ClaimValue;
 
             return name;
@@ -113,7 +140,9 @@ namespace ManagementServices.Implementations
 
         public int GetNumberUserEvents(string uId)
         {
-            return db.Events.GetAll().Where(e => e.ApplicationUserID == uId).Count();
+            return db.Events.GetAll()
+                .Where(e => e.ApplicationUserID == uId)
+                .Count();
         }
     }
 }
