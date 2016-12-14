@@ -386,7 +386,7 @@ namespace WebApplication1.Controllers
                     roomStatus = isBooked ? "booked" : "available";
                 }
 
-                roomsAvailability.Add(new RoomAvailabilityModel { RoomId = room.Id, Status = roomStatus});
+                roomsAvailability.Add(new RoomAvailabilityModel { RoomId = room.Id, Status = roomStatus, RoomTitle = room.Title});
             }
 
             return Json(new { roomsAvailability }, JsonRequestBehavior.AllowGet);

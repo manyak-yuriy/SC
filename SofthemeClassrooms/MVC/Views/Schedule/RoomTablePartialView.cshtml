@@ -7,7 +7,7 @@
     <div id="room-table">
 
         <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
-        <img id="schema-image-b" src="~/Images/walls.png" alt="" />
+        <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
 
         <!--panel of properties-->
         <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
@@ -39,7 +39,7 @@
 
         <!--Room containers-->
         <div class="room-container draggable resizeable" data-id="1" id="einstein">
-            <span class="caption">room-einstein</span>
+            <span class="title-container">Einstein Classroom</span>
         </div>
 
         <div class="room-container draggable resizeable" data-id="2" id="empty">
@@ -152,7 +152,7 @@
             data: { 'timeNow': timeNow.toISOString() },
             contentType: "application/json; charset=utf-8",
             success: function (data, textStatus, jqXHR) {
-                alert(JSON.stringify(data));
+                //alert(JSON.stringify(data));
 
                 var roomsAvail = data.roomsAvailability;
                 for (var i = 0; i < roomsAvail.length; i++)

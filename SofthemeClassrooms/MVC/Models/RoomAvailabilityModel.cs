@@ -9,5 +9,6 @@ namespace WebApplication1.Models
     {
         public int RoomId { get; set; }
         public string Status { get; set; }
+        public string RoomTitle { get; set; }
     }
 }
