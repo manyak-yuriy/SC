@@ -60,31 +60,29 @@
 
 .room-container
 {
-    background-color: lightgrey;
-    
-    
+  
     height: 100px;
     width: 50px;
 
     display: inline-block;
 
     position: absolute !important;
+    opacity: 0.95;
 }
 
 /*Einstein*/
 
 .room-container#einstein
 {
-    left: 424px;
-    top: 119px;
-    width: 184px;
-    height: 99px;
-    background-color: red;
+    left: 427px;
+    top: 117px;
+    width: 181px;
+    height: 101px;
 }
 
 .room-container#empty
 {
-        left: 23px;
+    left: 23px;
     top: 116px;
     width: 164px;
     height: 101px;
@@ -92,46 +90,92 @@
 
 .room-container#english
 {
-    
+    left: 983px;
+    top: 114px;
+    width: 44px;
+    height: 147px;
 }
 
 .room-container#hr
 {
-    
+    left: 191px;
+    top: 118px;
+    width: 229px;
+    height: 100px;
 }
 
 .room-container#info
 {
-    
+    left: 610px;
+    top: 117px;
+    width: 88px;
+    height: 99px;
 }
 
 .room-container#newton
 {
-    
+    left: 508px;
+    top: 259px;
+    width: 196px;
+    height: 100px;
 }
 
 .room-container#tesla
 {
-    
+    left: 321px;
+    top: 261px;
+    width: 190px;
+    height: 96px;
 }
 
 .room-container#web-1
 {
-    
+    left: 700px;
+    top: 117px;
+    width: 98px;
+    height: 94px;
 }
 
 .room-container#web-2
 {
-    
+    left: 800px;
+    top: 115px;
+    width: 91px;
+    height: 100px;
 }
 
 .room-container#web-3
 {
-    
+    left: 893px;
+    top: 115px;
+    width: 89px;
+    height: 102px;
 }
 
 .line-details
 {
     display: none;
+}
+
+.caption
+{
+    /*display:none;*/
+}
+
+
+/*Room states*/
+.room-available
+{
+    background-color: #9FA6B8;
+}
+
+.room-booked
+{
+    background-color: #FF4F50;
+}
+
+.room-disabled
+{
+    background-color: #D9DADE;
 }
 
