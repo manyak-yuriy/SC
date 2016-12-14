@@ -4,6 +4,8 @@
     width: 960px;
     height: 550px;
     position: relative;
+
+    font-family: sans-serif;
 }
 
 #wrap-table {
@@ -22,6 +24,7 @@
 
 #prop-pane {
     display: inline-block;
+    visibility: hidden;
 }
 
 #prop-pane {
@@ -93,6 +96,7 @@
         width: 44px;
         height: 147px;
     }
+    
 
     .room-container#hr {
         left: 191px;
@@ -230,17 +234,25 @@
 
 .title-container {
     border: none;
-    background-color: rgba(150, 150, 150, 0.4);
+    background-color: rgba(130, 130, 150, 0.4);
     color: white;
     border-radius: 23%;
 
     padding: 5%;
 
-    display: table-cell;
-    vertical-align: middle;
-
-    margin: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
+
+.room-container#english .title-container{
+        -webkit-transform: rotate(-90deg); 
+        -moz-transform: rotate(-90deg);
+        top: 45%;
+        left: -5%;
+
+    }
 
 html, body {
     height: 100%;
