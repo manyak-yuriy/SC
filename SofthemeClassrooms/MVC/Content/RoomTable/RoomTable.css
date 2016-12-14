@@ -1,0 +1,137 @@
+﻿#room-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+    height: 550px;
+    position: relative;
+}
+
+#schema-image {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    /*z-index: 100;*/
+    
+    /*width: 50%;*/
+}
+
+#prop-pane {
+    display: inline-block;
+}
+
+#prop-pane {
+    position: absolute;
+    left: 420px;
+    top: 470px;
+    z-index: 100;
+    background-image: url("../../Images/Extracted/PropPane/PropPane.png");
+    width: 400px;
+    height: 80px;
+    /*border: 5px solid red;*/
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.eq-container {
+    display: inline;
+    margin: 5px;
+    top: 12px;
+    left: 15px;
+    /*border: 1px solid green;*/
+    position: relative;
+}
+
+.eq-img {
+    margin: 5px;
+    z-index: 10;
+}
+
+.line-details
+{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    display: none;
+}
+
+
+
+
+
+.room-container
+{
+    background-color: lightgrey;
+    
+    
+    height: 100px;
+    width: 50px;
+
+    display: inline-block;
+
+    position: absolute !important;
+}
+
+/*Einstein*/
+
+.room-container#einstein
+{
+    left: 424px;
+    top: 119px;
+    width: 184px;
+    height: 99px;
+    background-color: red;
+}
+
+.room-container#empty
+{
+        left: 23px;
+    top: 116px;
+    width: 164px;
+    height: 101px;
+}
+
+.room-container#english
+{
+    
+}
+
+.room-container#hr
+{
+    
+}
+
+.room-container#info
+{
+    
+}
+
+.room-container#newton
+{
+    
+}
+
+.room-container#tesla
+{
+    
+}
+
+.room-container#web-1
+{
+    
+}
+
+.room-container#web-2
+{
+    
+}
+
+.room-container#web-3
+{
+    
+}
+
+.line-details
+{
+    display: none;
+}
+
