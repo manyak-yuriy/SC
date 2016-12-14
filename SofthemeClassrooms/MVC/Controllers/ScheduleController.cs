@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
 using WebApplication1.Models.Schedule;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -354,6 +355,41 @@ namespace WebApplication1.Controllers
                 .Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title, e.IsPublic});
             var roomData = eventsData.Select(e => new { e.ClassroomId, e.classRoomTitle } ).Distinct();
             return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetRoomTableState(DateTime timeNow)
+        {
+            var classRooms = db.ClassRoom;
+
+            var roomsAvailability = new List<RoomAvailabilityModel>();
+
+            foreach (var room in classRooms)
+            {
+                string roomStatus;
+
+                if (!room.IsBookable)
+                    roomStatus = "disabled";
+                else
+                {
+                    var roomEvents = room.Event.Where(e => e.ClassroomId == room.Id);
+
+                    bool isBooked = false;
+
+                    foreach (var roomEvent in roomEvents)
+                        if (roomEvent.DateStart < timeNow && timeNow < roomEvent.DateEnd)
+                        {
+                            isBooked = true;
+                            break;
+                        }
+
+                    roomStatus = isBooked ? "booked" : "available";
+                }
+
+                roomsAvailability.Add(new RoomAvailabilityModel { RoomId = room.Id, Status = roomStatus});
+            }
+
+            return Json(new { roomsAvailability }, JsonRequestBehavior.AllowGet);
         }
 
         // Get euipment data displayed on the panel

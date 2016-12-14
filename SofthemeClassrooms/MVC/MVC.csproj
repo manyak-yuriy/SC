@@ -236,6 +236,7 @@
     <Compile Include="Models\PersonalDataViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\RoomAvailabilityModel.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ErrorModel.cs" />

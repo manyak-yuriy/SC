@@ -54,15 +54,15 @@
             <span class="caption">room-hr</span>
         </div>
 
-        <div class="room-container draggable room-disabled resizeable" data-id="5" id="info">
+        <div class="room-container draggable resizeable" data-id="5" id="info">
             <span class="caption">room-info</span>
         </div>
 
-        <div class="room-container draggable room-available resizeable" data-id="6" id="newton">
+        <div class="room-container draggable resizeable" data-id="6" id="newton">
             <span class="caption">room-newton</span>
         </div>
 
-        <div class="room-container draggable room-booked resizeable" data-id="7" id="tesla">
+        <div class="room-container draggable resizeable" data-id="7" id="tesla">
             <span class="caption">room-tesla</span>
         </div>
 
@@ -141,6 +141,46 @@
         autoHide: true, ghost: true
     }
 
+    function renderRoomTable(timeNow)
+    {
+        
+
+        $.ajax({
+            url: '@Url.Action("GetRoomTableState", "Schedule")',
+            type: "GET",
+            context: this,
+            data: { 'timeNow': timeNow.toISOString() },
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus, jqXHR) {
+                alert(JSON.stringify(data));
+
+                var roomsAvail = data.roomsAvailability;
+                for (var i = 0; i < roomsAvail.length; i++)
+                {
+                    var roomId = roomsAvail[i].RoomId;
+                    var roomStatus = roomsAvail[i].Status;
+
+                    var $roomElem = $('.room-container').filter(function () {
+                        return $(this).data("id") == roomId
+                    });
+
+                    $roomElem.removeClass('room-available room-booked room-disabled');
+
+                    var cls = "";
+
+                    if (roomStatus == 'available')
+                        cls = 'room-available';
+                    else if (roomStatus == 'booked')
+                        cls = 'room-booked';
+                    else if (roomStatus == 'disabled')
+                        cls = 'room-disabled';
+
+                    $roomElem.addClass(cls);
+                }
+            }
+        });
+    }
+
     $(() => {
         $(".draggable").draggable();
 
@@ -159,5 +199,7 @@
             $('.line-details#' + id).css('display', 'none');
             $('#prop-pane').css("visibility", "hidden");
         });
+
+        renderRoomTable(new Date());
     });
 </script>
