@@ -5,7 +5,7 @@
 
 <div id="room-table">
 
-    <img id="schema-image" src="~/Images/walls.png" alt="" />
+    <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
 
     <!--panel of properties-->
     <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
@@ -79,52 +79,52 @@
 
 
     <!--Line details-->
-    <div class="line-details" data-id="1" id="einstein">
+    <div class="line-details draggable" data-id="1" id="einstein">
         <span class="caption">line-details-einstein</span>
         <img class="" src="~/Images/LineDetails/line-details-einstein.png">
     </div>
 
-    <div class="line-details" data-id="2" id="empty">
+    <div class="line-details draggable" data-id="2" id="empty">
         <span class="caption">line-details-empty</span>
         <img class="" src="~/Images/LineDetails/line-details-empty.png">
     </div>
 
-    <div class="line-details" data-id="3" id="english">
+    <div class="line-details draggable" data-id="3" id="english">
         <span class="caption">line-details-english</span>
         <img class="" src="~/Images/LineDetails/line-details-english.png">
     </div>
 
-    <div class="line-details" id="room-4" id="hr">
+    <div class="line-details draggable" id="hr" data-id="4">
         <span class="caption">line-details-hr</span>
         <img class="" src="~/Images/LineDetails/line-details-hr.png">
     </div>
 
-    <div class="line-details" data-id="5" id="info">
+    <div class="line-details draggable" data-id="5" id="info">
         <span class="caption">line-details-info</span>
         <img class="" src="~/Images/LineDetails/line-details-info.png">
     </div>
 
-    <div class="line-details" data-id="6" id="newton">
+    <div class="line-details draggable" data-id="6" id="newton">
         <span class="caption">line-details-newton</span>
         <img class="" src="~/Images/LineDetails/line-details-newton.png">
     </div>
 
-    <div class="line-details" data-id="7" id="tesla">
+    <div class="line-details draggable" data-id="7" id="tesla">
         <span class="caption">line-details-tesla</span>
         <img class="" src="~/Images/LineDetails/line-details-tesla.png">
     </div>
 
-    <div class="line-details" data-id="8" id="web-1">
+    <div class="line-details draggable" data-id="8" id="web-1">
         <span class="caption">line-details-web-1</span>
         <img class="" src="~/Images/LineDetails/line-details-web-1.png">
     </div>
 
-    <div class="line-details" data-id="9" id="web-2">
+    <div class="line-details draggable" data-id="9" id="web-2">
         <span class="caption">line-details-web-2</span>
         <img class="" src="~/Images/LineDetails/line-details-web-2.png">
     </div>
 
-    <div class="line-details" data-id="10" id="web-3">
+    <div class="line-details draggable" data-id="10" id="web-3">
         <span class="caption">line-details-web-3</span>
         <img class="" src="~/Images/LineDetails/line-details-web-3.png">
     </div>
@@ -142,5 +142,17 @@
         $(".draggable").draggable();
 
         $(".resizeable").resizable(resizeOptions);
+
+
+
+        $('.room-container ').mouseover(function () {
+            var id = $(this).attr('id');
+            $('.line-details#' + id).css('display', 'inline-block');
+        });
+
+        $('.room-container ').mouseout(function () {
+            var id = $(this).attr('id');
+            $('.line-details#' + id).css('display', 'none');
+        });
     });
 </script>

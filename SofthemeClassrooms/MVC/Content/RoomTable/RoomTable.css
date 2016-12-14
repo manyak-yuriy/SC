@@ -10,7 +10,8 @@
     position: absolute;
     left: 10px;
     top: 10px;
-    /*z-index: 100;*/
+    z-index: 100;
+    pointer-events: none;
     
     /*width: 50%;*/
 }
@@ -21,8 +22,8 @@
 
 #prop-pane {
     position: absolute;
-    left: 420px;
-    top: 470px;
+    left: 330px;
+    top: 400px;
     z-index: 100;
     background-image: url("../../Images/Extracted/PropPane/PropPane.png");
     width: 400px;
@@ -48,13 +49,13 @@
 
 .line-details
 {
-    position: absolute;
     top: 100px;
     left: 100px;
+    /*display: none;*/
+    z-index: 100;
+    position: absolute !important;
     display: none;
 }
-
-
 
 
 
@@ -68,6 +69,7 @@
 
     position: absolute !important;
     opacity: 0.95;
+    /*z-index: -1;*/
 }
 
 /*Einstein*/
@@ -152,14 +154,10 @@
     height: 102px;
 }
 
-.line-details
-{
-    display: none;
-}
-
 .caption
 {
-    /*display:none;*/
+    display:inline;
+    visibility: hidden;
 }
 
 
@@ -179,3 +177,71 @@
     background-color: #D9DADE;
 }
 
+
+/*Line details*/
+
+.line-details#einstein
+{
+    left: 394px;
+    top: 193px;
+}
+
+.line-details#empty
+{
+    left: 17px;
+    top: 192px;
+}
+
+.line-details#english
+{
+    left: 411px;
+    top: 218px;
+}
+
+.line-details#hr
+{
+    left: 180px;
+    top: 189px;
+}
+
+.line-details#info
+{
+    left: 315px;
+    top: 202px;
+}
+
+.line-details#newton
+{
+    left: 447px;
+    top: 295px;
+}
+
+.line-details#tesla
+{
+    left: 274px;
+    top: 335px;
+}
+
+.line-details#web-1
+{
+    left: 312px;
+    top: 195px;
+}
+
+.line-details#web-2
+{
+    left: 310px;
+    top: 197px;
+}
+
+.line-details#web-3
+{
+    left: 439px;
+    top: 174px;
+}
+
+.line-details
+{
+    display: none;
+    position: absolute !important;
+}
