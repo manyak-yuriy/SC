@@ -104,7 +104,7 @@ $(  function()
                 $.ajax({
                     url: $('#prop-pane').data('request-url'),
                     type: "GET",
-                    data: {roomId: 0},
+                    data: { roomId: 0 },
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     context: this,
