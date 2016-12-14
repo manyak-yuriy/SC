@@ -36,14 +36,20 @@ namespace DataAccessLayer.Migrations
 
             context.ClassRoom.AddOrUpdate(
                 c => c.Title,
-                new ClassRoom { Title = "Einstein", Capacity = 10, IsBookable = true},
-                new ClassRoom { Title = "Tesla", Capacity = 10, IsBookable = true },
-                new ClassRoom { Title = "Newton", Capacity = 10, IsBookable = true },
-                new ClassRoom { Title = "English", Capacity = 10, IsBookable = true }, 
-                new ClassRoom { Title = "HR", Capacity = 10, IsBookable = true}
+
+                new ClassRoom { Title = "Einstein Classroom", Capacity = 10, IsBookable = true},
+                new ClassRoom { Title = "Empty", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "English", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "HR office", Capacity = 10, IsBookable = true }, 
+                new ClassRoom { Title = "Info центр", Capacity = 10, IsBookable = true},
+                new ClassRoom { Title = "Newton Classroom", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "Tesla Classroom", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "Web & Marketing 1", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "Web & Marketing 2", Capacity = 10, IsBookable = true },
+                new ClassRoom { Title = "Web & Marketing 3", Capacity = 10, IsBookable = true }
             );
 
-
+            
         }
     }
 }
