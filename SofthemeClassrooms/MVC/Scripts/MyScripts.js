@@ -17,11 +17,6 @@ function toggleDisplayAndInputPInfo()
     $('#displayPersonalInfo').addClass("invisibleBlock");
 }
 
-function SendSuccess()
-{
-    $('#SuccessMessage').html('Спасибо. Ваше сообщение отправлено администратору.');
-}
-
 function SendChecker() {
     var searchInput = $('#user-search:input').val;
     if (searchInput == "") {
@@ -37,8 +32,16 @@ function LoadingStarted() {
     $('#load-icon').css('display','initial');
 }
 
-function LoadingFinished() {
-    $('#inputs').css('display', 'initial');
-    $('#load-icon').css('display', 'none');
+function LoadingFinished(input, loadIcon) {
+    $('#' + input).css('display', 'initial');
+    $('#' + loadIcon).css('display', 'none');
+}
+
+function FeedbackSentSuccessfully() {
+    $('#Name').val('');
+    $('#Surname').val('');
+    $('#Email').val('');
+    $('#messageText').val('');
+    $('#SuccessMessage').html('Спасибо. Ваше сообщение отправлено администратору.');
 }
 

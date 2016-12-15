@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ManagementServices.Implementations;
 using ManagementServices.Models;
 using WebApplication1.Models;
@@ -7,9 +6,8 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
-using System.Security.Claims;
-using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using ManagementServices.Interfaces;
 using WebApplication1.Extensions;
 
@@ -32,8 +30,6 @@ namespace WebApplication1.Controllers
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
-
-
 
         public ActionResult MyPage()
         {
@@ -92,6 +88,7 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Response.StatusCode = (int) HttpStatusCode.BadRequest;
                 return PartialView("ChangePasswordPartialView", model);
             }
 
@@ -105,6 +102,7 @@ namespace WebApplication1.Controllers
                 return PartialView("ChangePasswordPartialView", model);
             }
 
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
             AddErrors(result);
             return PartialView("ChangePasswordPartialView", model);
         }
@@ -120,7 +118,7 @@ namespace WebApplication1.Controllers
 
             IUserManager m = _businessLogicFactory.UserManager;
             int itemsPerPage = 20;
-            int NumberOfUsers = m.GetUserNumber();
+            int          NumberOfUsers = m.GetUserNumber();
 
             int lastPage = NumberOfUsers / itemsPerPage;
             int remainder = NumberOfUsers % itemsPerPage;

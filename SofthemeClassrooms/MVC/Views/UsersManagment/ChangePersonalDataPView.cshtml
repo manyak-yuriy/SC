@@ -8,6 +8,8 @@
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "pInfo",
+        OnBegin = "LoadingStarted('pInfo','load-icon')",
+        OnComplete = "LoadingFinished('pInfo','load-icon')"
     }))
     {
         @Html.AntiForgeryToken()
@@ -30,3 +32,5 @@
         <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton" />
     }
 </div>
+
+

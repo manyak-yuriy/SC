@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("SendFeedbackForm", model);
             }
 
             FeedBackDTO feedback = SendMessageModel.ToFeedbackDTO(model);
