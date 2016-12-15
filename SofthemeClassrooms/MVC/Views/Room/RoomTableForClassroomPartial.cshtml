@@ -1,13 +1,18 @@
 ﻿
 
-<link href="~/Content/RoomTable/RoomTable.css" rel="stylesheet" />
-
+<link href="~/Content/RoomTableForClassroom/RoomTableForClassroom.css" rel="stylesheet" />
 
 <div id='wrap-table'>
+    <div class="room-controls">
+        <input type="button" class="close-room-button" value="Закрыть" />
+        <input type="button" class="change-room-button" value="Изменить" />
+    </div>
     <div id="room-table">
-
+        
         <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
         <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
+
+        
 
         <!--panel of properties-->
         <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
@@ -215,8 +220,8 @@
         });
 
         renderRoomTable(new Date());
-
         $('#room-table').css('display', 'block');
+
 
         $(".room-container").mouseover(function () {
             var id = $(this).attr('id');

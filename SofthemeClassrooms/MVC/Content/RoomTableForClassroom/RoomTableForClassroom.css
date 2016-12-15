@@ -259,3 +259,50 @@
 html, body {
     height: 100%;
 }
+
+.room-controls
+{
+    float: right;
+    z-index: 1001;
+}
+
+
+.change-room-button, .close-room-button
+{
+    position:relative;
+
+    display: block;
+    margin: 10px;
+
+    border: none;
+    outline: none;
+
+    border: 0px solid rgba(255, 255, 255, 0); 
+    border-radius: 70px;
+
+    width: 140px;
+    height: 33px;
+
+    z-index: 1001;
+}
+
+.close-room-button
+{
+    background-color: #747B87;
+    color: white;
+}
+
+.close-room-button:hover
+{
+    background-color: lightcoral;
+}
+
+.change-room-button
+{
+    background-color: #C8CEDA;
+}
+
+.change-room-button:hover
+{
+    background-color: lightcoral;
+}

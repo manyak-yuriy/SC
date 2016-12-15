@@ -256,6 +256,7 @@
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\RoomTableForClassroom\RoomTableForClassroom.css" />
     <Content Include="Content\RoomTable\RoomTable.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -981,6 +982,7 @@
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
+    <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
