@@ -23,9 +23,13 @@
 
 @model WebApplication1.Models.Schedule.DisplayEventPartialViewModel
 
+@{
+    var culture = new System.Globalization.CultureInfo("ru-RU");
+}
+
 <div class="event-display-popup">
     <div class="event-display-header">
-        <span>@Model.DateStart.DayOfWeek, @Model.DateStart.Day @Model.DateStart.Month</span>
+        <span>@culture.DateTimeFormat.GetDayName(Model.DateStart.DayOfWeek), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
         <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
 
         <div class="header-controls">
