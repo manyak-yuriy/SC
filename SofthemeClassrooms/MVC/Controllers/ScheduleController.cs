@@ -394,10 +394,12 @@ namespace WebApplication1.Controllers
 
         // Get euipment data displayed on the panel
         [HttpGet]
+        [AllowAnonymous]
         public JsonResult GetEquipmentDataForRoom(int roomId)
         {
             ManagementServices.Implementations.EquipmentManagement equipmentManager = new ManagementServices.Implementations.EquipmentManagement();
-            return Json(equipmentManager.GetEquipmentByRoomId(roomId), JsonRequestBehavior.AllowGet);
+            var equipmentData = equipmentManager.GetEquipmentByRoomId(roomId);
+            return Json(equipmentData, JsonRequestBehavior.AllowGet);
         }
 
     }

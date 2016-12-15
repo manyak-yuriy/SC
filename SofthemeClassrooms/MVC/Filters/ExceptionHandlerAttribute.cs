@@ -10,8 +10,10 @@ namespace WebApplication1.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
+            /*
             filterContext.ExceptionHandled = true;
             filterContext.Result = new RedirectResult("~/Views/Shared/Error.cshtml");
+            */
         }
     }
 }
