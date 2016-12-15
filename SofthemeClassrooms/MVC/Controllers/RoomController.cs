@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Close(int roomId)
+        public ActionResult Close(int id)
         {
             return new EmptyResult();
         }
