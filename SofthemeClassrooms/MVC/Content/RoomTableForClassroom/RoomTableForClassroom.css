@@ -220,6 +220,7 @@
 }
 
 .line-details {
+    pointer-events: none;
     display: none;
     position: absolute !important;
 }
@@ -297,6 +298,7 @@ html, body {
 .path-info {
     position: absolute !important;
     visibility: hidden;
+    pointer-events: none;
 }
 
     .path-info#einstein {

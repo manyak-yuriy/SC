@@ -12,8 +12,10 @@
 <link href="~/Content/TimeTable/calendarWidget.css" rel="stylesheet" />
 
 
-
-<div id="main-container" style="margin: 0 auto">
+<style>
+    
+</style>
+<div id="main-container">
     <div id="change-view">
         <i class="fa fa-align-justify fa-1x" aria-hidden="true"></i>
         <i class="fa fa-list fa-1x" aria-hidden="true"></i>
@@ -29,7 +31,10 @@
 
 
     <style>
-        
+        #main-container
+        {
+            visibility: hidden;
+        }
 
     </style>
 
@@ -295,7 +300,7 @@
     $(() => {
 
         renderTimeTable();
-
+        $('#main-container').css("visibility", "visible");
     })
 
 </script>

@@ -222,6 +222,7 @@
 }
 
 .line-details {
+    pointer-events: none;
     display: none;
     position: absolute !important;
 }
