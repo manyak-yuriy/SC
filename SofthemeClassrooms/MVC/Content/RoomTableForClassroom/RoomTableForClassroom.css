@@ -4,9 +4,7 @@
     width: 960px;
     height: 550px;
     position: relative;
-
     font-family: sans-serif;
-
     display: none;
 }
 
@@ -98,7 +96,7 @@
         width: 44px;
         height: 147px;
     }
-    
+
 
     .room-container#hr {
         left: 191px;
@@ -239,70 +237,114 @@
     background-color: rgba(130, 130, 150, 0.4);
     color: white;
     border-radius: 23%;
-
     padding: 5%;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
 
-.room-container#english .title-container{
-        -webkit-transform: rotate(-90deg); 
-        -moz-transform: rotate(-90deg);
-        top: 45%;
-        left: -5%;
-
-    }
+.room-container#english .title-container {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    top: 45%;
+    left: -5%;
+}
 
 html, body {
     height: 100%;
 }
 
-.room-controls
-{
+.room-controls {
     float: right;
     z-index: 1001;
 }
 
 
-.change-room-button, .close-room-button
-{
-    position:relative;
-
+.change-room-button, .close-room-button {
+    position: relative;
     display: block;
     margin: 10px;
-
     border: none;
     outline: none;
-
-    border: 0px solid rgba(255, 255, 255, 0); 
+    border: 0px solid rgba(255, 255, 255, 0);
     border-radius: 70px;
-
     width: 140px;
     height: 33px;
-
     z-index: 1001;
 }
 
-.close-room-button
-{
+.close-room-button {
     background-color: #747B87;
     color: white;
 }
 
-.close-room-button:hover
-{
-    background-color: lightcoral;
-}
+    .close-room-button:hover {
+        background-color: lightcoral;
+    }
 
-.change-room-button
-{
+.change-room-button {
     background-color: #C8CEDA;
 }
 
-.change-room-button:hover
-{
-    background-color: lightcoral;
+    .change-room-button:hover {
+        background-color: lightcoral;
+    }
+
+
+
+
+.path-info {
+    position: absolute !important;
+    visibility: hidden;
 }
+
+    .path-info#einstein {
+        left: 33px;
+        top: 223px;
+    }
+
+    .path-info#empty {
+        left: 33px;
+        top: 223px;
+    }
+
+    .path-info#english {
+        left: 33px;
+        top: 236px;
+    }
+
+    .path-info#hr {
+        left: 31px;
+        top: 224px;
+    }
+
+    .path-info#info {
+        left: 31px;
+        top: 224px;
+    }
+
+    .path-info#newton {
+        left: 32px;
+        top: 236px;
+    }
+
+    .path-info#tesla {
+        left: 31px;
+        top: 236px;
+    }
+
+    .path-info#web-1 {
+        left: 32px;
+        top: 220px;
+    }
+
+    .path-info#web-2 {
+        left: 33px;
+        top: 190px;
+    }
+
+    .path-info#web-3 {
+        left: 32px;
+        top: 220px;
+    }

@@ -49,6 +49,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Index(int roomId)
         {
+            ViewBag.roomId = roomId;
             return View();
         }
     }

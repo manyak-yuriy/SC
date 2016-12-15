@@ -5,6 +5,12 @@
 }
 
 
+@{ 
+    int roomId = ViewBag.roomId;
+}
+
+<input type="hidden" class="room-id" value="@roomId"/>
+
 @Html.Partial("RoomTableForClassroomPartial")
 <!---->
 @Html.Partial("WeeklySchedulerPartialView")
