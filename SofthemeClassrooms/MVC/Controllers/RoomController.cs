@@ -29,11 +29,35 @@ namespace WebApplication1.Controllers
 
             return new EmptyResult();
         }
+
+        [HttpPost]
+        public ActionResult Open(int roomId)
+        {
+            var db = new ApplicationDbContext();
+
+            var room = db.ClassRoom.Find(roomId);
+
+            if (room != null)
+            {
+                room.IsBookable = true;
+            }
+
+            db.SaveChanges();
+
+            return new EmptyResult();
+        }
               
         [HttpGet]
         public ActionResult Index(int roomId)
         {
+            var db = new ApplicationDbContext();
+
             ViewBag.roomId = roomId;
+            var room = db.ClassRoom.Find(roomId);
+
+            if (room != null)
+                ViewBag.isBookable = room.IsBookable;
+
             return View();
         }
     }

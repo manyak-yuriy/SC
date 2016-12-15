@@ -2,10 +2,22 @@
 
 <link href="~/Content/RoomTableForClassroom/RoomTableForClassroom.css" rel="stylesheet" />
 
+<script>
+    var isBookable = @Json.Encode(@ViewBag.isBookable);
+</script>
+
+@{ 
+    var closeBtnInitialValue = (ViewBag.isBookable) ? "Закрыть" : "Открыть";
+}
+
 <div id='wrap-table'>
+
     <div class="room-controls">
-        <input type="button" class="close-room-button" value="Закрыть" />
+        
+        <input type="button" class="close-room-button" value="@closeBtnInitialValue" />
+            
         <input type="button" class="change-room-button" value="Изменить" />
+
     </div>
     <div id="room-table">
 
@@ -341,7 +353,25 @@
 
 
         $('.close-room-button').click(function () {
-            $('.room-close-popup').css("display", "block");
+            if (isBookable)
+                $('.room-close-popup').css("display", "block");
+            else
+            {
+                $.ajax({
+                    url: '@Url.Action("Open", "Room")',
+                    type: "POST",
+                    data: JSON.stringify({ roomId: dataId }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        alert("opened room");
+                    }
+                });
+
+                isBookable = true;
+                $('.close-room-button').val('Закрыть');
+            }
         });
 
         $('.change-room-button').click(function () {
@@ -349,20 +379,24 @@
         });
 
         $('.room-close-popup .confirm-cancellation-button').click(function () {
+            if (isBookable)
+            {
+                $.ajax({
+                    url: '@Url.Action("Close", "Room")',
+                    type: "POST",
+                    data: JSON.stringify({ roomId: dataId }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        alert("closed room");
+                    }
+                });
+                isBookable = false;
+                $('.close-room-button').val('Открыть');
+            }
 
             $('.room-close-popup').css("display", "none");
-
-            $.ajax({
-                url: '@Url.Action("Close", "Room")',
-                type: "POST",
-                data: JSON.stringify({ roomId: dataId }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    alert("deleted");
-                }
-            });
         });
 
         $('.room-close-popup .discart-cancellation-button').click(function () {

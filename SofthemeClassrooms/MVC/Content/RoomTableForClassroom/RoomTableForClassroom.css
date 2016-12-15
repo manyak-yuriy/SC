@@ -262,7 +262,7 @@ html, body {
 }
 
 
-.change-room-button, .close-room-button {
+.change-room-button, .close-room-button, .open-room-button {
     position: relative;
     display: block;
     margin: 10px;
