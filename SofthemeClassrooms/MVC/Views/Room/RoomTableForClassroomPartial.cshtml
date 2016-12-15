@@ -203,7 +203,6 @@
 
     function renderRoomTable(timeNow) {
 
-
         $.ajax({
             url: '@Url.Action("GetRoomTableState", "Schedule")',
             type: "GET",
@@ -245,6 +244,7 @@
     }
 
     $(() => {
+        $('.room-close-popup').draggable();
         $(".draggable").draggable();
 
         $(".resizeable").resizable(resizeOptions);
@@ -339,5 +339,34 @@
             }
         });
 
+
+        $('.close-room-button').click(function () {
+            $('.room-close-popup').css("display", "block");
+        });
+
+        $('.change-room-button').click(function () {
+            $('.change-room-button').css("visibility", "hidden");
+        });
+
+        $('.room-close-popup .confirm-cancellation-button').click(function () {
+
+            $('.room-close-popup').css("display", "none");
+
+            $.ajax({
+                url: '@Url.Action("Close", "Room")',
+                type: "POST",
+                data: JSON.stringify({ roomId: dataId }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    alert("deleted");
+                }
+            });
+        });
+
+        $('.room-close-popup .discart-cancellation-button').click(function () {
+            $('.room-close-popup').css("display", "none");
+        });
     });
 </script>

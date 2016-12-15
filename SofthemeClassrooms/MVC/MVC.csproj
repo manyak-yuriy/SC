@@ -251,6 +251,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Overlays\AddEventPartialView.css" />
+    <Content Include="Content\Overlays\CloseRoomPartialView.css" />
     <Content Include="Content\Overlays\CancelEventPartialView.css" />
     <Content Include="Content\Overlays\DisplayEventPartialView.css" />
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
@@ -983,6 +984,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
     <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
+    <Content Include="Views\Room\CloseRoomPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

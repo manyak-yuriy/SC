@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,44 +9,27 @@ namespace WebApplication1.Controllers
 {
     public class RoomController : Controller
     {
-        // Save info about capacity, number of equipment items
         [HttpPost]
-        public ActionResult SaveProperties(/*RoomPropViewModel roomProp*/)
+        public ActionResult Close(int roomId)
         {
-            return new EmptyResult();
-        }
+            var db = new ApplicationDbContext();
 
-        [HttpPost]
-        public ActionResult Close(int id)
-        {
-            return new EmptyResult();
-        }
-        [HttpPost]
-        public ActionResult Open(int roomId)
-        {
-            return new EmptyResult();
-        }
+            var room = db.ClassRoom.Find(roomId);
 
-        [HttpGet]
-        public ActionResult Edit(int roomId)
-        {
+            if (room != null)
+            {
+                room.IsBookable = false;
+
+                var eventsToDelete = room.Event.Where(e => e.ClassroomId == roomId);
+
+                db.Event.RemoveRange(eventsToDelete);
+            }
+
+            db.SaveChanges();
+
             return new EmptyResult();
         }
-
-        // Returns information about events
-        [HttpGet]
-        public ActionResult GetSchedulerState(int roomId, DateTime fromDate, DateTime toDate)
-        {
-            return new EmptyResult();
-        }
-
-        // Returns room capacity, number of items
-        [HttpGet]
-        public ActionResult GetProperties(int roomId)
-        {
-            return new EmptyResult();
-        }
-
+              
         [HttpGet]
         public ActionResult Index(int roomId)
         {
