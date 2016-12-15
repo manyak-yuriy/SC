@@ -10,8 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using DataAccessLayer;
-using System.Collections.Generic;
-using System.Threading;
+using WebApplication1.Extensions;
 using WebApplication1.Filters;
 
 namespace WebApplication1.Controllers
@@ -77,7 +76,8 @@ namespace WebApplication1.Controllers
                 return View(model);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+            var result =
+                await SignInManager.PasswordSignInAsync(model.Email.DeleteExtraSpaces(), model.Password, false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -150,18 +150,18 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email.DeleteExtraSpaces(), Email = model.Email.DeleteExtraSpaces() };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
                     UserManager.AddToRole(user.Id, "user");
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Name, model.FullName));
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.Name, model.FullName.DeleteExtraSpaces()));
 
                     return Content("Регистрация нового пользователя произошла успешно. Пожалуйста ожидайте одобрение администратора сайта." +
                         "На указаный адрес электронной почты будет выслано приглашение.");
@@ -206,7 +206,7 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByNameAsync(model.Email.DeleteExtraSpaces());
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Не показывать, что пользователь не существует или не подтвержден

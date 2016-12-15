@@ -101,3 +101,14 @@ a{
 a:hover{
     text-decoration: underline;
 }
+
+
+#load-icon{
+    display: none;
+    margin-left: 10%;
+}
+
+#inputs {
+    display: initial;
+}
+

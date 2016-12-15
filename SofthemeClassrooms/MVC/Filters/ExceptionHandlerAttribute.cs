@@ -6,12 +6,18 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Filters
 {
-    public class ExceptionHandlerAttribute : FilterAttribute, IExceptionFilter
+    public class ExceptionHandlerAttribute : HandleErrorAttribute
     {
-        public void OnException(ExceptionContext filterContext)
+        public override void OnException(ExceptionContext filterContext)
         {
+            if (filterContext.ExceptionHandled)
+            {
+                return;
+            }
+
+
+            filterContext.Result = new RedirectResult("/ErrorHandler/ErrorOccurred");
             filterContext.ExceptionHandled = true;
-            filterContext.Result = new RedirectResult("~/Views/Shared/Error.cshtml");
         }
     }
 }

@@ -1,20 +1,16 @@
 ﻿using DataAccessLayer;
 using ManagementServices.Interfaces;
 using ManagementServices.Models;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.IdentityModel.Claims;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer.Interfaces;
 
 namespace ManagementServices.Implementations
 {
     public class AppUsersManager : IUserManager
     {
-        IDatabaseRepositories db = new DataBaseRepositories();
+        private readonly IDatabaseRepositories db = DBFactory.GetDbRepositories();
 
         public void DeleteUser(string userId)
         {
@@ -29,7 +25,9 @@ namespace ManagementServices.Implementations
             }
 
             return db.Users.GetAll()
-                .Where(u => u.Claims.Where(c => ClaimTypes.Name == c.ClaimValue).FirstOrDefault().ClaimValue == name)
+                .Where(u => u.Claims
+                            .Where(c => ClaimTypes.Name == c.ClaimValue)
+                            .FirstOrDefault().ClaimValue == name)
                 .Count();
         }
 
@@ -65,6 +63,7 @@ namespace ManagementServices.Implementations
 
         public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage, string searchPattern = null)
         {
+            ///throw new AccessViolationException();
             IEnumerable<ApplicationUser> users;
 
             if(searchPattern != null)
@@ -73,7 +72,7 @@ namespace ManagementServices.Implementations
                 .Where(u => u.Claims
                 .Where(c => ClaimTypes.Name == c.ClaimType)
                 .FirstOrDefault()
-                .ClaimValue == searchPattern);
+                .ClaimValue.Contains(searchPattern));
             }
             else
             {
@@ -84,11 +83,16 @@ namespace ManagementServices.Implementations
                 (from u in users
                  select new UserInfo
                  {
-                     FullName = u.Claims.Where(c => ClaimTypes.Name == c.ClaimType).FirstOrDefault().ClaimValue,
+                     FullName = u.Claims
+                                .Where(c => ClaimTypes.Name == c.ClaimType)
+                                .FirstOrDefault().ClaimValue,
                      Email = u.Email,
                      UserId = u.Id,
                      NumberOfEvents = GetNumberUserEvents(u.Id),
-                 }).OrderBy(c => c.FullName).Skip(page-1 * itemsPerPage).Take(itemsPerPage);
+                 })
+                 .OrderBy(c => c.FullName)
+                 .Skip(page-1 * itemsPerPage)
+                 .Take(itemsPerPage);
 
             return usersInfo;
         }

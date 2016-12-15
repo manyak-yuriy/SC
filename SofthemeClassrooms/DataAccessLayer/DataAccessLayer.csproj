@@ -62,6 +62,7 @@
     <Compile Include="ClassRoom.cs" />
     <Compile Include="ClassRoomProperty.cs" />
     <Compile Include="DataBaseRepositories.cs" />
+    <Compile Include="DBFactory.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Feedback.cs" />

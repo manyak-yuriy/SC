@@ -214,6 +214,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -391,6 +392,7 @@
     <Content Include="Images\LineDetails\line-details-web-1.png" />
     <Content Include="Images\LineDetails\line-details-web-2.png" />
     <Content Include="Images\LineDetails\line-details-web-3.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\logo-gray.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\NewEvent.png" />
@@ -977,7 +979,7 @@
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\ErrorOccurred.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using ManagementServices.Implementations;
 using ManagementServices.Models;
 using WebApplication1.Models;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 using System.Collections;
 using System.Collections.Generic;
 using ManagementServices.Interfaces;
+using WebApplication1.Extensions;
 
 namespace WebApplication1.Controllers
 {
@@ -65,6 +67,9 @@ namespace WebApplication1.Controllers
             {
                 return PartialView("ChangePersonalDataPView", model);
             }
+
+            model.Email = model.Email.DeleteExtraSpaces();
+            model.Name = model.Name.DeleteExtraSpaces();
 
             IUserManager manager = _businessLogicFactory.UserManager;
             manager.UpdateUser(model.ToUserInfo());
@@ -129,7 +134,7 @@ namespace WebApplication1.Controllers
             IEnumerable<UserInfo> usersInfo =
                 string.IsNullOrEmpty(searcPattern) ?
                 m.GetUsersInfo(page, itemsPerPage) :
-                m.GetUsersInfo(page, itemsPerPage, searcPattern);
+                m.GetUsersInfo(page, itemsPerPage, searcPattern.DeleteExtraSpaces());
 
 
             var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo).ToList();

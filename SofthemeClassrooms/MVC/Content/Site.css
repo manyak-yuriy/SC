@@ -22,10 +22,11 @@ nav{
     display: block;
     width: 100%;
     min-width: 768px;
+    padding-right: 5%;
+    border-bottom: 2px solid silver;
 }
 
 #navformer{
-    border-bottom: 2px solid silver;
     height: 50px;
 }
 

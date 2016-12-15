@@ -32,3 +32,13 @@ function SendChecker() {
     }
 }
 
+function LoadingStarted() {
+    $('#inputs').css('display','none');
+    $('#load-icon').css('display','initial');
+}
+
+function LoadingFinished() {
+    $('#inputs').css('display', 'initial');
+    $('#load-icon').css('display', 'none');
+}
+

@@ -53,7 +53,7 @@
         <img id="logo" src="~/Images/logo.png" alt="logo" />
         @if (!Request.IsAuthenticated)
         {
-            <li id="userPageItem" class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
+            <li class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
         }
         else
         {
@@ -64,7 +64,7 @@
                 Session["UserName"] = m.GetUserName(User.Identity.Name);
             }
 
-            <li id="loginItem" class="menu-item">
+            <li id="userPageItem" class="menu-item">
                 <a href="@Url.Action("MyPage", "UsersManagment")">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     @(Session["UserName"] as string)

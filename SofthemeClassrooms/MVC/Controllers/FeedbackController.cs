@@ -32,9 +32,12 @@ namespace WebApplication1.Controllers
             FeedBackDTO feedback = SendMessageModel.ToFeedbackDTO(model);
             IFeedbackSender sender = _businessLogicFactory.FeedbackSender;
             sender.SendFeedback(feedback);
+            model.Email = "";
+            model.LastName = "";
+            model.Message = "";
+            model.Name = "";
 
-
-            return PartialView("SendFeedbackForm", null);
+            return PartialView("SendFeedbackForm", model);
         }
     }
 }

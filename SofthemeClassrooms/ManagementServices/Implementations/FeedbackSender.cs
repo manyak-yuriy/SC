@@ -12,7 +12,7 @@ namespace ManagementServices.Implementations
 {
     public class FeedbackSender : IFeedbackSender
     {
-        private readonly IDatabaseRepositories _work = new DataBaseRepositories();
+        private readonly IDatabaseRepositories _work = DBFactory.GetDbRepositories();
         public void SendFeedback(FeedBackDTO feedback)
         {
             Feedback f = new Feedback();
