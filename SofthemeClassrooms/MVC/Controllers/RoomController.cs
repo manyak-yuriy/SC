@@ -20,7 +20,13 @@ namespace WebApplication1.Controllers
             {
                 room.IsBookable = false;
 
-                var eventsToDelete = room.Event.Where(e => e.ClassroomId == roomId);
+                var eventsToDelete = room.Event.Where(e => e.ClassroomId == roomId).ToList();
+
+                foreach (var e in eventsToDelete)
+                {
+                    var fvToDelete = db.ForeignVisitor.Where(fv => fv.EventId == e.Id).ToList();
+                    db.ForeignVisitor.RemoveRange(fvToDelete);
+                }
 
                 db.Event.RemoveRange(eventsToDelete);
             }

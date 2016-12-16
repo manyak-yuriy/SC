@@ -232,7 +232,7 @@ namespace WebApplication1.Controllers
             }
 
             if (errors.Errors.Count() > 0)
-                return Json(new { status = "fail", errors.Errors}) ;
+                return Json(new { status = "fail", errors.Errors});
 
             Event dbModel = new Event();
 
@@ -281,7 +281,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id && e.Id != eventId);
+                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id && e.Id != eventId).ToList();
 
                 DateTime startDate = eventModel.Start;
                 DateTime endDate = eventModel.End;
