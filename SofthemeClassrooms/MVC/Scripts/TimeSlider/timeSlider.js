@@ -58,8 +58,12 @@ var updateHours =
         hours = Math.floor(hoursElapsed);
         var hourFract = hoursElapsed - hours;
         minutes = Math.floor(60 * hourFract);
-        mousewheelScrolling:
-            var prettyTime = ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes);
+        
+        var prettyTime = ((hours < 10) ? "0" + hours : hours) + ":" + ((minutes < 10) ? "0" + minutes : minutes);
+
+        var selectedTime = $('#jqxWidget').jqxCalendar('getDate');;
+        selectedTime.setHours(hours, minutes);
+        renderRoomTable(selectedTime);
 
         $('#selected-time').html(prettyTime);
     }

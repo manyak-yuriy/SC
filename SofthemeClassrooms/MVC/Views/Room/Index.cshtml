@@ -1,11 +1,20 @@
 ﻿
+
 @{
     ViewBag.Title = "Room page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-@Html.Partial("~/Views/Schedule/RoomsSchemePartialView.cshtml")
+@{ 
+    int roomId = ViewBag.roomId;
+}
+
+<input type="hidden" class="room-id" value="@roomId"/>
+
+@Html.Partial("~/Views/Room/CloseRoomPartialView.cshtml")
+
+@Html.Partial("RoomTableForClassroomPartial")
 <!---->
 @Html.Partial("WeeklySchedulerPartialView")
 @Html.Partial("MapPartialView")

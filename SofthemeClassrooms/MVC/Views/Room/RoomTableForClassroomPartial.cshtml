@@ -1,0 +1,407 @@
+﻿
+
+<link href="~/Content/RoomTableForClassroom/RoomTableForClassroom.css" rel="stylesheet" />
+
+<script>
+    var isBookable = @Json.Encode(@ViewBag.isBookable);
+</script>
+
+@{ 
+    var closeBtnInitialValue = (ViewBag.isBookable) ? "Закрыть" : "Открыть";
+}
+
+<div id='wrap-table'>
+
+    <div class="room-controls">
+        
+        <input type="button" class="close-room-button" value="@closeBtnInitialValue" />
+            
+        <input type="button" class="change-room-button" value="Изменить" />
+
+    </div>
+    <div id="room-table">
+
+        <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
+        <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
+        <!--panel of properties-->
+        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
+            <div class="eq-container">
+                <img class="eq-img" src="~/Images/icon-table.png" />
+                <span class="table"></span>
+            </div>
+
+            <div class="eq-container">
+                <img class="eq-img" src="~/Images/icon-board.png" />
+                <span class="board"></span>
+            </div>
+
+            <div class="eq-container">
+                <img class="eq-img" src="~/Images/icon-laptop.png" />
+                <span class="laptop"></span>
+            </div>
+
+            <div class="eq-container">
+                <img class="eq-img" src="~/Images/icon-print.png" />
+                <span class="printer"></span>
+            </div>
+
+            <div class="eq-container">
+                <img class="eq-img" src="~/Images/icon-proect.png" />
+                <span class="projector"></span>
+            </div>
+        </div>
+
+        <!--Room containers-->
+        <a href="@Url.Action("Index", "Room", new { roomId = 1})">
+            <div class="room-container draggable resizeable" data-id="1" id="einstein">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 2})">
+            <div class="room-container draggable resizeable" data-id="2" id="empty">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 3})">
+            <div class="room-container draggable resizeable" data-id="3" id="english">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 4})">
+            <div class="room-container draggable resizeable" data-id="4" id="hr">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 5})">
+            <div class="room-container draggable resizeable" data-id="5" id="info">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 6})">
+            <div class="room-container draggable resizeable" data-id="6" id="newton">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 7})">
+            <div class="room-container draggable resizeable" data-id="7" id="tesla">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 8})">
+            <div class="room-container draggable resizeable" data-id="8" id="web-1">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 9})">
+            <div class="room-container draggable resizeable" data-id="9" id="web-2">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+        <a href="@Url.Action("Index", "Room", new { roomId = 10})">
+            <div class="room-container draggable resizeable" data-id="10" id="web-3">
+                <span class="title-container"></span>
+            </div>
+        </a>
+
+
+        <!--Line details-->
+        <div class="line-details draggable" data-id="1" id="einstein">
+            <span class="caption">line-details-einstein</span>
+            <img class="" src="~/Images/LineDetails/line-details-einstein.png">
+        </div>
+
+        <div class="line-details draggable" data-id="2" id="empty">
+            <span class="caption">line-details-empty</span>
+            <img class="" src="~/Images/LineDetails/line-details-empty.png">
+        </div>
+
+        <div class="line-details draggable" data-id="3" id="english">
+            <span class="caption">line-details-english</span>
+            <img class="" src="~/Images/LineDetails/line-details-english.png">
+        </div>
+
+        <div class="line-details draggable" id="hr" data-id="4">
+            <span class="caption">line-details-hr</span>
+            <img class="" src="~/Images/LineDetails/line-details-hr.png">
+        </div>
+
+        <div class="line-details draggable" data-id="5" id="info">
+            <span class="caption">line-details-info</span>
+            <img class="" src="~/Images/LineDetails/line-details-info.png">
+        </div>
+
+        <div class="line-details draggable" data-id="6" id="newton">
+            <span class="caption">line-details-newton</span>
+            <img class="" src="~/Images/LineDetails/line-details-newton.png">
+        </div>
+
+        <div class="line-details draggable" data-id="7" id="tesla">
+            <span class="caption">line-details-tesla</span>
+            <img class="" src="~/Images/LineDetails/line-details-tesla.png">
+        </div>
+
+        <div class="line-details draggable" data-id="8" id="web-1">
+            <span class="caption">line-details-web-1</span>
+            <img class="" src="~/Images/LineDetails/line-details-web-1.png">
+        </div>
+
+        <div class="line-details draggable" data-id="9" id="web-2">
+            <span class="caption">line-details-web-2</span>
+            <img class="" src="~/Images/LineDetails/line-details-web-2.png">
+        </div>
+
+        <div class="line-details draggable" data-id="10" id="web-3">
+            <span class="caption">line-details-web-3</span>
+            <img class="" src="~/Images/LineDetails/line-details-web-3.png">
+        </div>
+
+        <!--Path info-->
+
+        <div class="path-info draggable" data-id="1" id="einstein">
+            <img src="~/Images/Path/path-einstein.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="2" id="empty">
+            <img src="~/Images/Path/path-empty.png" />
+        </div>
+        <div class="path-info draggable" data-id="3" id="english">
+            <img src="~/Images/Path/path-ienglish.png" />
+        </div>
+        <div class="path-info draggable" data-id="4" id="hr">
+            <img src="~/Images/Path/path-hr.png" />
+        </div>
+        <div class="path-info draggable" data-id="5" id="info">
+            <img src="~/Images/Path/path-info.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="6" id="newton">
+            <img src="~/Images/Path/path-newton.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="7" id="tesla">
+            <img src="~/Images/Path/path-tesla.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="8" id="web-1">
+            <img src="~/Images/Path/path-web-1.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="9" id="web-2">
+            <img src="~/Images/Path/path-web-2.png" />
+        </div>
+
+        <div class="path-info draggable" data-id="10" id="web-3">
+            <img src="~/Images/Path/path-web-3.png" />
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    var resizeOptions = {
+        autoHide: true, ghost: true
+    }
+
+    function renderRoomTable(timeNow) {
+
+        $.ajax({
+            url: '@Url.Action("GetRoomTableState", "Schedule")',
+            type: "GET",
+            context: this,
+            data: { 'timeNow': timeNow.toISOString() },
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus, jqXHR) {
+                //alert(JSON.stringify(data));
+
+                var roomsAvail = data.roomsAvailability;
+                for (var i = 0; i < roomsAvail.length; i++) {
+                    var roomId = roomsAvail[i].RoomId;
+                    var roomStatus = roomsAvail[i].Status;
+                    var roomTitle = roomsAvail[i].RoomTitle;
+
+                    var $roomElem = $('.room-container').filter(function () {
+                        return $(this).data("id") == roomId
+                    });
+
+                    $roomElem.children('span').html(roomTitle);
+                    $roomElem.removeClass('room-available room-booked room-disabled');
+
+                    var cls = "";
+
+                    if (roomStatus == 'available')
+                        cls = 'room-available';
+                    else if (roomStatus == 'booked')
+                        cls = 'room-disabled';
+                    else if (roomStatus == 'disabled')
+                        cls = 'room-disabled';
+
+                    if (roomId == $('.room-id').val())
+                        cls = 'room-booked';
+
+                    $roomElem.addClass(cls);
+                }
+            }
+        });
+    }
+
+    $(() => {
+        $('.room-close-popup').draggable();
+        $(".draggable").draggable();
+
+        $(".resizeable").resizable(resizeOptions);
+
+        /*
+        $('.room-container ').mouseout(function () {
+            var id = $(this).attr('id');
+            $('.line-details#' + id).css('display', 'none');
+            $('#prop-pane').css("visibility", "hidden");
+        });
+        */
+
+        renderRoomTable(new Date());
+        // mark current room as booked - just a trick
+        var $roomElem = $('.room-container').filter(function () {
+            return $(this).data("id") == $('.room-id').val();
+        });
+
+
+        $('#room-table').css('display', 'block');
+        //alert($roomElem.data("id"));
+
+        var id = $roomElem.attr('id');
+        $('.line-details#' + id).css('display', 'inline-block');
+        $('.path-info#' + id).css('visibility', 'visible');
+
+        var dataId = $roomElem.data('id');
+        $('#prop-pane').css("visibility", "visible");
+
+        $.ajax({
+            url: $('#prop-pane').data('request-url'),
+            type: "GET",
+            data: { roomId: dataId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            context: this,
+            success: function (data, textStatus, jqXHR) {
+
+                /*alert(textStatus);
+                alert(JSON.stringify(data));*/
+
+                if (data.SeatCount == 0)
+                    $('.table').parent().css("display", "none");
+                else
+                    $('.table').parent().css("display", "inline");
+
+                if (data.SeatCount > 1)
+                    $('.table').html(data.SeatCount);
+                else
+                    $('.table').html("");
+
+
+                if (data.BoardCount == 0)
+                    $('.board').parent().css("display", "none");
+                else
+                    $('.board').parent().css("display", "inline");
+
+                if (data.BoardCount > 1)
+                    $('.board').html(data.BoardCount);
+                else
+                    $('.board').html("");
+
+                if (data.LaptopCount == 0)
+                    $('.laptop').parent().css("display", "none");
+                else
+                    $('.laptop').parent().css("display", "inline");
+
+                if (data.LaptopCount > 1)
+                    $('.laptop').html(data.LaptopCount);
+                else
+                    $('.laptop').html("");
+
+                if (data.PrinterCount == 0)
+                    $('.printer').parent().css("display", "none");
+                else
+                    $('.printer').parent().css("display", "inline");
+
+                if (data.PrinterCount > 1)
+                    $('.printer').html(data.PrinterCount);
+                else
+                    $('.printer').html("");
+
+                if (data.ProjectorCount == 0)
+                    $('.projector').parent().css("display", "none");
+                else
+                    $('.projector').parent().css("display", "inline");
+
+                if (data.ProjectorCount > 1)
+                    $('.projector').html(data.ProjectorCount);
+                else
+                    $('.projector').html();
+            }
+        });
+
+
+        $('.close-room-button').click(function () {
+            if (isBookable)
+                $('.room-close-popup').css("display", "block");
+            else
+            {
+                $.ajax({
+                    url: '@Url.Action("Open", "Room")',
+                    type: "POST",
+                    data: JSON.stringify({ roomId: dataId }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        alert("opened room");
+                    }
+                });
+
+                isBookable = true;
+                $('.close-room-button').val('Закрыть');
+            }
+        });
+
+        $('.change-room-button').click(function () {
+            $('.change-room-button').css("visibility", "hidden");
+
+        });
+
+        $('.room-close-popup .confirm-cancellation-button').click(function () {
+            if (isBookable)
+            {
+                $.ajax({
+                    url: '@Url.Action("Close", "Room")',
+                    type: "POST",
+                    data: JSON.stringify({ roomId: dataId }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        alert("closed room");
+                    }
+                });
+                isBookable = false;
+                $('.close-room-button').val('Открыть');
+            }
+
+            $('.room-close-popup').css("display", "none");
+        });
+
+        $('.room-close-popup .discart-cancellation-button').click(function () {
+            $('.room-close-popup').css("display", "none");
+        });
+    });
+</script>

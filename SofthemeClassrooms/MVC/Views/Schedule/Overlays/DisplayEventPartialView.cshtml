@@ -23,9 +23,13 @@
 
 @model WebApplication1.Models.Schedule.DisplayEventPartialViewModel
 
+@{
+    var culture = new System.Globalization.CultureInfo("ru-RU");
+}
+
 <div class="event-display-popup">
     <div class="event-display-header">
-        <span>@Model.DateStart.DayOfWeek.ToString(), @Model.DateStart.Day @Model.DateStart.Month</span>
+        <span>@culture.DateTimeFormat.GetDayName(Model.DateStart.DayOfWeek), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
         <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
 
         <div class="header-controls">
@@ -66,7 +70,7 @@
             <div class="new-visitor-block">
                 <input type="text" class="add-visitor-email" placeholder="Укажите e-mail" />
 
-                <i class="fa fa-plus" aria-hclassden="true"></i> <br />
+                <i class="fa fa-plus fa-2x" aria-hclassden="true"></i> <br />
             </div>
         }
 
@@ -110,16 +114,16 @@
             success: function (data, textStatus, jqXHR) {
                 //alert(JSON.stringify(data));
                 
-                if (data.result == "fail")
+                if (data.status == "fail")
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append('<i class="fa fa-frown-o fa-3x"></i>');
-                    var eList = data.errorList;
+                    var eList = data.Errors;
                     for (var i = 0; i < eList.length; i++)
                         $('.val-errors').append("<span>" + eList[i] + "</span> <br>");
                 }
                 
-                if (data.result == "success")
+                if (data.status == "success")
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");

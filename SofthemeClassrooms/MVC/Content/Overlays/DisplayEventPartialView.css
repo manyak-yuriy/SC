@@ -13,7 +13,7 @@
     display: block;
     opacity: 0.9;
 
-    border-radius: 5%;
+    border-radius: 2%;
 }
 
 .event-display-popup:hover
@@ -23,17 +23,22 @@
 
 .event-display-header
 {
-    background-color: #ff6464;
+    background-color: #F95752;
     color: white;
     padding: 7px;
+    border-radius: 2%;
 }
 
 .change-button, .cancel-button
 {
-    background-color: red;
+    background-color: rgba(80, 80, 90, 0.5);
     color: white;
     border-radius: 20%;
     border: none;
+}
+
+.change-button {
+    background-color: rgba(230, 30, 30, 0.2);
 }
 
 .change-button:hover, .cancel-button:hover
@@ -100,13 +105,14 @@
     line-height: 10px;
     padding: 8px;
     width: 90%;
+    height: 30px;
 
     border: 1px solid grey;
 }
 
 i
 {
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 i:hover

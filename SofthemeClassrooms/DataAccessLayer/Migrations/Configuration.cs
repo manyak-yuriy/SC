@@ -35,15 +35,25 @@ namespace DataAccessLayer.Migrations
 
 
             context.ClassRoom.AddOrUpdate(
-                c => c.Title,
-                new ClassRoom { Title = "Einstein", Capacity = 10, IsBookable = true},
-                new ClassRoom { Title = "Tesla", Capacity = 10, IsBookable = true },
-                new ClassRoom { Title = "Newton", Capacity = 10, IsBookable = true },
-                new ClassRoom { Title = "English", Capacity = 10, IsBookable = true }, 
-                new ClassRoom { Title = "HR", Capacity = 10, IsBookable = true}
+                c => c.Id,
+
+                new ClassRoom { Id = 1, Title = "Einstein Classroom", Capacity = 20, IsBookable = true},
+                new ClassRoom { Id = 2, Title = "Empty", Capacity = 3, IsBookable = false },
+                new ClassRoom { Id = 3, Title = "English", Capacity = 13, IsBookable = true },
+                new ClassRoom { Id = 4, Title = "HR office", Capacity = 12, IsBookable = true }, 
+                new ClassRoom { Id = 5, Title = "Info центр", Capacity = 11, IsBookable = true},
+                new ClassRoom { Id = 6, Title = "Newton Classroom", Capacity = 15, IsBookable = true },
+                new ClassRoom { Id = 7, Title = "Tesla Classroom", Capacity = 19, IsBookable = true },
+                new ClassRoom { Id = 8, Title = "Web & Marketing", Capacity = 4, IsBookable = false },
+                new ClassRoom { Id = 9, Title = "Web & Marketing", Capacity = 5, IsBookable = true },
+                new ClassRoom { Id = 10, Title = "Web & Marketing", Capacity = 7, IsBookable = false }
             );
 
-
+            context.Equipment.AddOrUpdate(e => e.Id,
+                new Equipment { Id = 1, ImagePath = "Empty", Title = "Board"},
+                new Equipment { Id = 2, ImagePath = "Empty", Title = "Laptop" },
+                new Equipment { Id = 3, ImagePath = "Empty", Title = "Printer" },
+                new Equipment { Id = 4, ImagePath = "Empty", Title = "Projector" });
         }
     }
 }

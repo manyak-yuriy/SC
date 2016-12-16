@@ -18,7 +18,7 @@
 
 .event-cancel-header
 {
-    background-color: #9a90b6;
+    background-color: #9FA6B6;
     color: white;
     padding: 5px;
 }
@@ -26,23 +26,30 @@
 .cancellation-controls
 {
     margin: 0 auto; 
-    width: 60%;
-    height: 50px;
+    width: 90%;
+    height: 70px;
     padding: 10px;
 }
 
 .cancellation-controls input
 {
-    border-radius: 10%;
-    width: 100px;
-    height: 30px;
-    background-color: #f6e9e9;
+    background-color: #C8CEDA;
+
+    position: relative;
+    display: inline-block;
+    margin: 10px;
     border: none;
+    outline: none;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 70px;
+    width: 140px;
+    height: 33px;
+    z-index: 1001;
 }
 
 .cancellation-controls input:hover
 {
-    background-color: red;
+    background-color: #F95752;
 }
 
 .event-cancel-header .fa

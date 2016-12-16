@@ -10,20 +10,42 @@ namespace ManagementServices.Implementations
 {
     public class EquipmentManagement
     {
+
+        private int GetEquipmentQuantityByTitle(IEnumerable<ClassRoomProperty> roomProperties, string equipmentTitle)
+        {
+            // Equipment count
+
+            if (roomProperties == null)
+                return 0;
+
+            var equipment = roomProperties.Where(rp => (rp.Equipment != null && rp.Equipment.Title == equipmentTitle)).FirstOrDefault();
+
+            if (equipment != null)
+                return equipment.Quantity;
+
+            return 0;
+        }
+       
         public EquipmentViewModel GetEquipmentByRoomId(int roomId)
         {
-            Random r = new Random();
+            var db = new ApplicationDbContext();
+            var room = db.ClassRoom.Find(roomId);
 
-            return new EquipmentViewModel
+            if (room == null)
+                throw new NullReferenceException("There's no room with specified id");
+
+            var roomProperties = room.ClassRoomProperty.Where(cp => cp.ClassRoomId == roomId);
+
+            var equipmentData = new EquipmentViewModel
             {
-                SeatCount = 10 + r.Next(0, 3),
-                BoardCount = 1 + r.Next(0, 2),
-                LaptopCount = 10 + r.Next(0, 10),
-                PrinterCount = 0 + r.Next(0, 3),
-                ProjectorCount = 0 + r.Next(0, 2)
+                SeatCount = room.Capacity,
+                BoardCount = GetEquipmentQuantityByTitle(roomProperties, "Board"),
+                LaptopCount = GetEquipmentQuantityByTitle(roomProperties, "Laptop"),
+                PrinterCount = GetEquipmentQuantityByTitle(roomProperties, "Printer"),
+                ProjectorCount = GetEquipmentQuantityByTitle(roomProperties, "Projector")
             };
 
-            
+            return equipmentData;
         }
     }
 }

@@ -236,6 +236,7 @@
     <Compile Include="Models\PersonalDataViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\RoomAvailabilityModel.cs" />
     <Compile Include="Models\Schedule\EditEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\DisplayEventPartialViewModel.cs" />
     <Compile Include="Models\Schedule\ErrorModel.cs" />
@@ -250,11 +251,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Overlays\AddEventPartialView.css" />
+    <Content Include="Content\Overlays\CloseRoomPartialView.css" />
     <Content Include="Content\Overlays\CancelEventPartialView.css" />
     <Content Include="Content\Overlays\DisplayEventPartialView.css" />
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\RoomTableForClassroom\RoomTableForClassroom.css" />
+    <Content Include="Content\RoomTable\RoomTable.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -407,6 +411,7 @@
     <Content Include="Images\popup-triangle.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\Slider.png" />
+    <Content Include="Images\wallsMod.png" />
     <Content Include="Scripts\Calendar\calendar.js" />
     <Content Include="Images\SliderStatic.png" />
     <Content Include="Images\walls.png" />
@@ -967,7 +972,7 @@
     <Content Include="Scripts\Smooth-Div-Scroll-master\README.md" />
     <Content Include="Views\Schedule\Overlays\DisplayEventPartialView.cshtml" />
     <Content Include="Views\Schedule\Overlays\CancelEventPartialView.cshtml" />
-    <Content Include="Views\Schedule\Overlays\AddEventPartialView.cshtml" />
+    <Content Include="Views\Schedule\Overlays\EditEventPartialView.cshtml" />
     <Content Include="Views\UsersManagment\Users.cshtml" />
     <Content Include="Views\UsersManagment\UserPage.cshtml" />
     <Content Include="Views\Account\ForgotPasswordPView.cshtml" />
@@ -977,7 +982,9 @@
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-
+    <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
+    <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
+    <Content Include="Views\Room\CloseRoomPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

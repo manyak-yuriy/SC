@@ -6,9 +6,81 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js'></script>
 
+<style>
+    #calendar
+    {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .fc-toolbar
+    {
+        visibility: hidden !important;
+    }
+
+    td
+    {
+        border: 2px solid #d0e1ed !important;
+    }
+
+    tr
+    {
+        height: 50px !important;
+    }
+
+    .fc-row.fc-week.ui-widget-content
+    {
+        display: none;
+    }
 
 
-<div id='calendar'></div>
+    #date-scroller {
+    display: inline-block;
+    width: 1000px;
+    position: relative;
+    left: 170px;
+    text-align: center;
+    margin-bottom: 10px;
+
+    margin-top: 20px;
+}
+
+.fa-caret-left, .fa-caret-right {
+    opacity: 0.4;
+    transition: all .2s ease-in-out;
+}
+
+    .fa-caret-left:hover, .fa-caret-right:hover {
+        opacity: 0.9;
+    }
+
+    .fa-caret-left:active, .fa-caret-right:active {
+        opacity: 1;
+        transform: scale(1.9);
+    }
+
+.fa-caret-left {
+    float: left;
+}
+
+.fa-caret-right {
+    float: right;
+}
+</style>
+
+<div id="week-calendar-wrapper">
+    <div id="date-scroller">
+        <i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>
+
+        <span id="date-scroller-value">Декабрь, 2016</span>
+
+        <i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>
+    </div>
+
+    <div id='calendar'>
+
+    </div>
+</div>
 
 <script>
 

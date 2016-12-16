@@ -12,7 +12,9 @@
 <link href="~/Content/TimeTable/calendarWidget.css" rel="stylesheet" />
 
 
-
+<style>
+    
+</style>
 <div id="main-container">
     <div id="change-view">
         <i class="fa fa-align-justify fa-1x" aria-hidden="true"></i>
@@ -29,7 +31,11 @@
 
 
     <style>
-        
+
+        #main-container
+        {
+            visibility: hidden;
+        }
 
     </style>
 
@@ -182,6 +188,23 @@
                             $(this).parents('.event-display-popup').remove();
                         })
 
+                        $('.event-display-popup#' + eventId + ' .change-button').click(function () {
+                            var eventId = $(this).parents('.event-display-popup').attr('id');
+                            $.ajax({
+                                url: '@Url.Action("GetEventEditPartialView", "Schedule")',
+                                type: "GET",
+                                context: this,
+                                data: { eventId: eventId },
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data, textStatus, jqXHR) {
+                                    $('body').prepend(data);
+                                    $('.event-edit-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '30px').draggable();
+
+                                    
+                                }
+                            });
+                        });
+
                         $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
                             var eventId = $(this).parents('.event-display-popup').attr('id');
                             $.ajax({
@@ -278,7 +301,7 @@
     $(() => {
 
         renderTimeTable();
-
+        $('#main-container').css("visibility", "visible");
     })
 
 </script>
