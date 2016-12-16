@@ -41,7 +41,7 @@ namespace DataAccessLayer.Migrations
                 new ClassRoom { Id = 2, Title = "Empty", Capacity = 3, IsBookable = false },
                 new ClassRoom { Id = 3, Title = "English", Capacity = 13, IsBookable = true },
                 new ClassRoom { Id = 4, Title = "HR office", Capacity = 12, IsBookable = true }, 
-                new ClassRoom { Id = 5, Title = "Info центр", Capacity = 11, IsBookable = true},
+                new ClassRoom { Id = 5, Title = "Info center", Capacity = 11, IsBookable = true},
                 new ClassRoom { Id = 6, Title = "Newton Classroom", Capacity = 15, IsBookable = true },
                 new ClassRoom { Id = 7, Title = "Tesla Classroom", Capacity = 19, IsBookable = true },
                 new ClassRoom { Id = 8, Title = "Web & Marketing", Capacity = 4, IsBookable = false },
