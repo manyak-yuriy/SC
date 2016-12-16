@@ -214,11 +214,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersManagmentController.cs" />
     <Compile Include="DpResolver\NinjectDependencyResolver.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\ExceptionHandlerAttribute.cs" />
     <Compile Include="Filters\NonAuthorizedAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -250,6 +252,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading.css" />
     <Content Include="Content\Overlays\AddEventPartialView.css" />
     <Content Include="Content\Overlays\CloseRoomPartialView.css" />
     <Content Include="Content\Overlays\CancelEventPartialView.css" />
@@ -394,6 +397,7 @@
     <Content Include="Images\LineDetails\line-details-web-1.png" />
     <Content Include="Images\LineDetails\line-details-web-2.png" />
     <Content Include="Images\LineDetails\line-details-web-3.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\logo-gray.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\NewEvent.png" />
@@ -981,10 +985,14 @@
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
+
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
     <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
     <Content Include="Views\Room\CloseRoomPartialView.cshtml" />
+
+    <Content Include="Views\Error\ErrorOccurred.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

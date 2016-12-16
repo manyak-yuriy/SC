@@ -17,7 +17,7 @@ namespace WebApplication1.HtmlHelpers
             //TagBuilder icon = new TagBuilder("i");
             //icon.AddCssClass("fa");
             //icon.AddCssClass("fa-info-circle");
-
+            //HttpUtility.HtmlEncode("sda")
             var valMessage = helper.ValidationMessageFor(expression).ToString();
 
             TagBuilder DivBuilder = new TagBuilder("div");

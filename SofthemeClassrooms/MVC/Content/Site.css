@@ -1,17 +1,8 @@
-﻿body{
-    padding: 0px;
-    margin: 0px;
+﻿html, body{
+    margin: 0;
+    height: 100%;
 }
 
-footer{
-    width: 100%;
-    background-color: #f4f6fb;
-    height: 100%;
-    position: static;
-    display: inline;
-    bottom: 0px;
-    margin: 40px;
-}
 
 #logo-gray
 {
@@ -22,10 +13,11 @@ nav{
     display: block;
     width: 100%;
     min-width: 768px;
+    padding-right: 5%;
+    border-bottom: 2px solid silver;
 }
 
 #navformer{
-    border-bottom: 2px solid silver;
     height: 50px;
 }
 
@@ -94,4 +86,16 @@ li.menu-item-active{
 #lname-validation{
     float: right;
     width: 50%;
+}
+
+.content {
+    min-height: 100%;
+    margin: 0 auto -100px;
+}
+
+.footer {
+    display: inline-block;
+    height: 90px;
+    background: #f4f6fb;
+    width: 100%;
 }

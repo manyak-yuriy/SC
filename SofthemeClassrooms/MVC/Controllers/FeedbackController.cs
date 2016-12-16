@@ -26,15 +26,18 @@ namespace WebApplication1.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("SendFeedbackForm", model);
             }
 
             FeedBackDTO feedback = SendMessageModel.ToFeedbackDTO(model);
             IFeedbackSender sender = _businessLogicFactory.FeedbackSender;
             sender.SendFeedback(feedback);
+            model.Email = "";
+            model.LastName = "";
+            model.Message = "";
+            model.Name = "";
 
-
-            return PartialView("SendFeedbackForm", null);
+            return PartialView("SendFeedbackForm", model);
         }
     }
 }

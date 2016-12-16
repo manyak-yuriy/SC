@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    interface IRepository<T, ID> 
+    public interface IRepository<T, ID> 
         where T : class
     {
         IEnumerable<T> GetAll();

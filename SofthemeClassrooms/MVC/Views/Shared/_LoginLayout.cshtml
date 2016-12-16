@@ -7,6 +7,7 @@
     <link href="~/Content/inputs.css" rel="stylesheet" />
     <link href="~/Content/validationError.css" rel="stylesheet" />
     <link href="~/Content/login.css" rel="stylesheet" />
+    <link href="~/Content/loading.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/MyScripts.js"></script>
@@ -29,7 +30,10 @@
         </div>
         <div class="bottom-plane">
             <div id="inputForm" class="input-area">
-                @RenderBody()
+                <div id="inputs">
+                    @RenderBody()
+                </div>
+                <img id="load-icon" src="~/Images/loader.gif" alt="loading"/>
             </div>
         </div>
     </div>

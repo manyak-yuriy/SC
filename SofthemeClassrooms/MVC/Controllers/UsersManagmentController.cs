@@ -6,17 +6,17 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
-using System.Security.Claims;
-using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using ManagementServices.Interfaces;
+using WebApplication1.Extensions;
 
 namespace WebApplication1.Controllers
 {
     [Authorize]
     public class UsersManagmentController : Controller
     {
-        private IBusinessLogicFactory _businessLogicFactory;
+        private readonly IBusinessLogicFactory _businessLogicFactory;
 
         public UsersManagmentController(IBusinessLogicFactory factory)
         {
@@ -30,8 +30,6 @@ namespace WebApplication1.Controllers
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
-
-
 
         public ActionResult MyPage()
         {
@@ -66,6 +64,9 @@ namespace WebApplication1.Controllers
                 return PartialView("ChangePersonalDataPView", model);
             }
 
+            model.Email = model.Email.DeleteExtraSpaces();
+            model.Name = model.Name.DeleteExtraSpaces();
+
             IUserManager manager = _businessLogicFactory.UserManager;
             manager.UpdateUser(model.ToUserInfo());
 
@@ -87,6 +88,7 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Response.StatusCode = (int) HttpStatusCode.BadRequest;
                 return PartialView("ChangePasswordPartialView", model);
             }
 
@@ -100,6 +102,7 @@ namespace WebApplication1.Controllers
                 return PartialView("ChangePasswordPartialView", model);
             }
 
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
             AddErrors(result);
             return PartialView("ChangePasswordPartialView", model);
         }
@@ -115,7 +118,7 @@ namespace WebApplication1.Controllers
 
             IUserManager m = _businessLogicFactory.UserManager;
             int itemsPerPage = 20;
-            int NumberOfUsers = m.GetUserNumber();
+            int          NumberOfUsers = m.GetUserNumber();
 
             int lastPage = NumberOfUsers / itemsPerPage;
             int remainder = NumberOfUsers % itemsPerPage;
@@ -129,7 +132,7 @@ namespace WebApplication1.Controllers
             IEnumerable<UserInfo> usersInfo =
                 string.IsNullOrEmpty(searcPattern) ?
                 m.GetUsersInfo(page, itemsPerPage) :
-                m.GetUsersInfo(page, itemsPerPage, searcPattern);
+                m.GetUsersInfo(page, itemsPerPage, searcPattern.DeleteExtraSpaces());
 
 
             var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo).ToList();

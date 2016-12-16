@@ -7,7 +7,7 @@
     HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "feedbackForm",
-    OnSuccess = "SendSuccess()"
+    OnSuccess = "FeedbackSentSuccessfully()"
 }))
 {
     <div>
@@ -21,12 +21,12 @@
         </div>
     </div>
             <div class="fullname">
-                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6", placeholder = "Имя" } })
-                @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия" } })
+                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6", placeholder = "Имя", id="Name" } })
+                @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия", id="Surname" } })
             </div>
             <div>
                 @Html.RedValidationMessageFor(model => model.Email)
-                @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты" } })
+                @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты", id="Email" } })
             </div>
             <div>
                 @Html.RedValidationMessageFor(model => model.Message)

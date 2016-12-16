@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ManagementServices.Models;
 using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 
 namespace ManagementServices.Implementations
 {
     public class FeedbackSender : IFeedbackSender
     {
-        private UnitOfWork _work = new UnitOfWork();
+        private readonly IDatabaseRepositories _work = DBFactory.GetDbRepositories();
         public void SendFeedback(FeedBackDTO feedback)
         {
             Feedback f = new Feedback();

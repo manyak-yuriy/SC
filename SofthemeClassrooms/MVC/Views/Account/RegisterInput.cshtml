@@ -5,7 +5,9 @@
 {
     HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "inputForm"
+    UpdateTargetId = "inputForm",
+    OnBegin = "LoadingStarted('inputs', 'load-icon')",
+    OnComplete = "LoadingFinished('inputs', 'load-icon')"
 }))
 {
     @Html.AntiForgeryToken()
