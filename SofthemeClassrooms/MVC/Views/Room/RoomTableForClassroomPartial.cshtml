@@ -386,9 +386,9 @@
                     var roomStatus = roomsAvail[i].Status;
                     var roomTitle = roomsAvail[i].RoomTitle;
 
-                    $('#prop-pane-edit .title').val(roomTitle);
+                    
 
-                    var $roomElem = $('.room-container').filter(function () {
+                    $roomElem = $('.room-container').filter(function () {
                         return $(this).data("id") == roomId
                     });
 
@@ -405,7 +405,11 @@
                         cls = 'room-disabled';
 
                     if (roomId == $('.room-id').val())
+                    {
                         cls = 'room-booked';
+                        $('#prop-pane-edit .title').val(roomTitle);
+                    }
+                        
 
                     $roomElem.addClass(cls);
                 }
@@ -413,37 +417,8 @@
         });
     }
 
-    $(() => {
-        $('.room-close-popup').draggable();
-        $(".draggable").draggable();
-
-        $(".resizeable").resizable(resizeOptions);
-
-        /*
-        $('.room-container ').mouseout(function () {
-            var id = $(this).attr('id');
-            $('.line-details#' + id).css('display', 'none');
-            $('#prop-pane').css("visibility", "hidden");
-        });
-        */
-
-        renderRoomTable(new Date());
-        // mark current room as booked - just a trick
-        var $roomElem = $('.room-container').filter(function () {
-            return $(this).data("id") == $('.room-id').val();
-        });
-
-
-        $('#room-table').css('display', 'block');
-        //alert($roomElem.data("id"));
-
-        var id = $roomElem.attr('id');
-        $('.line-details#' + id).css('display', 'inline-block');
-        $('.path-info#' + id).css('visibility', 'visible');
-
-        var dataId = $roomElem.data('id');
-        $('#prop-pane').css("visibility", "visible");
-
+    function loadRoomProp(dataId)
+    {
         $.ajax({
             url: $('#prop-pane').data('request-url'),
             type: "GET",
@@ -521,6 +496,40 @@
                     $('.projector').html();
             }
         });
+    }
+
+    $(() => {
+        $('.room-close-popup').draggable();
+        $(".draggable").draggable();
+
+        $(".resizeable").resizable(resizeOptions);
+
+        /*
+        $('.room-container ').mouseout(function () {
+            var id = $(this).attr('id');
+            $('.line-details#' + id).css('display', 'none');
+            $('#prop-pane').css("visibility", "hidden");
+        });
+        */
+
+        renderRoomTable(new Date());
+        // mark current room as booked - just a trick
+        var $roomElem = $('.room-container').filter(function () {
+            return $(this).data("id") == $('.room-id').val();
+        });
+
+
+        $('#room-table').css('display', 'block');
+        //alert($roomElem.data("id"));
+
+        var id = $roomElem.attr('id');
+        $('.line-details#' + id).css('display', 'inline-block');
+        $('.path-info#' + id).css('visibility', 'visible');
+
+        var dataId = $roomElem.data('id');
+        $('#prop-pane').css("visibility", "visible");
+
+        loadRoomProp(dataId);
 
 
         $('.close-room-button').click(function () {
@@ -547,14 +556,22 @@
 
         $('.change-room-button').click(function () {
             $('.change-room-button').css("visibility", "hidden");
+            $roomElem.children('span').css("visibility", "hidden");
 
             $('#prop-pane').css("visibility", "hidden");
 
             $('#prop-pane-edit').css("visibility", "visible");
 
             $('#prop-pane-edit .save-button').click(function(){
+                $roomElem.children('span').css("visibility", "visible");
+                $roomElem.children('span').html($('#prop-pane-edit .title').val());
 
-
+                loadRoomProp(dataId);
+                //$('.table').html($('.prop-inp-edit .table').val());
+                //$('.board').html($('.prop-inp-edit .board').val());
+                //$('.laptop').html($('.prop-inp-edit .laptop').val());
+                //$('.printer').html($('.prop-inp-edit .printer').val());
+                //$('.projector').html($('.prop-inp-edit .projector').val());
 
                 $('.change-room-button').css("visibility", "visible");
                 $('#prop-pane').css("visibility", "visible");
@@ -562,6 +579,8 @@
             });
 
             $('#prop-pane-edit .cancel-button').click(function(){
+                $roomElem.children('span').css("visibility", "visible");
+
                 $('.change-room-button').css("visibility", "visible");
                 $('#prop-pane').css("visibility", "visible");
                 $('#prop-pane-edit').css("visibility", "hidden");
