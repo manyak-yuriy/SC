@@ -571,6 +571,7 @@
                         roomTitle: $('#prop-pane-edit .title').val(),
                         'equipmentData.SeatCount': $('.prop-inp-edit .table').val(),
                         'equipmentData.BoardCount': $('.prop-inp-edit .board').val(),
+                        'equipmentData.PrinterCount': $('.prop-inp-edit .printer').val(),
                         'equipmentData.LaptopCount': $('.prop-inp-edit .laptop').val(),
                         'equipmentData.ProjectorCount': $('.prop-inp-edit .projector').val()
                     };
@@ -592,6 +593,8 @@
                 $roomElem.children('span').html($('#prop-pane-edit .title').val());
 
                 loadRoomProp(dataId);
+
+                //// db data may not have changed yet
                 //$('.table').html($('.prop-inp-edit .table').val());
                 //$('.board').html($('.prop-inp-edit .board').val());
                 //$('.laptop').html($('.prop-inp-edit .laptop').val());
