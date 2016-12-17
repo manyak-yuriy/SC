@@ -24,7 +24,7 @@
         <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
         <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
         <!--panel of properties-->
-        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
+        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Room")'>
             <div class="eq-container">
                 <img class="eq-img" src="~/Images/icon-table.png" />
                 <span class="table"></span>
@@ -563,6 +563,30 @@
             $('#prop-pane-edit').css("visibility", "visible");
 
             $('#prop-pane-edit .save-button').click(function(){
+
+
+                var equipData = 
+                    { 
+                        roomId: dataId,
+                        SeatCount:$('.prop-inp-edit .table').val(),
+                        BoardCount: $('.prop-inp-edit .board').val(),
+                        LaptopCount: $('.prop-inp-edit .laptop').val(),
+                        ProjectorCount: $('.prop-inp-edit .projector').val()
+                    };
+
+                // save room prop data
+                $.ajax({
+                    url: '@Url.Action("SetEquipmentByRoomId", "Room")',
+                    type: "POST",
+                    data: JSON.serialize(equipData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+
+                    }
+                });
+
                 $roomElem.children('span').css("visibility", "visible");
                 $roomElem.children('span').html($('#prop-pane-edit .title').val());
 

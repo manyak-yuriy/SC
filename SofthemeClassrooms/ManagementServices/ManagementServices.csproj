@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BusinessLogicFactory.cs" />
-    <Compile Include="Implementations\EquipmentManagement.cs" />
-    <Compile Include="Implementations\EventManagement.cs" />
+    <Compile Include="Implementations\EquipmentManager.cs" />
+    <Compile Include="Implementations\EventManager.cs" />
     <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Interfaces\IBusinessLogicFactory.cs" />
     <Compile Include="Models\UserInfo.cs" />

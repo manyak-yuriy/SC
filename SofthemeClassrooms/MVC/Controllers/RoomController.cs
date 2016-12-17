@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using ManagementServices.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,29 @@ namespace WebApplication1.Controllers
 {
     public class RoomController : Controller
     {
+        // Get equipment data displayed on the panel
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult GetEquipmentDataForRoom(int roomId)
+        {
+            ManagementServices.Implementations.EquipmentManager equipmentManager = new ManagementServices.Implementations.EquipmentManager();
+            var equipmentData = equipmentManager.GetEquipmentByRoomId(roomId);
+            return Json(equipmentData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SetEquipmentDataForRoom(int roomId, EquipmentViewModel equipmentData)
+        {
+            if (!User.IsInRole("admin"))
+                return new HttpUnauthorizedResult();
+
+            ManagementServices.Implementations.EquipmentManager equipmentManager = new ManagementServices.Implementations.EquipmentManager();
+
+            equipmentManager.SetEquipmentByRoomId(roomId, equipmentData);
+
+            return new EmptyResult();
+        }
+
         [HttpPost]
         public ActionResult Close(int roomId)
         {
