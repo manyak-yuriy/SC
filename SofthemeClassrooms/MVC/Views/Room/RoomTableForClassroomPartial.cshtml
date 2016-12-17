@@ -592,18 +592,15 @@
                 $roomElem.children('span').css("visibility", "visible");
                 $roomElem.children('span').html($('#prop-pane-edit .title').val());
 
-                loadRoomProp(dataId);
-
-                //// db data may not have changed yet
-                //$('.table').html($('.prop-inp-edit .table').val());
-                //$('.board').html($('.prop-inp-edit .board').val());
-                //$('.laptop').html($('.prop-inp-edit .laptop').val());
-                //$('.printer').html($('.prop-inp-edit .printer').val());
-                //$('.projector').html($('.prop-inp-edit .projector').val());
-
-                $('.change-room-button').css("visibility", "visible");
-                $('#prop-pane').css("visibility", "visible");
                 $('#prop-pane-edit').css("visibility", "hidden");
+
+                setTimeout(function(){
+                    loadRoomProp(dataId);
+                    $('.change-room-button').css("visibility", "visible");
+                    $('#prop-pane').css("visibility", "visible");
+                    
+                }, 500);
+                
             });
 
             $('#prop-pane-edit .cancel-button').click(function(){
