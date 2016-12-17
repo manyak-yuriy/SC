@@ -1,10 +1,14 @@
-﻿<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.css' />
+﻿
+<link href="~/fullcalendar-3.1.0/fullcalendar-3.1.0/fullcalendar.css" rel="stylesheet" />
 <!--
     <script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
 -->
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js'></script>
+
+<script src="~/fullcalendar-3.1.0/fullcalendar-3.1.0/fullcalendar.js"></script>
+
+<script src="~/fullcalendar-3.1.0/fullcalendar-3.1.0/locale/ru.js"></script>
 
 <style>
     #calendar
@@ -93,11 +97,11 @@
         // page is ready
         $('#calendar').fullCalendar({
             // enable theme
-            theme: true,
+            theme: false,
             // emphasizes business hours
             businessHours: true,
             // event dragging & resizing
-            editable: true,
+            editable: false,
             // header
             header: {
                 left: 'prev',
@@ -108,23 +112,29 @@
             events: [
                 {
                     title: 'C# multithreading',
-                    start: '2016-12-08T05:30:00',
-                    end: '2016-12-08'
+                    start: '2016-12-17T05:30:00',
+                    end: '2016-12-17T07:30:00'
                 },
                 {
                     title: 'ASP.NET routing',
-                    start: '2016-12-08T10:30:00',
-                    end: '2016-12-08'
+                    start: '2016-12-17T10:30:00',
+                    end: '2016-12-17T12:30:00'
                 },
                 {
                     title: 'QA intro',
-                    start: '2016-12-08T17:30:00',
+                    start: '2016-12-17T17:30:00',
                     allDay: false // will make the time show
                 }
             ],
 
             color: 'black',     // an option!
-            textColor: 'yellow' // an option!
+            textColor: 'yellow', // an option!
+            displayEventEnd: true,
+            timeFormat: 'H(:mm)',
+            allDaySlot: false,
+            slotLabelFormat: 'H(:mm)',
+            firstDay: 2
+
         }).fullCalendar('changeView', 'agendaWeek')
     });
 
