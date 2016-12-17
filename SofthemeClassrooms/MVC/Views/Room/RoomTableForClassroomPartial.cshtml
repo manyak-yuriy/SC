@@ -56,15 +56,15 @@
         <style>
             #prop-pane-edit {
                 display: inline-block;
-                visibility: visible;
+                visibility: hidden;
             }
 
             #prop-pane-edit {
                 position: absolute;
-                left: 330px;
-                top: 460px;
+                left: 230px;
+                top: 404px;
                 z-index: 100;
-                width: 550px;
+                width: 600px;
                 height: 100px;
                 border: 2px solid rgba(155, 155, 155, 30);
                 border-radius: 30px;
@@ -74,11 +74,12 @@
 
             .eq-container-edit {
                 display: inline !important;
-                margin: 5px;
+                margin: 0px;
                 top: 12px;
                 left: 15px;
                 /*border: 1px solid green;*/
                 position: relative;
+                display: inline;
             }
 
                 .eq-container-edit input {
@@ -97,13 +98,15 @@
             }
 
             .prop-header-edit .title {
-                width: 140px;
+                width: 160px;
                 display: inline;
                 border: none;
                 border-bottom: 1px solid black;
                 background-color: transparent;
                 text-align: center;
                 margin-left: 5px;
+
+                font-size: 100%;
             }
 
 
@@ -114,12 +117,15 @@
             }
 
             .prop-inp-edit {
+                width: 100%;
             }
 
             .prop-header-edit {
                 margin-left: 20px;
                 margin-top: 10px;
                 padding: 0px;
+
+                margin-right: 10px;
             }
 
             .cancel-button, .save-button {
@@ -136,17 +142,27 @@
 
                 float: right;
 
-                margin-right: 10px;
+                margin-right: 5px;
             }
 
             .prop-header-edit .cancel-button
             {
-                background-color: lightgrey;
+                background-color: #c7c8d6;
+            }
+
+            .prop-header-edit .cancel-button:hover
+            {
+                background-color: lightcoral;
             }
 
             .prop-header-edit .save-button
             {
-                background-color: lightgrey;
+                background-color: #c7c8d6;
+            }
+
+            .prop-header-edit .save-button:hover
+            {
+                background-color: lightcoral;
             }
         </style>
 
@@ -370,6 +386,8 @@
                     var roomStatus = roomsAvail[i].Status;
                     var roomTitle = roomsAvail[i].RoomTitle;
 
+                    $('#prop-pane-edit .title').val(roomTitle);
+
                     var $roomElem = $('.room-container').filter(function () {
                         return $(this).data("id") == roomId
                     });
@@ -438,6 +456,8 @@
                 /*alert(textStatus);
                 alert(JSON.stringify(data));*/
 
+                $('.prop-inp-edit .table').val(data.SeatCount);
+
                 if (data.SeatCount == 0)
                     $('.table').parent().css("display", "none");
                 else
@@ -448,6 +468,7 @@
                 else
                     $('.table').html("");
 
+                $('.prop-inp-edit .board').val(data.BoardCount);
 
                 if (data.BoardCount == 0)
                     $('.board').parent().css("display", "none");
@@ -459,6 +480,9 @@
                 else
                     $('.board').html("");
 
+
+                $('.prop-inp-edit .laptop').val(data.LaptopCount);
+
                 if (data.LaptopCount == 0)
                     $('.laptop').parent().css("display", "none");
                 else
@@ -469,6 +493,10 @@
                 else
                     $('.laptop').html("");
 
+
+
+                $('.prop-inp-edit .printer').val(data.PrinterCount);
+
                 if (data.PrinterCount == 0)
                     $('.printer').parent().css("display", "none");
                 else
@@ -478,6 +506,9 @@
                     $('.printer').html(data.PrinterCount);
                 else
                     $('.printer').html("");
+
+
+                $('.prop-inp-edit .projector').val(data.ProjectorCount);
 
                 if (data.ProjectorCount == 0)
                     $('.projector').parent().css("display", "none");
@@ -517,6 +548,24 @@
         $('.change-room-button').click(function () {
             $('.change-room-button').css("visibility", "hidden");
 
+            $('#prop-pane').css("visibility", "hidden");
+
+            $('#prop-pane-edit').css("visibility", "visible");
+
+            $('#prop-pane-edit .save-button').click(function(){
+
+
+
+                $('.change-room-button').css("visibility", "visible");
+                $('#prop-pane').css("visibility", "visible");
+                $('#prop-pane-edit').css("visibility", "hidden");
+            });
+
+            $('#prop-pane-edit .cancel-button').click(function(){
+                $('.change-room-button').css("visibility", "visible");
+                $('#prop-pane').css("visibility", "visible");
+                $('#prop-pane-edit').css("visibility", "hidden");
+            });
         });
 
         $('.room-close-popup .confirm-cancellation-button').click(function () {
