@@ -9,10 +9,12 @@ namespace WebApplication1.Models
     public class RegisterViewModel
     {
         [Required]
+        [MaxLength(256, ErrorMessage = "Имя не должно быть больше чем 256 символов.")]
         public string FullName { get; set; }
 
         [Required]
         [EmailAddress]
+        [MaxLength(256, ErrorMessage = "Эмейл не должен быть больше чем 256 символов.")]
         public string Email { get; set; }
 
         [Required]

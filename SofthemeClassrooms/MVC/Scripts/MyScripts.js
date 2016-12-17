@@ -17,16 +17,6 @@ function toggleDisplayAndInputPInfo()
     $('#displayPersonalInfo').addClass("invisibleBlock");
 }
 
-function SendChecker() {
-    var searchInput = $('#user-search:input').val;
-    if (searchInput == "") {
-        $('#searchButton').prop('disabled', true);
-    }
-    else {
-        $('#searchButton').prop('disabled', false);
-    }
-}
-
 function LoadingStarted() {
     $('#inputs').css('display','none');
     $('#load-icon').css('display','initial');

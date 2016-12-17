@@ -11,7 +11,7 @@
     <link href="~/Content/loading.css" rel="stylesheet" />
     <link href="~/Content/userpage.css" rel="stylesheet" />
     <link href="~/Content/userstable.css" rel="stylesheet" />
-
+    <script src="~/Scripts/inputFormsValidations.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
@@ -78,11 +78,6 @@
                 }
 
                 <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
-                @if (Request.IsAuthenticated)
-                {
-
-                }
-
                 <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
 
             </div>

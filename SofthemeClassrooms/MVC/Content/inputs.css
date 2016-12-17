@@ -18,6 +18,11 @@
     padding: 10px 10px;
 }
 
+.button:disabled {
+    background-color: silver;
+    color: black;
+}
+
 #messageText{
     height: 200px;
 }
@@ -26,7 +31,13 @@
     padding-top: 50px;    
 }
 
-.error{
-    font-size: x-small;
+
+.field-validation-error {
+    background-image: url('../Images/info-icon.png');
+    background-repeat: no-repeat;
     color: red;
+    background-size: 14px 14px;
+    padding: 2px;
+    padding-left: 15px;
+    font-size: 11px;
 }

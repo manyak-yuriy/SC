@@ -14,9 +14,11 @@ namespace WebApplication1.Models
 
         [Required]
         [EmailAddress]
+        [MaxLength(256, ErrorMessage = "Эмейл не должен быть больше чем 256 символов.")]
         public string Email { get; set; }
 
         [Required]
+        [MaxLength(256, ErrorMessage = "Имя не должно быть больше чем 256 символов.")]
         public string Name { get; set; }
 
         public bool Is_Admin { get; set; }
@@ -39,7 +41,7 @@ namespace WebApplication1.Models
             {
                 Email = user.Email,
                 Name = user.FullName,
-                Is_Admin = user.Role == "admin",
+                Is_Admin = user.IsAdmin,
                 NumberOfEvents = user.NumberOfEvents,
                 Id = user.UserId
             };
@@ -51,7 +53,7 @@ namespace WebApplication1.Models
             {
                 Email = this.Email,
                 FullName = this.Name,
-                Role = this.Is_Admin ? "admin" : "user",
+                IsAdmin = this.Is_Admin,
                 UserId = this.Id
             };
         }

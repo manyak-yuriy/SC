@@ -89,13 +89,16 @@ li.menu-item{
     margin-bottom: 15px;
 }
 
-.menu-item-active{
-    text-decoration: solid;
-}
+
 
 a{
    text-decoration: none;
    color: silver;
+}
+
+.menu-item-active{
+    text-decoration: solid;
+    color: black;
 }
 
 a:hover{

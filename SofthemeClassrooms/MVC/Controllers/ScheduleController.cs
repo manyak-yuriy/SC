@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -360,11 +361,12 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public JsonResult GetRoomTableState(DateTime timeNow)
         {
-            var classRooms = db.ClassRoom;
+            ApplicationDbContext db = new ApplicationDbContext();;
+            DbSet<ClassRoom> classRooms = db.ClassRoom;
 
             var roomsAvailability = new List<RoomAvailabilityModel>();
 
-            foreach (var room in classRooms)
+            foreach (var room in classRooms.ToList())
             {
                 string roomStatus;
 

@@ -38,11 +38,25 @@
     color: black;
 }
 .usersTableItem {
-    width: 23%;
     display: inline-block;
     margin: 0;
 }
 
+.userNameItem {
+    width: 40%;
+}
+
+.userEmailItem {
+    width: 40%;
+}
+
+.userNumberOfEventsitem {
+    width: 14%;
+}
+
+.deleteUserItem {
+    width: 4%;
+}
 
 .searchForm{
     float: right;

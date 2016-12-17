@@ -1,12 +1,19 @@
 ﻿html, body{
     margin: 0;
+    padding: 0;
     height: 100%;
 }
 
+footer {
+    margin: 0;
+}
 
-#logo-gray
-{
-    
+
+.adminLabel{
+    background-color: red;
+    border-radius: 15px;
+    color: white;
+    padding: 5px 10px 5px 10px;
 }
 
 nav{
@@ -95,7 +102,9 @@ li.menu-item-active{
 
 .footer {
     display: inline-block;
-    height: 90px;
+    height: 110px;
     background: #f4f6fb;
     width: 100%;
+    margin: 0px;
 }
+

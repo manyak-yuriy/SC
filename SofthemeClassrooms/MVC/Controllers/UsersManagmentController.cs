@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using ManagementServices.Interfaces;
 using WebApplication1.Extensions;
 
@@ -93,7 +94,9 @@ namespace WebApplication1.Controllers
             }
 
             var user = UserManager.FindByName(User.Identity.Name);
-            var result = UserManager.ChangePassword(user.Id, model.OldPassword, model.NewPassword);
+            var result = UserManager
+                .ChangePassword(user.Id, model.OldPassword, model.NewPassword);
+
             if (result.Succeeded)
             {
                 model.ConfirmPassword = "";
@@ -166,12 +169,13 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult DeleteUser(string Id)
+        public async Task<ActionResult> DeleteUser(string Id)
         {
             if (User.Identity.GetUserId() != Id)
             {
                 AppUsersManager manager = new AppUsersManager();
                 manager.DeleteUser(Id);
+                await UserManager.SendEmailAsync(Id, "Удаление учетной записи.", "За решением администрации сайта Softheme Classroom Portal, ваш аккаунт удален." );
             }
 
             return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary
