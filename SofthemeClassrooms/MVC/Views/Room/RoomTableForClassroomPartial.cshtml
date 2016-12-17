@@ -86,7 +86,7 @@
                     width: 30px;
                     display: inline;
                     border: none;
-                    border-bottom: 1px solid black;
+                    border-bottom: 1px solid grey;
                     background-color: transparent;
                     text-align: center;
                 }
@@ -101,7 +101,7 @@
                 width: 160px;
                 display: inline;
                 border: none;
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid grey;
                 background-color: transparent;
                 text-align: center;
                 margin-left: 5px;
@@ -568,17 +568,18 @@
                 var equipData = 
                     { 
                         roomId: dataId,
-                        SeatCount:$('.prop-inp-edit .table').val(),
-                        BoardCount: $('.prop-inp-edit .board').val(),
-                        LaptopCount: $('.prop-inp-edit .laptop').val(),
-                        ProjectorCount: $('.prop-inp-edit .projector').val()
+                        roomTitle: $('#prop-pane-edit .title').val(),
+                        'equipmentData.SeatCount': $('.prop-inp-edit .table').val(),
+                        'equipmentData.BoardCount': $('.prop-inp-edit .board').val(),
+                        'equipmentData.LaptopCount': $('.prop-inp-edit .laptop').val(),
+                        'equipmentData.ProjectorCount': $('.prop-inp-edit .projector').val()
                     };
 
                 // save room prop data
                 $.ajax({
-                    url: '@Url.Action("SetEquipmentByRoomId", "Room")',
+                    url: '@Url.Action("SetEquipmentDataForRoom", "Room")',
                     type: "POST",
-                    data: JSON.serialize(equipData),
+                    data: JSON.stringify(equipData),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     context: this,

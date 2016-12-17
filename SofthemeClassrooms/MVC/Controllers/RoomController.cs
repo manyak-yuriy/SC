@@ -21,15 +21,16 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetEquipmentDataForRoom(int roomId, EquipmentViewModel equipmentData)
+        public ActionResult SetEquipmentDataForRoom(int roomId, string roomTitle, EquipmentViewModel equipmentData)
         {
+            /*
             if (!User.IsInRole("admin"))
                 return new HttpUnauthorizedResult();
-
+                */
             ManagementServices.Implementations.EquipmentManager equipmentManager = new ManagementServices.Implementations.EquipmentManager();
-
-            equipmentManager.SetEquipmentByRoomId(roomId, equipmentData);
-
+            
+            equipmentManager.SetEquipmentByRoomId(roomId, roomTitle, equipmentData);
+            
             return new EmptyResult();
         }
 

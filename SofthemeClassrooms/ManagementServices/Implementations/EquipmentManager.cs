@@ -30,103 +30,110 @@ namespace ManagementServices.Implementations
 
         public Equipment GetEquipmentByTitle(string title)
         {
-            var db = new ApplicationDbContext();
-
-            return db.Equipment.Where(e => e.Title == title).First();
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Equipment.Where(e => e.Title == title).First();
+            }
         }
        
         public EquipmentViewModel GetEquipmentByRoomId(int roomId)
         {
-            var db = new ApplicationDbContext();
-            var room = db.ClassRoom.Find(roomId);
-
-            if (room == null)
-                throw new NullReferenceException("There's no room with specified id");
-
-            var roomProperties = room.ClassRoomProperty.Where(cp => cp.ClassRoomId == roomId);
-
-            var equipmentData = new EquipmentViewModel
+            using (var db = new ApplicationDbContext())
             {
-                SeatCount = room.Capacity,
-                BoardCount = GetEquipmentQuantityByTitle(roomProperties, "Board"),
-                LaptopCount = GetEquipmentQuantityByTitle(roomProperties, "Laptop"),
-                PrinterCount = GetEquipmentQuantityByTitle(roomProperties, "Printer"),
-                ProjectorCount = GetEquipmentQuantityByTitle(roomProperties, "Projector")
-            };
+                var room = db.ClassRoom.Find(roomId);
 
-            return equipmentData;
+                if (room == null)
+                    throw new NullReferenceException("There's no room with specified id");
+
+                var roomProperties = room.ClassRoomProperty.Where(cp => cp.ClassRoomId == roomId);
+
+                var equipmentData = new EquipmentViewModel
+                {
+                    SeatCount = room.Capacity,
+                    BoardCount = GetEquipmentQuantityByTitle(roomProperties, "Board"),
+                    LaptopCount = GetEquipmentQuantityByTitle(roomProperties, "Laptop"),
+                    PrinterCount = GetEquipmentQuantityByTitle(roomProperties, "Printer"),
+                    ProjectorCount = GetEquipmentQuantityByTitle(roomProperties, "Projector")
+                };
+
+                return equipmentData;
+            }
         }
 
-        public void SetEquipmentByRoomId(int roomId, EquipmentViewModel equipmentData)
+        public void SetEquipmentByRoomId(int roomId, string roomTitle, EquipmentViewModel equipmentData)
         {
-            var db = new ApplicationDbContext();
-
-            var room = db.ClassRoom.Find(roomId);
-
-            if (room == null)
-                throw new NullReferenceException("There's no room with specified id");
-
-            room.Capacity = equipmentData.SeatCount;
-
-            var roomProperties = room.ClassRoomProperty.Where(cp => cp.ClassRoomId == roomId).ToList();
-
-            // boards
-
-            var boards = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Board").First();
-            var boardData = GetEquipmentByTitle("Board");
-
-            if (boards == null)
+            using (var db = new ApplicationDbContext())
             {
-                db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoom = room, Equipment = boardData, Quantity = equipmentData.BoardCount });
+                var room = db.ClassRoom.Find(roomId);
+
+                if (room == null)
+                    throw new NullReferenceException("There's no room with specified id");
+
+                room.Capacity = equipmentData.SeatCount;
+                room.Title = roomTitle;
+
+                var roomProperties = room.ClassRoomProperty.Where(cp => cp.ClassRoomId == roomId).ToList();
+
+                // boards
+
+                var boards = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Board" && crp.ClassRoomId == room.Id).FirstOrDefault();
+                var boardData = GetEquipmentByTitle("Board");
+
+                if (boards == null)
+                {
+                    db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoomId = room.Id, Equipment = boardData, Quantity = equipmentData.BoardCount });
+                }
+                else
+                {
+                    boards.Quantity = equipmentData.BoardCount;
+                }
+
+
+                // laptops
+
+                var laptops = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Laptop" && crp.ClassRoomId == room.Id).FirstOrDefault();
+                var laptopData = GetEquipmentByTitle("Laptop");
+
+                if (laptops == null)
+                {
+                    db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoomId = room.Id, Equipment = laptopData, Quantity = equipmentData.LaptopCount });
+                }
+                else
+                {
+                    laptops.Quantity = equipmentData.LaptopCount;
+                }
+
+                // printers
+
+                var printers = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Printer" && crp.ClassRoomId == room.Id).FirstOrDefault();
+                var printerData = GetEquipmentByTitle("Printer");
+
+                if (printers == null)
+                {
+                    db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoomId = room.Id, Equipment = printerData, Quantity = equipmentData.PrinterCount });
+                }
+                else
+                {
+                    printers.Quantity = equipmentData.PrinterCount;
+                }
+
+                // projectors
+
+                var projectors = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Projector" && crp.ClassRoomId == room.Id).FirstOrDefault();
+                var projectorData = GetEquipmentByTitle("Projector");
+
+                if (projectors == null)
+                {
+                    db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoomId = room.Id, Equipment = projectorData, Quantity = equipmentData.ProjectorCount });
+                }
+                else
+                {
+                    projectors.Quantity = equipmentData.ProjectorCount;
+                }
+
+                db.SaveChanges();
             }
-            else
-            {
-                boards.Quantity = equipmentData.BoardCount;
-            }
-
-
-            // laptops
-
-            var laptops = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Laptop").First();
-            var laptopData = GetEquipmentByTitle("Laptop");
-
-            if (laptops == null)
-            {
-                db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoom = room, Equipment = laptopData, Quantity = equipmentData.LaptopCount });
-            }
-            else
-            {
-                laptops.Quantity = equipmentData.LaptopCount;
-            }
-
-            // printers
-
-            var printers = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Printer").First();
-            var printerData = GetEquipmentByTitle("Printer");
-
-            if (printers == null)
-            {
-                db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoom = room, Equipment = printerData, Quantity = equipmentData.PrinterCount });
-            }
-            else
-            {
-                printers.Quantity = equipmentData.PrinterCount;
-            }
-
-            // projectors
-
-            var projectors = db.ClassRoomProperty.Where(crp => crp.Equipment.Title == "Projector").First();
-            var projectorData = GetEquipmentByTitle("Projector");
-
-            if (projectors == null)
-            {
-                db.ClassRoomProperty.Add(new ClassRoomProperty { ClassRoom = room, Equipment = projectorData, Quantity = equipmentData.ProjectorCount });
-            }
-            else
-            {
-                projectors.Quantity = equipmentData.ProjectorCount;
-            }
-
         }
+
     }
 }
