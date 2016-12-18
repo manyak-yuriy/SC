@@ -4,14 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/Content/inputs.css" rel="stylesheet" />
-    <link href="~/Content/validationError.css" rel="stylesheet" />
     <link href="~/calendar.ico" rel="icon" type="image/x-icon" />
-    <link href="~/Content/loading.css" rel="stylesheet" />
-    <link href="~/Content/userpage.css" rel="stylesheet" />
-    <link href="~/Content/userstable.css" rel="stylesheet" />
-    <script src="~/Scripts/inputFormsValidations.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
@@ -49,36 +42,38 @@
        <nav>
             <div id="navformer">
                 <img id="logo" src="~/Images/logo.png" alt="logo" />
-                @if (!Request.IsAuthenticated)
-                {
-                    <li class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
-                }
-                else
-                {
-
-                    if ((Session["UserName"] as string) == null)
+                <ul class ="menu-items">
+                    @if (!Request.IsAuthenticated)
                     {
-                        ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
-                        Session["UserName"] = m.GetUserName(User.Identity.Name);
+                        <li class="menu-item"><a href="@Url.Action("Login", "Account")">Вход</a></li>
+                    }
+                    else
+                    {
+
+                        if ((Session["UserName"] as string) == null)
+                        {
+                            ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
+                            Session["UserName"] = m.GetUserName(User.Identity.Name);
+                        }
+
+                        <li id="userPageItem" class="menu-item">
+                            <a href="@Url.Action("MyPage", "UsersManagment")">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                @(Session["UserName"] as string)
+                            </a>
+                        </li>
                     }
 
-                    <li id="userPageItem" class="menu-item">
-                        <a href="@Url.Action("MyPage", "UsersManagment")">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            @(Session["UserName"] as string)
-                        </a>
-                    </li>
-                }
+                    <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
 
-                <li id="feedbackItem" class="menu-item"><a href="@Url.Action("SendMessageForm","Feedback")">Обратная связь</a></li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
+                    }
 
-                @if (User.IsInRole("admin"))
-                {
-                    <li id="usersItem" class="menu-item"><a href="@Url.Action("Users","UsersManagment")">Пользователи</a></li>
-                }
-
-                <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
-                <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
+                    <li id="scheduleItem" class="menu-item"><a href="@Url.Action("ShowSchedule","Schedule")">Расписание</a></li>
+                    <li id="newEvent" class="menu-item"> <img src="~/Images/NewEvent.png" /></li>
+                </ul>
 
             </div>
         </nav>

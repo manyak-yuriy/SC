@@ -16,12 +16,12 @@
         <input type="hidden" name="Id" value="@Model.Id" />
         <input type="hidden" value="@Model.NumberOfEvents" name="NumberOfEvents" />
         <div>
-            @Html.RedValidationMessageFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
             @Html.EditorFor(m => m.Name, "", new { htmlattributes = new { @class = "changeData", id="FullName"} })
         </div>
 
         <div>
-            @Html.RedValidationMessageFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
             @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData", id="Email"} })
         </div>
         <div>

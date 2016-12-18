@@ -64,8 +64,10 @@
                 }
             }
         </ul>
-        <div id="pageLinks" class="btn-group">
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
+        <div id="page-wrapper" class="btn-group">
+            <div id="page-links">
+                @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
+            </div>
         </div>
     </div>
 </div>

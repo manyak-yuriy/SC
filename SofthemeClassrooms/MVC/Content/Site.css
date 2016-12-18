@@ -79,6 +79,17 @@ li.menu-item{
     margin: auto;
 }
 
+.visibleBlockmenu-item{
+    float: right;
+    display: block;
+    height: 100% !important;
+    text-align: center;
+    padding-top: 15px;
+    padding-right: 10px;
+    width: 150px;
+    margin: auto;
+}
+
 li.menu-item-active{
     background-color: #f4f6fb;
     border-bottom: 2px solid red;

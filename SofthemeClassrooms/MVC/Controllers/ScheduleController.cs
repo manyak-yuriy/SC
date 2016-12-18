@@ -8,6 +8,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
+using System.Globalization;
+using System.Threading.Tasks;
+using ManagementServices.Interfaces;
+using Microsoft.AspNet.Identity.Owin;
 using WebApplication1.Models.Schedule;
 using WebApplication1.Models;
 
@@ -16,7 +20,16 @@ namespace WebApplication1.Controllers
     public class ScheduleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private IBusinessLogicFactory _businessLogicFactory;
+        public ScheduleController(IBusinessLogicFactory factory)
+        {
+            _businessLogicFactory = factory;
+        }
 
+        public ApplicationUserManager UserManager
+        {
+            get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
         // Render main page
         [HttpGet]
         public ActionResult ShowSchedule()
@@ -319,7 +332,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public JsonResult CancelEvent(int Id)
+        public async Task<JsonResult> CancelEvent(int Id)
         {
             var eventToDelete = db.Event.Find(Id);
             
@@ -339,6 +352,24 @@ namespace WebApplication1.Controllers
 
                 if (!isAuthorized)
                     return Json(new { result = "Request for deletion is not authorized" }, JsonRequestBehavior.DenyGet);
+
+                var foreignVManager = _businessLogicFactory.VisitorsManager;
+                var emails = foreignVManager.EmailsOfEventVisitors(Id);
+                foreignVManager.DeleteVisiotrOfCanceledEvent(Id);
+
+                EmailService emailService = new EmailService();
+                foreach (var email in emails)
+                {
+                    await emailService.SendAsync(new IdentityMessage()
+                    {
+                        Destination = email,
+                        Subject = "Событие отменено.",
+                        Body = "Событие " + eventToDelete.Title + " что должно было состояться " +
+                               eventToDelete.DateStart.ToString("d") + " в " + eventToDelete.DateStart.ToString("t") +
+                               " отменено."
+                    });
+                }
+
 
                 // isAuthorized 
                 db.Event.Remove(eventToDelete);

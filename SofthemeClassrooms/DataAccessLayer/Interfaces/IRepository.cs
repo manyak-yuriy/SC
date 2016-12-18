@@ -13,7 +13,7 @@ namespace DataAccessLayer.Interfaces
         T Get(ID Id);
         void Update(T item);
         void Delete(ID id);
-
+        void Delete(IEnumerable<T> items);
         void Insert(T item);
     }
 }

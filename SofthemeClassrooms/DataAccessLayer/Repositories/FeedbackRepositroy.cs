@@ -16,6 +16,11 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<Feedback> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int id)
         {
             var feedback = dbContext.Feedback.Find(id);

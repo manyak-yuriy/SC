@@ -17,7 +17,7 @@ namespace ManagementServices.Implementations
             }
         }
 
-        public IEventManager EventManager
+        public IEventActions EventManager
         {
             get
             {
@@ -30,6 +30,14 @@ namespace ManagementServices.Implementations
             get
             {
                 return new FeedbackSender();
+            }
+        }
+
+        public IEventVisitorActions VisitorsManager
+        {
+            get
+            {
+                return new EventVisitorActions();
             }
         }
     }

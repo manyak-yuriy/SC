@@ -17,6 +17,11 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<Equipment> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int id)
         {
             Equipment equipment = dbContext.Equipment.Find(id);

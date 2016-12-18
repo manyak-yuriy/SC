@@ -18,6 +18,11 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<ApplicationUser> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(string id)
         {
             var user = dbContext.Users.Where(c => c.Id == id).FirstOrDefault();

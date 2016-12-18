@@ -147,8 +147,15 @@ link-active{
     font-size: 20px;
 }
 
-#pageLinks{
-    margin-left: 50%;
+#page-wrapper {
+    width: 100%;
+    margin-top: 30px;
 }
+
+#page-links {
+    float: right;
+    display: inline-block;
+}
+
 
 

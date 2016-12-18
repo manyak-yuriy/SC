@@ -5,9 +5,14 @@
 
 @Html.Partial("RoomTablePartialView")
 
-@Html.Partial("TimeTablePartialView")
-@Html.Partial("MapPartialView")
-
+<div>
+    <div style="float: left">
+        @Html.Partial("TimeTablePartialView")
+    </div>
+    <div style="float: right">
+        @Html.Partial("MapPartialView")
+    </div>
+</div>
 
 
 @section MenuItemActive{

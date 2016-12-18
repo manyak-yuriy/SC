@@ -156,10 +156,10 @@ namespace WebApplication1.Controllers
             return View(mod);
         }
 
-        public ActionResult ChangeUserInfoView(PersonalDataViewModel model)
-        {
-            return PartialView(model);
-        }
+        //public ActionResult ChangeUserInfoView(PersonalDataViewModel model)
+        //{
+        //    return PartialView(model);
+        //}
 
         [Authorize(Roles = "admin")]
         public ActionResult UserPage(PersonalDataViewModel model)
