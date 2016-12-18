@@ -127,6 +127,12 @@
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");
+                    var $visCntElem = $('.visitors-info span');
+
+                    //alert($visCntElem.html());
+
+                    $visCntElem.html(parseInt($visCntElem.html()) + 1);
+
                     setTimeout(function () {$('.val-errors').css("display", "none");}, 1000);
                 }
             }
