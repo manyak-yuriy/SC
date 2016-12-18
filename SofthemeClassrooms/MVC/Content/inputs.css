@@ -8,6 +8,7 @@
     padding: 1% 5%;
 }
 
+
 .button {
     background-color: red;
     border-style: none;
@@ -20,7 +21,6 @@
 
 .button:disabled {
     background-color: silver;
-    color: black;
 }
 
 #messageText{
@@ -31,13 +31,11 @@
     padding-top: 50px;    
 }
 
-
 .field-validation-error {
-    background-image: url('../Images/info-icon.png');
-    background-repeat: no-repeat;
     color: red;
-    background-size: 14px 14px;
-    padding: 2px;
-    padding-left: 15px;
     font-size: 11px;
+    background-image: url('../Images/info-icon.png');
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    padding-left: 15px;
 }

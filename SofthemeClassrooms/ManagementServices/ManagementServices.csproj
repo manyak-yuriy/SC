@@ -65,6 +65,7 @@
     <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Interfaces\IBusinessLogicFactory.cs" />
     <Compile Include="Interfaces\IEventVisitorActions.cs" />
+    <Compile Include="Models\EventInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Implementations\AppUserManager.cs" />
     <Compile Include="Interfaces\IEventActions.cs" />

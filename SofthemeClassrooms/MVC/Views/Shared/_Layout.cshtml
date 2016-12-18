@@ -52,8 +52,7 @@
 
                         if ((Session["UserName"] as string) == null)
                         {
-                            ManagementServices.Implementations.AppUsersManager m = new ManagementServices.Implementations.AppUsersManager();
-                            Session["UserName"] = m.GetUserName(User.Identity.Name);
+                            @Html.Action("GetUserName","Account")
                         }
 
                         <li id="userPageItem" class="menu-item">
@@ -82,7 +81,9 @@
         </div>
     </div>
     <footer class="footer">
-        <img id="logo-gray" src="~/Images/logo-gray.png" />
+        <div id="footer-logo">
+            <img id="logo-gray" src="~/Images/logo-gray.png" />
+        </div>
     </footer>
 
     @RenderSection("scripts", required: false)

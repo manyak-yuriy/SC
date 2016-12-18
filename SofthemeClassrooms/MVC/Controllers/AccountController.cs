@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using DataAccessLayer;
+using ManagementServices.Interfaces;
 using WebApplication1.Extensions;
 using WebApplication1.Filters;
 
@@ -20,9 +21,10 @@ namespace WebApplication1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private IBusinessLogicFactory _businessLogicFactory;
+        public AccountController(IBusinessLogicFactory factory)
         {
+            _businessLogicFactory = factory;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -70,7 +72,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         [NonAuthorized]
         public async Task<ActionResult> Login(LoginViewModel model)
-        { 
+        {
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -88,11 +90,11 @@ namespace WebApplication1.Controllers
                 default:
                     return View(model);
             }
-      
+
         }
 
         //
-        
+
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -111,7 +113,7 @@ namespace WebApplication1.Controllers
         [NonAuthorized]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        { 
+        {
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -170,7 +172,7 @@ namespace WebApplication1.Controllers
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
-            return PartialView("RegisterInput",model);
+            return PartialView("RegisterInput", model);
         }
 
 
@@ -247,6 +249,13 @@ namespace WebApplication1.Controllers
             return code == null ? View("Error") : View(reset);
         }
 
+        public ActionResult GetUserName()
+        {
+            var userManager = _businessLogicFactory.UserManager;
+            Session["UserName"] = userManager.GetUserName(User.Identity.Name);
+            return new EmptyResult();
+        }
+
         //
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -257,7 +266,7 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("ResetPasswordPView",model);
+                return PartialView("ResetPasswordPView", model);
             }
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)

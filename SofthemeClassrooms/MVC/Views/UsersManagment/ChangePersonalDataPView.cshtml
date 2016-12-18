@@ -2,6 +2,8 @@
 @using WebApplication1.HtmlHelpers
 
 
+<link href="~/Content/Overlays/AddEventPartialView.css" rel="stylesheet" />
+
 <div id="ChangePersonalInfo">
     @using (Ajax.BeginForm("ChangePersonalInfo", new AjaxOptions()
     {
@@ -25,11 +27,27 @@
             @Html.EditorFor(m => m.Email, "", new { htmlattributes = new { @class = "changeData", id="Email"} })
         </div>
         <div>
-            @Html.EditorFor(m => m.Is_Admin, new { htmlattributes = new { @class="" } })
-            Администратор
+            @if (User.IsInRole("admin"))
+            {
+                <div class="slideThree">
+                    @if (Model.Is_Admin)
+                    {
+                        <input id="slideThree" type="checkbox" name="Is_Admin" checked />
+                    }
+                    else
+                    {
+                        <input id="slideThree" type="checkbox" name="Is_Admin" />
+                    }
+                    <label for="slideThree"></label>
+                </div>
+
+                <span>Администратор</span>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.Is_Admin)
+            }
         </div>
         <input id="changePI" type="submit" value="Сохранить" class="userPagebuttton"/>
     }
 </div>
-
-

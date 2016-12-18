@@ -121,10 +121,10 @@ namespace WebApplication1.Controllers
 
             IUserManager m = _businessLogicFactory.UserManager;
             int itemsPerPage = 20;
-            int          NumberOfUsers = m.GetUserNumber();
+            int numberOfUsers = m.GetUserNumber();
 
-            int lastPage = NumberOfUsers / itemsPerPage;
-            int remainder = NumberOfUsers % itemsPerPage;
+            int lastPage = numberOfUsers / itemsPerPage;
+            int remainder = numberOfUsers % itemsPerPage;
             lastPage += remainder > 0 ? 1 : 0;
 
             if (lastPage < page)
@@ -138,13 +138,13 @@ namespace WebApplication1.Controllers
                 m.GetUsersInfo(page, itemsPerPage, searcPattern.DeleteExtraSpaces());
 
 
-            var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo).ToList();
+            var users = PersonalDataViewModel.CreateFromUsersInfo(usersInfo);
 
             PageInfo pageInfo = new PageInfo
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = page,
-                TotalNumOfItems = NumberOfUsers
+                TotalNumOfItems = numberOfUsers
             };
 
             UsersPageModel mod = new UsersPageModel
@@ -156,10 +156,6 @@ namespace WebApplication1.Controllers
             return View(mod);
         }
 
-        //public ActionResult ChangeUserInfoView(PersonalDataViewModel model)
-        //{
-        //    return PartialView(model);
-        //}
 
         [Authorize(Roles = "admin")]
         public ActionResult UserPage(PersonalDataViewModel model)
@@ -174,8 +170,8 @@ namespace WebApplication1.Controllers
             if (User.Identity.GetUserId() != Id)
             {
                 AppUsersManager manager = new AppUsersManager();
+                await UserManager.SendEmailAsync(Id, "Удаление учетной записи.", "За решением администрации сайта Softheme Classroom Portal, ваш аккаунт удален.");
                 manager.DeleteUser(Id);
-                await UserManager.SendEmailAsync(Id, "Удаление учетной записи.", "За решением администрации сайта Softheme Classroom Portal, ваш аккаунт удален." );
             }
 
             return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary

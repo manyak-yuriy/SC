@@ -332,7 +332,6 @@
     <Content Include="Images\icon-board.png" />
     <Content Include="Images\icon-laptop.png" />
     <Content Include="Images\icon-lock.png" />
-    <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\RoomsScheme\roomsScheme.css" />

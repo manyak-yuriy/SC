@@ -13,7 +13,7 @@
 {
     <div>
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary()
+        @Html.ValidationSummary(true)
         <div>
             @Html.ValidationMessageFor(model => model.Email)
             @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })

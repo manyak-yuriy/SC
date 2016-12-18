@@ -26,11 +26,6 @@ namespace WebApplication1.Controllers
             _businessLogicFactory = factory;
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-        }
-        // Render main page
         [HttpGet]
         public ActionResult ShowSchedule()
         {
