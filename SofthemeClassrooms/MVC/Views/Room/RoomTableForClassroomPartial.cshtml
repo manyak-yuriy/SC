@@ -27,6 +27,8 @@
         <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
         <!--panel of properties-->
         <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Room")'>
+            <img class="prop-loader" src="~/Images/loader.gif" />
+
             <div class="eq-container">
                 <img class="eq-img" src="~/Images/icon-table.png" />
                 <span class="table"></span>
@@ -595,9 +597,11 @@
                 $roomElem.children('span').html($('#prop-pane-edit .title').val());
 
                 $('#prop-pane-edit').css("visibility", "hidden");
+                $('.prop-loader').css('visibility', 'visible');
 
                 setTimeout(function(){
                     loadRoomProp(dataId);
+                    $('.prop-loader').css('visibility', 'hidden');
                     $('.change-room-button').css("visibility", "visible");
                     $('#prop-pane').css("visibility", "visible");
                     

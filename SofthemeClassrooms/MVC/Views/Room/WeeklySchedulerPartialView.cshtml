@@ -334,6 +334,19 @@
         // page is ready
         renderScheduler();
 
+        $('#date-scroller .fa-caret-left').click(function () {
+            $('#calendar').fullCalendar('prev');
+            var selDate = $('#calendar').fullCalendar('getDate');
+
+
+        });
+
+        $('#date-scroller .fa-caret-right').click(function () {
+            $('#calendar').fullCalendar('next');
+            var selDate = $('#calendar').fullCalendar('getDate');
+
+
+        });
     });
 
 

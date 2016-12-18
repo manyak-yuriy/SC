@@ -9,7 +9,10 @@
         <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
         <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
         <!--panel of properties-->
+        
         <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Room")'>
+            <img class="prop-loader" src="~/Images/loader.gif" />
+
             <div class="eq-container">
                 <img class="eq-img" src="~/Images/icon-table.png" />
                 <span class="table"></span>
@@ -34,6 +37,8 @@
                 <img class="eq-img" src="~/Images/icon-proect.png" />
                 <span class="projector"></span>
             </div>
+
+            
         </div>
         
 
@@ -221,8 +226,11 @@
             $('.line-details#' + id).css('display', 'inline-block');
 
             var dataId = $(this).data('id');
-            $('#prop-pane').css("visibility", "visible");
+            $('.prop-loader').css("visibility", "visible");
 
+            $('#prop-pane').css("visibility", "visible");
+            $('.eq-container').css('display', 'none');
+            
             $.ajax({
                 url: $('#prop-pane').data('request-url'),
                 type: "GET",
@@ -234,6 +242,8 @@
 
                     /*alert(textStatus);
                     alert(JSON.stringify(data));*/
+
+                    $('.prop-loader').css("visibility", "hidden");
 
                     if (data.SeatCount == 0)
                         $('.table').parent().css("display", "none");

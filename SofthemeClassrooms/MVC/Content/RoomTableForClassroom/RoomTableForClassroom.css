@@ -350,3 +350,14 @@ html, body {
         left: 32px;
         top: 220px;
     }
+
+
+
+#prop-pane .prop-loader
+{
+    display: inline-block;
+    position: absolute;
+    left: 25%;
+    top: -50px;
+    visibility: hidden;
+}
