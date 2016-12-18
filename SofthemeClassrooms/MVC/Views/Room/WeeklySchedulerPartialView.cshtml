@@ -198,6 +198,20 @@
         height: 100%;
         font-family: Arial;
     }
+
+
+    .public-event {
+        background-color: #f95748 !important;
+    }
+
+    .private-event {
+        background-color: #eff2f7 !important;
+        border: none !important;
+        background-image: url('../../Images/icon-lock.png');
+        color: black !important;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 </style>
 
 <div id="week-calendar-wrapper">
@@ -238,7 +252,7 @@
 
                 for (var i = 0; i < data.eventsData.length; i++) {
                     var e = data.eventsData[i];
-                    var newEvent = {id : e.Id, title : (e.Title)? e.Title : "", start: jDate(e.DateStart), end: jDate(e.DateEnd), class: e.IsPublic ? 'public-event' : 'private-event'};
+                    var newEvent = { id: e.Id, title: ((e.Title) ? e.Title : ""), start: jDate(e.DateStart), end: jDate(e.DateEnd), className: e.IsPublic ? 'public-event' : 'private-event' };
 
                     eventsForRoom.push(newEvent);
                 }

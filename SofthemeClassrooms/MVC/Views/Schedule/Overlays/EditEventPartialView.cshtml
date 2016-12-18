@@ -165,7 +165,7 @@
 
         </div>
 
-        <input type="button" class="send-event-form-data" value="Создать" />
+        <input type="button" class="send-event-form-data" value= @(ViewBag.IsNew ? "Создать" : "Изменить") />
     </div>
                     }
 
@@ -231,11 +231,11 @@
                         }
 
                         try{
-
+                            renderScheduler();
                         }
                         catch(err)
                         {
-                            renderScheduler();
+                            
                         }
                         
                     }

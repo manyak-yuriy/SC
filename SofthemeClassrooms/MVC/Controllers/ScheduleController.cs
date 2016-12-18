@@ -93,6 +93,8 @@ namespace WebApplication1.Controllers
             }
             ViewBag.RoomIdOptions = items;
             ViewBag.CallBackAction = "AddNewEvent";
+            ViewBag.IsNew = true;
+
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
 
@@ -140,6 +142,8 @@ namespace WebApplication1.Controllers
             // Pass id this way - will be replaced later
             ViewBag.eventId = eventId;
             ViewBag.CallBackAction = "EditEvent";
+            ViewBag.IsNew = false;
+
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
         
@@ -363,7 +367,7 @@ namespace WebApplication1.Controllers
         {
             var db = new ApplicationDbContext();
             var eventsData = db.Event.Where(e => e.ClassroomId == roomId)
-                .Select(e => new { e.Id, IsPublic = (e.IsPublic? e.Title: null), e.DateStart, e.DateEnd });
+                .Select(e => new { e.Id, e.IsPublic, Title = (e.IsPublic? e.Title: null), e.DateStart, e.DateEnd });
             
             return Json(new { eventsData}, JsonRequestBehavior.AllowGet);
         }
