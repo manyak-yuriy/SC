@@ -226,14 +226,28 @@
         // page is ready
         renderScheduler();
 
+        var getPrettyDateStr = function(selDate) {
+            var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+
+            var month = selDate.toDate().getMonth();
+            var dateStr = months[month] + ", " + selDate.toDate().getFullYear();
+
+            return dateStr;
+        }
+
         $('#date-scroller .fa-caret-left').click(function () {
             $('#calendar').fullCalendar('prev');
             var selDate = $('#calendar').fullCalendar('getDate');
+
+            
+            $('#date-scroller-value').html(getPrettyDateStr(selDate));
         });
 
         $('#date-scroller .fa-caret-right').click(function () {
             $('#calendar').fullCalendar('next');
             var selDate = $('#calendar').fullCalendar('getDate');
+
+            $('#date-scroller-value').html(getPrettyDateStr(selDate));
         });
     });
 
