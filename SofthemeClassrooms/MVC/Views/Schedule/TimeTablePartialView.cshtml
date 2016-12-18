@@ -55,8 +55,9 @@
     <script src="~/Scripts/TimeTableControls/timeTableControls.js"></script>
 
 
-
+    
     <div id="calendar-container" style="display:inline-block !important">
+        
         <div id='jqxWidget' data-req-url='@Url.Action("GetEventDataForDay", "Schedule")' style="display:inline-block !important">
 
         </div>
@@ -308,6 +309,10 @@
 
         renderTimeTable();
         $('#main-container').css("visibility", "visible");
+
+
+        $('#jqxWidget').css('visibility', 'visible');
+        $('#calendar-loader').css('visibility', 'hidden');
     })
 
 </script>

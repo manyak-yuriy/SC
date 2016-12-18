@@ -116,7 +116,7 @@ namespace WebApplication1.Controllers
             viewModel.Start = eventEntity.DateStart;
             viewModel.Title = eventEntity.Title;
             viewModel.IsPublic = eventEntity.IsPublic;
-            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer.UserName;
+            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer?.UserName;
             
             viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
 

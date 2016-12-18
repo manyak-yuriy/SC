@@ -1,6 +1,6 @@
 ﻿.event-edit-popup
 {
-    width: 450px;
+    width: 550px !important;
     border: 1px solid #cac0c0;
     background-color: white;
 
@@ -41,17 +41,17 @@
 {
     border-radius: 2em;
     border: 1px solid lightgrey;
-    width: 90% !important;
+    width: 95% !important;
     margin: 10px;
     padding: 10px;
-    height: 40px;
+    height: 35px;
 }
 
 .event-edit-contents textarea
 {
     border-radius: 10px;
     border: 1px solid lightgrey;
-    width: 90% !important;
+    width: 95% !important;
     margin: 10px;
     padding: 10px;
 }
@@ -220,6 +220,7 @@
 	background: red;
 }
 
+
 .slideThree input[type=checkbox]:checked + label {
 	left: 23px;
     background: grey;
@@ -229,15 +230,8 @@
 #reg-text
 {
     position: relative;
-    left: 30px;
-    top: -22px;
-}
-
-#show-author-text
-{
-    position: relative;
-    left: 30px;
-    top: -22px;
+    left: 45px !important;
+    top: -22px !important;
 }
 
 
@@ -250,6 +244,7 @@
     float: right;
     border-radius: 2em;
     color: white;
+    display: block !important;
 
     margin-right: 20px;
 }
@@ -325,10 +320,30 @@
 
 }
 
-.org-name-input
+.event-edit-contents .author-info .org-name-input
 {
-    width: 40px !important;
-    display: inline-block;
+    width: 120px !important;
+    display: inline !important;
+    position: relative;
+
+    top: -5px !important;
+
+    height: 30px;
+    width: 50% !important;
+    
+}
+
+#show-author-text
+{
+    position: relative;
+    left: -10px !important;
+    top: -2px !important;
+    
+}
+
+.show-author-check
+{
+    display: inline !important;
 }
 
 .error-panel
