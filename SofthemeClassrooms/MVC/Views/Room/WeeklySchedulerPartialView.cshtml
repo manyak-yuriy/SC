@@ -83,7 +83,7 @@
 
                                                         cancelPopup.remove();
                                                         $('.event-display-popup#' + eventId).remove();
-                                                        reRenderTimeTableTrick();
+                                                        renderScheduler();
                                                     }
                                                 });
                                             });
@@ -216,9 +216,35 @@
 
 <script>
 
+    var jDate = function (obj) {
+        return new Date(parseInt(obj.substr(6)));
+    }
 
     function renderScheduler() {
-        var eventsForRoom = [
+        var roomId = $('.room-id').val();
+
+        $.ajax(
+        {
+            url: '@Url.Action("GetEventDataForRoom", "Schedule")',
+            type: "GET",
+            data: { 'roomId': roomId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+
+                alert(JSON.stringify(data));
+
+                var eventsForRoom = [];
+
+                for (var i = 0; i < data.eventsData.length; i++) {
+                    var e = data.eventsData[i];
+                    var newEvent = {id : e.Id, title : (e.Title)? e.Title : "", start: jDate(e.DateStart), end: jDate(e.DateEnd), class: e.IsPublic ? 'public-event' : 'private-event'};
+
+                    eventsForRoom.push(newEvent);
+                }
+
+                /*
+                eventsForRoom = [
                 {
                     id: '11',
                     title: 'C# multithreading',
@@ -235,53 +261,58 @@
                     start: '2016-12-17T17:30:00',
                     allDay: false // will make the time show
                 }
-        ];
+                ];
+                */
 
 
 
 
-        $('#calendar').fullCalendar({
-            // enable theme
-            theme: false,
-            // emphasizes business hours
-            businessHours: false,
-            // event dragging & resizing
-            editable: false,
-            // header
-            header: {
-                left: 'prev',
-                center: 'title',
-                right: 'next'
-            },
+                $('#calendar').fullCalendar({
+                    // enable theme
+                    theme: false,
+                    // emphasizes business hours
+                    businessHours: false,
+                    // event dragging & resizing
+                    editable: false,
+                    // header
+                    header: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
 
-            events: eventsForRoom,
+                    events: eventsForRoom,
 
-            color: 'black',     // an option!
-            textColor: 'yellow', // an option!
-            displayEventEnd: true,
-            timeFormat: 'H(:mm)',
-            allDaySlot: false,
-            slotLabelFormat: 'H:mm',
-            firstDay: 2,
-            eventColor: '#FF0909',
-            weekends: true,
+                    color: 'black',     // an option!
+                    textColor: 'yellow', // an option!
+                    displayEventEnd: true,
+                    timeFormat: 'H(:mm)',
+                    allDaySlot: false,
+                    slotLabelFormat: 'H:mm',
+                    firstDay: 2,
+                    eventColor: '#FF0909',
+                    weekends: true,
 
-            slotDuration: '01:00:00',
-            nowIndicator: true,
-            columnFormat: "ddd     D.M",
+                    slotDuration: '01:00:00',
+                    nowIndicator: true,
+                    columnFormat: "ddd     D.M",
 
-            eventClick: function (calEvent, jsEvent, view) {
+                    eventClick: function (calEvent, jsEvent, view) {
 
-                displayPopupForEvent(calEvent.id);
+                        displayPopupForEvent(calEvent.id);
+                    }
+
+                }).fullCalendar('changeView', 'agendaWeek');
             }
+        });
 
-        }).fullCalendar('changeView', 'agendaWeek')
     }
 
     $(document).ready(function () {
         // page is ready
         renderScheduler();
-        renderScheduler();
+
+
     });
 
 

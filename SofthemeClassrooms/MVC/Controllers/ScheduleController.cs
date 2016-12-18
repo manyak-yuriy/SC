@@ -357,6 +357,17 @@ namespace WebApplication1.Controllers
             return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
         }
 
+        // Get data necessary to render Calendar on the Room page
+        [HttpGet]
+        public JsonResult GetEventDataForRoom(int roomId)
+        {
+            var db = new ApplicationDbContext();
+            var eventsData = db.Event.Where(e => e.ClassroomId == roomId)
+                .Select(e => new { e.Id, IsPublic = (e.IsPublic? e.Title: null), e.DateStart, e.DateEnd });
+            
+            return Json(new { eventsData}, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public JsonResult GetRoomTableState(DateTime timeNow)
         {

@@ -219,10 +219,27 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
                     //alert(JSON.stringify(data));
-                    reRenderTimeTableTrick();
+
                     if (data.status == 'success') {
                         $('.edit-event-form').remove();
+                        try{
+                            reRenderTimeTableTrick();
+                        }
+                        catch(err)
+                        {
+
+                        }
+
+                        try{
+
+                        }
+                        catch(err)
+                        {
+                            renderScheduler();
+                        }
+                        
                     }
+                    
                     else {
                         var errors = data.Errors;
                         $('.error-panel').empty();
