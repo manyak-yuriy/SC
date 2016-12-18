@@ -29,7 +29,7 @@
 
     td
     {
-        border: 2px solid #d0e1ed !important;
+        border: 2px solid #ecedf8 !important;
     }
 
     tr
@@ -75,6 +75,15 @@
 .fa-caret-right {
     float: right;
 }
+
+.fc-bg {
+    background-color: transparent;
+}
+
+.fc-time-grid-event
+{
+    border: none;
+}
 </style>
 
 <div id="week-calendar-wrapper">
@@ -99,7 +108,7 @@
             // enable theme
             theme: false,
             // emphasizes business hours
-            businessHours: true,
+            businessHours: false,
             // event dragging & resizing
             editable: false,
             // header
@@ -132,8 +141,14 @@
             displayEventEnd: true,
             timeFormat: 'H(:mm)',
             allDaySlot: false,
-            slotLabelFormat: 'H(:mm)',
-            firstDay: 2
+            slotLabelFormat: 'H:mm',
+            firstDay: 2,
+            eventColor: '#FF0909',
+            weekends: true,
+
+            slotDuration: '01:00:00',
+            nowIndicator: true,
+            columnFormat: "ddd     D.M"
 
         }).fullCalendar('changeView', 'agendaWeek')
     });
