@@ -87,9 +87,14 @@ namespace WebApplication1.Controllers
             var room = db.ClassRoom.Find(roomId);
 
             if (room != null)
+            {
                 ViewBag.isBookable = room.IsBookable;
-
-            return View();
+                ViewBag.Title = room.Title;
+                return View();
+            }
+            else
+                throw new ArgumentException("No room with specified id exists!");
+            
         }
     }
 }
