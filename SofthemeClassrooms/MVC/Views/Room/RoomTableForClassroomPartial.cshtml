@@ -597,14 +597,16 @@
                 $roomElem.children('span').html($('#prop-pane-edit .title').val());
 
                 $('#prop-pane-edit').css("visibility", "hidden");
+                // Show pane but hide contents and show loader inside of pane instead
+                $('#prop-pane').css("visibility", "visible");
+                $('#prop-pane .eq-container').css('display', 'none');
                 $('.prop-loader').css('visibility', 'visible');
 
                 setTimeout(function(){
                     loadRoomProp(dataId);
                     $('.prop-loader').css('visibility', 'hidden');
                     $('.change-room-button').css("visibility", "visible");
-                    $('#prop-pane').css("visibility", "visible");
-                    
+                    $('#prop-pane .eq-container').css('display', 'inline-block');
                 }, 500);
                 
             });
