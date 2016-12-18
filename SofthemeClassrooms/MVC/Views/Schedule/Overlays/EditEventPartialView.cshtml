@@ -230,8 +230,10 @@
 
                         }
 
-                        try{
+                        try {
+                            $('#calendar').fullCalendar('destroy');
                             renderScheduler();
+                            $('#calendar').fullCalendar('render');
                         }
                         catch(err)
                         {

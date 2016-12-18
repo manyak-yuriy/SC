@@ -83,7 +83,10 @@
 
                                                         cancelPopup.remove();
                                                         $('.event-display-popup#' + eventId).remove();
+
+                                                        $('#calendar').fullCalendar('destroy');
                                                         renderScheduler();
+                                                        $('#calendar').fullCalendar('render');
                                                     }
                                                 });
                                             });
@@ -325,7 +328,6 @@
     $(document).ready(function () {
         // page is ready
         renderScheduler();
-
 
     });
 
