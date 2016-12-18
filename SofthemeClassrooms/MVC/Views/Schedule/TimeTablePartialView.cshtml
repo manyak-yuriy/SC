@@ -13,7 +13,7 @@
 
 
 <style>
-    
+
 </style>
 <div id="main-container">
     <div id="change-view">
@@ -31,12 +31,9 @@
 
 
     <style>
-
-        #main-container
-        {
+        #main-container {
             visibility: hidden;
         }
-
     </style>
 
     <div class="timetable-container">
@@ -56,7 +53,7 @@
     </div>
 
     <script src="~/Scripts/TimeTableControls/timeTableControls.js"></script>
-    
+
 
 
     <div id="calendar-container" style="display:inline-block !important">
@@ -104,12 +101,11 @@
 <script src="~/Scripts/Calendar/calendar.js"></script>
 
 <script>
-        // quickly re-render timetable using events defined on calendar widget
+    // quickly re-render timetable using events defined on calendar widget
 
-        function reRenderTimeTableTrick()
-        {
-            $('#jqxWidget').jqxCalendar('setDate', $('#jqxWidget').jqxCalendar('getDate'));
-        }
+    function reRenderTimeTableTrick() {
+        $('#jqxWidget').jqxCalendar('setDate', $('#jqxWidget').jqxCalendar('getDate'));
+    }
 
 </script>
 
@@ -124,7 +120,91 @@
 <script src="~/Scripts/TimeSlider/timeSlider.js"></script>
 
 
+<!--Cascade of windows after clicking on event-->
+<script src="~/Scripts/Overlays/DisplayEventCascade.js"></script>
+
 <script>
+
+    function displayPopupForEvent(eventId) {
+        $.ajax(
+                        {
+                            url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
+                            type: "GET",
+                            context: this,
+                            data: { Id: eventId },
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data, textStatus, jqXHR) {
+
+                                $('body').prepend(data);
+                                $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '230px').css('top', '300px').draggable();
+
+                                $('.fa-window-minimize').click(function () {
+                                    //alert("min");
+                                    $(this).parents('.event-display-popup').remove();
+                                })
+
+                                $('.event-display-popup#' + eventId + ' .change-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventEditPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { eventId: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-edit-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '30px').draggable();
+
+
+                                        }
+                                    });
+                                });
+
+                                $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { Id: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
+
+                                            $('#' + eventId + ' .discart-cancellation-button').click(function () {
+                                                $(this).parents('.event-cancel-popup').remove();
+                                            });
+
+                                            $('#' + eventId + ' .confirm-cancellation-button').click(function () {
+                                                // cancel current event
+                                                var eventId = $(this).parents('.event-cancel-popup').attr('id');
+
+                                                $.ajax({
+                                                    url: '@Url.Action("CancelEvent", "Schedule")',
+                                                    type: "POST",
+                                                    context: this,
+                                                    data: "{ 'Id': '" + eventId + "'}",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    success: function (data, textStatus, jqXHR) {
+                                                        //alert(JSON.stringify(data));
+
+                                                        var cancelPopup = $(this).parents('.event-cancel-popup');
+
+                                                        cancelPopup.remove();
+                                                        $('.event-display-popup#' + eventId).remove();
+                                                        reRenderTimeTableTrick();
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    });
+                                });
+
+                            }
+                        }
+                    );
+    }
 
 
     var jDate = function (obj) {
@@ -167,88 +247,14 @@
 
         setTimeout(function () { updateCurrentTime(); checkTimeTableQuickNavState(); }, 1000);
 
+
+        
+
         // Display event info in a popup
         // Schedule/GetDisplayEventPartial/10502
         $('.time-entry').click(function () {
             var eventId = $(this).attr('data-id');
-            $.ajax(
-                {
-                    url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
-                    type: "GET",
-                    context: this,
-                    data: { Id: eventId },
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data, textStatus, jqXHR) {
-
-                        $('body').prepend(data);
-                        $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '230px').css('top', '300px').draggable();
-
-                        $('.fa-window-minimize').click(function () {
-                            //alert("min");
-                            $(this).parents('.event-display-popup').remove();
-                        })
-
-                        $('.event-display-popup#' + eventId + ' .change-button').click(function () {
-                            var eventId = $(this).parents('.event-display-popup').attr('id');
-                            $.ajax({
-                                url: '@Url.Action("GetEventEditPartialView", "Schedule")',
-                                type: "GET",
-                                context: this,
-                                data: { eventId: eventId },
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data, textStatus, jqXHR) {
-                                    $('body').prepend(data);
-                                    $('.event-edit-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '30px').draggable();
-
-                                    
-                                }
-                            });
-                        });
-
-                        $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
-                            var eventId = $(this).parents('.event-display-popup').attr('id');
-                            $.ajax({
-                                url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
-                                type: "GET",
-                                context: this,
-                                data: { Id: eventId },
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data, textStatus, jqXHR) {
-                                    $('body').prepend(data);
-                                    $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
-
-                                    $('#' + eventId + ' .discart-cancellation-button').click(function () {
-                                        $(this).parents('.event-cancel-popup').remove();
-                                    });
-
-                                    $('#' + eventId + ' .confirm-cancellation-button').click(function () {
-                                        // cancel current event
-                                        var eventId = $(this).parents('.event-cancel-popup').attr('id');
-
-                                        $.ajax({
-                                            url: '@Url.Action("CancelEvent", "Schedule")',
-                                            type: "POST",
-                                            context: this,
-                                            data: "{ 'Id': '" + eventId + "'}",
-                                            contentType: "application/json; charset=utf-8",
-                                            success: function (data, textStatus, jqXHR) {
-                                                //alert(JSON.stringify(data));
-
-                                                var cancelPopup = $(this).parents('.event-cancel-popup');
-
-                                                cancelPopup.remove();
-                                                $('.event-display-popup#' + eventId).remove();
-                                                reRenderTimeTableTrick();
-                                            }
-                                        });
-                                    });
-                                }
-                            });
-                        });
-
-                    }
-                }
-            );
+            displayPopupForEvent(eventId);
         });
 
         // Init slider

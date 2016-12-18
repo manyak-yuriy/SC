@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetDisplayEventPartial(int Id)
         {
-            var eventEntity = db.Event.Where(e => e.Id == Id).First();
+            var eventEntity = db.Event.Where(e => e.Id == Id).FirstOrDefault();
 
             if (eventEntity == null)
                 throw new NullReferenceException("There's no event with specified id!");
@@ -41,7 +41,7 @@ namespace WebApplication1.Controllers
                 isAuthorized = true;
 
             if (!eventEntity.IsPublic && !isAuthorized)
-                throw new AccessViolationException("Not enough rigths to view the private event");
+                throw new AccessViolationException("Not enough rights to view the private event");
 
                 DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
             model.CanEdit = isAuthorized;

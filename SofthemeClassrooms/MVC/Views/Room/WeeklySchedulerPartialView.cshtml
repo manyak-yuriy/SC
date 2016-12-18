@@ -10,80 +10,194 @@
 
 <script src="~/fullcalendar-3.1.0/fullcalendar-3.1.0/locale/ru.js"></script>
 
+<!--Cascade of windows after clicking on event-->
+<script src="~/Scripts/Overlays/DisplayEventCascade.js"></script>
+
+<script>
+
+    function displayPopupForEvent(eventId) {
+        $.ajax(
+                        {
+                            url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
+                            type: "GET",
+                            context: this,
+                            data: { Id: eventId },
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data, textStatus, jqXHR) {
+
+                                $('body').prepend(data);
+                                $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '230px').css('top', '300px').draggable();
+
+                                $('.fa-window-minimize').click(function () {
+                                    //alert("min");
+                                    $(this).parents('.event-display-popup').remove();
+                                })
+
+                                $('.event-display-popup#' + eventId + ' .change-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventEditPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { eventId: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-edit-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '30px').draggable();
+
+
+                                        }
+                                    });
+                                });
+
+                                $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { Id: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
+
+                                            $('#' + eventId + ' .discart-cancellation-button').click(function () {
+                                                $(this).parents('.event-cancel-popup').remove();
+                                            });
+
+                                            $('#' + eventId + ' .confirm-cancellation-button').click(function () {
+                                                // cancel current event
+                                                var eventId = $(this).parents('.event-cancel-popup').attr('id');
+
+                                                $.ajax({
+                                                    url: '@Url.Action("CancelEvent", "Schedule")',
+                                                    type: "POST",
+                                                    context: this,
+                                                    data: "{ 'Id': '" + eventId + "'}",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    success: function (data, textStatus, jqXHR) {
+                                                        //alert(JSON.stringify(data));
+
+                                                        var cancelPopup = $(this).parents('.event-cancel-popup');
+
+                                                        cancelPopup.remove();
+                                                        $('.event-display-popup#' + eventId).remove();
+                                                        reRenderTimeTableTrick();
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    });
+                                });
+
+                            }
+                        }
+                            );
+    }
+
+</script>
+
+
 <style>
-    #calendar
-    {
+    #calendar {
         width: 1000px;
         margin: 0 auto;
     }
 
-    .fc-toolbar
-    {
+    .fc-toolbar {
         visibility: hidden !important;
     }
-   
-    table
-    {
+
+    table {
         color: lightgrey;
     }
 
-    td
-    {
+    td {
         border: 2px solid #ecedf8 !important;
     }
 
-    tr
-    {
+    tr {
         height: 50px !important;
     }
 
-    .fc-row.fc-week.ui-widget-content
-    {
+    .fc-row.fc-week.ui-widget-content {
         display: none;
     }
 
 
     #date-scroller {
-    display: inline-block;
-    width: 1000px;
-    position: relative;
-    left: 170px;
-    text-align: center;
-    margin-bottom: 10px;
-
-    margin-top: 20px;
-}
-
-.fa-caret-left, .fa-caret-right {
-    opacity: 0.4;
-    transition: all .2s ease-in-out;
-}
-
-    .fa-caret-left:hover, .fa-caret-right:hover {
-        opacity: 0.9;
+        display: inline-block;
+        width: 1000px;
+        position: relative;
+        left: 170px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 20px;
     }
 
-    .fa-caret-left:active, .fa-caret-right:active {
-        opacity: 1;
-        transform: scale(1.9);
+    .fa-caret-left, .fa-caret-right {
+        opacity: 0.4;
+        transition: all .2s ease-in-out;
     }
 
-.fa-caret-left {
-    float: left;
-}
+        .fa-caret-left:hover, .fa-caret-right:hover {
+            opacity: 0.9;
+        }
 
-.fa-caret-right {
-    float: right;
-}
+        .fa-caret-left:active, .fa-caret-right:active {
+            opacity: 1;
+            transform: scale(1.9);
+        }
 
-.fc-bg {
-    background-color: transparent;
-}
+    .fa-caret-left {
+        float: left;
+    }
 
-.fc-time-grid-event
-{
-    border: none;
-}
+    .fa-caret-right {
+        float: right;
+    }
+
+    .fc-bg {
+        background-color: transparent;
+    }
+
+    .fc-time-grid-event {
+        border: none;
+    }
+
+    /*Time div inside of event*/
+
+    div.fc-time {
+        position: relative;
+        float: right;
+        left: -5px;
+        top: 5px;
+        color: lightgray;
+    }
+
+        div.fc-time span {
+            font-size: 110%;
+        }
+
+    /*Event title div inside of event*/
+
+
+
+    div.fc-title {
+        position: relative;
+        left: 3px;
+        top: 50%;
+        margin: 3px;
+    }
+
+    /*Containver for the upper*/
+    div.fc-content {
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-family: Arial;
+    }
 </style>
 
 <div id="week-calendar-wrapper">
@@ -102,24 +216,11 @@
 
 <script>
 
-    $(document).ready(function () {
-        // page is ready
-        $('#calendar').fullCalendar({
-            // enable theme
-            theme: false,
-            // emphasizes business hours
-            businessHours: false,
-            // event dragging & resizing
-            editable: false,
-            // header
-            header: {
-                left: 'prev',
-                center: 'title',
-                right: 'next'
-            },
 
-            events: [
+    function renderScheduler() {
+        var eventsForRoom = [
                 {
+                    id: '11',
                     title: 'C# multithreading',
                     start: '2016-12-17T05:30:00',
                     end: '2016-12-17T07:30:00'
@@ -134,7 +235,26 @@
                     start: '2016-12-17T17:30:00',
                     allDay: false // will make the time show
                 }
-            ],
+        ];
+
+
+
+
+        $('#calendar').fullCalendar({
+            // enable theme
+            theme: false,
+            // emphasizes business hours
+            businessHours: false,
+            // event dragging & resizing
+            editable: false,
+            // header
+            header: {
+                left: 'prev',
+                center: 'title',
+                right: 'next'
+            },
+
+            events: eventsForRoom,
 
             color: 'black',     // an option!
             textColor: 'yellow', // an option!
@@ -148,9 +268,20 @@
 
             slotDuration: '01:00:00',
             nowIndicator: true,
-            columnFormat: "ddd     D.M"
+            columnFormat: "ddd     D.M",
+
+            eventClick: function (calEvent, jsEvent, view) {
+
+                displayPopupForEvent(calEvent.id);
+            }
 
         }).fullCalendar('changeView', 'agendaWeek')
+    }
+
+    $(document).ready(function () {
+        // page is ready
+        renderScheduler();
+        renderScheduler();
     });
 
 

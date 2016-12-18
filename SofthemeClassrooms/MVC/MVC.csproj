@@ -980,6 +980,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Overlays\AddEventPartialView.js" />
+    <Content Include="Scripts\Overlays\DisplayEventCascade.js" />
     <Content Include="Scripts\Overlays\DisplayEventPartialView.js" />
     <Content Include="Scripts\Popups\userstable.js" />
     <Content Include="Scripts\respond.js" />

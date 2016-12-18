@@ -29,7 +29,7 @@
 
 <div class="event-display-popup">
     <div class="event-display-header">
-        <span>@culture.DateTimeFormat.GetDayName(Model.DateStart.DayOfWeek), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
+        <span>@culture.DateTimeFormat.GetAbbreviatedDayName((Model.DateStart.DayOfWeek)), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
         <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
 
         <div class="header-controls">
