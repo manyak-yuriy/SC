@@ -9,6 +9,7 @@
 
     table {
         color: lightgrey;
+        border-collapse: collapse !important;
     }
 
     td {
@@ -124,4 +125,12 @@
         visibility: visible;
 
         z-index: 1000;
+    }
+
+
+    .fc-today, .fc-state-highlight
+    {
+        background-color: transparent !important;
+        outline: lightgray solid 3px !important;
+        border-collapse: collapse !important;
     }
