@@ -131,6 +131,6 @@
     .fc-today, .fc-state-highlight
     {
         background-color: transparent !important;
-        outline: lightgray solid 3px !important;
+        outline: #D7D9DE solid 3px !important;
         border-collapse: collapse !important;
     }
