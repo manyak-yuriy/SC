@@ -23,10 +23,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult SetEquipmentDataForRoom(int roomId, string roomTitle, EquipmentViewModel equipmentData)
         {
-            /*
+            
             if (!User.IsInRole("admin"))
                 return new HttpUnauthorizedResult();
-                */
+                
             ManagementServices.Implementations.EquipmentManager equipmentManager = new ManagementServices.Implementations.EquipmentManager();
             
             equipmentManager.SetEquipmentByRoomId(roomId, roomTitle, equipmentData);
@@ -37,6 +37,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Close(int roomId)
         {
+            if (!User.IsInRole("admin"))
+                return new HttpUnauthorizedResult();
+
             var db = new ApplicationDbContext();
 
             var room = db.ClassRoom.Find(roomId);
