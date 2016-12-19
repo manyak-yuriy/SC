@@ -132,6 +132,8 @@
 
                     $visCntElem.html(parseInt($visCntElem.html()) + 1);
 
+                    loadAllSubscr(eventId);
+
                     setTimeout(function () { $('.val-errors').css("display", "none"); }, 1000);
                 }
             }

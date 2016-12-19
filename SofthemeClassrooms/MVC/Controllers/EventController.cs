@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models.Schedule;
+using WebApplication1.Models;
+using WebApplication1.Models.Event;
 
 namespace WebApplication1.Controllers
 {
@@ -14,7 +16,19 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Index(int eventId)
         {
-            return View(eventId);
+            var db = new ApplicationDbContext();
+
+            var e = db.Event.Find(eventId);
+
+            if (e == null)
+                throw new NullReferenceException("There's no event with specified id!");
+
+            var eventData = new EventControlsViewModel();
+
+            eventData.EventId = eventId;
+            eventData.RoomId = e.ClassroomId;
+
+            return View(eventData);
         }
 
         [HttpGet]
@@ -57,6 +71,60 @@ namespace WebApplication1.Controllers
 
             return PartialView("_DisplayEventPartial", model);
         }
+
+        
+        [HttpGet]
+        public ActionResult GetEventSubscribers(int eventId)
+        {
+            var db = new ApplicationDbContext();
+
+            var eventEntity = db.Event.Find(eventId);
+
+            if (eventEntity == null)
+                throw new NullReferenceException("There's no event with specified id!");
+
+            bool isAdmin = User.IsInRole("admin");
+            string userId = User.Identity.GetUserId();
+
+            if (!eventEntity.IsPublic && !(isAdmin || userId == eventEntity.ApplicationUserID))
+                throw new AccessViolationException("Not enough rights to access a private event");
+
+            List<ForeignVisitorViewModel> visitors = new List<ForeignVisitorViewModel>();
+
+            var visitorEntities = eventEntity.ForeignVisitor.ToList();
+
+            foreach (var visitor in visitorEntities)
+            {
+                visitors.Add(new ForeignVisitorViewModel { Id = visitor.Id, Email = visitor.Email});
+            }
+
+            return Json(new {visitors}, JsonRequestBehavior.AllowGet);
+        }
+
+        public void RemoveEventSubscriber(long eventId, long subId)
+        {
+            var db = new ApplicationDbContext();
+
+            var eventEntity = db.Event.Find(eventId);
+
+            if (eventEntity == null)
+                throw new NullReferenceException("There's no event with specified id!");
+
+            bool isAdmin = User.IsInRole("admin");
+            string userId = User.Identity.GetUserId();
+
+            if (!(isAdmin || userId == eventEntity.ApplicationUserID))
+                throw new AccessViolationException("Not enough rights to edit event subscribers");
+
+            var subToRemove = eventEntity.ForeignVisitor.Where(fv => fv.Id == subId).FirstOrDefault();
+
+            if (subToRemove == null)
+                throw new NullReferenceException("There's no subscriber with the specified id!");
+
+            db.ForeignVisitor.Remove(subToRemove);
+            db.SaveChanges();
+        }
+
 
     }
 }
