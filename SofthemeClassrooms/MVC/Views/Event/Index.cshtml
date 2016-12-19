@@ -74,7 +74,8 @@
                 $visCntElem.html(visitors.length);
 
                 $('#sub-data-container').empty();
-                $('#sub-data-container').append("Зарегистрированные участники: <ul>" + subscriberHtml + "</ul>");
+                if (visitors.length > 0)
+                    $('#sub-data-container').append("Зарегистрированные участники: <ul>" + subscriberHtml + "</ul>");
 
                 $('.visitor-elem .fa').click(function () {
 
