@@ -13,7 +13,7 @@ namespace DataAccessLayer.Interfaces
         IRepository<ClassRoom, int> ClassRooms { get; }
         IRepository<ClassRoomProperty, int> ClassRoomProperties { get; }
         IRepository<Equipment, int> Equipment { get; }
-        IRepository<Event, int> Events { get; }
+        IRepository<Event, long> Events { get; }
         IRepository<Feedback, int> Feedback { get; }
         IRepository<ForeignVisitor, int> ForeignVisitors { get; }
         IRepository<ApplicationUser, string> Users { get; }

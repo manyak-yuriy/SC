@@ -65,11 +65,14 @@
     <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Implementations\RoomManagement.cs" />
     <Compile Include="Interfaces\IBusinessLogicFactory.cs" />
+    <Compile Include="Interfaces\IEquipmentManagment.cs" />
     <Compile Include="Interfaces\IEventManagment.cs" />
     <Compile Include="Interfaces\IEventVisitorActions.cs" />
     <Compile Include="Interfaces\IRoomManagment.cs" />
     <Compile Include="Models\EventInfo.cs" />
+    <Compile Include="Models\EventTableItem.cs" />
     <Compile Include="Models\RoomInfo.cs" />
+    <Compile Include="Models\RoomStatus.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Implementations\AppUserManager.cs" />
     <Compile Include="Interfaces\IFeedbackSender.cs" />

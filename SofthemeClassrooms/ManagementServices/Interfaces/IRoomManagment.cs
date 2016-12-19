@@ -12,5 +12,7 @@ namespace ManagementServices.Interfaces
         void Close(int id);
         void Open(int id);
         RoomInfo GetRoomInfo(int roomId);
+        IEnumerable<RoomInfo> GetOpenedRooms();
+        IEnumerable<RoomStatus> GetOpenedRoomsStatus(DateTime now);
     }
 }

@@ -11,6 +11,7 @@ using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Threading.Tasks;
 using ManagementServices.Interfaces;
+using ManagementServices.Models;
 using Microsoft.AspNet.Identity.Owin;
 using WebApplication1.Models.Schedule;
 using WebApplication1.Models;
@@ -36,35 +37,36 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetDisplayEventPartial(int Id)
         {
-            var eventEntity = db.Event.Where(e => e.Id == Id).First();
+            var eventInfo = _businessLogicFactory.EventManager.GetEventInfo(Id);
 
-            if (eventEntity == null)
+            if (eventInfo == null)
+            {
                 throw new NullReferenceException("There's no event with specified id!");
+            }
 
+            var model = DisplayEventPartialViewModel.ConvertFromEventInfo(eventInfo);
+            if (model.OrganizerName == null)
+            {
+
+            }
 
             bool isAuthorized = false;
             bool isAdmin = User.IsInRole("admin");
             string userId = User.Identity.GetUserId();
 
-            if (isAdmin || eventEntity.ApplicationUserID == userId)
+            if (isAdmin || model.ApplicationUserId == userId)
+            {
                 isAuthorized = true;
+            }
 
-            if (!eventEntity.IsPublic && !isAuthorized)
+            if (!model.IsPublic && !isAuthorized)
+            {
                 throw new AccessViolationException("Not enough rigths to view the private event");
+            }
 
-                DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
             model.CanEdit = isAuthorized;
-            model.AllowSubscription = (bool) eventEntity.AllowSubscription;
-            model.DateStart = eventEntity.DateStart;
-            model.DateEnd = eventEntity.DateEnd;
-            model.Title = eventEntity.Title;
-            model.Description = eventEntity.Description;
-            if (eventEntity.OrganizerName != null)
-                model.OrganizerName = eventEntity.OrganizerName;
-            else
-                model.OrganizerName = (eventEntity.Organizer == null)? "" : eventEntity.Organizer.UserName;
 
-            model.VisitorCount = eventEntity.ForeignVisitor.Count;
+            model.VisitorCount = _businessLogicFactory.VisitorsManager.CountVisitorsOfEvent(eventInfo.Id);
 
             return PartialView("~/Views/Schedule/Overlays/DisplayEventPartialView.cshtml", model);
         }
@@ -72,7 +74,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public PartialViewResult GetEventCancellationPartialView(int Id)
         {
-            var e = db.Event.Find(Id);
+            var e = _businessLogicFactory.EventManager.GetEventInfo(Id);
             return PartialView("~/Views/Schedule/Overlays/CancelEventPartialView.cshtml", e.Title);
         }
 
@@ -80,7 +82,7 @@ namespace WebApplication1.Controllers
         public PartialViewResult GetEventAddPartialView()
         {
             EditEventPartialViewModel viewModel;
-            
+
             viewModel = new EditEventPartialViewModel();
             viewModel.Start = DateTime.Now;
             viewModel.End = DateTime.Now.AddHours(2);
@@ -90,48 +92,54 @@ namespace WebApplication1.Controllers
 
             List<SelectListItem> items = new List<SelectListItem>();
 
-            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+            IEnumerable<RoomInfo> availRooms = _businessLogicFactory.RoomManager.GetOpenedRooms();
 
             foreach (var room in availRooms)
             {
                 items.Add(new SelectListItem
-                    {
-                         Text = room.Title, Value = room.Id.ToString()
-                    }
+                {
+                    Text = room.Title,
+                    Value = room.Id.ToString()
+                }
                 );
             }
+
             ViewBag.RoomIdOptions = items;
             ViewBag.CallBackAction = "AddNewEvent";
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
 
-        
+
         [HttpGet]
         public PartialViewResult GetEventEditPartialView(int eventId)
         {
-            Event eventEntity = db.Event.Find(eventId);
+            var eventEntity = _businessLogicFactory.EventManager.GetEventInfo(eventId);
 
             if (eventEntity == null)
+            {
                 throw new NullReferenceException("Event with specified id does not exist");
+            }
 
-            EditEventPartialViewModel viewModel;
-            viewModel = new EditEventPartialViewModel();
+            EditEventPartialViewModel viewModel = new EditEventPartialViewModel()
+            {
+                AllowSubscription = (bool)eventEntity.AllowSubscription,
+                Description = eventEntity.Description,
+                End = eventEntity.DateEnd,
+                Start = eventEntity.DateStart,
+                Title = eventEntity.Title,
+                IsPublic = eventEntity.IsPublic,
+                OrganizerName = eventEntity.OrganizerName,
+                RoomId = eventEntity.RoomId.ToString()
+            };
 
-            viewModel.AllowSubscription = (bool)eventEntity.AllowSubscription;
-            viewModel.Description = eventEntity.Description;
-            viewModel.End = eventEntity.DateEnd;
-            viewModel.Start = eventEntity.DateStart;
-            viewModel.Title = eventEntity.Title;
-            viewModel.IsPublic = eventEntity.IsPublic;
-            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer.UserName;
-            
-            viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
+
+            viewModel.ShowAuthor = true;
 
             List<SelectListItem> items = new List<SelectListItem>();
 
-            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+            IEnumerable<RoomInfo> availRooms = _businessLogicFactory.RoomManager.GetOpenedRooms();
 
-            int roomId = eventEntity.ClassroomId;
+            int roomId = eventEntity.RoomId;
 
             foreach (var room in availRooms)
             {
@@ -151,67 +159,66 @@ namespace WebApplication1.Controllers
             ViewBag.CallBackAction = "EditEvent";
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
-        
+
 
         [HttpPost]
         public ActionResult AddSubscriber(int eventId, NewSubscriberViewModel subModel)
         {
-            var e = db.Event.Find(eventId);
             var errors = new ErrorModel();
 
-            if (e == null)
-                throw new NullReferenceException("No event with a given id exists");
-
-            bool canSubscribe = (bool)e.AllowSubscription;
-            if (!canSubscribe)
+            bool subscriptionResult = _businessLogicFactory
+                .VisitorsManager.SubscribeForEvent(subModel.Email, eventId);
+            if (!subscriptionResult)
             {
                 errors.Errors.Add("Это событие не поддерживает подписку");
             }
 
             if (!ModelState.IsValid)
             {
-                var errorList = (from item in ModelState.Values
-                                 from error in item.Errors
-                                 select error.ErrorMessage).ToList();
+                var errorList = from item in ModelState.Values
+                                from error in item.Errors
+                                select error.ErrorMessage;
 
                 foreach (string s in errorList)
+                {
                     errors.Errors.Add(s);
+                }
             }
 
             if (errors.Errors.Count() > 0)
+            {
                 return Json(new { status = "fail", errors.Errors });
+            }
 
 
-            var newVis = new ForeignVisitor();
-
-            newVis.Email = subModel.Email;
-            newVis.Event = e;
-
-            db.ForeignVisitor.Add(newVis);
-
-            db.SaveChanges();
-
-            return Json(new { status = "success"});
+            return Json(new { status = "success" });
         }
 
         [HttpPost]
         public ActionResult AddNewEvent(EditEventPartialViewModel eventModel)
         {
-            var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
+            var classRoom = _businessLogicFactory
+                .RoomManager
+                .GetRoomInfo(Int32.Parse(eventModel.RoomId));
+
             var errors = new ErrorModel();
 
             if (!ModelState.IsValid)
             {
-                var errorList = (from item in ModelState.Values
-                                 from error in item.Errors
-                                 select error.ErrorMessage).ToList();
+                var errorList = from item in ModelState.Values
+                                from error in item.Errors
+                                select error.ErrorMessage;
 
-                foreach (string s in errorList)
+                foreach (var s in errorList)
+                {
                     errors.Errors.Add(s);
+                }
             }
 
             if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
+            {
                 errors.Errors.Add("Событие не может быть короче 20 минут");
+            }
 
 
             if (classRoom == null)
@@ -224,60 +231,60 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id);
-
-                DateTime startDate = eventModel.Start;
-                DateTime endDate = eventModel.End;
-
-                foreach (var e in eventsForClassRoom)
+                if (!_businessLogicFactory.EventManager
+                    .IsRoomForEventFree(int.Parse(eventModel.RoomId),
+                                        eventModel.Start, eventModel.End))
                 {
-                    if ( (e.DateStart > startDate && e.DateStart < endDate) || 
-                         (e.DateEnd > startDate && e.DateEnd < endDate))
-                    {
-                        errors.Errors.Add("Specified room is already booked for the specified time");
-                        break;
-                    }
+                    errors.Errors.Add("Эта комната уже занята в указаное время.");
                 }
             }
 
             if (errors.Errors.Count() > 0)
-                return Json(new { status = "fail", errors.Errors}) ;
+            {
+                return Json(new { status = "fail", errors.Errors });
+            }
 
-            Event dbModel = new Event();
+            EventInfo eventInfo = new EventInfo()
+            {
+                AllowSubscription = eventModel.AllowSubscription,
+                ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null,
+                OrganizerName = (eventModel.ShowAuthor) ? null : eventModel.OrganizerName,
+                RoomId = Int32.Parse(eventModel.RoomId),
+                Description = eventModel.Description,
+                Title = eventModel.Title,
+                DateStart = eventModel.Start,
+                DateEnd = eventModel.End,
+                IsPublic = eventModel.IsPublic
+            };
 
-            dbModel.AllowSubscription = eventModel.AllowSubscription;
-            dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
-            dbModel.OrganizerName = (eventModel.ShowAuthor)? null : eventModel.OrganizerName;
-            dbModel.ClassroomId = Int32.Parse(eventModel.RoomId);
-            dbModel.Description = eventModel.Description;
-            dbModel.Title = eventModel.Title;
-            dbModel.DateStart = eventModel.Start;
-            dbModel.DateEnd = eventModel.End;
-            dbModel.IsPublic = eventModel.IsPublic;
+            _businessLogicFactory.EventManager.CreateEvent(eventInfo);
 
-            db.Event.Add(dbModel);
-            db.SaveChanges();
-
-            return Json(new { status = "success"});
+            return Json(new { status = "success" });
         }
 
         public ActionResult EditEvent(int eventId, EditEventPartialViewModel eventModel)
         {
-            var classRoom = db.ClassRoom.Find(Int32.Parse(eventModel.RoomId));
+            var classRoom = _businessLogicFactory
+                        .RoomManager.GetRoomInfo(int.Parse(eventModel.RoomId));
+
             var errors = new ErrorModel();
 
             if (!ModelState.IsValid)
             {
-                var errorList = (from item in ModelState.Values
-                                 from error in item.Errors
-                                 select error.ErrorMessage).ToList();
+                var errorList = from item in ModelState.Values
+                                from error in item.Errors
+                                select error.ErrorMessage;
 
                 foreach (string s in errorList)
+                {
                     errors.Errors.Add(s);
+                }
             }
 
             if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
+            {
                 errors.Errors.Add("Событие не может быть короче 20 минут");
+            }
 
 
             if (classRoom == null)
@@ -307,21 +314,25 @@ namespace WebApplication1.Controllers
             }
 
             if (errors.Errors.Count() > 0)
+            {
                 return Json(new { status = "fail", errors.Errors });
+            }
 
-            Event dbModel = db.Event.Find(eventId);
+            EventInfo eventInfo = new EventInfo()
+            {
+                Id = eventId,
+                AllowSubscription = eventModel.AllowSubscription,
+                ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null,
+                OrganizerName = (eventModel.ShowAuthor) ? null : eventModel.OrganizerName,
+                RoomId = Int32.Parse(eventModel.RoomId),
+                Description = eventModel.Description,
+                Title = eventModel.Title,
+                DateStart = eventModel.Start,
+                DateEnd = eventModel.End,
+                IsPublic = eventModel.IsPublic
+            };
 
-            dbModel.AllowSubscription = eventModel.AllowSubscription;
-            dbModel.ApplicationUserID = (eventModel.ShowAuthor) ? User.Identity.GetUserId() : null;
-            dbModel.OrganizerName = (eventModel.ShowAuthor) ? null : eventModel.OrganizerName;
-            dbModel.ClassroomId = Int32.Parse(eventModel.RoomId);
-            dbModel.Description = eventModel.Description;
-            dbModel.Title = eventModel.Title;
-            dbModel.DateStart = eventModel.Start;
-            dbModel.DateEnd = eventModel.End;
-            dbModel.IsPublic = eventModel.IsPublic;
-
-            db.SaveChanges();
+            _businessLogicFactory.EventManager.UpdateEvent(eventInfo);
 
             return Json(new { status = "success" });
         }
@@ -329,12 +340,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<JsonResult> CancelEvent(int Id)
         {
-            var eventToDelete = db.Event.Find(Id);
-            
+            var eventToDelete = _businessLogicFactory.EventManager.GetEventInfo(Id);
+
 
             if (eventToDelete == null)
             {
-                return Json(new { result = "No such event exists in the database"}, JsonRequestBehavior.DenyGet);
+                return Json(new { result = "No such event exists in the database" }, JsonRequestBehavior.DenyGet);
             }
             else
             {
@@ -343,10 +354,14 @@ namespace WebApplication1.Controllers
                 string userId = User.Identity.GetUserId();
 
                 if (isAdmin || eventToDelete.ApplicationUserID == userId)
+                {
                     isAuthorized = true;
+                }
 
                 if (!isAuthorized)
+                {
                     return Json(new { result = "Request for deletion is not authorized" }, JsonRequestBehavior.DenyGet);
+                }
 
                 var foreignVManager = _businessLogicFactory.VisitorsManager;
                 var emails = foreignVManager.EmailsOfEventVisitors(Id);
@@ -366,9 +381,7 @@ namespace WebApplication1.Controllers
                 }
 
 
-                // isAuthorized 
-                db.Event.Remove(eventToDelete);
-                db.SaveChanges();
+                _businessLogicFactory.EventManager.DeleteEvent(eventToDelete.Id);
                 return Json(new { result = "Success" }, JsonRequestBehavior.DenyGet);
             }
         }
@@ -377,44 +390,19 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public JsonResult GetEventDataForDay(DateTime daySelected)
         {
-            var db = new ApplicationDbContext();
-            var eventsData = db.Event.Where(e => e.DateStart.Day == daySelected.Day)
-                .Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title, e.IsPublic});
-            var roomData = eventsData.Select(e => new { e.ClassroomId, e.classRoomTitle } ).Distinct();
-            return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
+            var eventsData = _businessLogicFactory.EventManager.GetEventTableItems(daySelected);
+            var roomData = eventsData.Select(e => new { e.ClassroomId, e.classRoomTitle }).Distinct();
+            return Json(new { roomData, eventsData }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetRoomTableState(DateTime timeNow)
         {
-            ApplicationDbContext db = new ApplicationDbContext();;
-            DbSet<ClassRoom> classRooms = db.ClassRoom;
-
             var roomsAvailability = new List<RoomAvailabilityModel>();
 
-            foreach (var room in classRooms.ToList())
+            foreach (var room in _businessLogicFactory.RoomManager.GetOpenedRoomsStatus(timeNow))
             {
-                string roomStatus;
-
-                if (!room.IsBookable)
-                    roomStatus = "disabled";
-                else
-                {
-                    var roomEvents = room.Event.Where(e => e.ClassroomId == room.Id);
-
-                    bool isBooked = false;
-
-                    foreach (var roomEvent in roomEvents)
-                        if (roomEvent.DateStart < timeNow && timeNow < roomEvent.DateEnd)
-                        {
-                            isBooked = true;
-                            break;
-                        }
-
-                    roomStatus = isBooked ? "booked" : "available";
-                }
-
-                roomsAvailability.Add(new RoomAvailabilityModel { RoomId = room.Id, Status = roomStatus, RoomTitle = room.Title});
+                roomsAvailability.Add(new RoomAvailabilityModel { RoomId = room.Id, Status = room.roomStatus , RoomTitle = room.Title });
             }
 
             return Json(new { roomsAvailability }, JsonRequestBehavior.AllowGet);
@@ -425,8 +413,7 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public JsonResult GetEquipmentDataForRoom(int roomId)
         {
-            ManagementServices.Implementations.EquipmentManagement equipmentManager = new ManagementServices.Implementations.EquipmentManagement();
-            var equipmentData = equipmentManager.GetEquipmentByRoomId(roomId);
+            var equipmentData = _businessLogicFactory.EquipmentManagment.GetEquipmentByRoomId(roomId);
             return Json(equipmentData, JsonRequestBehavior.AllowGet);
         }
 

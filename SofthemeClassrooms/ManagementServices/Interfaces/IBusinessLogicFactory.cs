@@ -13,5 +13,6 @@ namespace ManagementServices.Interfaces
         IFeedbackSender FeedbackSender { get; }
         IEventVisitorActions VisitorsManager { get; }
         IRoomManagment RoomManager { get; }
+        IEquipmentManagment EquipmentManagment { get; }
     }
 }

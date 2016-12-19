@@ -48,5 +48,13 @@ namespace ManagementServices.Implementations
                 return new RoomManagement();
             }
         }
+
+        public IEquipmentManagment EquipmentManagment
+        {
+            get
+            {
+                return new EquipmentManagement();
+            }
+        }
     }
 }

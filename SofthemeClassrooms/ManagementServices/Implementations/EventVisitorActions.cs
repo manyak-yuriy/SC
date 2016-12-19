@@ -53,5 +53,41 @@ namespace ManagementServices.Implementations
                 .Select(x => x.Email);
             }
         }
+
+        public int CountVisitorsOfEvent(long eventID)
+        {
+            lock (_locker)
+            {
+                return db.ForeignVisitors
+                    .GetAll()
+                    .Where(v => v.EventId == eventID)
+                    .Count();
+            }
+        }
+
+        public bool SubscribeForEvent(string email, long eventId)
+        {
+            lock (_locker)
+            {
+                var e = db.Events.Get(eventId);
+
+                if (e == null)
+                {
+                    throw new NullReferenceException("No event with a given id exists");
+                }
+
+                if (!e.AllowSubscription ?? false)
+                {
+                    return false;
+                }
+
+                db.ForeignVisitors.Insert(new ForeignVisitor()
+                {
+                    Event = e,
+                    Email = email
+                });  
+            }
+            return true;
+        }
     }
 }

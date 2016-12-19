@@ -44,7 +44,8 @@ namespace DataAccessLayer.Repositories
 
         public void Insert(ForeignVisitor item)
         {
-            throw new NotImplementedException();
+            dbContext.ForeignVisitor.Add(item);
+            dbContext.SaveChanges();
         }
 
         public void Update(ForeignVisitor item)

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using ManagementServices.Models;
 using DataAccessLayer;
+using ManagementServices.Interfaces;
 
 namespace ManagementServices.Implementations
 {
-    public class EquipmentManagement
+    public class EquipmentManagement : IEquipmentManagment
     {
 
         private int GetEquipmentQuantityByTitle(IEnumerable<ClassRoomProperty> roomProperties, string equipmentTitle)

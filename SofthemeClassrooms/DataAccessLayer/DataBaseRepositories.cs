@@ -82,7 +82,7 @@ namespace DataAccessLayer
             }
         }
 
-        public IRepository<Event, int> Events
+        public IRepository<Event, long> Events
         {
             get
             {

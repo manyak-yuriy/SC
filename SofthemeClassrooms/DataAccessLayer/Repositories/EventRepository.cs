@@ -9,8 +9,8 @@ using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.Repositories
 {
-  
-    public class EventRepository : IRepository<Event, int>
+
+    public class EventRepository : IRepository<Event, long>
     {
         private ApplicationDbContext dbContext;
 
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repositories
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             Event _event = dbContext.Event.Find(id);
             if (_event != null)
@@ -35,7 +35,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public Event Get(int Id)
+        public Event Get(long Id)
         {
             return dbContext.Event.Find(Id);
         }
@@ -47,16 +47,14 @@ namespace DataAccessLayer.Repositories
 
         public void Insert(Event item)
         {
-            throw new NotImplementedException();
+            dbContext.Event.Add(item);
+            dbContext.SaveChanges();
         }
 
         public void Update(Event item)
         {
-            var e = dbContext.Event.Find(item);
-            if (e != null)
-            {
-                dbContext.Entry(item).State = EntityState.Modified;
-            }
+            dbContext.Entry(item).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
     }
 }

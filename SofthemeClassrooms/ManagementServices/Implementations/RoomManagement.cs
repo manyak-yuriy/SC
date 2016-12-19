@@ -56,5 +56,59 @@ namespace ManagementServices.Implementations
             };
             return info;
         }
+
+        public IEnumerable<RoomInfo> GetOpenedRooms()
+        {
+            lock (_locker)
+            {
+                return db.ClassRooms
+                    .GetAll()
+                    .Where(r => r.IsBookable)
+                    .Select(room =>  new RoomInfo()
+                    {
+                        Title = room.Title,
+                        Capacity = room.Capacity,
+                        IsBookable = room.IsBookable,
+                        Id = room.Id
+                    });
+            }
+        }
+
+        public IEnumerable<RoomStatus> GetOpenedRoomsStatus(DateTime now)
+        {
+            lock (_locker)
+            {
+                var openedRooms = db.ClassRooms.GetAll();
+
+                List<RoomStatus> roomInfos = new List<RoomStatus>();
+                foreach (var room in openedRooms.ToList())
+                {
+                    var roomInfo = new RoomStatus()
+                    {
+                        Id = room.Id,
+                        Title = room.Title
+                    };
+                    if (!room.IsBookable)
+                    {
+                        roomInfo.roomStatus = "disabled";
+                    }
+                    else if (db.Events
+                        .GetAll()
+                        .Where(e => e.DateStart <= now && e.DateEnd >= now
+                        && e.ClassroomId == room.Id)
+                        .Count() > 0)
+                    {
+                        roomInfo.roomStatus = "booked";
+                    }
+                    else
+                    {
+                        roomInfo.roomStatus = "available";
+                    }
+                    roomInfos.Add(roomInfo);
+                }
+
+                return roomInfos;
+            }
+        }
     }
 }
