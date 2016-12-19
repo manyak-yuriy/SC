@@ -1,5 +1,5 @@
 ﻿
-<link href="~/Content/Event/_DisplayEventPartial.css" rel="stylesheet" />
+<link href="~/Content/Event/_EditEventPartial.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
 
 
@@ -24,100 +24,96 @@
     var culture = new System.Globalization.CultureInfo("ru-RU");
 }
 
-    <div class="event-display-popup">
+<div class="event-display-popup">
 
-        <div class="main-info">
-            <h3>@Model.Title</h3>
+    <div class="main-info">
+        <h3>@Model.Title</h3>
 
-            <div class="organizer-info">
-                <i class="fa fa-user" aria-hclassden="true"></i>
-                <span>@Model.OrganizerName</span>
-            </div>
-
-            <p class="model-descr">
-                @Model.Description
-            </p>
-
-            <div class="subscr-info-line">
-
-                @if (Model.AllowSubscription && Model.VisitorCount > 0)
-            {
-                    <div class="visitors-info">
-                        <span>Планируют принять участие </span>
-                        <span class="visitors-count">@Model.VisitorCount</span> человек.
-                    </div>
-                }
-
-                @if (Model.AllowSubscription)
-            {
-                    <div class="new-visitor-block">
-                        <span>Присоединиться</span>
-
-                        <input type="text" class="add-visitor-email" placeholder="Укажите e-mail, чтобы присоединиться" />
-
-                        <i class="fa fa-plus fa-2x" aria-hclassden="true"></i>
-                    </div>
-                }
-            </div>
+        <div class="organizer-info">
+            <i class="fa fa-user" aria-hclassden="true"></i>
+            <span>@Model.OrganizerName</span>
         </div>
 
-        <div class="right-side-panel">
-            <div class="event-display-header">
-                <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
-                <span>@Model.DateStart.ToString("dd.M.yy", System.Globalization.CultureInfo.InvariantCulture)</span>
-                <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
-                <span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
-            </div>
+        <p class="model-descr">
+            @Model.Description
+        </p>
 
-            <div class="event-display-links">
-                <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
-                <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
-                <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
-            </div>
+        <div class="subscr-info-line">
 
-            <div class="header-controls">
-                @if (Model.CanEdit)
+            @if (Model.AllowSubscription && Model.VisitorCount > 0)
             {
-                    <input type="button" class="change-button" value="Изменить">
-                    <input type="button" class="cancel-button" value="Отменить">
-                }
-            </div>
+                <div class="visitors-info">
+                    <span>Планируют принять участие </span>
+                    <span class="visitors-count">@Model.VisitorCount</span> человек.
+                </div>
+            }
 
-            <div class="val-errors">
-                Error
-            </div>
+            @if (Model.AllowSubscription)
+            {
+                <div class="new-visitor-block">
+                    <span>Присоединиться</span>
+
+                    <input type="text" class="add-visitor-email" placeholder="Укажите e-mail, чтобы присоединиться" />
+
+                    <i class="fa fa-plus fa-2x" aria-hclassden="true"></i>
+                </div>
+            }
         </div>
-
     </div>
+
+    <div class="right-side-panel">
+        <div class="event-display-header">
+            <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+            <span>@Model.DateStart.ToString("dd.M.yy", System.Globalization.CultureInfo.InvariantCulture)</span>
+            <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+            <span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
+        </div>
+
+        <div class="event-display-links">
+            <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
+            <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
+            <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
+        </div>
+
+        <div class="header-controls">
+            @if (Model.CanEdit)
+            {
+                <input type="button" class="change-button" value="Изменить">
+                <input type="button" class="cancel-button" value="Отменить">
+            }
+        </div>
+
+        <div class="val-errors">
+            Error
+        </div>
+    </div>
+
+</div>
 
 <script src="~/Scripts/Overlays/DisplayEventPartialView.js"></script>
 
 
 <script>
 
-    $('.header-controls .cancel-button').click(function () {
-        cancelEvent();
-    });
-
     $('.header-controls .change-button').click(function () {
-        $('#event-data-container').css('display', "none");
-
         var eventId = $('.event-id').val();
         $.ajax(
             {
-                url: '@Url.Action("GetEventEditPartial", "Event")',
+                url: '@Url.Action("GetEditEventPartial", "Event")',
                 type: "GET",
                 context: this,
-                data: { eventId: eventId },
+                data: { Id: eventId },
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
-                    $('#event-edit-container').empty();
-                    $('#event-edit-container').append(data);
+                    $('#event-data-container').empty();
+                    $('#event-data-container').append(data);
                 }
             });
     });
 
-
+    $('.header-controls .cancel-button').click(function () {
+        cancelEvent();
+    });
 
     function cancelEvent() {
         var eventId = $('.event-id').val();
@@ -205,4 +201,5 @@
     });
 
 </script>
+
 

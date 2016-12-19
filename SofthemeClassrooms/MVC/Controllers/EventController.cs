@@ -72,7 +72,57 @@ namespace WebApplication1.Controllers
             return PartialView("_DisplayEventPartial", model);
         }
 
-        
+        [HttpGet]
+        public PartialViewResult GetEventEditPartial(int eventId)
+        {
+            var db = new ApplicationDbContext();
+
+            Event eventEntity = db.Event.Find(eventId);
+
+            if (eventEntity == null)
+                throw new NullReferenceException("Event with specified id does not exist");
+
+            EditEventPartialViewModel viewModel;
+            viewModel = new EditEventPartialViewModel();
+
+            viewModel.AllowSubscription = (bool)eventEntity.AllowSubscription;
+            viewModel.Description = eventEntity.Description;
+            viewModel.End = eventEntity.DateEnd;
+            viewModel.Start = eventEntity.DateStart;
+            viewModel.Title = eventEntity.Title;
+            viewModel.IsPublic = eventEntity.IsPublic;
+            viewModel.OrganizerName = eventEntity.OrganizerName ?? eventEntity.Organizer?.UserName;
+
+            viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
+
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            IEnumerable<ClassRoom> availRooms = db.ClassRoom.Where(r => r.IsBookable == true);
+
+            int roomId = eventEntity.ClassroomId;
+
+            foreach (var room in availRooms)
+            {
+                bool sel = room.Id == roomId;
+
+                items.Add(new SelectListItem
+                {
+                    Text = room.Title,
+                    Value = room.Id.ToString(),
+                    Selected = sel
+                }
+                );
+            }
+            ViewBag.RoomIdOptions = items;
+            // Pass id this way - will be replaced later
+            ViewBag.eventId = eventId;
+            ViewBag.CallBackAction = "EditEvent";
+            ViewBag.IsNew = false;
+
+            return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
+        }
+
+
         [HttpGet]
         public ActionResult GetEventSubscribers(int eventId)
         {
