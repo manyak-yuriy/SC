@@ -29,7 +29,7 @@
         <div>
             @if (User.IsInRole("admin"))
             {
-                <div class="slideThree">
+                <div id="switcher" class="slideThree">
                     @if (Model.Is_Admin)
                     {
                         <input id="slideThree" type="checkbox" name="Is_Admin" checked />

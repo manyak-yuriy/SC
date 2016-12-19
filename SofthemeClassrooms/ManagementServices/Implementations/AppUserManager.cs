@@ -32,7 +32,7 @@ namespace ManagementServices.Implementations
                     return db.Users.GetAll().Count();
                 }
 
-                return db.Users.GetAll()
+                return db.Users.GetAll().ToList()
                     .Where(u => u.Claims
                                 .Where(c => ClaimTypes.Name == c.ClaimValue)
                                 .FirstOrDefault().ClaimValue.Contains(name))
@@ -50,16 +50,16 @@ namespace ManagementServices.Implementations
             {
                 user = db.Users.GetAll()
                .Where(u => u.UserName == userName)
-               .FirstOrDefault();
+               .First();
 
                 adminId = db.Roles.
                     Where(c => c.Name == "admin").
-                    FirstOrDefault()
+                    First()
                     .Id;
 
                 role = user.Roles.
                     Where(r => r.RoleId == adminId)
-                    .FirstOrDefault();
+                    .First();
             }
 
             UserInfo uInfo = new UserInfo
@@ -68,7 +68,7 @@ namespace ManagementServices.Implementations
                 UserId = user.Id,
                 FullName = user.Claims
                     .Where(c => c.ClaimType == ClaimTypes.Name)
-                    .FirstOrDefault().ClaimValue,
+                    .First().ClaimValue,
 
                 NumberOfEvents = GetNumberUserEvents(user.Id),
                 IsAdmin = role != null
@@ -85,10 +85,10 @@ namespace ManagementServices.Implementations
 
                 if (searchPattern != null)
                 {
-                    users = db.Users.GetAll()
+                    users = db.Users.GetAll().ToList()
                         .Where(u => u.Claims
-                                    .Where(c => ClaimTypes.Name == c.ClaimValue)
-                                    .FirstOrDefault().ClaimValue == searchPattern);
+                                    .Where(c => ClaimTypes.Name == c.ClaimType)
+                                    .FirstOrDefault().ClaimValue.Contains(searchPattern));
                 }
                 else
                 {
@@ -101,7 +101,7 @@ namespace ManagementServices.Implementations
 
                 var adminId = db.Roles.
                         Where(c => c.Name == "admin").
-                        FirstOrDefault()
+                        First()
                         .Id;
 
                 var usersInfo =
@@ -110,7 +110,7 @@ namespace ManagementServices.Implementations
                  {
                      FullName = u.Claims
                          .Where(c => ClaimTypes.Name == c.ClaimType)
-                         .FirstOrDefault().ClaimValue,
+                         .First().ClaimValue,
                      Email = u.Email,
                      UserId = u.Id,
                      NumberOfEvents = GetNumberUserEvents(u.Id),

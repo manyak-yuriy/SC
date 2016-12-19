@@ -13,7 +13,9 @@
 {
     <div>
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+        <div class="delete-bullets">
+            @Html.ValidationSummary(true)
+        </div>
         <div>
             @Html.ValidationMessageFor(model => model.Email)
             @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
