@@ -1,6 +1,5 @@
 ﻿.event-display-popup
 {
-    border: 1px solid #ff6464;
     font-family: monospace;
 
     font-size: 90%;
@@ -37,6 +36,11 @@
     z-index: 1001;
 }
 
+.event-display-header i
+{
+    zoom: 130%;
+}
+
 .header-controls .change-button {
     background-color: #C8CEDA;
 }
@@ -47,7 +51,7 @@
 
 .change-button:hover, .cancel-button:hover
 {
-    background-color: #92979B;
+    background-color: lightcoral;
 }
 
 .change-button:active, .cancel-button:active
@@ -76,7 +80,7 @@
 
     position: relative;
 
-    left: 30%;
+    left: 15%;
 }
 
 .event-display-links i
@@ -145,8 +149,6 @@ h3
     float: left;
     display: inline;
 
-    border: 1px solid red;
-
     margin-left: 30px;
 
     margin: 10px;
@@ -157,8 +159,6 @@ h3
     width: 25%;
     float: left;
     display: inline-block;
-
-    border: 1px solid red;
 
     margin: 10px;
     padding: 5px;
@@ -186,7 +186,7 @@ h3
     opacity: 0.5;
     line-height: 10px;
 
-    width: 250px;
+    width: 220px;
     height: 23px;
 
     border: 1px solid grey;
@@ -220,10 +220,16 @@ h3
     display: inline-block;
 
     padding: 12px;
+    padding-bottom: 20px;
 }
 
 .event-display-header .fa
 {
     position: relative;
     top: 5px;
+}
+
+.model-descr
+{
+    width: 700px;
 }
