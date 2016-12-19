@@ -44,6 +44,8 @@ namespace WebApplication1.Controllers
                 throw new AccessViolationException("Not enough rights to view the private event");
 
                 DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+
+            model.Id = eventEntity.Id;
             model.CanEdit = isAuthorized;
             model.AllowSubscription = (bool) eventEntity.AllowSubscription;
             model.DateStart = eventEntity.DateStart;

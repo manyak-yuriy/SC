@@ -84,7 +84,7 @@
         <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
         <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
         <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
-        <i class="fa fa-link fa-2x" aria-hclassden="true"></i>
+        <a href='@Url.Action("Index", "Event", new { eventId = Model.Id})'><i class="fa fa-link fa-2x" aria-hclassden="true"></i></a>
     </div>
 
 </div>
@@ -93,12 +93,16 @@
 
 
 <script>
+    $(() => {
+        
+    })
+    
 
     $('.new-visitor-block .fa-plus').click(function () {
 
         $('.val-errors').empty();
 
-        var eventId = $(this).parents('.event-display-popup').attr('id');
+        var eventId = $(this).parents('.event-display-popup').attr('id')
 
         var eMail = $('.new-visitor-block input').val();
         //alert(eMail);
