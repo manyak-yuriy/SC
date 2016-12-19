@@ -181,11 +181,18 @@
 
             var id = $(this).data('id');
 
+            // show path info
+            $('.path-info#' + $(this).attr('id')).css('visibility', 'visible');
+
+
             var prevRoomId = $('.new-room-id').val();
 
             $prevRoomElem = $('.room-container').filter(function () {
                 return $(this).data("id") == prevRoomId
             });
+
+            // hide prev path info
+            $('.path-info#' + $prevRoomElem.attr('id')).css('visibility', 'hidden');
 
             $('.new-room-id').val(id);
 
