@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
             var e = db.Event.Find(eventId);
 
             if (e == null)
-                throw new NullReferenceException("There's no event with specified id!");
+                return RedirectToAction("ShowSchedule", "Schedule");
 
             var eventData = new EventControlsViewModel();
 
