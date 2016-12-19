@@ -354,6 +354,11 @@ namespace WebApplication1.Controllers
                 if (!isAuthorized)
                     return Json(new { result = "Request for deletion is not authorized" }, JsonRequestBehavior.DenyGet);
 
+                var subscribers = db.ForeignVisitor.Where(fv => fv.EventId == Id).ToList();
+
+                foreach (var subscriber in subscribers)
+                    db.ForeignVisitor.Remove(subscriber);
+
                 // isAuthorized 
                 db.Event.Remove(eventToDelete);
                 db.SaveChanges();
