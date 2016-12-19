@@ -1109,7 +1109,7 @@
     <Content Include="Views\Error\ErrorOccurred.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\_DisplayEventPartial.cshtml" />
-    <Content Include="Views\Event\_DisplayEventRoomTablePartial.cshtml" />
+    <Content Include="Views\Event\_DisplayEventRoomTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
