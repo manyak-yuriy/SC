@@ -162,7 +162,6 @@
                     if (roomId == $('.room-id').val())
                     {
                         cls = 'room-booked';
-                        $('#prop-pane-edit .title').val(roomTitle);
                     }
                         
 
@@ -174,7 +173,27 @@
 
 
     $(() => {
-        
+
+        $('.room-container ').click(function () {
+
+            if (!$(this).hasClass('room-available'))
+                return;
+
+            var id = $(this).data('id');
+
+            var prevRoomId = $('.new-room-id').val();
+
+            $prevRoomElem = $('.room-container').filter(function () {
+                return $(this).data("id") == prevRoomId
+            });
+
+            $('.new-room-id').val(id);
+
+            $prevRoomElem.removeClass('room-booked').addClass('room-available');
+
+            var cls = 'room-booked';
+            $(this).addClass(cls);
+        });
 
         /*
         $('.room-container ').mouseout(function () {

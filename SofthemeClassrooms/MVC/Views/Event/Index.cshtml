@@ -42,9 +42,11 @@
 
 <input type="hidden" class="event-id" value="@Model.EventId" />
 <input type="hidden" class="room-id" value="@Model.RoomId" />
+<input type="hidden" class="new-room-id" value="@Model.RoomId" />
 
 <div id="event-data-container"> </div>
 <div id="sub-data-container"> </div>
+
 <div id="room-data-container">
     @Html.Partial("_DisplayEventRoomTable"); 
 </div>
