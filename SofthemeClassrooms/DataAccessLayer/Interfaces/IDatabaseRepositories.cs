@@ -18,5 +18,6 @@ namespace DataAccessLayer.Interfaces
         IRepository<ForeignVisitor, int> ForeignVisitors { get; }
         IRepository<ApplicationUser, string> Users { get; }
         IQueryable<IdentityRole> Roles { get; }
+        void SaveDBChanges();
     }
 }

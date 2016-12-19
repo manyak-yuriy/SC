@@ -151,6 +151,11 @@ namespace DataAccessLayer
             }
         }
 
+        public void SaveDBChanges()
+        {
+            _context.SaveChanges();
+        }
+
 
         public IRepository<ApplicationUser, string> Users
         {

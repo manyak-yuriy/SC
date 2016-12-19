@@ -350,7 +350,7 @@ namespace WebApplication1.Controllers
 
                 var foreignVManager = _businessLogicFactory.VisitorsManager;
                 var emails = foreignVManager.EmailsOfEventVisitors(Id);
-                foreignVManager.DeleteVisiotrOfCanceledEvent(Id);
+                foreignVManager.DeleteVisiotorsOfCanceledEvent(Id);
 
                 EmailService emailService = new EmailService();
                 foreach (var email in emails)

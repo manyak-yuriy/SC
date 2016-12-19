@@ -21,7 +21,8 @@ namespace DataAccessLayer.Repositories
 
         public void Delete(IEnumerable<Event> items)
         {
-            throw new NotImplementedException();
+            dbContext.Event.RemoveRange(items);
+            dbContext.SaveChanges();
         }
 
         public void Delete(int id)
