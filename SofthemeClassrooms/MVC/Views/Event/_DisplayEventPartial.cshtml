@@ -24,74 +24,71 @@
     var culture = new System.Globalization.CultureInfo("ru-RU");
 }
 
-<div class="event-display-popup">
-    <div class="main-info">
-        <h3>@Model.Title</h3>
+    <div class="event-display-popup">
 
-        <div class="organizer-info">
-            <i class="fa fa-user" aria-hclassden="true"></i>
-            <span>@Model.OrganizerName</span>
-        </div>
+        <div class="main-info">
+            <h3>@Model.Title</h3>
 
-        <p>
-            @Model.Description
-        </p>
-
-        <div class="subscr-info-line">
-            <div class="visitors-info">
-                <span>Планируют принять участие </span>
-                <span>@Model.VisitorCount</span> человек.
+            <div class="organizer-info">
+                <i class="fa fa-user" aria-hclassden="true"></i>
+                <span>@Model.OrganizerName</span>
             </div>
 
-            @if (Model.AllowSubscription)
+            <p>
+                @Model.Description
+            </p>
+
+            <div class="subscr-info-line">
+
+                @if (Model.AllowSubscription && Model.VisitorCount > 0)
             {
-                <div class="new-visitor-block">
-                    <span>Присоединиться</span>
+                    <div class="visitors-info">
+                        <span>Планируют принять участие </span>
+                        <span>@Model.VisitorCount</span> человек.
+                    </div>
+                }
 
-                    <input type="text" class="add-visitor-email" placeholder="Укажите e-mail, чтобы присоединиться" />
-
-                    <i class="fa fa-plus fa-2x" aria-hclassden="true"></i>
-                </div>
-            }
-        </div>
-    </div>
-
-
-
-
-    <div class="right-side-panel">
-        <div class="event-display-header">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <span>@Model.DateStart.ToString("dd.M.yy", System.Globalization.CultureInfo.InvariantCulture)</span>
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
-        </div>
-
-        <div class="event-display-links">
-            <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
-            <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
-            <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
-        </div>
-
-        <div class="header-controls">
-            @if (Model.CanEdit)
+                @if (Model.AllowSubscription)
             {
-                <input type="button" class="change-button" value="Изменить">
-                <input type="button" class="cancel-button" value="Отменить">
-            }
+                    <div class="new-visitor-block">
+                        <span>Присоединиться</span>
+
+                        <input type="text" class="add-visitor-email" placeholder="Укажите e-mail, чтобы присоединиться" />
+
+                        <i class="fa fa-plus fa-2x" aria-hclassden="true"></i>
+                    </div>
+                }
+            </div>
         </div>
 
-        <div class="val-errors">
-            Error
+        <div class="right-side-panel">
+            <div class="event-display-header">
+                <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                <span>@Model.DateStart.ToString("dd.M.yy", System.Globalization.CultureInfo.InvariantCulture)</span>
+                <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+                <span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
+            </div>
+
+            <div class="event-display-links">
+                <i class="fa fa-calendar-plus-o" aria-hclassden="true"></i>
+                <i class="fa fa-envelope-o" aria-hclassden="true"></i>
+                <i class="fa fa-print" aria-hclassden="true"></i>
+            </div>
+
+            <div class="header-controls">
+                @if (Model.CanEdit)
+            {
+                    <input type="button" class="change-button" value="Изменить">
+                    <input type="button" class="cancel-button" value="Отменить">
+                }
+            </div>
+
+            <div class="val-errors">
+                Error
+            </div>
         </div>
+
     </div>
-    
-
-
-    
-
-
-</div>
 
 <script src="~/Scripts/Overlays/DisplayEventPartialView.js"></script>
 

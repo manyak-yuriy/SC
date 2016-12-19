@@ -3,9 +3,9 @@
     border: 1px solid #ff6464;
     font-family: monospace;
 
-    font-size: 100%;
+    font-size: 90%;
 
-    width: 90%;
+    width: 98%;
 
     z-index: 200;
 
@@ -24,29 +24,30 @@
     opacity: 1;
 }
 
-.event-display-header
-{
-    background-color: #F95752;
-    color: white;
-    padding: 7px;
-    border-radius: 2%;
-}
-
 .header-controls .change-button, .cancel-button {
-    background-color: rgba(80, 80, 90, 0.5);
-    color: white;
-    border-radius: 20%;
+    position: relative;
+    display: inline;
+    margin: 10px;
     border: none;
-    margin-right: 3px;
+    outline: none;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 70px;
+    width: 90px;
+    height: 23px;
+    z-index: 1001;
 }
 
-.change-button {
-    background-color: rgba(230, 30, 30, 0.2);
+.header-controls .change-button {
+    background-color: #C8CEDA;
+}
+
+.header-controls .cancel-button {
+    background-color: #92979B;
 }
 
 .change-button:hover, .cancel-button:hover
 {
-    background-color: gray;
+    background-color: #92979B;
 }
 
 .change-button:active, .cancel-button:active
@@ -57,8 +58,6 @@
 .header-controls
 {
     display: inline-block !important;
-    margin-left: 30px;
-    float: right;
 
     position: relative !important;
     top: 0px;
@@ -69,17 +68,21 @@
 
 .event-display-links
 {
-    margin: 0 auto; 
-    width: 60%;
+    width: 100%;
+
+    display: inline-block;
+
+    margin: 10px;
+
+    position: relative;
+
+    left: 30%;
 }
 
 .event-display-links i
 {
     padding: 5px;
 }
-
-
-
 
 i
 {
@@ -151,13 +154,14 @@ h3
 
 .right-side-panel
 {
-    width: 20%;
+    width: 25%;
     float: left;
     display: inline-block;
 
     border: 1px solid red;
 
     margin: 10px;
+    padding: 5px;
 }
 
 
@@ -188,6 +192,8 @@ h3
     border: 1px solid grey;
 
     font-size: 80%;
+
+    padding: 3px;
 }
 
 .fa-plus
@@ -203,4 +209,21 @@ h3
 {
     display: inline-block;
     vertical-align: top;
+}
+
+.event-display-header
+{
+    color: white;
+    background-color: red;
+    border-radius: 15px;
+
+    display: inline-block;
+
+    padding: 12px;
+}
+
+.event-display-header .fa
+{
+    position: relative;
+    top: 5px;
 }
