@@ -159,6 +159,11 @@ namespace WebApplication1.Controllers
             if (e == null)
                 throw new NullReferenceException("No event with a given id exists");
 
+            var sameEmailSubscribers = db.ForeignVisitor.Where(fv => fv.Email == subModel.Email).FirstOrDefault();
+
+            if (sameEmailSubscribers != null)
+                errors.Errors.Add("Такой e-mail уже существует");
+
             bool canSubscribe = (bool)e.AllowSubscription;
             if (!canSubscribe)
             {
