@@ -95,6 +95,50 @@
 
 <script>
 
+    $('.header-controls .cancel-button').click(function () {
+        cancelEvent();
+    });
+
+    function cancelEvent() {
+        var eventId = $('.event-id').val();
+        $.ajax({
+            url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
+            type: "GET",
+            context: this,
+            data: { Id: eventId },
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus, jqXHR) {
+                $('body').prepend(data);
+                $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
+
+                $('#' + eventId + ' .discart-cancellation-button').click(function () {
+                    $(this).parents('.event-cancel-popup').remove();
+                });
+
+                $('#' + eventId + ' .confirm-cancellation-button').click(function () {
+                    // cancel current event
+                    var eventId = $(this).parents('.event-cancel-popup').attr('id');
+
+                    $.ajax({
+                        url: '@Url.Action("CancelEvent", "Schedule")',
+                        type: "POST",
+                        context: this,
+                        data: "{ 'Id': '" + eventId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data, textStatus, jqXHR) {
+                            //alert(JSON.stringify(data));
+
+                            var cancelPopup = $(this).parents('.event-cancel-popup');
+
+                            cancelPopup.remove();
+                            $('.event-display-popup#' + eventId).remove();
+                        }
+                    });
+                });
+            }
+        });
+    }
+
     $('.new-visitor-block .fa-plus').click(function () {
 
         $('.val-errors').empty();
