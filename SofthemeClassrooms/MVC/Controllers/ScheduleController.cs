@@ -215,7 +215,7 @@ namespace WebApplication1.Controllers
             if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
                 errors.Errors.Add("Событие не может быть короче 20 минут");
 
-            if (eventModel.End.Hour > 21 || (eventModel.End.Hour == 21 && eventModel.End.Minute != 0) || eventModel.Start.Hour < 9)
+            if (eventModel.End.Hour > 20 || (eventModel.End.Hour == 20 && eventModel.End.Minute != 0) || eventModel.Start.Hour < 9)
                 errors.Errors.Add("Событие не может быть за пределами рабочих часов");
 
             if (classRoom == null)
