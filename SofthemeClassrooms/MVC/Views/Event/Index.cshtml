@@ -7,6 +7,10 @@
 
 <input type="hidden" class="event-id" value="@Model" />
 
+<div id="event-data-container"> </div>
+<div id="sub-data-container"> </div>
+<div id="room-data-container"> </div>
+
 <script>
     $(() => {
         var eventId = $('.event-id').val();
@@ -18,7 +22,7 @@
                 data: { Id: eventId },
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
-                    $('.event-id').after(data);
+                    $('#event-data-container').append(data);
                 }
             });
     });

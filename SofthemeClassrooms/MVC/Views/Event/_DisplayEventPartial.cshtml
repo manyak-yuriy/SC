@@ -34,7 +34,7 @@
                 <span>@Model.OrganizerName</span>
             </div>
 
-            <p>
+            <p class="model-descr">
                 @Model.Description
             </p>
 
@@ -44,7 +44,7 @@
             {
                     <div class="visitors-info">
                         <span>Планируют принять участие </span>
-                        <span>@Model.VisitorCount</span> человек.
+                        <span class="visitors-count">@Model.VisitorCount</span> человек.
                     </div>
                 }
 
@@ -70,9 +70,9 @@
             </div>
 
             <div class="event-display-links">
-                <i class="fa fa-calendar-plus-o" aria-hclassden="true"></i>
-                <i class="fa fa-envelope-o" aria-hclassden="true"></i>
-                <i class="fa fa-print" aria-hclassden="true"></i>
+                <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
+                <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
+                <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
             </div>
 
             <div class="header-controls">
@@ -99,7 +99,7 @@
 
         $('.val-errors').empty();
 
-        var eventId = $(this).parents('.event-display-popup').attr('id');
+        var eventId = $('.event-id').val();
 
         var eMail = $('.new-visitor-block input').val();
         //alert(eMail);
@@ -126,7 +126,7 @@
                 if (data.status == "success") {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");
-                    var $visCntElem = $('.visitors-info span');
+                    var $visCntElem = $('.visitors-count');
 
                     //alert($visCntElem.html());
 
