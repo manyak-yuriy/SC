@@ -1,8 +1,29 @@
-﻿
+﻿@model int
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Страница события";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<input type="hidden" class="event-id" value="@Model" />
 
+<script>
+    $(() => {
+        var eventId = $('.event-id').val();
+        $.ajax(
+            {
+                url: '@Url.Action("GetDisplayEventPartial", "Event")',
+                type: "GET",
+                context: this,
+                data: { Id: eventId },
+                contentType: "application/json; charset=utf-8",
+                success: function (data, textStatus, jqXHR) {
+                    $('.event-id').after(data);
+                }
+            });
+    });
+</script>
+
+
+
+@Html.Partial("MapPartialView")
