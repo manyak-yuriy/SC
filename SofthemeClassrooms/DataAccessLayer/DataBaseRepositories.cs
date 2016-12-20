@@ -20,14 +20,23 @@ namespace DataAccessLayer
         private FeedbackRepositroy _feedback;
         private ForeignVisitorRepository _foreignVisitors;
         private UsersRepository _users;
+        private readonly object _locker = new object();
 
         public IRepository<ClassRoomProperty, int> ClassRoomProperties
         {
             get
             {
-                if (_classroomProperties == null)
+                if (_classroomProperties != null)
                 {
-                    _classroomProperties = new ClassRoomPropertyRepository(_context);
+                    return _classroomProperties;
+                }
+
+                lock (_locker)
+                {
+                    if (_classroomProperties == null)
+                    {
+                        _classroomProperties = new ClassRoomPropertyRepository(_context);
+                    }
                 }
                 return _classroomProperties;
             }
@@ -37,9 +46,17 @@ namespace DataAccessLayer
         {
             get
             {
-                if (_classroooms == null)
+                if (_classroooms != null)
                 {
-                    _classroooms = new ClassroomRepository(_context);
+                    return _classroooms;
+                }
+
+                lock (_locker)
+                {
+                    if (_classroooms == null)
+                    {
+                        _classroooms = new ClassroomRepository(_context);
+                    }
                 }
                 return _classroooms;
             }
@@ -49,9 +66,17 @@ namespace DataAccessLayer
         {
             get
             {
-                if (_equipment == null)
+                if (_equipment != null)
                 {
-                    _equipment = new EquipmentRepository(_context);
+                    return _equipment;
+                }
+
+                lock (_locker)
+                {
+                    if (_equipment == null)
+                    {
+                        _equipment = new EquipmentRepository(_context);
+                    }
                 }
                 return _equipment;
             }
@@ -61,9 +86,17 @@ namespace DataAccessLayer
         {
             get
             {
-                if (_events == null)
+                if (_events != null)
                 {
-                    _events = new EventRepository(_context);
+                    return _events;
+                }
+
+                lock (_locker)
+                {
+                    if (_events == null)
+                    {
+                        _events = new EventRepository(_context);
+                    }
                 }
                 return _events;
             }
@@ -73,9 +106,17 @@ namespace DataAccessLayer
         {
             get
             {
-                if (_feedback == null)
+                if (_feedback != null)
                 {
-                    _feedback = new FeedbackRepositroy(_context);
+                    return _feedback;
+                }
+
+                lock (_locker)
+                {
+                    if (_feedback == null)
+                    {
+                        _feedback = new FeedbackRepositroy(_context);
+                    }
                 }
                 return _feedback;
             }
@@ -85,9 +126,17 @@ namespace DataAccessLayer
         {
             get
             {
-                if (_foreignVisitors == null)
+                if (_foreignVisitors != null)
                 {
-                    _foreignVisitors = new ForeignVisitorRepository(_context);
+                    return _foreignVisitors;
+                }
+
+                lock (_locker)
+                {
+                    if (_foreignVisitors == null)
+                    {
+                        _foreignVisitors = new ForeignVisitorRepository(_context);
+                    }
                 }
 
                 return _foreignVisitors;
@@ -102,13 +151,22 @@ namespace DataAccessLayer
             }
         }
 
+
         public IRepository<ApplicationUser, string> Users
         {
             get
             {
-                if(_users == null)
+                if (_users != null)
                 {
-                    _users = new UsersRepository(_context);
+                    return _users;
+                }
+
+                lock (_locker)
+                {
+                    if (_users == null)
+                    {
+                        _users = new UsersRepository(_context);
+                    }
                 }
                 return _users;
             }

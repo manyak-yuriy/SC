@@ -20,7 +20,6 @@ namespace WebApplication1
             var me = "classroommanyakhok@gmail.com";
             var password = "0931426141";
 
-
             MailAddress from = new MailAddress(me);
             MailAddress to = new MailAddress(message.Destination);
             MailMessage m = new MailMessage(from, to);

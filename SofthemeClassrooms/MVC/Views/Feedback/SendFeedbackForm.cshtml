@@ -12,25 +12,25 @@
 {
     <div>
         <div id="name-validation">
-            @*<i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i>*@
-            @Html.RedValidationMessageFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
 
         <div id="lname-validation">
-            @Html.RedValidationMessageFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
         </div>
     </div>
             <div class="fullname">
-                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6", placeholder = "Имя", id="Name" } })
-                @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия", id="Surname" } })
+                @Html.EditorFor(model => model.Name, "", new { htmlAttributes = new { @class = "custom-input col-lg-6", placeholder = "Имя", id="Name", onkeyup= "CheckFeedbackFormForContent()" } })
+                @Html.EditorFor(model => model.LastName, "", new { htmlAttributes = new { @class = "custom-input col-lg-offset-1 col-lg-5", placeholder = "Фамилия", id="Surname", onkeyup = "CheckFeedbackFormForContent()" } })
             </div>
             <div>
-                @Html.RedValidationMessageFor(model => model.Email)
-                @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты", id="Email" } })
+                @Html.ValidationMessageFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, "", new { htmlAttributes = new { @class = "custom-input col-lg-12 col-md-12", placeholder = "Адрес электронной почты", id="Email", onkeyup = "CheckFeedbackFormForContent()" } })
             </div>
             <div>
-                @Html.RedValidationMessageFor(model => model.Message)
-                @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id = "messageText" } })
-                <input class="button" type="submit" value="Отправить" />
+                @Html.ValidationMessageFor(model => model.Message)
+                @Html.EditorFor(model => model.Message, "", new { htmlAttributes = new { @class = "custom-input col-lg-12  col-md-12", id = "messageText", onkeyup = "CheckFeedbackFormForContent()" } })
+                <input id="sendFeedback" class="button" type="submit" value="Отправить" disabled/>
             </div>
 }
+    

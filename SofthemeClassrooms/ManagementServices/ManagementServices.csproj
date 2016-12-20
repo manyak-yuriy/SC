@@ -59,14 +59,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BusinessLogicFactory.cs" />
+
     <Compile Include="Implementations\EquipmentManager.cs" />
     <Compile Include="Implementations\EventManager.cs" />
+
+    <Compile Include="Implementations\EquipmentManagement.cs" />
+    <Compile Include="Implementations\EventActions.cs" />
+    <Compile Include="Implementations\EventVisitorActions.cs" />
+
     <Compile Include="Implementations\FeedbackSender.cs" />
     <Compile Include="Interfaces\IBusinessLogicFactory.cs" />
+    <Compile Include="Interfaces\IEventVisitorActions.cs" />
+    <Compile Include="Models\EventInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Implementations\AppUserManager.cs" />
-    <Compile Include="Interfaces\EventManagement.cs" />
-    <Compile Include="Interfaces\IEventManager.cs" />
+    <Compile Include="Interfaces\IEventActions.cs" />
     <Compile Include="Interfaces\IFeedbackSender.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
     <Compile Include="Models\EquipmentViewModel.cs" />

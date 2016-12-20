@@ -10,6 +10,7 @@ namespace WebApplication1.Models
     {
         [Required]
         [Display(Name = "Email")]
+        [MaxLength(256, ErrorMessage = "Эмейл не должен быть больше чем 256 символов.")]
         public string Email { get; set; }
     }
 }

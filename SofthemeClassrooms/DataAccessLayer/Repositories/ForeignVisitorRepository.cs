@@ -16,6 +16,12 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<ForeignVisitor> items)
+        {
+            dbContext.ForeignVisitor.RemoveRange(items);
+            dbContext.SaveChanges();
+        }
+
         public void Delete(int id)
         {
             var visitor = dbContext.ForeignVisitor.Find(id);
@@ -51,3 +57,4 @@ namespace DataAccessLayer.Repositories
         }
     }
 }
+

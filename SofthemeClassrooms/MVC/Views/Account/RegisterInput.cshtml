@@ -12,7 +12,7 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        @Html.RedValidationMessageFor(model => model.FullName)
+        @Html.ValidationMessageFor(model => model.FullName)
         @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })
     </div>
 

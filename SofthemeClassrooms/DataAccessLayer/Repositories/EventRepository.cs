@@ -19,6 +19,11 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<Event> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int id)
         {
             Event _event = dbContext.Event.Find(id);

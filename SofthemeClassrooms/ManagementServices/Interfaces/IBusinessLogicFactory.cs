@@ -9,7 +9,8 @@ namespace ManagementServices.Interfaces
     public interface IBusinessLogicFactory
     {
         IUserManager UserManager { get; }
-        IEventManager EventManager { get; }
+        IEventActions EventManager { get; }
         IFeedbackSender FeedbackSender { get; }
+        IEventVisitorActions VisitorsManager { get; }
     }
 }

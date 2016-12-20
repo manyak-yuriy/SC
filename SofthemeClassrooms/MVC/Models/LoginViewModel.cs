@@ -10,6 +10,7 @@ namespace WebApplication1.Models
     {
         [Required]
         [EmailAddress]
+        [MaxLength(256, ErrorMessage = "Эмейл не должен быть больше чем 256 символов.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

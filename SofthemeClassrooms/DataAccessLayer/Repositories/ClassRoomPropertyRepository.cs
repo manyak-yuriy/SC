@@ -17,6 +17,11 @@ namespace DataAccessLayer.Repositories
             dbContext = context;
         }
 
+        public void Delete(IEnumerable<ClassRoomProperty> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int id)
         {
             ClassRoomProperty property = dbContext.ClassRoomProperty.Find(id);

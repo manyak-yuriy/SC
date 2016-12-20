@@ -38,11 +38,25 @@
     color: black;
 }
 .usersTableItem {
-    width: 23%;
     display: inline-block;
     margin: 0;
 }
 
+.userNameItem {
+    width: 40%;
+}
+
+.userEmailItem {
+    width: 40%;
+}
+
+.userNumberOfEventsitem {
+    width: 14%;
+}
+
+.deleteUserItem {
+    width: 4%;
+}
 
 .searchForm{
     float: right;
@@ -133,8 +147,15 @@ link-active{
     font-size: 20px;
 }
 
-#pageLinks{
-    margin-left: 50%;
+#page-wrapper {
+    width: 100%;
+    margin-top: 30px;
 }
+
+#page-links {
+    float: right;
+    display: inline-block;
+}
+
 
 

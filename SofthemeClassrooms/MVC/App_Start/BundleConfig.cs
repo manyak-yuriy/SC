@@ -21,11 +21,18 @@ namespace WebApplication1
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/inputFormsValidations.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/inputs.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/Site.css",
+                      "~/Content/font-awesome-4.7.0/css/font-awesome.css",
+                      "~/Content/validationError.css",
+                      "~/Content/loading.css",
+                      "~/Content/userpage.css",
+                      "~/Content/userstable.css"));
         }
     }
 }

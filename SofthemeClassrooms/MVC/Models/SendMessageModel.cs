@@ -15,7 +15,7 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Это обязательное поле для заполнения.")]
         public string LastName { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Эмейл не должно быть больше 100 символов.")]
+        [MaxLength(100, ErrorMessage = "Эмейл не должен быть больше 100 символов.")]
         [Required(ErrorMessage = "Это обязательное поле для заполнения.")]
         [EmailAddress(ErrorMessage ="Введите правильный email.")]
         public string Email { get; set; }

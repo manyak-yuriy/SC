@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace ManagementServices.Interfaces
 {
-    public interface IEventManager
+    public interface IEventVisitorActions
     {
-        int NumberOfPlanedEvents(string userId);
-        void CancelEvent(int id);
-        void MakeEvent();
-        void UpdateEvent();
+        void DeleteVisiotrOfCanceledEvent(long EventId);
+        IEnumerable<string> EmailsOfEventVisitors(long EventVisitors);
     }
 }

@@ -22,9 +22,9 @@
             <div class="searchForm">
                 @using (Html.BeginForm("Users", "UsersManagment", FormMethod.Get))
                 {
-                    <input name='SearcPattern' type='text' value='@Model.SearchPattern' id ='user-search' onkeyup = 'SendChecker()'/>
+                    <input name='SearcPattern' type='text' value='@Model.SearchPattern' id ='user-search' onclick="SearchChecker()" onchange = "SearchChecker()"/>
                     @Html.HiddenFor(m => m.PageInfo.PageNumber)
-                    <button id="searchButton" type="submit" onsubmit="ValidateSearchInput" disabled>
+                    <button id="searchButton" type="submit" disabled>
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 }
@@ -39,11 +39,17 @@
                         <div class="usersTableRow">
                             <a href="@Url.Action("UserPage", "UsersManagment", u)">
 
-                                <div class="usersTableItem">@u.Name</div>
-                                <div class="usersTableItem">@u.Email</div>
-                                <div class="usersTableItem"><i class="fa fa-calendar" aria-hidden="true"></i> @u.NumberOfEvents</div>
+                                <div class="usersTableItem userNameItem">
+                                    @u.Name
+                                    @if (u.Is_Admin)
+                                    {
+                                        <span class="adminLabel">admin</span>
+                                    }
+                                </div>
+                                <div class="usersTableItem userEmailItem">@u.Email</div>
+                                <div class="usersTableItem userNumberOfEventsitem"><i class="fa fa-calendar" aria-hidden="true"></i> @u.NumberOfEvents</div>
                             </a>
-                            <div class="usersTableItem">
+                            <div class="usersTableItem deleteUserItem">
                                 <button class="delete" onclick="DeleteUserPopupShow('@i.ToString()')"><i class="fa fa-times" aria-hidden="true"></i></button>
                             </div>
 
@@ -58,8 +64,10 @@
                 }
             }
         </ul>
-        <div id="pageLinks" class="btn-group">
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
+        <div id="page-wrapper" class="btn-group">
+            <div id="page-links">
+                @Html.PageLinks(Model.PageInfo, x => Url.Action("Users", new { page = x }))
+            </div>
         </div>
     </div>
 </div>

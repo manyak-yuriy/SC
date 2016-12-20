@@ -36,12 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -214,16 +215,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+
     <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Models\Event\EventControlsViewModel.cs" />
+
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UsersManagmentController.cs" />
     <Compile Include="DpResolver\NinjectDependencyResolver.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Filters\ExceptionHandlerAttribute.cs" />
+    <Compile Include="Filters\ExceptionsHandlerAttribute.cs" />
     <Compile Include="Filters\NonAuthorizedAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -446,7 +449,6 @@
     <Content Include="Images\icon-board.png" />
     <Content Include="Images\icon-laptop.png" />
     <Content Include="Images\icon-lock.png" />
-    <Content Include="Content\customswitch.css" />
     <Content Include="Content\inputs.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\RoomsScheme\roomsScheme.css" />
@@ -496,15 +498,20 @@
     <Content Include="Images\Extracted\Einstein\EinsteinDisabled.psd" />
     <Content Include="Images\Extracted\PropPane.psd" />
     <Content Include="Images\Extracted\Tesla\NewTesla.psd" />
+
     <Content Include="fullcalendar-3.1.0\fullcalendar-3.1.0\demos\json\events.json" />
     <Content Include="fullcalendar-3.1.0\fullcalendar-3.1.0\demos\php\get-events.php" />
     <Content Include="fullcalendar-3.1.0\fullcalendar-3.1.0\demos\php\get-timezones.php" />
     <Content Include="fullcalendar-3.1.0\fullcalendar-3.1.0\demos\php\utils.php" />
+
+    <None Include="Properties\PublishProfiles\softhemeclassroommanyakhok - Web Deploy %282%29.pubxml" />
+
     <None Include="Properties\PublishProfiles\softhemeclassroommanyakhok - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\icon-print.png" />
     <Content Include="Images\icon-proect.png" />
     <Content Include="Images\icon-table.png" />
+    <Content Include="Images\info-icon.png" />
     <Content Include="Images\LineDetails\line-details-einstein.png" />
     <Content Include="Images\LineDetails\line-details-empty.png" />
     <Content Include="Images\LineDetails\line-details-english.png" />
@@ -966,6 +973,7 @@
     <Content Include="JQWidget\jqwidgets\styles\jqx.ui-sunny.css" />
     <Content Include="JQWidget\jqwidgets\styles\jqx.web.css" />
     <Content Include="JQWidget\jqwidgets\styles\jqx.windowsphone.css" />
+    <Content Include="Scripts\inputFormsValidations.js" />
     <Content Include="Scripts\MyScripts.js" />
     <Content Include="Images\today-active-bottom.png" />
     <Content Include="Images\today-active-top.png" />
@@ -1104,6 +1112,7 @@
     <Content Include="Views\UsersManagment\DeletePersonPopup.cshtml" />
     <Content Include="Views\Account\RegisterInput.cshtml" />
     <Content Include="Views\Feedback\SendFeedbackForm.cshtml" />
+
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
     <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
@@ -1113,6 +1122,13 @@
     <Content Include="Views\Event\_DisplayEventPartial.cshtml" />
     <Content Include="Views\Event\_DisplayEventRoomTable.cshtml" />
     <Content Include="Views\Event\_EditEventPartial.cshtml" />
+
+    <Content Include="Views\Schedule\RoomTablePartialView.cshtml" />
+    <Content Include="Views\Room\RoomTableForClassroomPartial.cshtml" />
+    <Content Include="Views\Room\CloseRoomPartialView.cshtml" />
+    <Content Include="Views\Account\ResetPasswordPView.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

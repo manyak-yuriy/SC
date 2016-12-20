@@ -1,50 +1,66 @@
-﻿using DataAccessLayer;
+﻿using System;
+using DataAccessLayer;
 using ManagementServices.Interfaces;
 using ManagementServices.Models;
 using System.Collections.Generic;
 using System.IdentityModel.Claims;
 using System.Linq;
 using DataAccessLayer.Interfaces;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ManagementServices.Implementations
 {
     public class AppUsersManager : IUserManager
     {
         private readonly IDatabaseRepositories db = DBFactory.GetDbRepositories();
+        private static readonly object _locker = new object();
 
         public void DeleteUser(string userId)
         {
-            db.Users.Delete(userId);
+            lock (_locker)
+            {
+                db.Users.Delete(userId);
+            }
         }
 
         public int GetUserNumber(string name = null)
         {
-            if(name == null)
+            lock (_locker)
             {
-                return db.Users.GetAll().Count();
-            }
+                if (name == null)
+                {
+                    return db.Users.GetAll().Count();
+                }
 
-            return db.Users.GetAll()
-                .Where(u => u.Claims
-                            .Where(c => ClaimTypes.Name == c.ClaimValue)
-                            .FirstOrDefault().ClaimValue == name)
-                .Count();
+                return db.Users.GetAll().ToList()
+                    .Where(u => u.Claims
+                                .Where(c => ClaimTypes.Name == c.ClaimValue)
+                                .FirstOrDefault().ClaimValue.Contains(name))
+                    .Count();
+            }
         }
 
         public UserInfo GetUserInfo(string userName)
         {
-            var user = db.Users.GetAll()
-                .Where(u => u.UserName == userName)
-                .FirstOrDefault();
+            ApplicationUser user;
+            string adminId;
+            IdentityUserRole role;
 
-            var adminId = db.Roles.
-                Where(c => c.Name == "admin").
-                FirstOrDefault()
-                .Id;
+            lock (_locker)
+            {
+                user = db.Users.GetAll()
+               .Where(u => u.UserName == userName)
+               .First();
 
-            var role = user.Roles.
-                Where(r => r.RoleId == adminId)
-                .FirstOrDefault();
+                adminId = db.Roles.
+                    Where(c => c.Name == "admin").
+                    First()
+                    .Id;
+
+                role = user.Roles.
+                    Where(r => r.RoleId == adminId)
+                    .First();
+            }
 
             UserInfo uInfo = new UserInfo
             {
@@ -52,10 +68,10 @@ namespace ManagementServices.Implementations
                 UserId = user.Id,
                 FullName = user.Claims
                     .Where(c => c.ClaimType == ClaimTypes.Name)
-                    .FirstOrDefault().ClaimValue,
+                    .First().ClaimValue,
 
                 NumberOfEvents = GetNumberUserEvents(user.Id),
-                Role = role == null ? "user" : "admin"
+                IsAdmin = role != null
             };
 
             return uInfo;
@@ -63,45 +79,87 @@ namespace ManagementServices.Implementations
 
         public IEnumerable<UserInfo> GetUsersInfo(int page, int itemsPerPage, string searchPattern = null)
         {
-            ///throw new AccessViolationException();
-            IEnumerable<ApplicationUser> users;
-
-            if(searchPattern != null)
+            lock (_locker)
             {
-                users = db.Users.GetAll()
-                .Where(u => u.Claims
-                .Where(c => ClaimTypes.Name == c.ClaimType)
-                .FirstOrDefault()
-                .ClaimValue.Contains(searchPattern));
-            }
-            else
-            {
-                users = db.Users.GetAll();
-            }
+                IEnumerable<ApplicationUser> users;
 
-            var usersInfo =
-                (from u in users
+                if (searchPattern != null)
+                {
+                    users = db.Users.GetAll().ToList()
+                        .Where(u => u.Claims
+                                    .Where(c => ClaimTypes.Name == c.ClaimType)
+                                    .FirstOrDefault().ClaimValue.Contains(searchPattern));
+                }
+                else
+                {
+                    users = db.Users.GetAll()
+                        .OrderBy(c => c.Email)
+                        .Skip(page - 1 * itemsPerPage)
+                        .Take(itemsPerPage);
+                }
+
+
+                var adminId = db.Roles.
+                        Where(c => c.Name == "admin").
+                        First()
+                        .Id;
+
+                var usersInfo =
+                (from u in users.ToList()
                  select new UserInfo
                  {
                      FullName = u.Claims
-                                .Where(c => ClaimTypes.Name == c.ClaimType)
-                                .FirstOrDefault().ClaimValue,
+                         .Where(c => ClaimTypes.Name == c.ClaimType)
+                         .First().ClaimValue,
                      Email = u.Email,
                      UserId = u.Id,
                      NumberOfEvents = GetNumberUserEvents(u.Id),
-                 })
-                 .OrderBy(c => c.FullName)
-                 .Skip(page-1 * itemsPerPage)
-                 .Take(itemsPerPage);
+                     IsAdmin = u.Roles.
+                                Where(r => r.RoleId == adminId)
+                                .FirstOrDefault() != null
+                 });
 
-            return usersInfo;
+
+                return usersInfo;
+            }
         }
 
         public void UpdateUser(UserInfo user)
         {
-            var appUser = db.Users.Get(user.UserId);
-            if (appUser != null)
+            lock (_locker)
             {
+                var appUser = db.Users.Get(user.UserId);
+                var roles = db.Roles.ToArray();
+                var adminRole = roles.Where(r => r.Name == "admin").First();
+                var userRole = roles.Where(r => r.Name == "user").First();
+
+                var personRole = appUser.Roles.FirstOrDefault();
+
+                if (user.IsAdmin &&
+                    adminRole.Id != personRole.RoleId)
+                {
+                    appUser.Roles.Remove(personRole);
+                    var newRole = new IdentityUserRole()
+                    {
+                        RoleId = adminRole.Id,
+                        UserId = appUser.Id
+                    };
+
+                    appUser.Roles.Add(newRole);
+                }
+                else if (!user.IsAdmin &&
+                         personRole.RoleId != userRole.Id)
+                {
+                    appUser.Roles.Remove(personRole);
+                    var newRole = new IdentityUserRole()
+                    {
+                        RoleId = userRole.Id,
+                        UserId = appUser.Id
+                    };
+
+                    appUser.Roles.Add(newRole);
+                }
+
                 appUser.Email = user.Email;
                 appUser.UserName = user.Email;
                 appUser.Claims
@@ -109,44 +167,46 @@ namespace ManagementServices.Implementations
                     .FirstOrDefault()
                     .ClaimValue = user.FullName;
 
-                var role = appUser.Roles.FirstOrDefault();
-                var admin = db.Roles
-                    .Where(r => r.Name == "admin")
-                    .FirstOrDefault();
-
-                if (user.Role == "admin" && role.RoleId != admin.Id)
-                {
-                    role.RoleId = admin.Id;
-                }
-
                 db.Users.Update(appUser);
+
             }
+
         }
 
         public string GetUserName(string email)
         {
-            var user = db.Users
+            string name;
+            lock (_locker)
+            {
+                var user = db.Users
                 .GetAll()
                 .Where(u => u.Email == email)
                 .FirstOrDefault();
 
-            if (user == null)
-            {
-                return null;
-            }
+                if (user == null)
+                {
+                    return null;
+                }
 
-            var name = user.Claims
-                .Where(c => c.ClaimType == ClaimTypes.Name)
-                .FirstOrDefault().ClaimValue;
+                name = user.Claims
+                    .Where(c => c.ClaimType == ClaimTypes.Name)
+                    .FirstOrDefault().ClaimValue;
+            }
 
             return name;
         }
 
         public int GetNumberUserEvents(string uId)
         {
-            return db.Events.GetAll()
+            int count;
+            lock (_locker)
+            {
+                count = db.Events.GetAll()
                 .Where(e => e.ApplicationUserID == uId)
                 .Count();
+            }
+            return count;
         }
     }
 }
+
