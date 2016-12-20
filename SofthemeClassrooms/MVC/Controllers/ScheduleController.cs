@@ -45,10 +45,6 @@ namespace WebApplication1.Controllers
             }
 
             var model = DisplayEventPartialViewModel.ConvertFromEventInfo(eventInfo);
-            if (model.OrganizerName == null)
-            {
-
-            }
 
             bool isAuthorized = false;
             bool isAdmin = User.IsInRole("admin");
