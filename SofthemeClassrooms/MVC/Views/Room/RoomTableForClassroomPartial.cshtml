@@ -6,25 +6,31 @@
     var isBookable = @Json.Encode(@ViewBag.isBookable);
 </script>
 
-@{ 
+@{
     var closeBtnInitialValue = (ViewBag.isBookable) ? "Закрыть" : "Открыть";
 }
 
 <div id='wrap-table'>
 
-    <div class="room-controls">
-        
-        <input type="button" class="close-room-button" value="@closeBtnInitialValue" />
-            
-        <input type="button" class="change-room-button" value="Изменить" />
-
-    </div>
+    
     <div id="room-table">
+        @if (User.IsInRole("admin"))
+        {
+            <div class="room-controls">
+
+                <input type="button" class="close-room-button" value="@closeBtnInitialValue" />
+
+                <input type="button" class="change-room-button" value="Изменить" />
+
+            </div>
+        }
 
         <img id="schema-image" src="~/Images/wallsMod.png" alt="" />
         <!--<img id="schema-image-b" src="~/Images/walls.png" alt="" /> -->
         <!--panel of properties-->
-        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Schedule")'>
+        <div id="prop-pane" data-request-url='@Url.Action("GetEquipmentDataForRoom", "Room")'>
+            <img class="prop-loader" src="~/Images/loader.gif" />
+
             <div class="eq-container">
                 <img class="eq-img" src="~/Images/icon-table.png" />
                 <span class="table"></span>
@@ -50,6 +56,162 @@
                 <span class="projector"></span>
             </div>
         </div>
+
+
+
+        <style>
+            #prop-pane-edit {
+                display: inline-block;
+                visibility: hidden;
+            }
+
+            #prop-pane-edit {
+                position: absolute;
+                left: 230px;
+                top: 404px;
+                z-index: 100;
+                width: 600px;
+                height: 100px;
+                border: 2px solid rgba(155, 155, 155, 30);
+                border-radius: 30px;
+                background-color: rgba(250, 252, 253, 0.85);
+                opacity: 0.9;
+            }
+
+            .eq-container-edit {
+                display: inline !important;
+                margin: 0px;
+                top: 12px;
+                left: 15px;
+                /*border: 1px solid green;*/
+                position: relative;
+                display: inline;
+            }
+
+                .eq-container-edit input {
+                    width: 30px;
+                    display: inline;
+                    border: none;
+                    border-bottom: 1px solid grey;
+                    background-color: transparent;
+                    text-align: center;
+                }
+
+            .prop-header-edit input
+            {
+                border-color: lightgrey;
+                font-size: 80%;
+            }
+
+            .prop-header-edit .title {
+                width: 160px;
+                display: inline;
+                border: none;
+                border-bottom: 1px solid grey;
+                background-color: transparent;
+                text-align: center;
+                margin-left: 5px;
+
+                font-size: 100%;
+            }
+
+
+
+            .eq-img-edit {
+                margin: 5px;
+                z-index: 10;
+            }
+
+            .prop-inp-edit {
+                width: 100%;
+            }
+
+            .prop-header-edit {
+                margin-left: 20px;
+                margin-top: 10px;
+                padding: 0px;
+
+                margin-right: 10px;
+            }
+
+            .prop-header-edit .cancel-button, .save-button {
+                position: relative;
+                display: inline;
+                margin: 3px;
+                border: none;
+                outline: none;
+                border: 0px solid rgba(255, 255, 255, 0);
+                border-radius: 70px;
+                width: 80px;
+                height: 16px;
+                z-index: 1001;
+
+                float: right;
+
+                margin-right: 5px;
+            }
+
+            .prop-header-edit .cancel-button
+            {
+                background-color: #c7c8d6;
+            }
+
+            .prop-header-edit .cancel-button:hover
+            {
+                background-color: lightcoral;
+            }
+
+            .prop-header-edit .save-button
+            {
+                background-color: #c7c8d6;
+            }
+
+            .prop-header-edit .save-button:hover
+            {
+                background-color: lightcoral;
+            }
+        </style>
+
+        <!--panel for editing of properties-->
+        <div id="prop-pane-edit" data-request-url=''>
+            <div class="prop-header-edit">
+                <span>Название: </span>
+                <input class="title" />
+
+                <input type="button" class="save-button" value="Сохранить" />
+                <input type="button" class="cancel-button" value="Отменить"/>
+                
+            </div>
+            <div class="prop-inp-edit">
+                <div class="eq-container-edit">
+                    <img class="eq-img" src="~/Images/icon-table.png" />
+                    <input class="table" />
+                </div>
+
+                <div class="eq-container-edit">
+                    <img class="eq-img" src="~/Images/icon-board.png" />
+                    <input class="board" />
+                </div>
+
+                <div class="eq-container-edit">
+                    <img class="eq-img" src="~/Images/icon-laptop.png" />
+                    <input class="laptop" />
+                </div>
+
+                <div class="eq-container-edit">
+                    <img class="eq-img" src="~/Images/icon-print.png" />
+                    <input class="printer" />
+                </div>
+
+                <div class="eq-container-edit">
+                    <img class="eq-img" src="~/Images/icon-proect.png" />
+                    <input class="projector" />
+                </div>
+            </div>
+        </div>
+
+
+
 
         <!--Room containers-->
         <a href="@Url.Action("Index", "Room", new { roomId = 1})">
@@ -230,7 +392,9 @@
                     var roomStatus = roomsAvail[i].Status;
                     var roomTitle = roomsAvail[i].RoomTitle;
 
-                    var $roomElem = $('.room-container').filter(function () {
+                    
+
+                    $roomElem = $('.room-container').filter(function () {
                         return $(this).data("id") == roomId
                     });
 
@@ -247,10 +411,95 @@
                         cls = 'room-disabled';
 
                     if (roomId == $('.room-id').val())
+                    {
                         cls = 'room-booked';
+                        $('#prop-pane-edit .title').val(roomTitle);
+                    }
+                        
 
                     $roomElem.addClass(cls);
                 }
+            }
+        });
+    }
+
+    function loadRoomProp(dataId)
+    {
+        $.ajax({
+            url: $('#prop-pane').data('request-url'),
+            type: "GET",
+            data: { roomId: dataId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            context: this,
+            success: function (data, textStatus, jqXHR) {
+
+                /*alert(textStatus);
+                alert(JSON.stringify(data));*/
+
+                $('.prop-inp-edit .table').val(data.SeatCount);
+
+                if (data.SeatCount == 0)
+                    $('.table').parent().css("display", "none");
+                else
+                    $('.table').parent().css("display", "inline");
+
+                if (data.SeatCount > 1)
+                    $('.table').html(data.SeatCount);
+                else
+                    $('.table').html("");
+
+                $('.prop-inp-edit .board').val(data.BoardCount);
+
+                if (data.BoardCount == 0)
+                    $('.board').parent().css("display", "none");
+                else
+                    $('.board').parent().css("display", "inline");
+
+                if (data.BoardCount > 1)
+                    $('.board').html(data.BoardCount);
+                else
+                    $('.board').html("");
+
+
+                $('.prop-inp-edit .laptop').val(data.LaptopCount);
+
+                if (data.LaptopCount == 0)
+                    $('.laptop').parent().css("display", "none");
+                else
+                    $('.laptop').parent().css("display", "inline");
+
+                if (data.LaptopCount > 1)
+                    $('.laptop').html(data.LaptopCount);
+                else
+                    $('.laptop').html("");
+
+
+
+                $('.prop-inp-edit .printer').val(data.PrinterCount);
+
+                if (data.PrinterCount == 0)
+                    $('.printer').parent().css("display", "none");
+                else
+                    $('.printer').parent().css("display", "inline");
+
+                if (data.PrinterCount > 1)
+                    $('.printer').html(data.PrinterCount);
+                else
+                    $('.printer').html("");
+
+
+                $('.prop-inp-edit .projector').val(data.ProjectorCount);
+
+                if (data.ProjectorCount == 0)
+                    $('.projector').parent().css("display", "none");
+                else
+                    $('.projector').parent().css("display", "inline");
+
+                if (data.ProjectorCount > 1)
+                    $('.projector').html(data.ProjectorCount);
+                else
+                    $('.projector').html();
             }
         });
     }
@@ -286,70 +535,7 @@
         var dataId = $roomElem.data('id');
         $('#prop-pane').css("visibility", "visible");
 
-        $.ajax({
-            url: $('#prop-pane').data('request-url'),
-            type: "GET",
-            data: { roomId: dataId },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            context: this,
-            success: function (data, textStatus, jqXHR) {
-
-                /*alert(textStatus);
-                alert(JSON.stringify(data));*/
-
-                if (data.SeatCount == 0)
-                    $('.table').parent().css("display", "none");
-                else
-                    $('.table').parent().css("display", "inline");
-
-                if (data.SeatCount > 1)
-                    $('.table').html(data.SeatCount);
-                else
-                    $('.table').html("");
-
-
-                if (data.BoardCount == 0)
-                    $('.board').parent().css("display", "none");
-                else
-                    $('.board').parent().css("display", "inline");
-
-                if (data.BoardCount > 1)
-                    $('.board').html(data.BoardCount);
-                else
-                    $('.board').html("");
-
-                if (data.LaptopCount == 0)
-                    $('.laptop').parent().css("display", "none");
-                else
-                    $('.laptop').parent().css("display", "inline");
-
-                if (data.LaptopCount > 1)
-                    $('.laptop').html(data.LaptopCount);
-                else
-                    $('.laptop').html("");
-
-                if (data.PrinterCount == 0)
-                    $('.printer').parent().css("display", "none");
-                else
-                    $('.printer').parent().css("display", "inline");
-
-                if (data.PrinterCount > 1)
-                    $('.printer').html(data.PrinterCount);
-                else
-                    $('.printer').html("");
-
-                if (data.ProjectorCount == 0)
-                    $('.projector').parent().css("display", "none");
-                else
-                    $('.projector').parent().css("display", "inline");
-
-                if (data.ProjectorCount > 1)
-                    $('.projector').html(data.ProjectorCount);
-                else
-                    $('.projector').html();
-            }
-        });
+        loadRoomProp(dataId);
 
 
         $('.close-room-button').click(function () {
@@ -376,7 +562,64 @@
 
         $('.change-room-button').click(function () {
             $('.change-room-button').css("visibility", "hidden");
+            $roomElem.children('span').css("visibility", "hidden");
 
+            $('#prop-pane').css("visibility", "hidden");
+
+            $('#prop-pane-edit').css("visibility", "visible");
+
+            $('#prop-pane-edit .save-button').click(function(){
+
+
+                var equipData = 
+                    { 
+                        roomId: dataId,
+                        roomTitle: $('#prop-pane-edit .title').val(),
+                        'equipmentData.SeatCount': $('.prop-inp-edit .table').val(),
+                        'equipmentData.BoardCount': $('.prop-inp-edit .board').val(),
+                        'equipmentData.PrinterCount': $('.prop-inp-edit .printer').val(),
+                        'equipmentData.LaptopCount': $('.prop-inp-edit .laptop').val(),
+                        'equipmentData.ProjectorCount': $('.prop-inp-edit .projector').val()
+                    };
+
+                // save room prop data
+                $.ajax({
+                    url: '@Url.Action("SetEquipmentDataForRoom", "Room")',
+                    type: "POST",
+                    data: JSON.stringify(equipData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+
+                    }
+                });
+
+                $roomElem.children('span').css("visibility", "visible");
+                $roomElem.children('span').html($('#prop-pane-edit .title').val());
+
+                $('#prop-pane-edit').css("visibility", "hidden");
+                // Show pane but hide contents and show loader inside of pane instead
+                $('#prop-pane').css("visibility", "visible");
+                $('#prop-pane .eq-container').css('display', 'none');
+                $('.prop-loader').css('visibility', 'visible');
+
+                setTimeout(function(){
+                    loadRoomProp(dataId);
+                    $('.prop-loader').css('visibility', 'hidden');
+                    $('.change-room-button').css("visibility", "visible");
+                    $('#prop-pane .eq-container').css('display', 'inline-block');
+                }, 500);
+                
+            });
+
+            $('#prop-pane-edit .cancel-button').click(function(){
+                $roomElem.children('span').css("visibility", "visible");
+
+                $('.change-room-button').css("visibility", "visible");
+                $('#prop-pane').css("visibility", "visible");
+                $('#prop-pane-edit').css("visibility", "hidden");
+            });
         });
 
         $('.room-close-popup .confirm-cancellation-button').click(function () {

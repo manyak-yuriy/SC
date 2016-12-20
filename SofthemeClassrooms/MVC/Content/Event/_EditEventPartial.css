@@ -1,0 +1,233 @@
+﻿.event-display-popup
+{
+    
+
+    width: 98%;
+
+    z-index: 200;
+
+    background-color: transparent !important;
+
+    display: block;
+    opacity: 0.9;
+
+    border-radius: 2%;
+
+    margin: 10px;
+}
+
+.event-display-popup:hover
+{
+    opacity: 1;
+}
+
+.header-controls .change-button, .cancel-button {
+    position: relative;
+    display: inline;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 70px;
+    width: 90px;
+    height: 23px;
+    z-index: 1001;
+}
+
+.event-display-header i
+{
+    zoom: 130%;
+}
+
+.header-controls .change-button {
+    background-color: #C8CEDA;
+}
+
+.header-controls .cancel-button {
+    background-color: #92979B;
+}
+
+.change-button:hover, .cancel-button:hover
+{
+    background-color: lightcoral;
+}
+
+.change-button:active, .cancel-button:active
+{
+    border: none !important;
+}
+
+.header-controls
+{
+    display: inline-block !important;
+
+    position: relative !important;
+    top: 0px;
+
+    font-weight: bold;
+}
+
+
+.event-display-links
+{
+    width: 100%;
+
+    display: inline-block;
+
+    margin: 10px;
+
+    position: relative;
+
+    left: 15%;
+}
+
+.event-display-links i
+{
+    padding: 5px;
+}
+
+i
+{
+    opacity: 0.8;
+}
+
+i:hover
+{
+    opacity: 0.9;
+}
+
+
+.event-display-links i
+{
+    opacity: 0.3;
+}
+
+.event-display-links i:hover
+{
+    opacity: 0.9;
+}
+
+
+.organizer-info
+{
+    display: inline-block;
+    margin: 10px;
+}
+
+.visitors-info
+{
+    display: inline-block;
+    float: left;
+    vertical-align: bottom;
+
+    margin: 10px;
+}
+
+
+
+
+p
+{
+    margin: 10px;
+}
+
+h3
+{
+    margin: 10px;
+}
+
+
+
+
+
+
+
+.main-info
+{
+    float: left;
+    display: inline;
+
+    margin-left: 30px;
+
+    margin: 10px;
+}
+
+.right-side-panel
+{
+    width: 25%;
+    float: left;
+    display: inline-block;
+
+    margin: 10px;
+    padding: 5px;
+}
+
+
+.new-visitor-block
+{
+    float: left;
+    display: inline-block;
+    vertical-align: bottom;
+
+    margin: 10px;
+
+
+    position: relative;
+
+    top: -10px;
+}
+
+
+.add-visitor-email
+{
+    border-radius: 2em;
+    opacity: 0.5;
+    line-height: 10px;
+
+    width: 220px;
+    height: 23px;
+
+    border: 1px solid grey;
+
+    font-size: 80%;
+
+    padding: 3px;
+}
+
+.fa-plus
+{
+    opacity: 0.3;
+    display: inline;
+    position: relative;
+
+    top: 5px;
+}
+
+.subscr-info-line
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.event-display-header
+{
+    color: white;
+    background-color: red;
+    border-radius: 15px;
+
+    display: inline-block;
+
+    padding: 12px;
+    padding-bottom: 20px;
+}
+
+.event-display-header .fa
+{
+    position: relative;
+    top: 5px;
+}
+
+.model-descr
+{
+    width: 700px;
+}

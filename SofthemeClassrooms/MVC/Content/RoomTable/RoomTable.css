@@ -260,3 +260,13 @@
 html, body {
     height: 100%;
 }
+
+
+#prop-pane .prop-loader
+{
+    display: inline-block;
+    position: absolute;
+    left: 25%;
+    top: -50px;
+    visibility: hidden;
+}

@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetDisplayEventPartial(int Id)
         {
-            var eventEntity = db.Event.Where(e => e.Id == Id).First();
+            var eventEntity = db.Event.Where(e => e.Id == Id).FirstOrDefault();
 
             if (eventEntity == null)
                 throw new NullReferenceException("There's no event with specified id!");
@@ -41,9 +41,11 @@ namespace WebApplication1.Controllers
                 isAuthorized = true;
 
             if (!eventEntity.IsPublic && !isAuthorized)
-                throw new AccessViolationException("Not enough rigths to view the private event");
+                throw new AccessViolationException("Not enough rights to view the private event");
 
                 DisplayEventPartialViewModel model = new DisplayEventPartialViewModel();
+
+            model.Id = eventEntity.Id;
             model.CanEdit = isAuthorized;
             model.AllowSubscription = (bool) eventEntity.AllowSubscription;
             model.DateStart = eventEntity.DateStart;
@@ -93,6 +95,8 @@ namespace WebApplication1.Controllers
             }
             ViewBag.RoomIdOptions = items;
             ViewBag.CallBackAction = "AddNewEvent";
+            ViewBag.IsNew = true;
+
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
 
@@ -114,7 +118,7 @@ namespace WebApplication1.Controllers
             viewModel.Start = eventEntity.DateStart;
             viewModel.Title = eventEntity.Title;
             viewModel.IsPublic = eventEntity.IsPublic;
-            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer.UserName;
+            viewModel.OrganizerName = eventEntity.OrganizerName?? eventEntity.Organizer?.UserName;
             
             viewModel.ShowAuthor = (eventEntity.OrganizerName == null);
 
@@ -140,6 +144,8 @@ namespace WebApplication1.Controllers
             // Pass id this way - will be replaced later
             ViewBag.eventId = eventId;
             ViewBag.CallBackAction = "EditEvent";
+            ViewBag.IsNew = false;
+
             return PartialView("~/Views/Schedule/Overlays/EditEventPartialView.cshtml", viewModel);
         }
         
@@ -152,6 +158,11 @@ namespace WebApplication1.Controllers
 
             if (e == null)
                 throw new NullReferenceException("No event with a given id exists");
+
+            var sameEmailSubscribers = db.ForeignVisitor.Where(fv => fv.Email == subModel.Email).FirstOrDefault();
+
+            if (sameEmailSubscribers != null)
+                errors.Errors.Add("Такой e-mail уже существует");
 
             bool canSubscribe = (bool)e.AllowSubscription;
             if (!canSubscribe)
@@ -204,6 +215,8 @@ namespace WebApplication1.Controllers
             if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
                 errors.Errors.Add("Событие не может быть короче 20 минут");
 
+            if (eventModel.End.Hour > 20 || (eventModel.End.Hour == 20 && eventModel.End.Minute != 0) || eventModel.Start.Hour < 9)
+                errors.Errors.Add("Событие не может быть за пределами рабочих часов");
 
             if (classRoom == null)
             {
@@ -232,7 +245,7 @@ namespace WebApplication1.Controllers
             }
 
             if (errors.Errors.Count() > 0)
-                return Json(new { status = "fail", errors.Errors}) ;
+                return Json(new { status = "fail", errors.Errors});
 
             Event dbModel = new Event();
 
@@ -270,6 +283,8 @@ namespace WebApplication1.Controllers
             if (eventModel.End - eventModel.Start < new TimeSpan(0, 20, 0))
                 errors.Errors.Add("Событие не может быть короче 20 минут");
 
+            if (eventModel.End.Hour > 21 || (eventModel.End.Hour == 21 && eventModel.End.Minute != 0) || eventModel.Start.Hour < 9)
+                errors.Errors.Add("Событие не может быть за пределами рабочих часов");
 
             if (classRoom == null)
             {
@@ -281,7 +296,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id && e.Id != eventId);
+                var eventsForClassRoom = db.Event.Where(e => e.ClassroomId == classRoom.Id && e.Id != eventId).ToList();
 
                 DateTime startDate = eventModel.Start;
                 DateTime endDate = eventModel.End;
@@ -339,6 +354,11 @@ namespace WebApplication1.Controllers
                 if (!isAuthorized)
                     return Json(new { result = "Request for deletion is not authorized" }, JsonRequestBehavior.DenyGet);
 
+                var subscribers = db.ForeignVisitor.Where(fv => fv.EventId == Id).ToList();
+
+                foreach (var subscriber in subscribers)
+                    db.ForeignVisitor.Remove(subscriber);
+
                 // isAuthorized 
                 db.Event.Remove(eventToDelete);
                 db.SaveChanges();
@@ -355,6 +375,17 @@ namespace WebApplication1.Controllers
                 .Select(e => new { e.Id, e.DateStart, e.DateEnd, e.ClassroomId, classRoomTitle = e.ClassRoom.Title, e.Title, e.IsPublic});
             var roomData = eventsData.Select(e => new { e.ClassroomId, e.classRoomTitle } ).Distinct();
             return Json(new { roomData, eventsData } , JsonRequestBehavior.AllowGet);
+        }
+
+        // Get data necessary to render Calendar on the Room page
+        [HttpGet]
+        public JsonResult GetEventDataForRoom(int roomId)
+        {
+            var db = new ApplicationDbContext();
+            var eventsData = db.Event.Where(e => e.ClassroomId == roomId)
+                .Select(e => new { e.Id, e.IsPublic, Title = (e.IsPublic? e.Title: null), e.DateStart, e.DateEnd });
+            
+            return Json(new { eventsData}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -390,16 +421,6 @@ namespace WebApplication1.Controllers
             }
 
             return Json(new { roomsAvailability }, JsonRequestBehavior.AllowGet);
-        }
-
-        // Get euipment data displayed on the panel
-        [HttpGet]
-        [AllowAnonymous]
-        public JsonResult GetEquipmentDataForRoom(int roomId)
-        {
-            ManagementServices.Implementations.EquipmentManagement equipmentManager = new ManagementServices.Implementations.EquipmentManagement();
-            var equipmentData = equipmentManager.GetEquipmentByRoomId(roomId);
-            return Json(equipmentData, JsonRequestBehavior.AllowGet);
         }
 
     }

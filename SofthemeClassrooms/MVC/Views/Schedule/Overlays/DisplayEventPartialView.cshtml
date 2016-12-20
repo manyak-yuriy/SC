@@ -29,7 +29,7 @@
 
 <div class="event-display-popup">
     <div class="event-display-header">
-        <span>@culture.DateTimeFormat.GetDayName(Model.DateStart.DayOfWeek), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
+        <span>@culture.DateTimeFormat.GetAbbreviatedDayName((Model.DateStart.DayOfWeek)), @Model.DateStart.Day @culture.DateTimeFormat.GetMonthName(Model.DateStart.Month)</span>
         <br><span>@Model.DateStart.ToString("HH:mm") - @Model.DateEnd.ToString("HH:mm")</span>
 
         <div class="header-controls">
@@ -84,7 +84,7 @@
         <i class="fa fa-calendar-plus-o fa-2x" aria-hclassden="true"></i>
         <i class="fa fa-envelope-o fa-2x" aria-hclassden="true"></i>
         <i class="fa fa-print fa-2x" aria-hclassden="true"></i>
-        <i class="fa fa-link fa-2x" aria-hclassden="true"></i>
+        <a href='@Url.Action("Index", "Event", new { eventId = Model.Id})'><i class="fa fa-link fa-2x" aria-hclassden="true"></i></a>
     </div>
 
 </div>
@@ -93,12 +93,16 @@
 
 
 <script>
+    $(() => {
+        
+    })
+    
 
     $('.new-visitor-block .fa-plus').click(function () {
 
         $('.val-errors').empty();
 
-        var eventId = $(this).parents('.event-display-popup').attr('id');
+        var eventId = $(this).parents('.event-display-popup').attr('id')
 
         var eMail = $('.new-visitor-block input').val();
         //alert(eMail);
@@ -127,6 +131,12 @@
                 {
                     $('.val-errors').css("display", "inline-block");
                     $('.val-errors').append("<span>Добавлено</span> <br>");
+                    var $visCntElem = $('.visitors-info span');
+
+                    //alert($visCntElem.html());
+
+                    $visCntElem.html(parseInt($visCntElem.html()) + 1);
+
                     setTimeout(function () {$('.val-errors').css("display", "none");}, 1000);
                 }
             }

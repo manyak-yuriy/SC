@@ -29,12 +29,12 @@
     border-radius: 2%;
 }
 
-.change-button, .cancel-button
-{
+.header-controls .change-button, .cancel-button {
     background-color: rgba(80, 80, 90, 0.5);
     color: white;
     border-radius: 20%;
     border: none;
+    margin-right: 3px;
 }
 
 .change-button {
@@ -53,12 +53,12 @@
 
 .header-controls
 {
-    display: inline-block;
+    display: inline-block !important;
     margin-left: 30px;
     float: right;
 
-    position: relative;
-    top: -10px;
+    position: relative !important;
+    top: 0px;
 
     font-weight: bold;
 }
@@ -66,6 +66,7 @@
 .fa-window-minimize
 {
     opacity: 0.5;
+    display: inline;
 }
 
 .fa-window-minimize:hover

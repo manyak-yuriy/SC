@@ -7,6 +7,7 @@ namespace WebApplication1.Models.Schedule
 {
 	public class DisplayEventPartialViewModel
 	{
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateStart { get; set; }

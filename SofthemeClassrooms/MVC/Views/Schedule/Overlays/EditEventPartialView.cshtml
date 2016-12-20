@@ -35,7 +35,6 @@
             <div style='width: 30px; display: inline-block'>
             </div>
 
-
             <div id="first" class="custom-numeric-picker hour-picker">
                 <i class="fa fa-caret-up" aria-hidden="true"></i><br>
                 <input type="text" class="date-custom-input" readonly value="@Model.Start.Hour" /><br />
@@ -143,7 +142,7 @@
                 <div class="author-info">
                     <!-- Squared THREE -->
 
-                    <div>
+                    <div class="show-author-check">
                         <input type="checkbox" value="true" id="show-author" class="ShowAuthor" name="ShowAuthor" @showAuthor />
                         <label for="squaredThree"></label>
                     </div>
@@ -165,7 +164,7 @@
 
         </div>
 
-        <input type="button" class="send-event-form-data" value="Создать" />
+        <input type="button" class="send-event-form-data" value= @(ViewBag.IsNew ? "Создать" : "Изменить") />
     </div>
                     }
 
@@ -218,11 +217,30 @@
                     ,
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
-                    alert(JSON.stringify(data));
-                    reRenderTimeTableTrick();
+                    //alert(JSON.stringify(data));
+
                     if (data.status == 'success') {
                         $('.edit-event-form').remove();
+                        try{
+                            reRenderTimeTableTrick();
+                        }
+                        catch(err)
+                        {
+
+                        }
+
+                        try {
+                            $('#calendar').fullCalendar('destroy');
+                            renderScheduler();
+                            $('#calendar').fullCalendar('render');
+                        }
+                        catch(err)
+                        {
+                            
+                        }
+                        
                     }
+                    
                     else {
                         var errors = data.Errors;
                         $('.error-panel').empty();
