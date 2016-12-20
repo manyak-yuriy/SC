@@ -438,6 +438,7 @@
     <Content Include="Images\Extracted\Newton\NewtonDisabled.png" />
     <Content Include="Images\Extracted\Other\icon-lock.png" />
     <Content Include="Images\Extracted\PropPane\PropPane.png" />
+    <Content Include="Images\Extracted\roomTimeSlider.png" />
     <Content Include="Images\Extracted\Tesla\TeslaAvailable.png" />
     <Content Include="Images\Extracted\Tesla\TeslaBooked.png" />
     <Content Include="Images\Extracted\Tesla\TeslaDisabled.png" />

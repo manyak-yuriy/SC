@@ -13,6 +13,13 @@
 <!--Cascade of windows after clicking on event-->
 <script src="~/Scripts/Overlays/DisplayEventCascade.js"></script>
 
+
+<style>
+    #sliderHor
+    {
+        position: absolute;
+    }
+</style>
 <script>
 
     function displayPopupForEvent(eventId) {
@@ -114,13 +121,18 @@
         <i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>
     </div>
     <img class="calendar-loader" src="~/Images/loader.gif" />
+
+    <img id="sliderHor" src='~/Images/Extracted/roomTimeSlider.png' />
+
     <div id='calendar'>
 
     </div>
 </div>
 
-<script>
 
+
+<script>
+    
     var jDate = function (obj) {
         return new Date(parseInt(obj.substr(6)));
     }
@@ -225,6 +237,7 @@
     $(document).ready(function () {
         // page is ready
         renderScheduler();
+        $('.fc-now-indicator-line').html('lol');//($('#sliderHor'));
 
         var getPrettyDateStr = function(selDate) {
             var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
