@@ -22,7 +22,7 @@ namespace DataAccessLayer
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(): base("AzureDatabase", throwIfV1Schema: false)
+        public ApplicationDbContext(): base("TestTable", throwIfV1Schema: false)
 
         {
            
