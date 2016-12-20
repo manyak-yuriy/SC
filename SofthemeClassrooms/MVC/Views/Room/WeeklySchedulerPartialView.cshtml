@@ -13,7 +13,18 @@
 <!--Cascade of windows after clicking on event-->
 <script src="~/Scripts/Overlays/DisplayEventCascade.js"></script>
 
-
+<style>
+    div.fc-now-indicator.fc-now-indicator-line
+    {
+        background-position: -10px 0px; 
+        z-index: 1000;
+        display: block;
+        width: 135px;
+        height: 40px;
+        background-image: url('https://s27.postimg.org/eqztjpmpf/room_Time_Slider.png');
+        background-repeat: no-repeat;
+    }
+</style>
 
 <script>
 
@@ -232,7 +243,7 @@
     $(document).ready(function () {
         // page is ready
         renderScheduler();
-        
+
 
         var getPrettyDateStr = function(selDate) {
             var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
