@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ManagementServices.Interfaces;
 
 namespace WebApplication1.Controllers
 {
     public class RoomController : Controller
     {
+
         // Get equipment data displayed on the panel
         [HttpGet]
         [AllowAnonymous]
@@ -32,51 +34,35 @@ namespace WebApplication1.Controllers
             equipmentManager.SetEquipmentByRoomId(roomId, roomTitle, equipmentData);
             
             return new EmptyResult();
+		}
+
+        private IBusinessLogicFactory _businessLogicFactory;
+		
+        public RoomController(IBusinessLogicFactory factory)
+        {
+            _businessLogicFactory = factory;
         }
 
         [HttpPost]
         public ActionResult Close(int roomId)
         {
-            if (!User.IsInRole("admin"))
-                return new HttpUnauthorizedResult();
 
-            var db = new ApplicationDbContext();
+            var roomManagment = _businessLogicFactory.RoomManager;
+            roomManagment.Close(roomId);
 
-            var room = db.ClassRoom.Find(roomId);
+            var eventManagment = _businessLogicFactory.EventManager;
+            var eventsId = eventManagment.GetIdOfRoomEvents(roomId);
+            _businessLogicFactory.VisitorsManager.DeleteVisitorsOfCanceledEvents(eventsId);
 
-            if (room != null)
-            {
-                room.IsBookable = false;
-
-                var eventsToDelete = room.Event.Where(e => e.ClassroomId == roomId).ToList();
-
-                foreach (var e in eventsToDelete)
-                {
-                    var fvToDelete = db.ForeignVisitor.Where(fv => fv.EventId == e.Id).ToList();
-                    db.ForeignVisitor.RemoveRange(fvToDelete);
-                }
-
-                db.Event.RemoveRange(eventsToDelete);
-            }
-
-            db.SaveChanges();
-
+            eventManagment.DeleteEventsOfRoom(roomId);
+            
             return new EmptyResult();
         }
 
         [HttpPost]
         public ActionResult Open(int roomId)
         {
-            var db = new ApplicationDbContext();
-
-            var room = db.ClassRoom.Find(roomId);
-
-            if (room != null)
-            {
-                room.IsBookable = true;
-            }
-
-            db.SaveChanges();
+            _businessLogicFactory.RoomManager.Open(roomId);
 
             return new EmptyResult();
         }
@@ -84,20 +70,17 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Index(int roomId)
         {
-            var db = new ApplicationDbContext();
+            var roomInfo = _businessLogicFactory.RoomManager.GetRoomInfo(roomId);
 
-            ViewBag.roomId = roomId;
-            var room = db.ClassRoom.Find(roomId);
-
-            if (room != null)
+            if (roomInfo == null)
             {
-                ViewBag.isBookable = room.IsBookable;
-                ViewBag.Title = room.Title;
-                return View();
+                return new HttpNotFoundResult();
             }
-            else
-                throw new ArgumentException("No room with specified id exists!");
-            
+
+            ViewBag.isBookable = roomInfo.IsBookable;
+            ViewBag.roomId = roomId;
+            return View();
+
         }
     }
 }

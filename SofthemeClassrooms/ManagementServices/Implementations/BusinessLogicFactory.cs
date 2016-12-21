@@ -17,11 +17,11 @@ namespace ManagementServices.Implementations
             }
         }
 
-        public IEventActions EventManager
+        public IEventManagment EventManager
         {
             get
             {
-                throw  new NotImplementedException();
+                return  new EventManager();
             }
         }
 
@@ -38,6 +38,22 @@ namespace ManagementServices.Implementations
             get
             {
                 return new EventVisitorActions();
+            }
+        }
+
+        public IRoomManagment RoomManager
+        {
+            get
+            {
+                return new RoomManagement();
+            }
+        }
+
+        public IEquipmentManagment EquipmentManagment
+        {
+            get
+            {
+                return new EquipmentManagement();
             }
         }
     }

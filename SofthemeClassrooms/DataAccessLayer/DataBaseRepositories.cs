@@ -82,7 +82,7 @@ namespace DataAccessLayer
             }
         }
 
-        public IRepository<Event, int> Events
+        public IRepository<Event, long> Events
         {
             get
             {
@@ -149,6 +149,11 @@ namespace DataAccessLayer
             {
                 return _context.Roles;
             }
+        }
+
+        public void SaveDBChanges()
+        {
+            _context.SaveChanges();
         }
 
 

@@ -8,7 +8,10 @@ namespace ManagementServices.Interfaces
 {
     public interface IEventVisitorActions
     {
-        void DeleteVisiotrOfCanceledEvent(long EventId);
+        void DeleteVisiotorsOfCanceledEvent(long EventId);
+        void DeleteVisitorsOfCanceledEvents(IEnumerable<long> eventsId);
         IEnumerable<string> EmailsOfEventVisitors(long EventVisitors);
+        int CountVisitorsOfEvent(long eventID);
+        bool SubscribeForEvent(string email, long eventId);
     }
 }
