@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         public static IDatabaseRepositories GetDbRepositories()
         {
-            return  new DatajBaseRepositories();
+            return  new DataBaseRepositories();
         }
     }
 }
