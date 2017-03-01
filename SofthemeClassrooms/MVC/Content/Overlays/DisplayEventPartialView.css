@@ -1,0 +1,152 @@
+﻿.event-display-popup
+{
+    border: 1px solid #ff6464;
+    font-family: monospace;
+    width: 350px;
+
+    z-index: 200;
+
+    position: fixed !important;
+
+    background-color: white !important;
+
+    display: block;
+    opacity: 0.9;
+
+    border-radius: 2%;
+}
+
+.event-display-popup:hover
+{
+    opacity: 1;
+}
+
+.event-display-header
+{
+    background-color: #F95752;
+    color: white;
+    padding: 7px;
+    border-radius: 2%;
+}
+
+.header-controls .change-button, .cancel-button {
+    background-color: rgba(80, 80, 90, 0.5);
+    color: white;
+    border-radius: 20%;
+    border: none;
+    margin-right: 3px;
+}
+
+.change-button {
+    background-color: rgba(230, 30, 30, 0.2);
+}
+
+.change-button:hover, .cancel-button:hover
+{
+    background-color: gray;
+}
+
+.change-button:active, .cancel-button:active
+{
+    border: none !important;
+}
+
+.header-controls
+{
+    display: inline-block !important;
+    margin-left: 30px;
+    float: right;
+
+    position: relative !important;
+    top: 0px;
+
+    font-weight: bold;
+}
+
+.fa-window-minimize
+{
+    opacity: 0.5;
+    display: inline;
+}
+
+.fa-window-minimize:hover
+{
+    color: black;
+    opacity: 1;
+}
+
+.event-display-contents
+{
+    background-color: white;
+    margin: 10px;
+}
+
+
+.event-display-links
+{
+    margin: 0 auto; 
+    width: 60%;
+}
+
+.event-display-links i
+{
+    padding: 5px;
+}
+
+
+.new-visitor-block
+{
+    margin: 5px;
+}
+
+.add-visitor-email
+{
+    border-radius: 2em;
+    opacity: 0.5;
+    line-height: 10px;
+    padding: 8px;
+    width: 90%;
+    height: 30px;
+
+    border: 1px solid grey;
+}
+
+i
+{
+    opacity: 0.8;
+}
+
+i:hover
+{
+    opacity: 0.9;
+}
+
+
+.event-display-links i
+{
+    opacity: 0.3;
+}
+
+.event-display-links i:hover
+{
+    opacity: 0.9;
+}
+
+.fa-plus
+{
+    opacity: 0.3;
+}
+
+.organizer-info
+{
+    display: inline-block;
+    margin: 5px;
+}
+
+.visitors-info
+{
+    display: inline-block;
+    margin: 5px;
+    float: right;
+    margin-right: 10px;
+}

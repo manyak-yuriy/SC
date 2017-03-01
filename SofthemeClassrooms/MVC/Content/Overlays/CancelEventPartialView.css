@@ -1,0 +1,58 @@
+﻿.event-cancel-popup
+{
+    background-color: white !important;
+    border: 1px solid #837f7f;
+    opacity: 0.9;
+    width: 400px;
+
+    z-index: 300;
+
+    position: fixed !important;
+    display: block;
+}
+
+.event-cancel-popup:hover
+{
+    opacity: 1;
+}
+
+.event-cancel-header
+{
+    background-color: #9FA6B6;
+    color: white;
+    padding: 5px;
+}
+
+.cancellation-controls
+{
+    margin: 0 auto; 
+    width: 90%;
+    height: 70px;
+    padding: 10px;
+}
+
+.cancellation-controls input
+{
+    background-color: #C8CEDA;
+
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 70px;
+    width: 140px;
+    height: 33px;
+    z-index: 1001;
+}
+
+.cancellation-controls input:hover
+{
+    background-color: #F95752;
+}
+
+.event-cancel-header .fa
+{
+    padding: 10px;
+}

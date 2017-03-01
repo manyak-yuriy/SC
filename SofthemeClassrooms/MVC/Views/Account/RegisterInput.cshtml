@@ -1,0 +1,43 @@
+﻿@model WebApplication1.Models.RegisterViewModel
+@using WebApplication1.HtmlHelpers;
+
+@using (Ajax.BeginForm("Register", "Account", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "inputForm",
+    OnBegin = "LoadingStarted('inputs', 'load-icon')",
+    OnComplete = "LoadingFinished('inputs', 'load-icon')"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.RedValidationMessageFor(model => model.FullName)
+        @Html.EditorFor(model => model.FullName, "", new { htmlattributes = new { placeholder = " Имя Фамилия", @class = "custom-input" } })
+    </div>
+
+    <div>
+        @Html.RedValidationMessageFor(model => model.Email)
+        @Html.EditorFor(model => model.Email, "", new { htmlattributes = new { placeholder = " Адрес электронной почты", @class = "custom-input" } })
+    </div>
+    <div>
+        @Html.RedValidationMessageFor(model => model.Password)
+        @Html.EditorFor(model => model.Password, "", new { htmlattributes = new { placeholder = " Пароль", @class = "custom-input" } })
+    </div>
+    <div>
+        @Html.RedValidationMessageFor(model => model.ConfirmPassword)
+        @Html.EditorFor(model => model.ConfirmPassword, "", new { htmlattributes = new { placeholder = " Повторить пароль", @class = "custom-input" } })
+    </div>
+
+
+    <input class="button" type="submit" value="Зарегистрироваться" />
+}
+
+@section header{
+    <div id="register" class="header-content">
+        Регистрация
+    </div>
+    <script>
+        ActivateMenu('Register-item');
+    </script>
+}

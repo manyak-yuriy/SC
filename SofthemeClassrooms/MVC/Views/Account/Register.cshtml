@@ -1,0 +1,17 @@
+﻿@model WebApplication1.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@Html.Partial("RegisterInput")
+
+@section header{
+    <div id="register" class="header-content">
+        Регистрация
+    </div>
+    <script>
+        ActivateMenu('Register-item');
+    </script>
+}

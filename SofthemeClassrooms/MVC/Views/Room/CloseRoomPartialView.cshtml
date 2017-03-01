@@ -1,0 +1,20 @@
+﻿<link href="~/Content/Overlays/CloseRoomPartialView.css" rel="stylesheet" />
+
+<script src="https://use.fontawesome.com/8492b6eaf6.js"></script>
+@model string
+
+<div class="room-close-popup">
+    <div class="room-close-header">
+        <i class="fa fa-ban fa-2x" aria-hidden="true"></i>
+        <span>Вы уверены, что хотите закрыть эту аудиторию?</span>
+        
+    </div>
+    <div class="room-close-contents">
+        Все события, запланированные в этой аудитории, будут отменены
+    </div>
+    <div class="cancellation-controls">
+        
+        <input type="button" class="confirm-cancellation-button" value="Да">
+        <input type="button" class="discart-cancellation-button" value="Нет">
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@model WebApplication1.Models.PersonalDataViewModel
+
+<div id="displayPersonalInfo">
+    <h2>@Html.DisplayFor(m => m.Name)</h2>
+
+    @if (Model.Is_Admin)
+    {
+        <span id="adminLabel">admin</span>
+    }
+
+    @Html.HiddenFor(m => m.Is_Admin)
+    <br />
+    <strong>Email:</strong><span> @Html.DisplayFor(m => m.Email)</span>
+    <br />
+    <strong>Количество активных событий:</strong><span>@Model.NumberOfEvents</span>
+    <br />
+    <button class="userPagebuttton" id="changePI" onclick="toggleDisplayAndInputPInfo()">Изменить</button>
+</div>
+
+<div id="piEditor" class="invisibleBlock">
+  @Html.Partial("ChangePersonalDataPView")
+</div>

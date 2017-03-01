@@ -1,0 +1,60 @@
+﻿#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+    opacity: 0.95;
+    border: none;
+    background-color: transparent;
+    border: none !important;
+    z-index: 102;
+}
+
+    #custom-handle:active {
+        background-color: transparent;
+        border: none !important;
+    }
+
+    #custom-handle img {
+        display: block;
+        opacity: 0.95;
+    }
+
+.ui-slider-handle {
+    background-color: white;
+}
+
+#slider img {
+    height: 1230%;
+    position: absolute;
+    top: -310px;
+}
+
+.ui-widget-content {
+    border: none !important;
+}
+
+.ui-widget.ui-widget-content {
+    border: none !important;
+}
+
+.scrollingHotSpotLeft {
+    opacity: 30;
+}
+
+#slider {
+    left: -8px;
+    position: relative;
+}
+
+#selected-time {
+    position: relative;
+    top: -40px;
+    left: -5px;
+}
+
+.ui-state-active {
+    color: black !important;
+}

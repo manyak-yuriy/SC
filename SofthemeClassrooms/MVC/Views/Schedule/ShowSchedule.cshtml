@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Домашняя страница";
+}
+
+@Html.Partial("RoomTablePartialView")
+
+@Html.Partial("TimeTablePartialView")
+@Html.Partial("MapPartialView")
+
+
+
+@section MenuItemActive{
+    <script>
+        ActivateMenu('scheduleItem');
+    </script>
+}

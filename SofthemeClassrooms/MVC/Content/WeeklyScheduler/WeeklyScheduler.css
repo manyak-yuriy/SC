@@ -1,0 +1,136 @@
+﻿#calendar {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .fc-toolbar {
+        visibility: hidden !important;
+    }
+
+    table {
+        color: lightgrey;
+        border-collapse: collapse !important;
+    }
+
+    td {
+        border: 2px solid #ecedf8 !important;
+    }
+
+    tr {
+        height: 50px !important;
+    }
+
+    .fc-row.fc-week.ui-widget-content {
+        display: none;
+    }
+
+
+    #date-scroller {
+        display: inline-block;
+        width: 1000px;
+        position: relative;
+        left: 170px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    .fa-caret-left, .fa-caret-right {
+        opacity: 0.4;
+        transition: all .2s ease-in-out;
+    }
+
+        .fa-caret-left:hover, .fa-caret-right:hover {
+            opacity: 0.9;
+        }
+
+        .fa-caret-left:active, .fa-caret-right:active {
+            opacity: 1;
+            transform: scale(1.9);
+        }
+
+    .fa-caret-left {
+        float: left;
+    }
+
+    .fa-caret-right {
+        float: right;
+    }
+
+    .fc-bg {
+        background-color: transparent;
+    }
+
+    .fc-time-grid-event {
+        border: none;
+    }
+
+    /*Time div inside of event*/
+
+    div.fc-time {
+        position: relative;
+        float: right;
+        left: -5px;
+        top: 5px;
+        color: lightgray;
+    }
+
+        div.fc-time span {
+            font-size: 110%;
+        }
+
+    /*Event title div inside of event*/
+
+
+
+    div.fc-title {
+        position: relative;
+        left: 3px;
+        top: 50%;
+        margin: 3px;
+    }
+
+    /*Containver for the upper*/
+    div.fc-content {
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-family: Arial;
+    }
+
+
+    .public-event {
+        background-color: #f95748 !important;
+    }
+
+    .private-event {
+        background-color: #eff2f7 !important;
+        border: none !important;
+        background-image: url('../../Images/icon-lock.png');
+        color: black !important;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #week-calendar-wrapper
+    {
+        position: relative;
+    }
+
+    .calendar-loader {
+        display: inline-block;
+        position: absolute;
+        left: 45%;
+        top: 30px;
+        visibility: visible;
+
+        z-index: 1000;
+    }
+
+
+    .fc-today, .fc-state-highlight
+    {
+        background-color: transparent !important;
+        outline: #D7D9DE solid 3px !important;
+        border-collapse: collapse !important;
+    }

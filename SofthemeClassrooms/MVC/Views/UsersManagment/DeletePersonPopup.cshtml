@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.Pair<System.Int32, System.String>
+
+<div id="@Model.item1" class="b-popup">
+    <div class="b-popup-content">
+        <div class="popup-upper-plane">
+            <i class="fa fa-ban" aria-hidden="true"></i>
+            Вы уверены, что хотите удалить пользователя?
+        </div>
+        <p class="deleteMessage">Все события, запланированые этим пользователем, будут отменены.</p>
+        <div>
+            <div class="NoBlock">
+                <button onclick="DeleteUserPopupHide('@Model.item1')" class="button No">Нет</button>
+            </div>
+            <div class="YesBlock">
+                @using (Html.BeginForm("DeleteUser", "UsersManagment", FormMethod.Post))
+                {
+                    <input type="hidden" name="Id" value="@Model.item2"/>
+                    <input type="submit" class="button Yes" value="Да"/>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿.custom-input {
+    border-radius: 20px;
+    background-color: #f4f5f6;
+    border-style: none;
+    height: 30px;
+    margin-bottom: 10px;
+    width: 90%;
+    padding: 1% 5%;
+}
+
+.button {
+    background-color: red;
+    border-style: none;
+    border-radius: 20px;
+    width: 50%;
+    margin-left: 22%;
+    color: white;
+    padding: 10px 10px;
+}
+
+#messageText{
+    height: 200px;
+}
+
+#feedbackForm{
+    padding-top: 50px;    
+}
+
+.error{
+    font-size: x-small;
+    color: red;
+}

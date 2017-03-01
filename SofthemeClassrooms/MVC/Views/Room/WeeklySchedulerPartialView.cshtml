@@ -1,0 +1,276 @@
+﻿
+<link href="~/fullcalendar-3.1.0/fullcalendar-3.1.0/fullcalendar.css" rel="stylesheet" />
+<!--
+    <script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+-->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js'></script>
+
+<script src="~/fullcalendar-3.1.0/fullcalendar-3.1.0/fullcalendar.js"></script>
+
+<script src="~/fullcalendar-3.1.0/fullcalendar-3.1.0/locale/ru.js"></script>
+
+<!--Cascade of windows after clicking on event-->
+<script src="~/Scripts/Overlays/DisplayEventCascade.js"></script>
+
+<style>
+    div.fc-now-indicator.fc-now-indicator-line
+    {
+        background-position: -10px 0px; 
+        z-index: 1000;
+        display: block;
+        width: 135px;
+        height: 40px;
+        background-image: url('https://s27.postimg.org/eqztjpmpf/room_Time_Slider.png');
+        background-repeat: no-repeat;
+    }
+</style>
+
+<script>
+
+    function displayPopupForEvent(eventId) {
+        $.ajax(
+                        {
+                            url: '@Url.Action("GetDisplayEventPartial", "Schedule")',
+                            type: "GET",
+                            context: this,
+                            data: { Id: eventId },
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data, textStatus, jqXHR) {
+
+                                $('body').prepend(data);
+                                $('.event-display-popup:first-of-type').attr('id', eventId).css('left', '230px').css('top', '300px').draggable();
+
+                                $('.fa-window-minimize').click(function () {
+                                    //alert("min");
+                                    $(this).parents('.event-display-popup').remove();
+                                })
+
+                                $('.event-display-popup#' + eventId + ' .change-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventEditPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { eventId: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-edit-popup:first-of-type').attr('id', eventId).css('left', '30px').css('top', '30px').draggable();
+
+
+                                        }
+                                    });
+                                });
+
+                                $('.event-display-popup#' + eventId + ' .cancel-button').click(function () {
+                                    var eventId = $(this).parents('.event-display-popup').attr('id');
+                                    $.ajax({
+                                        url: '@Url.Action("GetEventCancellationPartialView", "Schedule")',
+                                        type: "GET",
+                                        context: this,
+                                        data: { Id: eventId },
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data, textStatus, jqXHR) {
+                                            $('body').prepend(data);
+                                            $('.event-cancel-popup:first-of-type').attr('id', eventId).css('left', '300px').css('top', '300px').draggable();
+
+                                            $('#' + eventId + ' .discart-cancellation-button').click(function () {
+                                                $(this).parents('.event-cancel-popup').remove();
+                                            });
+
+                                            $('#' + eventId + ' .confirm-cancellation-button').click(function () {
+                                                // cancel current event
+                                                var eventId = $(this).parents('.event-cancel-popup').attr('id');
+
+                                                $.ajax({
+                                                    url: '@Url.Action("CancelEvent", "Schedule")',
+                                                    type: "POST",
+                                                    context: this,
+                                                    data: "{ 'Id': '" + eventId + "'}",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    success: function (data, textStatus, jqXHR) {
+                                                        //alert(JSON.stringify(data));
+
+                                                        var cancelPopup = $(this).parents('.event-cancel-popup');
+
+                                                        cancelPopup.remove();
+                                                        $('.event-display-popup#' + eventId).remove();
+
+                                                        $('#calendar').fullCalendar('destroy');
+                                                        renderScheduler();
+                                                        $('#calendar').fullCalendar('render');
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    });
+                                });
+
+                            }
+                        }
+                            );
+    }
+
+</script>
+
+
+<!--Styles for this page-->
+<link href="~/Content/WeeklyScheduler/WeeklyScheduler.css" rel="stylesheet" />
+
+<div id="week-calendar-wrapper">
+    <div id="date-scroller">
+        <i class="fa fa-caret-left fa-2x" aria-hidden="true"></i>
+
+        <span id="date-scroller-value">Декабрь, 2016</span>
+
+        <i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>
+    </div>
+    <img class="calendar-loader" src="~/Images/loader.gif" />
+
+    
+
+    <div id='calendar'>
+
+    </div>
+</div>
+
+
+
+<script>
+    
+    var jDate = function (obj) {
+        return new Date(parseInt(obj.substr(6)));
+    }
+
+    function renderScheduler() {
+        $('.calendar-loader ').css('visibility', "visible");
+        var roomId = $('.room-id').val();
+        
+
+        $.ajax(
+        {
+            url: '@Url.Action("GetEventDataForRoom", "Schedule")',
+            type: "GET",
+            data: { 'roomId': roomId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+
+                //alert(JSON.stringify(data));
+
+                var eventsForRoom = [];
+
+                for (var i = 0; i < data.eventsData.length; i++) {
+                    var e = data.eventsData[i];
+                    var newEvent = { id: e.Id, title: ((e.Title) ? e.Title : ""), start: jDate(e.DateStart), end: jDate(e.DateEnd), className: e.IsPublic ? 'public-event' : 'private-event' };
+
+                    eventsForRoom.push(newEvent);
+                }
+
+                /*
+                eventsForRoom = [
+                {
+                    id: '11',
+                    title: 'C# multithreading',
+                    start: '2016-12-17T05:30:00',
+                    end: '2016-12-17T07:30:00'
+                },
+                {
+                    title: 'ASP.NET routing',
+                    start: '2016-12-17T10:30:00',
+                    end: '2016-12-17T12:30:00'
+                },
+                {
+                    title: 'QA intro',
+                    start: '2016-12-17T17:30:00',
+                    allDay: false // will make the time show
+                }
+                ];
+                */
+
+
+
+
+                $('#calendar').fullCalendar({
+                    // enable theme
+                    theme: false,
+                    // emphasizes business hours
+                    businessHours: false,
+                    // event dragging & resizing
+                    editable: false,
+                    // header
+                    header: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
+
+                    events: [],
+
+                    color: 'black',     // an option!
+                    textColor: 'yellow', // an option!
+                    displayEventEnd: true,
+                    timeFormat: 'H(:mm)',
+                    allDaySlot: false,
+                    slotLabelFormat: 'H:mm',
+                    firstDay: 1,
+                    eventColor: '#FF0909',
+                    weekends: true,
+
+                    slotDuration: '01:00:00',
+                    nowIndicator: true,
+                    columnFormat: "ddd     D.M",
+                    minTime: "9:00:00",
+                    maxTime: "20:00:00",
+
+                    eventClick: function (calEvent, jsEvent, view) {
+
+                        displayPopupForEvent(calEvent.id);
+                    }
+
+                }).fullCalendar('changeView', 'agendaWeek');
+
+                for (var i = 0; i < eventsForRoom.length; i++)
+                    $('#calendar').fullCalendar('renderEvent', eventsForRoom[i], true);
+
+                $('.calendar-loader ').css('visibility', "hidden");
+            }
+        });
+
+    }
+
+    $(document).ready(function () {
+        // page is ready
+        renderScheduler();
+
+
+        var getPrettyDateStr = function(selDate) {
+            var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+
+            var month = selDate.toDate().getMonth();
+            var dateStr = months[month] + ", " + selDate.toDate().getFullYear();
+
+            return dateStr;
+        }
+
+        $('#date-scroller .fa-caret-left').click(function () {
+            $('#calendar').fullCalendar('prev');
+            var selDate = $('#calendar').fullCalendar('getDate');
+
+            
+            $('#date-scroller-value').html(getPrettyDateStr(selDate));
+        });
+
+        $('#date-scroller .fa-caret-right').click(function () {
+            $('#calendar').fullCalendar('next');
+            var selDate = $('#calendar').fullCalendar('getDate');
+
+            $('#date-scroller-value').html(getPrettyDateStr(selDate));
+        });
+    });
+
+
+</script>
+
+

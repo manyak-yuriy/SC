@@ -1,0 +1,74 @@
+﻿#schema-image {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+   /*width: 50%;*/ 
+}
+
+#prop-pane
+{
+    position: absolute;
+    left: 420px;
+    top: 470px;
+    z-index: 100;
+    background-image: url("../../Images/Extracted/PropPane/PropPane.png");
+    width: 400px;
+    height:80px;
+    /*border: 5px solid red;*/
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.eq-container
+{
+    display: inline;
+    margin: 5px;
+    top: 12px;
+    left: 15px;
+    /*border: 1px solid green;*/
+    position: relative;
+}
+
+.line-details
+{
+    display: none;
+    z-index: 9;
+}
+
+.eq-img
+{
+    margin: 5px;
+    z-index: 10;
+}
+
+.draggable {
+    display: block;
+    position: absolute;
+}
+
+.draggable .resizeable
+{
+    display: none;
+}
+
+#schema-wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
+#prop-pane
+{
+    display: none;
+}
+
+.schema-wrapper button
+{
+    visibility: hidden;
+    margin: 30px;
+}
+
+.caption
+{
+    visibility: hidden;
+}

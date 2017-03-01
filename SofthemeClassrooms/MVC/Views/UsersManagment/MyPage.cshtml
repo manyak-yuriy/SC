@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Моя страница";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-lg-offset-9 col-lg-2">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input id="logout" class="userPagebuttton" type="submit" value="Выход" />
+    }
+</div>
+
+<div class="container">
+    <div class="col-lg-4">
+        <div id="pInfo">
+            @Html.Partial("PersonalInfoPView")
+        </div>
+    </div>
+
+    <div class="col-lg-offset-2 col-lg-6  changePassword">
+        <div id="changePassWindow" class="changePasswordForm">
+            @Html.Action("ChangePasswordView")
+        </div>
+    </div>
+</div>
+
+@section MenuItemActive{
+    <script>
+        ActivateMenu('userPageItem');
+    </script>
+}
+
+<div style="height: 50px"></div>
+
+@Html.Partial("~/Views/Schedule/TimeTablePartialView.cshtml")
+
+<div style="height: 150px"></div>
